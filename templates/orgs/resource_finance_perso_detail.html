@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} تفاصيل فرصة تمويل الأفراد {% endblock %}
+
+{% block content %}
+<h1>تفاصيل فرصة تمويل الأفراد</h1>
+
+<div class="card" style="width: 50rem;">
+    <p class="card-text">لوغو الجهة المانحة
+        <img class="" src="{% static 'media/article_img.jpg' %}" width="50px" alt="Card image cap"></p>
+    <div class="card-body">
+        <p class="card-text">الجهة المانحة</p>
+        <p class="card-text">فئة المنحة</p>
+        <p class="card-text">نوع المنحة</p>
+        <h5 class="card-title">قطاع المنحة</h5>
+        <p class="card-text">دول المنحة</p>
+        <p class="card-text">لمحة عن الجهة المانحة</p>
+
+        <p class="card-text">تاريخ إغلاق المنحة</p>
+        <p class="card-text">مدة المنحة</p>
+        <p class="card-text">حجم المنحة</p>
+        <p class="card-text">وصف المنحة</p>
+        <p class="card-text">شروط المنحة</p>
+        <p class="card-text">متطلبات التقديم</p>
+        <p class="card-text">كيفية التقديم</p>
+        <p class="card-text">الرابط الأصلي</p>
+        <p class="text-muted">تاريخ النشر</p>
+        {% if id <= '4' %}
+        <a href="#" class="btn btn-success">موافق على النشر</a>
+        <a href="#" class="btn btn-danger">رفض النشر</a>
+        {% endif %}
+        <a href="" class="btn btn-block btn-primary btn-social btn-facebook mt-4"><span class="fa fa-facebook"></span>
+            مشاركة على فيسبوك</a>
+    </div>
+
+
+    <a href="{% url 'resource_finance_perso' %}" class="btn btn-primary btn-block"> عودة إلى صفحة فرص تمويل الأفراد </a>
+
+</div>
+
+
+
+{% endblock %}

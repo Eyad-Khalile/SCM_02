@@ -1,0 +1,258 @@
+{% load static %}
+
+<nav class="navbar fixed-top navbar-expand-lg navbar-dark">
+    <div class="container-fluid">
+        <!-- BRAND -->
+        <!-- <a class="navbar-brand" href="{% url 'home' %}">
+                    <span class="logo-color">SCM</span>
+                </a> -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mb-2 mb-lg-0">
+
+                <li class="nav-item">
+                    <a class="nav-link {% if request.resolver_match.url_name == 'home' %} active {% endif %}"
+                        aria-current="page" href="{% url 'home' %}">بوابة المجتمع المدني</a>
+                </li>
+                <li class="nav-item d-none d-lg-block">
+                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">|</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {% if request.resolver_match.url_name == 'guide' %} active {% endif %}"
+                        aria-current="page" href="{% url 'guide' %}">دليل المجتمع المدني</a>
+                </li>
+                <li class="nav-item d-none d-lg-block">
+                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">|</a>
+                </li>
+
+                <!-- ::::::::::: أخبار المجتمع المدني ::::::::: -->
+                <li class="nav-item dropdown li-news-dropdown-menu d-none d-lg-block">
+                    <a class="nav-link  {% if request.resolver_match.url_name == 'news' %} active {% endif %}"
+                        href="{% url 'news' %}">
+                        أخبار المجتمع المدني
+                    </a>
+                    <ul class="dropdown-menu ul-news-dropdown-menu bg-main-color" aria-labelledby="navbarDropdown">
+
+                        <li>
+                            <a class="dropdown-item {% if request.resolver_match.url_name == 'orgs_news' %} active {% endif %}"
+                                href="{% url 'orgs_news' %}">أخبار المنظمات</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item {% if request.resolver_match.url_name == 'orgs_rapport' %} active {% endif %}"
+                                href="{% url 'orgs_rapport' %}">تقارير ودراسات</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item {% if request.resolver_match.url_name == 'data' %} active {% endif %}"
+                                href="{% url 'data' %}">بيانات</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item {% if request.resolver_match.url_name == 'media' %} active {% endif %}"
+                                href="{% url 'media' %}">سمعي وبصري</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item {% if request.resolver_match.url_name == 'research' %} active {% endif %}"
+                                href="{% url 'research' %}">أبحاث خارجية</a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-item dropdown d-block d-lg-none">
+                    <a class="nav-link dropdown-toggle {% if request.resolver_match.url_name == 'resource' %} active {% endif %}"
+                        href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
+                        أخبار المجتمع المدني
+                    </a>
+                    <ul class="dropdown-menu bg-main-color  border-0" aria-labelledby="navbarDropdown">
+
+                        <li>
+                            <a class="dropdown-item {% if request.resolver_match.url_name == 'resource' %} active {% endif %}"
+                                href="{% url 'news' %}">أخبار المجتمع المدني</a>
+                        </li>
+
+                        <li>
+                            <hr class="dropdown-divider" />
+                        </li>
+                        <li>
+                            <a class="dropdown-item disabled" href="#">اﻷخبار
+                                <i class="fa fa-arrow-down" aria-hidden="true"></i></a>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider" />
+                        </li>
+
+                        <li>
+                            <a class="dropdown-item {% if request.resolver_match.url_name == 'orgs_news' %} active {% endif %}"
+                                href="{% url 'orgs_news' %}">أخبار المنظمات</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item {% if request.resolver_match.url_name == 'orgs_rapport' %} active {% endif %}"
+                                href="{% url 'orgs_rapport' %}">تقارير ودراسات</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item {% if request.resolver_match.url_name == 'data' %} active {% endif %}"
+                                href="{% url 'data' %}">بيانات</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item {% if request.resolver_match.url_name == 'media' %} active {% endif %}"
+                                href="{% url 'media' %}">سمعي وبصري</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item {% if request.resolver_match.url_name == 'research' %} active {% endif %}"
+                                href="{% url 'research' %}">أبحاث خارجية</a>
+                        </li>
+                    </ul>
+                </li>
+
+
+                <li class="nav-item d-none d-lg-block">
+                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">|</a>
+                </li>
+
+
+
+                <!-- :::::::::::::::: موارد المجتمع المدني :::::::::::::::: -->
+                <!-- LG -->
+                <li class="nav-item dropdown li-resource-dropdown-menu d-none d-lg-block">
+                    <a class="nav-link {% if request.resolver_match.url_name == 'resource' %} active {% endif %}"
+                        href="{% url 'resource' %}">
+                        موارد المجتمع المدني
+                    </a>
+                    <ul class="dropdown-menu ul-resource-dropdown-menu bg-main-color" aria-labelledby="navbarDropdown">
+                        <li>
+                            <a class="dropdown-item {% if request.resolver_match.url_name == 'resource_work' %} active {% endif %}"
+                                href="{% url 'resource_work' %}">فرص العمل</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item {% if request.resolver_match.url_name == 'resource_finance' %} active {% endif %}"
+                                href="{% url 'resource_finance' %}">فرص التمويل</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item {% if request.resolver_match.url_name == 'resource_stectur' %} active {% endif %}"
+                                href="{% url 'resource_stectur' %}">فرص بناء القدرات</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item {% if request.resolver_match.url_name == 'resource_upgrade' %} active {% endif %}"
+                                href="{% url 'resource_upgrade' %}">دليل التطوير</a>
+                        </li>
+                    </ul>
+                </li>
+
+                <!-- MD -->
+                <li class="nav-item dropdown d-block d-lg-none">
+                    <a class="nav-link dropdown-toggle {% if request.resolver_match.url_name == 'resource' %} active {% endif %}"
+                        href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
+                        موارد المجتمع المدني
+                    </a>
+                    <ul class="dropdown-menu bg-main-color border-0" aria-labelledby="navbarDropdown">
+                        <li>
+                            <a class="dropdown-item {% if request.resolver_match.url_name == 'resource' %} active {% endif %}"
+                                href="{% url 'resource' %}">موارد المجتمع المدني</a>
+                        </li>
+
+                        <li>
+                            <hr class="dropdown-divider" />
+                        </li>
+                        <li>
+                            <a class="dropdown-item disabled" href="#">الموارد
+                                <i class="fa fa-arrow-down" aria-hidden="true"></i></a>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider" />
+                        </li>
+                        <li>
+                            <a class="dropdown-item {% if request.resolver_match.url_name == 'resource_work' %} active {% endif %}"
+                                href="{% url 'resource_work' %}">فرص العمل</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item {% if request.resolver_match.url_name == 'resource_finance' %} active {% endif %}"
+                                href="{% url 'resource_finance' %}">فرص التمويل</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item {% if request.resolver_match.url_name == 'resource_stectur' %} active {% endif %}"
+                                href="{% url 'resource_stectur' %}">فرص بناء القدرات</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item {% if request.resolver_match.url_name == 'resource_upgrade' %} active {% endif %}"
+                                href="{% url 'resource_upgrade' %}">دليل التطوير</a>
+                        </li>
+                    </ul>
+                </li>
+
+
+                <li class="nav-item d-none d-lg-block">
+                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">|</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {% if request.resolver_match.url_name == 'centre_news' %} active {% endif %}"
+                        aria-current="page" href="{% url 'centre_news' %}">أخبار المركز</a>
+                </li>
+
+
+
+            </ul>
+
+            <!-- left side -->
+            <ul class="navbar-nav mr-auto mb-2 mb-lg-0">
+                <li class="nav-item d-none d-xs-block d-sm-block d-md-block">
+                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">
+                        <hr />
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {% if request.resolver_match.url_name == 'signe_in' %} active {% endif %}"
+                        aria-current="page" href="{% url 'signe_in' %}">تسجيل الدخول</a>
+                </li>
+                <li class="nav-item d-none d-lg-block">
+                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">|</a>
+                </li>
+                <li class="nav-item d-none d-xs-block d-sm-block d-md-block">
+                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">
+                        <hr />
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <select class="form-select form-select-md selectpicker" aria-label=".form-select-sm example">
+                        <!-- <option selected>Open this select menu</option> -->
+                        <option value="1">
+                            <a class="nav-link" aria-current="page" href="#">العربية</a>
+                        </option>
+                        <option data-thumbnail="{% static 'media/en.png' %}" value="2">
+                            <a class="nav-link" aria-current="page" href="#">
+                                <img src="{% static 'media/en.png' %}" width="20" class="logo-shadow" alt=""
+                                    loading="lazy" />
+                                الانكليزية
+                            </a>
+                        </option>
+                        <option data-thumbnail="{% static 'media/ku.png' %}" value="3">
+                            <a class="nav-link" aria-current="page" href="#">
+                                <img src="{% static 'media/ku.png' %}" width="20" class="logo-shadow" alt=""
+                                    loading="lazy" />
+                                الكردية
+                            </a>
+                        </option>
+                    </select>
+                </li>
+
+                <!-- 
+                        <li class="nav-item">
+                            
+                        </li>
+                        <li class="nav-item">
+                            
+                        </li>
+                        <li class="nav-item">
+                            
+                        </li> -->
+            </ul>
+
+            <!--     
+              <form class="d-flex">
+                <input class="form-control mr-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+              </form> -->
+        </div>
+    </div>
+</nav>

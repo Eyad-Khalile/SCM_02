@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} تفاصيل فرصة عمل {% endblock %}
+
+{% block content %}
+<h1>تفاصيل فرصة عمل</h1>
+
+<div class="card" style="width: 50rem;">
+
+    <div class="card-body">
+        <h4 class="card-text">اسم المنظمة</h4>
+        <h5 class="card-title">عنوان الوظيفة</h5>
+        <p class="card-text">مدة العقد</p>
+        <p class="card-text">وصف الوظيفة</p>
+        <p class="card-text">نوع الوظيفة</p>
+        <p class="card-text">فئة الوظيفة</p>
+        <p class="card-text">الخبرة</p>
+        <p class="card-text">مكان العمل</p>
+        <p class="card-text">محال العمل</p>
+        <p class="card-text">تاريخ انتهاء التقدم</p>
+        <p class="card-text">طريقة التقدم للوظيفة</p>
+        <p class="text-muted">تاريخ الخبر</p>
+        {% if id <= '4' %}
+        <a href="#" class="btn btn-success">موافق على النشر</a>
+        <a href="#" class="btn btn-danger">رفض النشر</a>
+        {% endif %}
+        <a href="" class="btn btn-block btn-primary btn-social btn-facebook mt-4"><span class="fa fa-facebook"></span>
+            مشاركة على فيسبوك</a>
+    </div>
+    <a href="{% url 'resource_work' %}" class="btn btn-primary btn-block"> عودة إلى صفحة فرص العمل </a>
+</div>
+
+</div>
+
+
+
+
+{% endblock %}

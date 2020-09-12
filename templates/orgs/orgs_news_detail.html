@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} تفاصيل الخبر {% endblock %}
+
+{% block content %}
+<h1>تفاصيل الخبر</h1>
+
+<div class="card" style="width: 18rem;">
+    <img class="card-img-top" src="{% static 'media/article_img.jpg' %}" alt="Card image cap">
+    <div class="card-body">
+      <h5 class="card-title">عنوان الخبر</h5>
+      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+      <p class="text-muted">تاريخ الخبر</p>
+      {% if id <= '4' %}
+      <a href="#" class="btn btn-success">موافق على النشر</a>
+      <a href="#" class="btn btn-danger">رفض الخبر</a>
+      {% endif %}
+      <a href="" class="btn btn-block btn-primary btn-social btn-facebook mt-4"><span class="fa fa-facebook"></span> مشاركة على فيسبوك</a>
+    </div>
+    <a href="{% url 'orgs_news' %}" class="btn btn-primary btn-block"> عودة إلى صفحة أخبار المنظمات </a>
+  </div>
+  
+</div>
+
+{% endblock %}

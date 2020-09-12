@@ -1,0 +1,334 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} أخبار المنظمات {% endblock %}
+
+{% block content %}
+
+<h1>أخبار المنظمات</h1>
+<div class="row">
+
+    <!-- SECTION 1 -->
+    <div class="col-9">
+        <div class="collapse mt-4" id="collapseAddNews">
+            <h2>إضافة خبر</h2>
+            <form action="">
+                <div class="form-group">
+                    <select class="form-select mt-4" aria-label="Default select example">
+                        <option selected>اسم المنظمة</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="عنوان الخبر">
+                </div>
+                <div class="form-group">
+                    <label for="">صورة</label>
+                    <input type="file" class="form-control" accept="image/*">
+                </div>
+                <div class="form-group">
+                    <textarea type="text" class="form-control" rows="5" cols="33" placeholder="الخبر"></textarea>
+                </div>
+
+
+                <div class="form-group">
+                    <input type="submit" class="btn btn-success btn-block mt-3" value="انشر الخبر">
+                </div>
+
+            </form>
+        </div>
+
+        <!-- THE NEWS -->
+        <div class="collapse mt-4" id="collapseListOrgsNews">
+            <h2>قائمة أخبار المنظمات للموافقة على النشر</h2>
+
+            <table class="table table-dark">
+                <thead>
+                    <tr>
+                        <th scope="col">اسم المنظمة</th>
+                        <th scope="col">عنوان الخبر</th>
+                        <th scope="col">صورة الخبر</th>
+                        <th scope="col">الخبر</th>
+                        <th scope="col">تاريخ الخبر</th>
+                        <th scope="col">تفاصيل الخبر</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Mark</td>
+                        <td>Otto</td>
+                        <td><img class="" src="{% static 'media/article_img.jpg' %}" width="100px" alt="Card image cap">
+                        </td>
+                        <td>Mark</td>
+                        <td>Otto</td>
+                        <td>
+                            <a href="{% url 'news_detail' 1 %}" class="btn btn-info"> تفاصيل الخبر </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Mark</td>
+                        <td>Otto</td>
+                        <td><img class="" src="{% static 'media/article_img.jpg' %}" width="100px" alt="Card image cap">
+                        </td>
+                        <td>Mark</td>
+                        <td>Otto</td>
+                        <td>
+                            <a href="{% url 'news_detail' 2 %}" class="btn btn-info"> تفاصيل الخبر </a>
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <td>Mark</td>
+                        <td>Otto</td>
+                        <td><img class="" src="{% static 'media/article_img.jpg' %}" width="100px" alt="Card image cap">
+                        </td>
+                        <td>Mark</td>
+                        <td>Otto</td>
+                        <td>
+                            <a href="{% url 'news_detail' 3 %}" class="btn btn-info"> تفاصيل الخبر </a>
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <td>Mark</td>
+                        <td>Otto</td>
+                        <td><img class="" src="{% static 'media/article_img.jpg' %}" width="100px" alt="Card image cap">
+                        </td>
+                        <td>Mark</td>
+                        <td>Otto</td>
+                        <td>
+                            <a href="{% url 'news_detail' 4 %}" class="btn btn-info"> تفاصيل الخبر </a>
+                        </td>
+
+                    </tr>
+                </tbody>
+            </table>
+
+
+        </div>
+        <!-- AFTER THE CONFIRMATION -->
+        <div class="mt-4">
+            <h2>قائمة أخبار المنظمات </h2>
+
+            <!-- CARD -->
+            <div class="card bg-light" style="width: 40rem;">
+                <img src="{% static 'media/article_img.jpg' %}" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">عنوان الخبر</h5>
+                    <h6 class="card-title">اسم المنظمة</h6>
+                    <p class="text-muted">تاريخ الخبر</p>
+
+                    <p class="card-text">
+                        لوريم ايبسوم دولار سيت أميت ,كونسيكتيتور أدايبا يسكينج أليايت,سيت دو أيوسمود تيمبور
+
+                        <span class="collapse" id="collapseContent1">
+                            أنكايديديونتيوت لابوري ات دولار ماجنا أليكيوا . يوت انيم أد مينيم فينايم,كيواس نوستريد
+
+                            أكسير سيتاشن يللأمكو لابورأس نيسي يت أليكيوب أكس أيا كوممودو كونسيكيوات . ديواس
+
+                            أيوتي أريري دولار إن ريبريهينديرأيت فوليوبتاتي فيلايت أيسسي كايلليوم دولار أيو فيجايت
+
+                            نيولا باراياتيور. أيكسسيبتيور ساينت أوككايكات كيوبايداتات نون بروايدينت ,سيونت ان كيولبا
+
+                            كيو أوفيسيا ديسيريونتموليت انيم أيدي ايست لابوريوم.
+                        </span>
+                    </p>
+
+                    <a class="btn btn-flat red-text p-1 my-1 mr-0 mml-1 collapsed border-0 text-info" data-toggle="collapse"
+                        href="#collapseContent1" aria-expanded="false" aria-controls="collapseContent">إقراء المزيد</a>
+
+                </div>
+            </div>
+
+            <hr>
+
+            <!-- CARD -->
+            <div class="card bg-light" style="width: 40rem;">
+                <img src="{% static 'media/article_img.jpg' %}" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">عنوان الخبر</h5>
+                    <h6 class="card-title">اسم المنظمة</h6>
+                    <p class="text-muted">تاريخ الخبر</p>
+
+                    <p class="card-text">
+                        لوريم ايبسوم دولار سيت أميت ,كونسيكتيتور أدايبا يسكينج أليايت,سيت دو أيوسمود تيمبور
+
+                        <span class="collapse" id="collapseContent2">
+                            أنكايديديونتيوت لابوري ات دولار ماجنا أليكيوا . يوت انيم أد مينيم فينايم,كيواس نوستريد
+
+                            أكسير سيتاشن يللأمكو لابورأس نيسي يت أليكيوب أكس أيا كوممودو كونسيكيوات . ديواس
+
+                            أيوتي أريري دولار إن ريبريهينديرأيت فوليوبتاتي فيلايت أيسسي كايلليوم دولار أيو فيجايت
+
+                            نيولا باراياتيور. أيكسسيبتيور ساينت أوككايكات كيوبايداتات نون بروايدينت ,سيونت ان كيولبا
+
+                            كيو أوفيسيا ديسيريونتموليت انيم أيدي ايست لابوريوم.
+                        </span>
+                    </p>
+
+                    <a class="btn btn-flat red-text p-1 my-1 mr-0 mml-1 collapsed border-0 text-info" data-toggle="collapse"
+                        href="#collapseContent2" aria-expanded="false" aria-controls="collapseContent">إقراء المزيد</a>
+
+                </div>
+            </div>
+
+            <hr>
+
+            <!-- CARD -->
+            <div class="card bg-light" style="width: 40rem;">
+                <img src="{% static 'media/article_img.jpg' %}" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">عنوان الخبر</h5>
+                    <h6 class="card-title">اسم المنظمة</h6>
+                    <p class="text-muted">تاريخ الخبر</p>
+
+                    <p class="card-text">
+                        لوريم ايبسوم دولار سيت أميت ,كونسيكتيتور أدايبا يسكينج أليايت,سيت دو أيوسمود تيمبور
+
+                        <span class="collapse" id="collapseContent3">
+                            أنكايديديونتيوت لابوري ات دولار ماجنا أليكيوا . يوت انيم أد مينيم فينايم,كيواس نوستريد
+
+                            أكسير سيتاشن يللأمكو لابورأس نيسي يت أليكيوب أكس أيا كوممودو كونسيكيوات . ديواس
+
+                            أيوتي أريري دولار إن ريبريهينديرأيت فوليوبتاتي فيلايت أيسسي كايلليوم دولار أيو فيجايت
+
+                            نيولا باراياتيور. أيكسسيبتيور ساينت أوككايكات كيوبايداتات نون بروايدينت ,سيونت ان كيولبا
+
+                            كيو أوفيسيا ديسيريونتموليت انيم أيدي ايست لابوريوم.
+                        </span>
+                    </p>
+
+                    <a class="btn btn-flat red-text p-1 my-1 mr-0 mml-1 collapsed border-0 text-info" data-toggle="collapse"
+                        href="#collapseContent3" aria-expanded="false" aria-controls="collapseContent">إقراء المزيد</a>
+
+                </div>
+            </div>
+
+            <hr>
+
+            <!-- CARD -->
+            <div class="card bg-light" style="width: 40rem;">
+                <img src="{% static 'media/article_img.jpg' %}" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">عنوان الخبر</h5>
+                    <h6 class="card-title">اسم المنظمة</h6>
+                    <p class="text-muted">تاريخ الخبر</p>
+
+                    <p class="card-text">
+                        لوريم ايبسوم دولار سيت أميت ,كونسيكتيتور أدايبا يسكينج أليايت,سيت دو أيوسمود تيمبور
+
+                        <span class="collapse" id="collapseContent4">
+                            أنكايديديونتيوت لابوري ات دولار ماجنا أليكيوا . يوت انيم أد مينيم فينايم,كيواس نوستريد
+
+                            أكسير سيتاشن يللأمكو لابورأس نيسي يت أليكيوب أكس أيا كوممودو كونسيكيوات . ديواس
+
+                            أيوتي أريري دولار إن ريبريهينديرأيت فوليوبتاتي فيلايت أيسسي كايلليوم دولار أيو فيجايت
+
+                            نيولا باراياتيور. أيكسسيبتيور ساينت أوككايكات كيوبايداتات نون بروايدينت ,سيونت ان كيولبا
+
+                            كيو أوفيسيا ديسيريونتموليت انيم أيدي ايست لابوريوم.
+                        </span>
+                    </p>
+
+                    <a class="btn btn-flat red-text p-1 my-1 mr-0 mml-1 collapsed border-0 text-info" data-toggle="collapse"
+                        href="#collapseContent4" aria-expanded="false" aria-controls="collapseContent">إقراء المزيد</a>
+
+                </div>
+            </div>
+
+            <hr>
+
+            <!-- CARD -->
+            <div class="card bg-light" style="width: 40rem;">
+                <img src="{% static 'media/article_img.jpg' %}" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">عنوان الخبر</h5>
+                    <h6 class="card-title">اسم المنظمة</h6>
+                    <p class="text-muted">تاريخ الخبر</p>
+
+                    <p class="card-text">
+                        لوريم ايبسوم دولار سيت أميت ,كونسيكتيتور أدايبا يسكينج أليايت,سيت دو أيوسمود تيمبور
+
+                        <span class="collapse" id="collapseContent5">
+                            أنكايديديونتيوت لابوري ات دولار ماجنا أليكيوا . يوت انيم أد مينيم فينايم,كيواس نوستريد
+
+                            أكسير سيتاشن يللأمكو لابورأس نيسي يت أليكيوب أكس أيا كوممودو كونسيكيوات . ديواس
+
+                            أيوتي أريري دولار إن ريبريهينديرأيت فوليوبتاتي فيلايت أيسسي كايلليوم دولار أيو فيجايت
+
+                            نيولا باراياتيور. أيكسسيبتيور ساينت أوككايكات كيوبايداتات نون بروايدينت ,سيونت ان كيولبا
+
+                            كيو أوفيسيا ديسيريونتموليت انيم أيدي ايست لابوريوم.
+                        </span>
+                    </p>
+
+                    <a class="btn btn-flat red-text p-1 my-1 mr-0 mml-1 collapsed border-0 text-info" data-toggle="collapse"
+                        href="#collapseContent5" aria-expanded="false" aria-controls="collapseContent">إقراء المزيد</a>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    <!-- SECTION 2 -->
+    <div class="col-3">
+        <fieldset class="fieldset pt-5 px-4 pb-2 mt-4">
+            <!-- FILTERS -->
+            <h2>فرز بحسب :</h2>
+
+            <form action="" class="form-inline">
+                <div class="form-group">
+                    <select class="form-select mt-4" aria-label="Default select example">
+                        <option selected>اسم المنظمة</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control mt-3" placeholder="عنوان الخبر">
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control mt-3" placeholder="كلمات من الخبر">
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <label for="">تاريخ النشر / من :</label>
+                        <input type="date" class="form-control" name="from" id="">
+                    </div>
+                    <div class="col">
+                        <label for="">إلى :</label>
+                        <input type="date" class="form-control" name="to" id="">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input type="text" name="" id="" class="btn btn-block btn-success mt-4" value="بحث">
+                </div>
+            </form>
+
+            <!-- BUTTONS -->
+            <hr>
+
+            <button class="btn btn-primary btn-block mt-4" type="button" data-toggle="collapse"
+                data-target="#collapseAddNews" aria-expanded="false" aria-controls="collapseAddNews">
+                إضافة خبر
+            </button>
+            <button class="btn btn-primary btn-block mt-4" type="button" data-toggle="collapse"
+                data-target="#collapseListOrgsNews" aria-expanded="false" aria-controls="collapseListOrgsNews">
+                عرض أخبار المنظمات للموافقة على النشر
+            </button>
+            <!-- <button class="btn btn-primary btn-block mt-4" type="button" data-toggle="collapse"
+                data-target="#collapseListAllOrgs" aria-expanded="false" aria-controls="collapseListAllOrgs">
+                قائمة منظمات المجتمع المدني
+            </button> -->
+            <a href="{% url 'news' %}" class="btn btn-primary mt-4">عودة إلى صفحة أخبار المجتمع المدني</a>
+
+
+        </fieldset>
+    </div>
+</div>
+
+{% endblock %}

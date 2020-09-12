@@ -1,0 +1,44 @@
+// @import "custom";
+@import "~bootstrap/scss/bootstrap";
+
+
+
+// COLOR
+$color-1: rgb(59, 133, 180);
+$color-2: rgb(69, 156, 210);
+
+$bg-color: linear-gradient(to right, $color-2, $color-1);
+$bg-color-degrader: linear-gradient(to right, rgba($color-2, 0.5), rgba($color-1, 0.5));
+
+// FONTS
+$main-font: "Tajawal",
+sans-serif;
+$title-font: "Reem Kufi",
+sans-serif;
+
+
+
+body {
+
+    // BODY GENERAL
+    padding-top: 80px;
+    font-family: $main-font;
+
+    .text-al-just {
+        text-align: justify !important;
+    }
+
+    // GENERAL
+    h1,
+    h2 {
+        font-family: $title-font;
+    }
+
+
+
+
+
+
+
+
+}

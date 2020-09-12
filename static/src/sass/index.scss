@@ -1,0 +1,234 @@
+@import 'mixins.scss';
+@import 'general.scss';
+@import 'nav.scss';
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ::::::::::::::: - OLDE - ::::::::::::::: */
+
+// HOME PAGE
+.org-work {
+    .btn-button {
+        @include work-btn;
+        @include myTransition;
+
+        &:hover {
+            /* vertical-align: middle; */
+            // background-color: #fff;
+            background-image: linear-gradient(to right, rgba($color-2, 0), rgba($color-1, 0));
+            color: #1490c2;
+            border: 1px solid #1490c2 !important;
+        }
+    }
+}
+
+
+
+.fieldset {
+    /* border: 1px solid #1490C2; */
+    border-radius: 20px;
+    // background-color: rgba(20, 144, 194, 0.5);
+    background-image: $bg-color-degrader;
+    padding-bottom: 2rem !important;
+}
+
+
+
+/* ======= FORM SIGNE-IN ====== */
+.form-signin {
+    width: 100%;
+    max-width: 330px;
+    padding: 15px;
+    margin: 0 auto;
+
+    .checkbox {
+        font-weight: 400;
+    }
+
+    .form-control {
+        position: relative;
+        box-sizing: border-box;
+        height: auto;
+        padding: 10px;
+        font-size: 16px;
+
+        &:focus {
+            z-index: 2;
+        }
+    }
+
+    input[type="email"] {
+        margin-bottom: -1px;
+        border-bottom-right-radius: 0;
+        border-bottom-left-radius: 0;
+    }
+
+    input[type="password"] {
+        margin-bottom: 10px;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+    }
+}
+
+
+
+
+
+
+
+
+
+/* ========== FORM SIGNE-UP ========== */
+
+.register {
+    // background: -webkit-linear-gradient(left, #3931af, #00c6ff);
+    background-image: $bg-color;
+    margin-top: 3%;
+    padding: 3%;
+
+    .register-form {
+        padding: 10%;
+        margin-top: 10%;
+    }
+
+    form {
+        .form-group {
+            margin: 1.5em 0;
+
+            label {
+                margin-bottom: 1.5em;
+                color: #fff;
+                padding-right: 1.5em;
+            }
+        }
+    }
+
+    .nav-tabs {
+        margin-top: 3%;
+        border: none;
+        background: #0062cc;
+        border-radius: 1.5rem;
+        width: 28%;
+        float: right;
+
+        .nav-link {
+            padding: 2%;
+            height: 34px;
+            font-weight: 600;
+            color: #fff;
+            border-top-right-radius: 1.5rem;
+            border-bottom-right-radius: 1.5rem;
+
+            &:hover {
+                border: none;
+            }
+
+            &.active {
+                width: 100px;
+                color: #0062cc;
+                border: 2px solid #0062cc;
+                border-top-left-radius: 1.5rem;
+                border-bottom-left-radius: 1.5rem;
+            }
+        }
+    }
+}
+
+.register-left {
+    text-align: center;
+    color: #fff;
+    margin-top: 4%;
+
+    input {
+        border: none;
+        border-radius: 1.5rem;
+        padding: 2%;
+        width: 60%;
+        background: #f8f9fa;
+        font-weight: bold;
+        color: #383d41;
+        margin-top: 30%;
+        margin-bottom: 3%;
+        cursor: pointer;
+    }
+
+    img {
+        margin-top: 15%;
+        margin-bottom: 5%;
+        width: 25%;
+        -webkit-animation: mover 2s infinite alternate;
+        animation: mover 1s infinite alternate;
+    }
+
+    p {
+        font-weight: lighter;
+        padding: 12%;
+        margin-top: -9%;
+    }
+}
+
+
+.register-right {
+    background: #f8f9fa;
+    border-top-left-radius: 10% 50%;
+    border-bottom-left-radius: 10% 50%;
+}
+
+
+.btnRegister {
+    float: right;
+    margin-top: 10%;
+    border: none;
+    border-radius: 1.5rem;
+    padding: 2%;
+    background: #0062cc;
+    color: #fff;
+    font-weight: 600;
+    width: 50%;
+    cursor: pointer;
+}
+
+
+
+.register-heading {
+    text-align: center;
+    margin-top: 8%;
+    margin-bottom: -15%;
+    color: #495057;
+}
+
+
+// ANIMATIONS
+
+@-webkit-keyframes mover {
+    0% {
+        transform: translateY(0);
+    }
+
+    100% {
+        transform: translateY(-20px);
+    }
+}
+
+@keyframes mover {
+    0% {
+        transform: translateY(0);
+    }
+
+    100% {
+        transform: translateY(-20px);
+    }
+}

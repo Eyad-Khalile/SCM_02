@@ -1,0 +1,238 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} دليل المجتمع المدني {% endblock %}
+
+{% block content %}
+
+
+
+<div class="row">
+    
+    <!-- SECTION 1 -->
+    <div class="col-9">
+        <article>
+            <h1 class="text-center mb-4"> دليل المجتمع المدني</h1>
+            <!-- Text Descriptions -->
+            <p class="text-right text-al-just p-color h4">
+                "لوريم ايبسوم دولار سيت أميت ,كونسيكتيتور أدايبا يسكينج أليايت,سيت دو أيوسمود تيمبور
+
+                أنكايديديونتيوت لابوري ات دولار ماجنا أليكيوا . يوت انيم أد مينيم فينايم,كيواس نوستريد
+
+                أكسير سيتاشن يللأمكو لابورأس نيسي يت أليكيوب أكس أيا كوممودو كونسيكيوات . ديواس
+
+                أيوتي أريري دولار إن ريبريهينديرأيت فوليوبتاتي فيلايت أيسسي كايلليوم دولار أيو فيجايت
+
+                نيولا باراياتيور. أيكسسيبتيور ساينت أوككايكات كيوبايداتات نون بروايدينت ,سيونت ان كيولبا
+
+                كيو أوفيسيا ديسيريونتموليت انيم أيدي ايست لابوريوم."
+
+                "سيت يتبيرسبايكياتيس يوندي أومنيس أستي ناتيس أيررور سيت فوليبتاتيم أكيسأنتييوم
+
+                دولاريمكيو لايودانتيوم,توتام ريم أبيرأم,أيكيو أبسا كيواي أب أللو أنفينتوري فيرأتاتيس ايت
+
+                كياسي أرشيتيكتو بيتاي فيتاي ديكاتا سيونت أكسبليكابو. نيمو أنيم أبسام فوليوباتاتيم كيواي
+
+                فوليوبتاس سايت أسبيرناتشر أيوت أودايت أيوت فيوجايت, سيد كيواي كونسيكيونتشر ماجناي
+
+                دولارس أيوس كيواي راتاشن فوليوبتاتيم سيكيواي نيسكايونت. نيكيو بوررو كيوايسكيوم
+
+                ايست,كيواي دولوريم ايبسيوم كيوا دولار سايت أميت, كونسيكتيتيور,أديبايسكاي فيلايت, سيد
+
+                كيواي نون نيومكيوام ايايوس موداي تيمبورا انكايديونت يوت لابوري أيت دولار ماجنام
+
+                ألايكيوام كيوايرات فوليوبتاتيم. يوت اينايم أد مينيما فينيام, كيواس نوستريوم أكسيركايتاشيم
+
+                يلامكوربوريس سيوسكايبيت لابورايوسام, نايساي يوت ألايكيوايد أكس أيا كوموداي
+
+                كونسيكيواتشر؟ كيوايس أيوتيم فيل أيوم أيوري ريبريهينديرايت كيواي ان إيا فوليوبتاتي
+
+                فيلايت ايسسي كيوم نايهايل موليستايا كونسيكيواتيو,فيلايليوم كيواي دولوريم أيوم فيوجايات كيو
+
+                فوليوبتاس نيولا باراياتيور؟"
+            </p>
+        </article>
+        <hr>
+        <!-- TABLES OF ORGS -->
+        <div class="collapse mt-4" id="collapseListOrgs">
+            <h2>طلبات اشتراك المنظمات</h2>
+            <table class="table table-dark">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">First</th>
+                        <th scope="col">Last</th>
+                        <th scope="col">Handle</th>
+                        <th scope="col">Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">1</th>
+                        <td>Mark</td>
+                        <td>Otto</td>
+                        <td>@mdo</td>
+                        <td>
+                            <a href="{% url 'particip_detail' 1 %}" class="btn btn-info">تفاصيل الطلب</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">2</th>
+                        <td>Jacob</td>
+                        <td>Thornton</td>
+                        <td>@fat</td>
+                        <td>
+                            <a href="{% url 'particip_detail' 2 %}" class="btn btn-info">تفاصيل الطلب</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">3</th>
+                        <td>Larry</td>
+                        <td>the Bird</td>
+                        <td>@twitter</td>
+                        <td>
+                            <a href="{% url 'particip_detail' 3 %}" class="btn btn-info">تفاصيل الطلب</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="mt-4" id="collapseListAllOrgs">
+            <h2>قائمة منظمات المجتمع المدني</h2>
+            <table class="table table-dark">
+                <thead>
+                    <tr>
+                        <th scope="col">اسم المنظمة</th>
+                        <th scope="col">الاسم المختصر</th>
+                        
+                        <th scope="col">اللوغو</th>
+                        <th scope="col">الرؤية والرسالة</th>
+                        <th scope="col">تفاصيل المنظمة</th>
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Mark</td>
+                        <td>Otto</td>
+                        <td>
+                            <img src="{% static 'media/article_img.jpg' %}" alt="" width="50">
+                        </td>
+                        <td>Mark</td>
+                        <td>
+                            <a href="{% url 'particip_detail' 5 %}" class="btn btn-info">تفاصيل المنظمة</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Jacob</td>
+                        <td>Thornton</td>
+                        <td>
+                            <img src="{% static 'media/article_img.jpg' %}" alt="" width="50">
+                        </td>
+                        <td>Jacob</td>
+                        <td>
+                            <a href="{% url 'particip_detail' 6 %}" class="btn btn-info">تفاصيل المنظمة</a>
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <td>Larry</td>
+                        <td>the Bird</td>
+                        <td>
+                            <img src="{% static 'media/article_img.jpg' %}" alt="" width="50">
+                        </td>
+                        <td>Larry</td>
+                        <td>
+                            <a href="{% url 'particip_detail' 7 %}" class="btn btn-info">تفاصيل المنظمة</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        
+
+
+    </div>
+
+    <!-- SECTION 2 -->
+    <div class="col-3">
+        <fieldset class="fieldset pt-5 px-4 pb-2 mt-4">
+            <!-- FILTERS -->
+            <h2>فرز بحسب :</h2>
+            
+            <form action="" class="form-inline">
+                <div class="form-group">
+                    <select class="form-select mt-4" aria-label="Default select example">
+                        <option selected>اسم المنظمة</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <select class="form-select mt-4" aria-label="Default select example">
+                        <option selected>مكان العمل</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <select class="form-select mt-4" aria-label="Default select example">
+                        <option selected>مجال العمل</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                    </select>
+                </div>
+               
+                <div class="row">
+                    <div class="form-group mt-4">
+                        <label for="">تاريخ التأسيس / من :</label>
+                        <!-- <input type="date" class="form-control" name="from" id=""> -->
+                        <input type="text" class="form-control" id="year" name="year" placeholder="سنة التأسيس" maxlength="4" spellcheck="false" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
+
+                    </div>
+                    <div class="form-group mb-4">
+                        <label for="">إلى :</label>
+                        <input type="text" class="form-control" id="year" name="year" placeholder="سنة التأسيس" maxlength="4" spellcheck="false" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
+                    </div>
+                </div>
+                <div class="form-group mt-4">
+                    <select class="form-select mt-4" aria-label="Default select example">
+                        <option selected>الفئات المستهدفة</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <input type="submit" class="btn btn-block btn-success mt-4" value="بحث">
+                </div>
+            </form>
+            
+            <!-- BUTTONS -->
+            <hr>
+
+            <a href="{% url 'signe_up' %}" class="btn btn-primary btn-block mt-4">تقديم طلب اشتراك</a>
+            <button class="btn btn-primary btn-block mt-4" type="button" data-toggle="collapse"
+                data-target="#collapseListOrgs" aria-expanded="false" aria-controls="collapseListOrgs">
+                طلبات اشتراك المنظمات
+            </button>
+            <!-- <button class="btn btn-primary btn-block mt-4" type="button" data-toggle="collapse"
+                data-target="#collapseListAllOrgs" aria-expanded="false" aria-controls="collapseListAllOrgs">
+                قائمة منظمات المجتمع المدني
+            </button> -->
+
+
+        </fieldset>
+    </div>
+</div>
+
+
+
+
+
+
+{% endblock %}

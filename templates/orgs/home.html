@@ -1,0 +1,121 @@
+{% extends 'base.html' %}
+{% block title %} بوابة المجتمع المدني {% endblock %}
+
+{% block content %}
+
+
+
+<article>
+    <h1 class="text-center mb-4 mt-5 pt-5">بوابة المجتمع المدني</h1>
+    <p class="text-right p-color text-al-just h4 pt-5 mt-5">
+        "لوريم ايبسوم دولار سيت أميت ,كونسيكتيتور أدايبا يسكينج أليايت,سيت دو أيوسمود تيمبور
+
+        أنكايديديونتيوت لابوري ات دولار ماجنا أليكيوا . يوت انيم أد مينيم فينايم,كيواس نوستريد
+
+        أكسير سيتاشن يللأمكو لابورأس نيسي يت أليكيوب أكس أيا كوممودو كونسيكيوات . ديواس
+
+        أيوتي أريري دولار إن ريبريهينديرأيت فوليوبتاتي فيلايت أيسسي كايلليوم دولار أيو فيجايت
+
+        نيولا باراياتيور. أيكسسيبتيور ساينت أوككايكات كيوبايداتات نون بروايدينت ,سيونت ان كيولبا
+
+        كيو أوفيسيا ديسيريونتموليت انيم أيدي ايست لابوريوم."
+
+        "سيت يتبيرسبايكياتيس يوندي أومنيس أستي ناتيس أيررور سيت فوليبتاتيم أكيسأنتييوم
+
+        دولاريمكيو لايودانتيوم,توتام ريم أبيرأم,أيكيو أبسا كيواي أب أللو أنفينتوري فيرأتاتيس ايت
+
+        كياسي أرشيتيكتو بيتاي فيتاي ديكاتا سيونت أكسبليكابو. نيمو أنيم أبسام فوليوباتاتيم كيواي
+
+        فوليوبتاس سايت أسبيرناتشر أيوت أودايت أيوت فيوجايت, سيد كيواي كونسيكيونتشر ماجناي
+
+        دولارس أيوس كيواي راتاشن فوليوبتاتيم سيكيواي نيسكايونت. نيكيو بوررو كيوايسكيوم
+
+        ايست,كيواي دولوريم ايبسيوم كيوا دولار سايت أميت, كونسيكتيتيور,أديبايسكاي فيلايت, سيد
+
+        كيواي نون نيومكيوام ايايوس موداي تيمبورا انكايديونت يوت لابوري أيت دولار ماجنام
+
+        ألايكيوام كيوايرات فوليوبتاتيم. يوت اينايم أد مينيما فينيام, كيواس نوستريوم أكسيركايتاشيم
+
+        يلامكوربوريس سيوسكايبيت لابورايوسام, نايساي يوت ألايكيوايد أكس أيا كوموداي
+
+        كونسيكيواتشر؟ كيوايس أيوتيم فيل أيوم أيوري ريبريهينديرايت كيواي ان إيا فوليوبتاتي
+
+        فيلايت ايسسي كيوم نايهايل موليستايا كونسيكيواتيو,فيلايليوم كيواي دولوريم أيوم فيوجايات كيو
+
+        فوليوبتاس نيولا باراياتيور؟"
+    </p>
+</article>
+<br>
+<hr>
+<div class="row org-work mb-2">
+    <h2 class="text-center mt-5 mb-5">مجال عمل المنظمات</h2>
+
+    <div class="col-lg-2 col-md-4 col-sm-6">
+        <a href="{% url 'guide_filter' 1 %}"
+            class="btn btn-button d-flex justify-content-center align-items-center h-100 w-100 border-0">إعلام</a>
+    </div>
+    <div class="col-lg-2 col-md-4 col-sm-6">
+        <a href="{% url 'guide_filter' 2 %}"
+            class="btn btn-button d-flex justify-content-center align-items-center h-100 w-100 border-0">تعليم</a>
+    </div>
+    <div class="col-lg-2 col-md-4 col-sm-6">
+        <a href="{% url 'guide_filter' 3 %}"
+            class="btn btn-button d-flex justify-content-center align-items-center h-100 w-100 border-0">حماية</a>
+    </div>
+    <div class="col-lg-2 col-md-4 col-sm-6">
+        <a href="{% url 'guide_filter' 4 %}"
+            class="btn btn-button d-flex justify-content-center align-items-center h-100 w-100 border-0">سبل
+            العيش والأمن الغذائي</a>
+    </div>
+    <div class="col-lg-2 col-md-4 col-sm-6">
+        <a href="{% url 'guide_filter' 5 %}"
+            class="btn btn-button d-flex justify-content-center align-items-center h-100 w-100 border-0">مشاريع
+            النظافة والمياه والصرف الصحي</a>
+    </div>
+    <div class="col-lg-2 col-md-4 col-sm-6">
+        <a href="{% url 'guide_filter' 6 %}"
+            class="btn btn-button d-flex justify-content-center align-items-center h-100 w-100 border-0">تنمیة</a>
+    </div>
+</div>
+
+
+
+
+<div class="row org-work mt-2 mb-2">
+    <div class="col-lg-2 col-md-4 col-sm-6">
+        <a href="{% url 'guide_filter' 7 %}"
+            class="btn btn-button d-flex justify-content-center align-items-center h-100 w-100 border-0">قانون و
+            مناصرة و سیاسة</a>
+    </div>
+    <div class="col-lg-2 col-md-4 col-sm-6">
+        <a href="{% url 'guide_filter' 8 %}"
+            class="btn btn-button d-flex justify-content-center align-items-center h-100 w-100 border-0">مانحین و
+            دعم العمل التطوعي</a>
+    </div>
+    <div class="col-lg-2 col-md-4 col-sm-6">
+        <a href="{% url 'guide_filter' 9 %}"
+            class="btn btn-button d-flex justify-content-center align-items-center h-100 w-100 border-0">منظمات
+            دینیة</a>
+    </div>
+    <div class="col-lg-2 col-md-4 col-sm-6">
+        <a href="{% url 'guide_filter' 10 %}"
+            class="btn btn-button d-flex justify-content-center align-items-center h-100 w-100 border-0">تجمعات و
+            اتحادات مھنیة</a>
+    </div>
+    <div class="col-lg-2 col-md-4 col-sm-6">
+        <a href="{% url 'guide_filter' 11 %}"
+            class="btn btn-button d-flex justify-content-center align-items-center h-100 w-100 border-0">صحة</a>
+    </div>
+    <div class="col-lg-2 col-md-4 col-sm-6">
+        <a href="{% url 'guide_filter' 12 %}"
+            class="btn btn-button d-flex justify-content-center align-items-center h-100 w-100 border-0">دراسات
+            وأبحاث</a>
+    </div>
+</div>
+
+
+
+
+
+
+{% endblock %}

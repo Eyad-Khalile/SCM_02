@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} فرص التمويل {% endblock %}
+
+{% block content %}
+<h1>فرص التمويل</h1>
+
+<div class="row org-work pt-5 mb-2 d-flex justify-content-center">
+
+
+
+    <div class="col-lg-2 col-md-4 col-sm-6">
+        <a href="{% url 'resource_finance_perso' %}"
+            class="btn btn-button d-flex justify-content-center align-items-center h-100 w-100 border-0">فرص تمويل
+            الأفراد</a>
+    </div>
+    <div class="col-lg-2 col-md-4 col-sm-6">
+        <a href="{% url 'resource_finance_orgs' %}"
+            class="btn btn-button d-flex justify-content-center align-items-center h-100 w-100 border-0">فرص تمويل
+            المنظمات</a>
+    </div>
+
+    <a href="{% url 'resource' %}" class="btn btn-primary mt-5">عودة إلى صفحة موارد المجتمع المدني</a>
+
+</div>
+
+
+
+
+{% endblock %}

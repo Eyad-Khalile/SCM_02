@@ -1,0 +1,67 @@
+@import 'general.scss';
+
+// NAVBAR
+nav {
+    background-image: $bg-color;
+
+    ul {
+
+        .bg-main-color {
+            background-image: $bg-color-degrader;
+        }
+
+        .dropdown-menu {
+            transition: all 0.5s;
+            padding: 1.25rem 0;
+            text-align: right;
+            background-color: rgba(255, 255, 255, 0.0);
+            border: none;
+
+            li {
+                a {
+                    color: #fff;
+
+                    &.disabled {
+                        color: #fff;
+                    }
+
+                    &:hover {
+                        color: #3b85b4 !important;
+                    }
+
+                }
+            }
+        }
+
+        li {
+            a {
+                color: #fff;
+
+                .disabled {
+                    color: #fff;
+                }
+            }
+        }
+    }
+
+}
+
+// SUIT OF NAVBAR
+.li-news-dropdown-menu {
+    &:hover .ul-news-dropdown-menu {
+        display: block;
+    }
+}
+
+.li-resource-dropdown-menu {
+    &:hover .ul-resource-dropdown-menu {
+        display: block;
+    }
+}
+
+.dropdown-item.active,
+.dropdown-item:active {
+    // color: #3b85b4 !important;
+    color: $color-1 !important;
+    background-color: #fff;
+}
