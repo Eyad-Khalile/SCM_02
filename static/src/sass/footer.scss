@@ -1,0 +1,49 @@
+// @import "general.scss";
+
+
+footer {
+    background-image: $bg-color;
+
+    a {
+        text-decoration: none;
+    }
+
+    .logo-shadow {
+        background-image: linear-gradient(to right, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 1), rgba(255, 255, 255, 0.1));
+        border-radius: 15px;
+        // box-shadow: 1px 1px 35px #fff;
+        padding: 5px;
+    }
+
+
+
+
+    div.social {
+        a {
+            color: #fff;
+            margin: 1.5em;
+            font-size: 1.5em;
+
+            @include myTransition;
+
+            &:hover {
+                transform: scale(2);
+                color: #fff;
+            }
+        }
+    }
+
+    .footer-brand {
+        font-size: 1.25em;
+        color: #fff;
+        font-weight: bold;
+        @include myTransition;
+
+        &:hover {
+            font-size: 1.25em;
+            font-weight: bold;
+            color: $color-1;
+            text-shadow: 1px 1px 3px #fff;
+        }
+    }
+}

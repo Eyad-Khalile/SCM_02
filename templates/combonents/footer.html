@@ -1,7 +1,7 @@
 {% load static %}
 
 <!-- Footer -->
-<footer class="page-footer font-small text-white bg-dark pt-4 mt-5">
+<footer class="page-footer font-small text-white pt-4 mt-5">
     <!-- Footer Links -->
     <div class="container text-center text-md-right">
         <!-- Grid row -->
@@ -10,12 +10,11 @@
             <div class="col-md-4 col-lg-3 mr-auto my-md-4 my-0 mt-4 mb-1">
                 <!-- Content -->
 
-                <a href="{% url 'home' %}" class="d-flex justify-content-center mb-4">
-                    <img src="{% static 'media/scroll-logo.png' %}" width="80" class="logo-shadow" alt=""
-                        loading="lazy" />
+                <a href="{% url 'home' %}" class="d-flex justify-content-center mb-4 logo-shadow">
+                    <img src="{% static 'media/scroll-logo.png' %}" width="90" alt="Logo" loading="lazy" />
                 </a>
                 <h5 class="font-weight-bold text-uppercase mb-4">
-                    <a href="{% url 'home' %}" class="btn btn-block btn-primary">بوابة المجتمع المدني</a>
+                    <a href="{% url 'home' %}" class="btn btn-block">بوابة المجتمع المدني</a>
                 </h5>
                 <!-- <p>بوابة المجتمع المدني</p>
                     <p>"لوريم ايبسوم دولار سيت أميت ,كونسيكتيتور أدايبا يسكينج أليايت,سيت دو أيوسمود تيمبور
@@ -30,7 +29,7 @@
 
                         كيو أوفيسيا ديسيريونتموليت انيم أيدي ايست لابوريوم."</p> -->
 
-                <a href="{% url 'site_politic' %}" class="btn btn-block btn-primary">
+                <a href="{% url 'site_politic' %}" class="btn btn-block">
                     سياسة الخصوصية
                 </a>
             </div>
@@ -40,9 +39,9 @@
 
             <!-- Grid column -->
             <div class="col-md-2 col-lg-2 mx-auto my-md-4 my-0 mt-4 mb-1">
-                <a href="#collapseContact" data-toggle="collapse" class="btn btn-block btn-primary mb-2" role="button"
+                <a href="#collapseContact" data-toggle="collapse" class="btn btn-block mb-2" role="button"
                     aria-expanded="false" aria-controls="collapseContact">
-                    للتوصل معنا
+                    للتواصل معنا
                 </a>
 
                 <div class="collapse" id="collapseContact">
@@ -109,7 +108,7 @@
             <hr class="clearfix w-100 d-md-none" />
 
             <!-- Grid column -->
-            <div class="col-md-4 col-lg-3 mx-auto my-md-4 my-0 mt-4 mb-1">
+            <div class="col-md-4 social col-lg-3 mx-auto my-md-4 my-0 mt-4 mb-1">
                 <!-- Social buttons -->
                 <h5 class="font-weight-bold text-uppercase mb-4">تابعونا على</h5>
 
@@ -140,7 +139,7 @@
                 <h5 class="font-weight-bold text-uppercase mb-4">
                     للاشتراك باخر الأخبار
                 </h5>
-                <a href="#collapseForm" data-toggle="collapse" class="btn btn-block btn-primary mb-2" role="button"
+                <a href="#collapseForm" data-toggle="collapse" class="btn btn-block mb-2" role="button"
                     aria-expanded="false" aria-controls="collapseForm">
                     اشترك معنا
                 </a>
@@ -177,7 +176,7 @@
     <!-- Copyright -->
     <div class="footer-copyright text-center py-3">
         © 2020 Copyright:
-        <a href="https://scm.bz/" target="_blanck"> SCM</a>
+        <a href="https://scm.bz/" target="_blanck" class="footer-brand"> SCM</a>
     </div>
     <!-- Copyright -->
 </footer>

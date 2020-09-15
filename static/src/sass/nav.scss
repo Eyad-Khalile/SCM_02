@@ -1,4 +1,4 @@
-@import 'general.scss';
+// @import 'general.scss';
 
 // NAVBAR
 nav {
@@ -7,7 +7,7 @@ nav {
     ul {
 
         .bg-main-color {
-            background-image: $bg-color-degrader;
+            background-image: $bg-color;
         }
 
         .dropdown-menu {
@@ -19,10 +19,11 @@ nav {
 
             li {
                 a {
-                    color: #fff;
+                    color: rgba(255, 255, 255, 0.55);
 
                     &.disabled {
-                        color: #fff;
+                        color: rgba(255, 255, 255, 0.55);
+                        ;
                     }
 
                     &:hover {

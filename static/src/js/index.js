@@ -1,6 +1,6 @@
 // const x = "this is a test";
 // alert(x);
-import 'jquery';
+
 // You can specify which plugins you need
 import {
     Tooltip,
@@ -10,4 +10,6 @@ import {
 
 import "../sass/index.scss";
 
+
+import 'jquery';
 import "./main.js";

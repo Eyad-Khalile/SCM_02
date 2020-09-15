@@ -1,6 +1,6 @@
 const path = require("path");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const webpack = require('webpack');
+const webpack = require("webpack");
 
 module.exports = {
   entry: {
@@ -14,21 +14,31 @@ module.exports = {
     path: path.resolve(__dirname, "dist"),
   },
   module: {
-    rules: [{
-      test: /\.(scss)$/,
-      use: [
-        "babel-loader",
-        MiniCssExtractPlugin.loader,
-        "css-loader",
-        "sass-loader",
-
-      ],
-    }, ],
+    rules: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: { loader: "babel-loader" },
+      },
+      {
+        test: /\.s[ac]ss$/i,
+        use: [
+          MiniCssExtractPlugin.loader,
+          // "style-loader",
+          "css-loader",
+          "sass-loader",
+        ],
+      },
+      {
+        test: /\.(png|svg|jpg|gif)$/,
+        use: { loader: "file-loader" },
+      },
+    ],
   },
   plugins: [
     new webpack.ProvidePlugin({
-      $: 'jquery',
-      jQuery: 'jquery',
+      $: "jquery",
+      jQuery: "jquery",
     }),
     new MiniCssExtractPlugin({
       filename: "[name].bundle.css",
