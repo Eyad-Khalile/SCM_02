@@ -18,7 +18,9 @@ module.exports = {
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        use: { loader: "babel-loader" },
+        use: {
+          loader: "babel-loader",
+        },
       },
       {
         test: /\.s[ac]ss$/i,
@@ -30,8 +32,8 @@ module.exports = {
         ],
       },
       {
-        test: /\.(png|svg|jpg|gif)$/,
-        use: { loader: "file-loader" },
+        test: /\.(gif|png|jpe?g|svg)$/i,
+        use: ["file-loader", { loader: "image-webpack-loader" }],
       },
     ],
   },

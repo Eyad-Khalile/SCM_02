@@ -5,10 +5,11 @@
 {% block content %}
 
 <h1>البيانات</h1>
+
 <hr>
 
 <div class="row">
-    
+
     <div class="col-9">
         <div class="collapse mt-4" id="collapseAddData">
             <h2>إضافة بيان</h2>
@@ -54,7 +55,8 @@
                     <tr>
                         <td>Mark</td>
                         <td>Otto</td>
-                        <td><a href="{% static 'media/test.pdf' %}" class="btn btn-secondary text-white" target="_blanck">البيان</a>
+                        <td><a href="{% static 'media/test.pdf' %}" class="btn btn-secondary "
+                                target="_blanck">البيان</a>
                         </td>
                         <td>Otto</td>
                         <td>
@@ -64,7 +66,8 @@
                     <tr>
                         <td>Mark</td>
                         <td>Otto</td>
-                        <td><a href="{% static 'media/test.pdf' %}" class="btn btn-secondary text-white" target="_blanck">البيان</a>
+                        <td><a href="{% static 'media/test.pdf' %}" class="btn btn-secondary "
+                                target="_blanck">البيان</a>
                         </td>
                         <td>Otto</td>
                         <td>
@@ -75,7 +78,8 @@
                     <tr>
                         <td>Mark</td>
                         <td>Otto</td>
-                        <td><a href="{% static 'media/test.pdf' %}" class="btn btn-secondary text-white" target="_blanck">البيان</a>
+                        <td><a href="{% static 'media/test.pdf' %}" class="btn btn-secondary "
+                                target="_blanck">البيان</a>
                         </td>
                         <td>Otto</td>
                         <td>
@@ -86,7 +90,8 @@
                     <tr>
                         <td>Mark</td>
                         <td>Otto</td>
-                        <td><a href="{% static 'media/test.pdf' %}" class="btn btn-secondary text-white" target="_blanck">البيان</a>
+                        <td><a href="{% static 'media/test.pdf' %}" class="btn btn-secondary "
+                                target="_blanck">البيان</a>
                         </td>
                         <td>Otto</td>
                         <td>
@@ -116,7 +121,8 @@
                     <tr>
                         <td>Mark</td>
                         <td>Otto</td>
-                        <td><a href="{% static 'media/test.pdf' %}" class="btn btn-secondary text-white" target="_blanck">البيان</a>
+                        <td><a href="{% static 'media/test.pdf' %}" class="btn btn-secondary "
+                                target="_blanck">البيان</a>
                         </td>
                         <td>Otto</td>
                         <td>
@@ -126,7 +132,8 @@
                     <tr>
                         <td>Mark</td>
                         <td>Otto</td>
-                        <td><a href="{% static 'media/test.pdf' %}" class="btn btn-secondary text-white" target="_blanck">البيان</a>
+                        <td><a href="{% static 'media/test.pdf' %}" class="btn btn-secondary "
+                                target="_blanck">البيان</a>
                         </td>
                         <td>Otto</td>
                         <td>
@@ -137,7 +144,8 @@
                     <tr>
                         <td>Mark</td>
                         <td>Otto</td>
-                        <td><a href="{% static 'media/test.pdf' %}" class="btn btn-secondary text-white" target="_blanck">البيان</a>
+                        <td><a href="{% static 'media/test.pdf' %}" class="btn btn-secondary "
+                                target="_blanck">البيان</a>
                         </td>
                         <td>Otto</td>
                         <td>
@@ -148,7 +156,8 @@
                     <tr>
                         <td>Mark</td>
                         <td>Otto</td>
-                        <td><a href="{% static 'media/test.pdf' %}" class="btn btn-secondary text-white" target="_blanck">البيان</a>
+                        <td><a href="{% static 'media/test.pdf' %}" class="btn btn-secondary "
+                                target="_blanck">البيان</a>
                         </td>
                         <td>Otto</td>
                         <td>
@@ -159,7 +168,8 @@
                     <tr>
                         <td>Mark</td>
                         <td>Otto</td>
-                        <td><a href="{% static 'media/test.pdf' %}" class="btn btn-secondary text-white" target="_blanck">البيان</a>
+                        <td><a href="{% static 'media/test.pdf' %}" class="btn btn-secondary "
+                                target="_blanck">البيان</a>
                         </td>
                         <td>Otto</td>
                         <td>
@@ -170,7 +180,8 @@
                     <tr>
                         <td>Mark</td>
                         <td>Otto</td>
-                        <td><a href="{% static 'media/test.pdf' %}" class="btn btn-secondary text-white" target="_blanck">البيان</a>
+                        <td><a href="{% static 'media/test.pdf' %}" class="btn btn-secondary "
+                                target="_blanck">البيان</a>
                         </td>
                         <td>Otto</td>
                         <td>
@@ -188,7 +199,7 @@
         <fieldset class="fieldset pt-5 px-4 pb-2 mt-4">
             <!-- FILTERS -->
             <h2>فرز بحسب :</h2>
-            
+
             <form action="" class="form-inline">
                 <div class="form-group">
                     <select class="form-select mt-4" aria-label="Default select example">
@@ -199,21 +210,21 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <input type="text" name="" id="" class="form-control mt-4" placeholder="عنوان البيان">
+                    <input type="text" name="" class="form-control mt-4" placeholder="عنوان البيان">
                 </div>
-                
+
                 <div class="row">
                     <div class="col">
                         <label for="">تاريخ النشر / من :</label>
-                        <input type="date" class="form-control" name="from" id="">
+                        <input type="date" class="form-control" name="from">
                     </div>
                     <div class="col">
                         <label for="">إلى :</label>
-                        <input type="date" class="form-control" name="to" id="">
+                        <input type="date" class="form-control" name="to">
                     </div>
                 </div>
                 <div class="form-froup">
-                    <input type="text" name="" id="" class="btn btn-block btn-success mt-4" value="بحث">
+                    <input type="text" name="" class="btn btn-block btn-success mt-4" value="بحث">
                 </div>
             </form>
 
