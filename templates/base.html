@@ -1,7 +1,10 @@
-{% load static %}
+{% load static i18n %}
+
+{% get_current_language as LANGUAGE_CODE %}
+
 
 <!DOCTYPE html>
-<html lang="fr" dir="rtl">
+<html lang="{{ LANGUAGE_CODE }}" {% if LANGUAGE_CODE == 'ar' %} dir="rtl" {% endif %}>
 
 <head>
   <!-- Required meta tags -->
@@ -36,6 +39,23 @@
 
   <!-- ============ BODY CONTENT ========= -->
   <div class="container min-vh-100 mb-5 pb-5">
+    <div class="messages">
+      <!-- ======== L'affichage des Messages ====== -->
+      {% if messages %}
+      {% for message in messages %}
+      {% if message.tags == 'error' %}
+      <div class="alert alert-danger">
+        {{ message }}
+      </div>
+      {% else %}
+      <div class="alert alert-{{message.tags}}">
+        {{ message }}
+      </div>
+      {% endif %}
+      {% endfor %}
+      {% endif %}
+    </div>
+
     {% block content %} {% endblock %}
   </div>
 

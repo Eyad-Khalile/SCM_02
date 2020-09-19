@@ -1,0 +1,27 @@
+form {
+    label.requiredField {
+
+
+        span.asteriskField {
+            position: relative;
+            color: red;
+            font-size: 2em;
+            right: 10px;
+            top: 14px;
+        }
+    }
+
+    .form-select {
+        width: auto;
+    }
+
+    #div_id_logo {
+        div {
+            color: #fff;
+
+            a {
+                color: #fff;
+            }
+        }
+    }
+}

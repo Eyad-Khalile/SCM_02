@@ -1,18 +1,22 @@
-{% load static %}
+{% load static i18n %}
+
+{% get_current_language as LANGUAGE_CODE %}
+
 
 <nav class="navbar fixed-top navbar-expand-lg navbar-dark">
+
     <div class="container-fluid">
         <!-- BRAND -->
         <!-- <a class="navbar-brand" href="{% url 'home' %}">
                     <span class="logo-color">SCM</span>
                 </a> -->
+
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mb-2 mb-lg-0">
-
                 <li class="nav-item">
                     <a class="nav-link {% if request.resolver_match.url_name == 'home' %} active {% endif %}"
                         aria-current="page" href="{% url 'home' %}">بوابة المجتمع المدني</a>
@@ -30,12 +34,11 @@
 
                 <!-- ::::::::::: أخبار المجتمع المدني ::::::::: -->
                 <li class="nav-item dropdown li-news-dropdown-menu d-none d-lg-block">
-                    <a class="nav-link  {% if request.resolver_match.url_name == 'news' %} active {% endif %}"
+                    <a class="nav-link {% if request.resolver_match.url_name == 'news' %} active {% endif %}"
                         href="{% url 'news' %}">
                         أخبار المجتمع المدني
                     </a>
                     <ul class="dropdown-menu ul-news-dropdown-menu bg-main-color" aria-labelledby="navbarDropdown">
-
                         <li>
                             <a class="dropdown-item {% if request.resolver_match.url_name == 'orgs_news' %} active {% endif %}"
                                 href="{% url 'orgs_news' %}">أخبار المنظمات</a>
@@ -64,8 +67,7 @@
                         href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
                         أخبار المجتمع المدني
                     </a>
-                    <ul class="dropdown-menu bg-main-color  border-0" aria-labelledby="navbarDropdown">
-
+                    <ul class="dropdown-menu bg-main-color border-0" aria-labelledby="navbarDropdown">
                         <li>
                             <a class="dropdown-item {% if request.resolver_match.url_name == 'resource' %} active {% endif %}"
                                 href="{% url 'news' %}">أخبار المجتمع المدني</a>
@@ -75,8 +77,8 @@
                             <hr class="dropdown-divider" />
                         </li>
                         <li>
-                            <a class="dropdown-item disabled" href="#">اﻷخبار
-                                <i class="fa fa-arrow-down" aria-hidden="true"></i></a>
+                            <a class="dropdown-item disabled" href="#">اﻷخبار <i class="fa fa-arrow-down"
+                                    aria-hidden="true"></i></a>
                         </li>
                         <li>
                             <hr class="dropdown-divider" />
@@ -105,12 +107,9 @@
                     </ul>
                 </li>
 
-
                 <li class="nav-item d-none d-lg-block">
                     <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">|</a>
                 </li>
-
-
 
                 <!-- :::::::::::::::: موارد المجتمع المدني :::::::::::::::: -->
                 <!-- LG -->
@@ -155,8 +154,8 @@
                             <hr class="dropdown-divider" />
                         </li>
                         <li>
-                            <a class="dropdown-item disabled" href="#">الموارد
-                                <i class="fa fa-arrow-down" aria-hidden="true"></i></a>
+                            <a class="dropdown-item disabled" href="#">الموارد <i class="fa fa-arrow-down"
+                                    aria-hidden="true"></i></a>
                         </li>
                         <li>
                             <hr class="dropdown-divider" />
@@ -180,7 +179,6 @@
                     </ul>
                 </li>
 
-
                 <li class="nav-item d-none d-lg-block">
                     <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">|</a>
                 </li>
@@ -188,9 +186,6 @@
                     <a class="nav-link {% if request.resolver_match.url_name == 'centre_news' %} active {% endif %}"
                         aria-current="page" href="{% url 'centre_news' %}">أخبار المركز</a>
                 </li>
-
-
-
             </ul>
 
             <!-- left side -->
@@ -200,6 +195,34 @@
                         <hr />
                     </a>
                 </li>
+                {% if request.user.is_authenticated %}
+                <li class="nav-item d-none d-lg-block">
+                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">أهلاً {{user}}</a>
+                </li>
+                <li class="nav-item d-none d-lg-block">
+                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">|</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {% if request.resolver_match.url_name == 'signe_in' %} active {% endif %}"
+                        aria-current="page" href="{% url 'profile'%}">ملفي الشخصي</a>
+                </li>
+                <li class="nav-item d-none d-lg-block">
+                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">|</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link {% if request.resolver_match.url_name == 'logout' %} active {% endif %}"
+                        aria-current="page" href="{% url 'logout' %}">تسجيل الخروج</a>
+                </li>
+                <li class="nav-item d-none d-lg-block">
+                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">|</a>
+                </li>
+                <li class="nav-item d-none d-xs-block d-sm-block d-md-block">
+                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">
+                        <hr />
+                    </a>
+                </li>
+                {% else %}
                 <li class="nav-item">
                     <a class="nav-link {% if request.resolver_match.url_name == 'signe_in' %} active {% endif %}"
                         aria-current="page" href="{% url 'signe_in' %}">تسجيل الدخول</a>
@@ -212,11 +235,12 @@
                         <hr />
                     </a>
                 </li>
+                {% endif %}
 
                 <li class="nav-item">
-                    <select class="form-select form-select-md selectpicker" aria-label=".form-select-sm example">
-                        <!-- <option selected>Open this select menu</option> -->
-                        <option value="1">
+                    <!-- <select class="form-select form-select-md selectpicker" aria-label=".form-select-sm example"> -->
+                    <!-- <option selected>Open this select menu</option> -->
+                    <!-- <option value="1">
                             <a class="nav-link" aria-current="page" href="#">العربية</a>
                         </option>
                         <option data-thumbnail="{% static 'media/en.png' %}" value="2">
@@ -231,8 +255,39 @@
                                 الكردية
                             </a>
                         </option>
-                    </select>
+                    </select> -->
+
+
+
+
+                    <form action="{% url 'set_language' %}" method="post">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col">
+                                <input type="hidden" name="next" value="{{ redirect_to }}">
+                                <select class="form-select" name="language" id="">
+                                    {% get_available_languages as LANGUAGES %}
+                                    {% get_language_info_list for LANGUAGES as languages %}
+                                    {% for language in languages %}
+                                    <option value="{{ language.code }}" {% if language.code == LANGUAGE_CODE %} selected
+                                        {% endif %}>
+                                        {{ language.name_local }} ({{ language.code }})
+                                    </option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="col">
+                                <button type="submit" class="btn btn-sm btn-success">
+                                    <i class="fa fa-paper-plane" aria-hidden="true"></i>
+                                </button>
+                            </div>
+                        </div>
+
+
+                    </form>
                 </li>
+
+
 
                 <!-- 
                         <li class="nav-item">

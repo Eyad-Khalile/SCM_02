@@ -13,3 +13,4 @@ import "../sass/index.scss";
 
 import 'jquery';
 import "./main.js";
+import "./forms.js";

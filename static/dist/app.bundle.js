@@ -18694,6 +18694,63 @@ module.exports = g;
 
 /***/ }),
 
+/***/ "./src/js/forms.js":
+/*!*************************!*\
+  !*** ./src/js/forms.js ***!
+  \*************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function($) {// make the Email in the form register required filde
+// let astr = '<span class="asteriskField">*</span>';
+// $('input.emailinput').parent().prev('label').addClass('requiredField').append(astr);
+$('form.form-signin').find('label[for="id_username"]').addClass('d-none');
+$('form.form-signin').find('#id_username').attr('placeholder', 'اسم المستخدم');
+$('form.form-signin').find('label[for="id_password"]').addClass('d-none');
+$('form.form-signin').find('#id_password').attr('placeholder', 'كلمة المرور'); // ORG PROFILE
+
+$('#div_id_city_work').hide();
+
+if ($('#id_position_work').val() == 'SY') {
+  $('#div_id_city_work').show();
+}
+
+$('#id_position_work').change(function () {
+  let country = $('#id_position_work').val();
+
+  switch (country) {
+    case 'SY':
+      $('#div_id_city_work').show();
+      break;
+
+    default:
+      $('#div_id_city_work').hide();
+      break;
+  }
+});
+$('#div_id_org_registered_country').hide();
+
+if ($('#id_is_org_registered').val() == '1') {
+  $('#div_id_org_registered_country').show();
+}
+
+$('#id_is_org_registered').change(function () {
+  let org_reg = $('#id_is_org_registered').val();
+
+  switch (org_reg) {
+    case '1':
+      $('#div_id_org_registered_country').show();
+      break;
+
+    default:
+      $('#div_id_org_registered_country').hide();
+      break;
+  }
+});
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js")))
+
+/***/ }),
+
 /***/ "./src/js/index.js":
 /*!*************************!*\
   !*** ./src/js/index.js ***!
@@ -18710,9 +18767,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _main_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./main.js */ "./src/js/main.js");
 /* harmony import */ var _main_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_main_js__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _forms_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./forms.js */ "./src/js/forms.js");
+/* harmony import */ var _forms_js__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_forms_js__WEBPACK_IMPORTED_MODULE_4__);
 // const x = "this is a test";
 // alert(x);
 // You can specify which plugins you need
+
 
 
 
@@ -18727,7 +18787,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function($) {$(document).ready(function () {// alert('Salut');
+/* WEBPACK VAR INJECTION */(function($) {$(".alert").delay(6000).slideUp(1000, function () {
+  $(this).alert('close');
 });
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js")))
 

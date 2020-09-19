@@ -1,4 +1,3 @@
-$(document).ready(function () {
-    // alert('Salut');
-
+$(".alert").delay(6000).slideUp(1000, function () {
+    $(this).alert('close');
 });

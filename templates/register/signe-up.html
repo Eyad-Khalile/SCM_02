@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
-{% load static %}
+{% load static crispy_forms_tags %}
+
 
 {% block title %} أنشاء حساب {% endblock %}
 
@@ -11,16 +12,22 @@
 <div class="register">
     <div class="row">
         <div class="col-md-3 register-left">
-            <img src="https://image.ibb.co/n7oTvU/logo_white.png" alt=""/>
+            <img src="https://image.ibb.co/n7oTvU/logo_white.png" alt="" />
             <h2>تقديم طلب اشترك</h2>
-            <p>You are 30 seconds away from earning your own money!</p>
+            <hr>
+            <p> إذا كان لديك حساب يمكنك تسجيل الدخول من هنا </p>
             <a href="{% url 'signe_in' %}" class="btn btn-primary">تسجيل الدخول</a>
-            <br/>
+            <br />
         </div>
         <!-- register-right -->
         <div class="col-md-9 ">
-            
-            <form action="">
+
+            <form action="" method="post">
+                {% csrf_token %}
+                {{ form|crispy }}
+
+                <!-- <form action="">
+                
                 <div class="form-group">
                     <input type="text" class="form-control" placeholder="اسم المنظمة">
                 </div>
@@ -87,7 +94,12 @@
                 <div class="form-group">
                     <textarea type="text" class="form-control" rows="5" cols="33"
                         placeholder="نبذة عن المشاريع الحالية أو السابقة"></textarea>
-                </div>
+                </div> -->
+
+
+
+
+
                 <div class="form-group">
                     <input type="submit" class="btn btn-success btn-block mt-3" value="اشترك">
                 </div>
@@ -97,6 +109,7 @@
     </div>
 
 </div>
+
 
 
 {% endblock %}
