@@ -263,9 +263,11 @@
                     <form action="{% url 'set_language' %}" method="post">
                         {% csrf_token %}
                         <div class="row">
-                            <div class="col">
+                            <div>
                                 <input type="hidden" name="next" value="{{ redirect_to }}">
-                                <select class="form-select w-auto" name="language" id="">
+                                <select
+                                    class="form-select w-auto {% if LANGUAGE_CODE == 'ar' %} float-right {% else %} float-left {% endif %} "
+                                    name="language" id="">
                                     {% get_available_languages as LANGUAGES %}
                                     {% get_language_info_list for LANGUAGES as languages %}
                                     {% for language in languages %}
@@ -275,30 +277,14 @@
                                     </option>
                                     {% endfor %}
                                 </select>
-                            </div>
-                            <div class="col">
                                 <button type="submit" class="btn btn-sm btn-success">
                                     <i class="fa fa-paper-plane" aria-hidden="true"></i>
                                 </button>
                             </div>
                         </div>
-
-
                     </form>
                 </li>
 
-
-
-                <!-- 
-                        <li class="nav-item">
-                            
-                        </li>
-                        <li class="nav-item">
-                            
-                        </li>
-                        <li class="nav-item">
-                            
-                        </li> -->
             </ul>
 
             <!--     

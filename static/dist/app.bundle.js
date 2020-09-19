@@ -18746,7 +18746,13 @@ $('#id_is_org_registered').change(function () {
       $('#div_id_org_registered_country').hide();
       break;
   }
-});
+}); // INPUT ACCEPT YEAR ONLY
+
+let field = $('input#year').val(); // let reg = field.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');
+// $('input#year').attr('oninput', "this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');");
+
+$('input#year').attr('maxlength', '4');
+$('input#year').attr('spellcheck', 'false');
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js")))
 
 /***/ }),

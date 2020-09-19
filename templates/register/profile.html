@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% load static i18n %}
-{% block title %} بروفايل {% endblock %}
+{% block title %} {% trans 'الملف الشخصي' %} {% endblock %}
 
 {% block content %}
 
@@ -220,11 +220,14 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="col-lg-6">
                     <div class="about-avatar">
-                        <img src="{{ user.orgprofile.logo.url }}" title="" alt="">
+                        <img src="{{ user.orgprofile.logo.url }}" title="{{user.orgprofile.name}}"
+                            alt="{{user.orgprofile.name}}">
                     </div>
                 </div>
+                <hr>
                 <a href="{% url 'org_profile_edit' user.orgprofile.id %}" class="btn btn-block mt-4">
                     {% trans 'تعديل الملف الشخصي' %} </a>
                 <a href="{% url 'password_change' %}" class="btn btn-block mt-4">

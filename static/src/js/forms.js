@@ -44,3 +44,13 @@ $('#id_is_org_registered').change(function () {
             break;
     }
 });
+
+
+// INPUT ACCEPT YEAR ONLY
+let field = $('input#year').val();
+// let reg = field.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');
+
+
+// $('input#year').attr('oninput', "this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');");
+$('input#year').attr('maxlength', '4');
+$('input#year').attr('spellcheck', 'false');
