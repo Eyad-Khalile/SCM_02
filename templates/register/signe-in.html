@@ -19,6 +19,10 @@
     </div>
 
     <hr />
+    <p class="mt-4"> {% trans 'هل نسيت كلمة المرور' %} </p>
+    <a href="{% url 'password_reset' %}" class="btn btn-primary btn-block"> {% trans 'إعادة تعيين كلمة المرور' %} </a>
+
+    <hr />
     <p class="mt-4">إذا لم يكن لديك حساب ! يمكنك</p>
     <a href="{% url 'signe_up' %}" class="btn btn-primary btn-block">إنشاء حساب</a>
     <p class="mt-5 mb-3 text-muted">&copy; 2020</p>

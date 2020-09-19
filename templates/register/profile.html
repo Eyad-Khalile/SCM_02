@@ -227,6 +227,8 @@
                 </div>
                 <a href="{% url 'org_profile_edit' user.orgprofile.id %}" class="btn btn-block mt-4">
                     {% trans 'تعديل الملف الشخصي' %} </a>
+                <a href="{% url 'password_change' %}" class="btn btn-block mt-4">
+                    {% trans 'تغيير كلمة المرور' %} </a>
             </div>
             <!--             
             <div class="counter">
@@ -263,8 +265,12 @@
 
 {% else %}
 
-<h3> {% trans 'رجاءً أتمم ملف المنظمة الشخصي لنتمكن من التحقق من معلوماتكم و يمكنكم استخدام الموقع' %} </h3>
-<a href="{% url 'org_profile' %}" class="btn"> {% trans 'ملف المنظمة الشخصي' %} </a>
+<h3 class="mt-4 mb-4 pt-4 pb-4">
+    {% trans 'رجاءً أتمم ملف المنظمة الشخصي لنتمكن من التحقق من معلوماتكم و يمكنكم استخدام الموقع' %}
+</h3>
+<p class="mt-4">
+    <a href="{% url 'org_profile' %}" class="btn p-4"> {% trans 'ملف المنظمة الشخصي' %} </a>
+</p>
 
 {% endif %}
 

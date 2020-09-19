@@ -1,6 +1,9 @@
-from django.urls import path
+from django.urls import path, include
+from django.conf import settings
 from django.contrib.auth import views as auth_views
+from django.conf.urls.static import static
 from . import views
+from django.views.generic import TemplateView
 
 urlpatterns = [
     # HOME AND LEGALE
@@ -69,4 +72,20 @@ urlpatterns = [
          views.org_profile_edit, name='org_profile_edit'),
     path('particip_detail/<str:par_id>',
          views.particip_detail, name="particip_detail"),
+
+    # Password Reset
+    path('password-reset', auth_views.PasswordResetView.as_view(
+        template_name='register/password_reset.html'), name='password_reset'),
+    path('password-reset/done/', auth_views.PasswordResetDoneView.as_view(
+        template_name='register/password_reset_done.html'), name='password_reset_done'),
+    path('password-reset-confirm/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(
+        template_name='register/password_reset_confirm.html'), name='password_reset_confirm'),
+    path('password-reset-complete/done/', auth_views.PasswordResetCompleteView.as_view(
+        template_name='register/password_reset_complete.html'), name='password_reset_complete'),
+
+    # Password Change
+    path('password_change/done/', auth_views.PasswordChangeDoneView.as_view(
+        template_name='register/password_change_done.html'), name='password_change_done'),
+    path('password_change/', auth_views.PasswordChangeView.as_view(
+        template_name='register/password_change.html'), name='password_change'),
 ]

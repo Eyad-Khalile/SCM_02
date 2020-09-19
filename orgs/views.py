@@ -145,6 +145,11 @@ def org_profile_edit(request, pk):
     return render(request, 'register/org_profile_update.html', context)
 
 
+# =========== Page 404 ==================
+def page_not_found_view(request, exception):
+    return render(request, 'errors/404.html')
+
+
 def home(request):
     return render(request, 'orgs/home.html')
 

@@ -7070,6 +7070,9 @@ body {
     font-family: "Reem Kufi", sans-serif; }
   body .card {
     background-image: linear-gradient(to right, #046db8, #085185); }
+  body hr {
+    background-image: linear-gradient(to right, #046db8, #085185);
+    border: 1px; }
   body .btn {
     background-image: linear-gradient(to right, #046db8, white, #085185) !important;
     border: 1px solid #085185;
@@ -7077,6 +7080,7 @@ body {
     font-weight: 600;
     text-shadow: 0.5px 0.5px 6.5px rgba(255, 255, 255, 0.7);
     border: none;
+    padding: 0.5em;
     transition: all 0.5s ease-in-out;
     /* About Me 
 ---------------------*/ }
@@ -7281,8 +7285,9 @@ footer {
 .fieldset {
   /* border: 1px solid #1490C2; */
   border-radius: 20px;
-  background-image: linear-gradient(to right, rgba(4, 109, 184, 0.5), rgba(8, 81, 133, 0.5));
-  padding-bottom: 2rem !important; }
+  background-image: linear-gradient(to right, #046db8, #085185);
+  padding-bottom: 2rem !important;
+  color: #fff; }
 
 /* ======= FORM SIGNE-IN ====== */
 .form-signin {
@@ -7416,7 +7421,7 @@ form label.requiredField span.asteriskField {
   top: 14px; }
 
 form .form-select {
-  width: auto; }
+  width: 100%; }
 
 form #div_id_logo div {
   color: #fff; }

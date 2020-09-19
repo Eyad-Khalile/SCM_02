@@ -265,7 +265,7 @@
                         <div class="row">
                             <div class="col">
                                 <input type="hidden" name="next" value="{{ redirect_to }}">
-                                <select class="form-select" name="language" id="">
+                                <select class="form-select w-auto" name="language" id="">
                                     {% get_available_languages as LANGUAGES %}
                                     {% get_language_info_list for LANGUAGES as languages %}
                                     {% for language in languages %}

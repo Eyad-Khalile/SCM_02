@@ -80,6 +80,11 @@ body {
         background-image: $bg-color;
     }
 
+    hr {
+        background-image: $bg-color;
+        border: 1px;
+    }
+
     .btn {
         background-image: $bg-color-btn !important;
         border: 1px solid $color-1;
@@ -87,6 +92,7 @@ body {
         font-weight: 600;
         text-shadow: 0.5px 0.5px 6.5px rgba(255, 255, 255, 0.7);
         border: none;
+        padding: 0.5em;
 
         transition: all 0.5s ease-in-out;
 

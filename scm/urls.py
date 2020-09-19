@@ -18,6 +18,9 @@ from django.conf.urls.static import static
 
 from django.contrib import admin
 from django.urls import path, include
+from django.views.generic.base import RedirectView
+
+from orgs import views as orgs_views
 from django.conf.urls.i18n import i18n_patterns
 from django.utils.translation import gettext_lazy as _
 
@@ -28,13 +31,19 @@ from django.utils.translation import gettext_lazy as _
 #     path('', include('orgs.urls')),
 # ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
+favicon_view = RedirectView.as_view(url='static/favicon.ico',
+                                    permanent=False)
 
 urlpatterns = [
     path('i18n/', include('django.conf.urls.i18n')),
 ]
 
 urlpatterns += i18n_patterns(
-    path('admin/', admin.site.urls),
+    path(_('admin/'), admin.site.urls),
     path('', include('orgs.urls')),
+    path('favicon.ico', favicon_view),
     prefix_default_language=True,
 ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+handler404 = 'orgs.views.page_not_found_view'
+# handler500 = 'article.views.page_not_found_view'
