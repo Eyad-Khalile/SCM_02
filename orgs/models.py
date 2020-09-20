@@ -132,10 +132,13 @@ class OrgProfile(models.Model):
                              null=False, default='org_logos/default_logo.jpg', verbose_name=_("شعار المنظمة"))
     message = models.TextField(
         max_length=2000, null=False, verbose_name=_("الرؤية و الرسالة"))
+
     name_managing_director = models.CharField(
         max_length=255, null=True, blank=True, verbose_name=_("اسم رئيس مجلس اﻹدارة"))
     name_ceo = models.CharField(
         max_length=255, null=True, blank=True, verbose_name=_('اسم المدير التنفيذي'))
+
+    # CONTACT INFO
     site_web = models.CharField(
         max_length=255, null=True, blank=True, verbose_name=_('الموقع الالكتروني'))
     facebook = models.URLField(
@@ -150,6 +153,10 @@ class OrgProfile(models.Model):
         max_length=255, null=True, blank=True, verbose_name=_('اسم الشخص المسؤول عن التواصل'))
     email_person_contact = models.CharField(
         max_length=255, null=True, blank=True, verbose_name=_('البريد الاكتروني للشخص المسؤول عن التواصل'))
+    org_adress = models.CharField(
+        max_length=255, null=False, verbose_name=_('عنوان المقر الرئيسي'))
+
+    # ORG INFO
     work_domain = models.CharField(
         max_length=255, choices=domain_CHOICES, null=False, verbose_name=_('مجال العمل'))
     target_cat = models.CharField(
@@ -160,8 +167,7 @@ class OrgProfile(models.Model):
         max_length=100, null=False, choices=bool_CHOICES, verbose_name=_('هل المنظمة مسجلة ؟'))
     org_registered_country = CountryField(
         max_length=255, null=True, blank=True, verbose_name=_("بلد التسجيل"))
-    org_adress = models.CharField(
-        max_length=255, null=False, verbose_name=_('عنوان المقر الرئيسي'))
+
     org_members_count = models.PositiveIntegerField(
         validators=[MinValueValidator(1)], null=True, blank=True, verbose_name=_('عدد اﻷعضاء'))
     org_members_womans_count = models.PositiveIntegerField(
@@ -172,6 +178,8 @@ class OrgProfile(models.Model):
         'ھل المؤسسة عضو في اي شبكة او تحالف او جسم تنسیقي؟'))
     coalition_name = models.CharField(
         max_length=255, null=True, blank=True, verbose_name=_('اسم الشبكة / التحالف'))
+
+    publish = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(blank=True, null=True, default=None)
 
@@ -180,6 +188,9 @@ class OrgProfile(models.Model):
             # return '%s %s' % (self.user.username, self.name)
             # return '%s' % (self.user.username) + ' / ' + '%s' % (self.name)
             return self.user.username
+
+    # def formatted_phone(self, country=None):
+    #     return phonenumbers.parse(self.phone, country)
 
     def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
         super().save(force_insert, force_update, using, update_fields)

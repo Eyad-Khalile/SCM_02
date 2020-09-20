@@ -18753,6 +18753,14 @@ let field = $('input#year').val(); // let reg = field.replace(/[^0-9.]/g, '').re
 
 $('input#year').attr('maxlength', '4');
 $('input#year').attr('spellcheck', 'false');
+$('form.confirm').find('#id_publish').hide();
+$('form.deconfirm').find('#id_publish').hide();
+$('form.confirm').submit(function () {
+  $('form.confirm').find('#id_publish').attr('checked', true);
+});
+$('form.deconfirm').submit(function () {
+  $('form.deconfirm').find('#id_publish').attr('checked', false);
+});
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js")))
 
 /***/ }),

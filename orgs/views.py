@@ -1,3 +1,4 @@
+import phonenumbers
 from django.http import HttpResponse, JsonResponse, HttpResponseRedirect, Http404
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login
@@ -17,6 +18,8 @@ from django.urls import reverse_lazy, reverse
 from django.core.mail import EmailMessage
 from django.utils.timezone import datetime
 from django.utils.translation import gettext as _
+from django.core.paginator import Paginator
+from .filters import OrgsFilter
 
 
 # ::::::::::::: SIGNE UP :::::::::::::::
@@ -161,8 +164,84 @@ def home(request):
     return render(request, 'orgs/home.html')
 
 
+# L'AFFICHAGE DES ORGS PUBLISHED
 def guide(request):
-    return render(request, 'orgs/orgs_guide.html')
+    orgs = OrgProfile.objects.filter(publish=True).order_by('-created_at')
+
+    myFilter = OrgsFilter(request.GET, queryset=orgs)
+    orgs = myFilter.qs
+
+    # PAGINATEUR
+    paginator = Paginator(orgs, 9)
+    page = request.GET.get('page')
+    try:
+        orgs = paginator.get_page(page)
+    except(EmptyPage, InvalidPage):
+        orgs = paginator.page(paginator.num_pages)
+
+    context = {
+        'orgs': orgs,
+        'myFilter': myFilter,
+    }
+    return render(request, 'orgs/orgs_guide.html', context)
+
+
+# L'AFFICHAGE DES ORGS NOT PUBLISHED
+def guide_not_pub(request):
+    orgs = OrgProfile.objects.filter(publish=False).order_by('-created_at')
+
+    # PAGINATEUR
+    paginator = Paginator(orgs, 9)
+    page = request.GET.get('page')
+    try:
+        orgs = paginator.get_page(page)
+    except(EmptyPage, InvalidPage):
+        orgs = paginator.page(paginator.num_pages)
+
+    context = {
+        'orgs': orgs,
+    }
+    return render(request, 'orgs/orgs_guid_conf_pub.html', context)
+
+
+# @register.filter(name='phonenumber')
+# def phonenumber(value, country=None):
+#     return phonenumbers.parse(value, country)
+
+
+# ORG DETAIL
+def particip_detail(request, par_id):
+    org = get_object_or_404(OrgProfile, id=par_id)
+
+    if request.method == 'POST':
+        print('request ======', request)
+        form = OrgConfirmForm(request.POST or None, instance=org)
+        if form.is_valid():
+            # pub = form.save(commit=False)
+            # pub.publish = True
+            # pub.save()
+            form.save()
+
+            messages.success(request, _(
+                'لقد تم تغيير حالة الطلب للمنظمة بنجاح'))
+
+            # org_status = form.cleaned_data.get('publish')
+            # if org_status == 'True':
+            #     messages.success(request, _(
+            #         'لقد تم قبول طلب تسجيل المنظمة بنجاح'))
+            # if org_status == 'False':
+            #     messages.info(request, _(
+            #         'لقد تم رفض طلب تسجيل المنظمة بنجاح'))
+
+            return redirect('guide')
+    else:
+        form = OrgConfirmForm(instance=org)
+
+    context = {
+        'org': org,
+        'form': form,
+    }
+    return render(request, 'orgs/particip_detail.html', context)
 
 
 def guide_filter(request, work_id):
@@ -219,13 +298,6 @@ def orgs_news(request):
 
 def site_politic(request):
     return render(request, 'orgs/politic.html')
-
-
-def particip_detail(request, par_id):
-    context = {
-        'par_id': par_id,
-    }
-    return render(request, 'orgs/particip_detail.html', context)
 
 
 def orgs_rapport(request):

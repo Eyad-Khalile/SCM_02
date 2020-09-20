@@ -1,64 +1,482 @@
 {% extends 'base.html' %}
-{% load static %}
-{% block title %} تفاصيل المنظمة {% endblock %}
+{% load static i18n phonenumber_filters %}
+
+{% get_current_language as LANGUAGE_CODE %}
+
+{% block title %} {% trans 'تفاصيل المنظمة' %} {% endblock %}
 
 {% block content %}
 
-<h1>تفاصيل المنظمة</h1>
+<h1 class="mt-4 mb-4">{% trans 'تفاصيل المنظمة' %}</h1>
 
-<div class="card text-white p-4" style="width: 60rem;">
-    <h2>لوجو :
-        <img src="{% static 'media/article_img.jpg' %}" alt="" width="100">
-    </h2>
-    <div class="card-body">
-        <h5 class="card-title">اسم المنظمة</h5>
-        <h5 class="card-title">اسم المنظمة باللغة الإنكليزية/الكردية</h5>
-        <h5 class="card-title">الاسم المختصر</h5>
-        <h5 class="card-title">نوع المنظمة</h5>
-        <h5 class="card-title">مكان العمل</h5>
-        <h5 class="card-title">اسم رئيس مجلس الإدارة</h5>
-        <h5 class="card-title">اسم المدير التنفيذي</h5>
-        <h5 class="card-title">التواصل</h5>
-        <h5 class="card-title">مجال العمل</h5>
-        <h5 class="card-title">الفئات المستهدفة</h5>
-        <h5 class="card-title">تاريخ التأسيس</h5>
-        <h5 class="card-title">هل المنظمة مسجلة</h5>
-        <h5 class="card-title">عنوان المقر الرئيسي</h5>
-        <h5 class="card-title">عدد الأعضاء</h5>
-        <h5 class="card-title">عدد النساء من الأعضاء</h5>
-        <h5 class="card-title">السياسات واللوائح المكتوبة</h5>
-        <h5 class="card-title">ھل المؤسسة عضو في اي شبكة او تحالف او جسم تنسیقي؟</h5>
-        <p class="card-text text-al-just">الرؤية والرسالة
-            وريم ايبسوم هو نموذج افتراضي يوضع في التصاميم لتعرض على العميل ليتصور طريقه وضع النصوص بالتصاميم سواء كانت
-            تصاميم مطبوعه ... بروشور او فلاير على سبيل المثال ... او نماذج مواقع انترنت ...
 
-            وعند موافقه العميل المبدئيه على التصميم يتم ازالة هذا النص من التصميم ويتم وضع النصوص النهائية المطلوبة
-            للتصميم ويقول البعض ان وضع النصوص التجريبية بالتصميم قد تشغل المشاهد عن وضع الكثير من الملاحظات او
-            الانتقادات للتصميم الاساسي.
 
-            وخلافاَ للاعتقاد السائد فإن لوريم إيبسوم ليس نصاَ عشوائياً، بل إن له جذور في الأدب اللاتيني الكلاسيكي منذ
-            العام 45 قبل الميلاد. من كتاب "حول أقاصي الخير والشر"
-        </p>
-        <p class="card-text text-al-just">
-            نبذة عن المشاريع الحالية أو السابقة
-            وريم ايبسوم هو نموذج افتراضي يوضع في التصاميم لتعرض على العميل ليتصور طريقه وضع النصوص بالتصاميم سواء كانت
-            تصاميم مطبوعه ... بروشور او فلاير على سبيل المثال ... او نماذج مواقع انترنت ...
 
-            وعند موافقه العميل المبدئيه على التصميم يتم ازالة هذا النص من التصميم ويتم وضع النصوص النهائية المطلوبة
-            للتصميم ويقول البعض ان وضع النصوص التجريبية بالتصميم قد تشغل المشاهد عن وضع الكثير من الملاحظات او
-            الانتقادات للتصميم الاساسي.
 
-            وخلافاَ للاعتقاد السائد فإن لوريم إيبسوم ليس نصاَ عشوائياً، بل إن له جذور في الأدب اللاتيني الكلاسيكي منذ
-            العام 45 قبل الميلاد. من كتاب "حول أقاصي الخير والشر"
-        </p>
-        <p class="card-text">تاريخ تقديم الطلب</p>
-        {% if par_id <= '4' %}
-        <a href="" class="btn btn-success">قبول الطلب</a>
-        <a href="" class="btn btn-danger">رفض الطلب</a>
-        {% endif %}
-    </div>
-    <a href="{% url 'guide' %}" class="btn btn-primary"> عودة إلى صفحة دليل المجتمع المدني </a>
+<div class="container emp-profile mt-4">
+    <form method="post">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="profile-img">
+                    <img src="{{ org.logo.url }}" alt="{{ org.name }}" title="{{ org.name }}" />
+                    <!-- <div class="file">
+                        Change Photo
+                        <input type="file" name="file" />
+                    </div> -->
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="profile-head">
+                    <h5>
+                        {{ org.name }}
+                    </h5>
+                    <h6>
+                        {{ org.name_en_ku }}
+                    </h6>
+                    <h6>
+                        {{ org.short_cut }}
+                    </h6>
+                    <!-- <p class="proile-rating">RANKINGS : <span>8/10</span></p> -->
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab"
+                                aria-controls="home" aria-selected="true">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
+                                aria-controls="profile" aria-selected="false">Contact</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <!-- <input type="submit" class="profile-edit-btn btn" name="btnAddMore" value="Edit Profile" /> -->
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="profile-work">
+                    <p> {% trans 'معلومات عن المنظمة' %} </p>
+                    <p>{% trans 'نوع المنظمة' %} : {{ org.org_type }}</p>
+                    <p>{% trans 'مكان العمل' %} : {{ org.position_work }}</p>
+                    <p>{% trans 'المحافظة' %} : {{ org.city_work }}</p>
 
+                    <p>{% trans 'الرؤية و الرسالة' %}</p>
+                    <p> {{ org.message }} </p>
+
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="tab-content profile-tab" id="myTabContent">
+                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label> {% trans 'اسم رئيس مجلس اﻹدارة' %} </label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>
+                                    {% if org.name_managing_director %}
+                                    {{ org.name_managing_director }}
+                                    {% else %}
+                                    <span class="text-muted">
+                                        {% trans 'لم يذكر' %}
+                                    </span>
+                                    {% endif %}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label> {% trans 'اسم المدير التنفيذي' %} </label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>
+                                    {% if org.name_ceo %}
+                                    {{ org.name_ceo }}
+                                    {% else %}
+                                    <span class="text-muted">
+                                        {% trans 'لم يذكر' %}
+                                    </span>
+                                    {% endif %}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label> {% trans 'مجال العمل' %} </label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>
+                                    {% if org.work_domain %}
+                                    {{ org.work_domain }}
+                                    {% else %}
+                                    <span class="text-muted">
+                                        {% trans 'لم يذكر' %}
+                                    </span>
+                                    {% endif %}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label> {% trans 'الفئات المستهدفة' %} </label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>
+                                    {% if org.target_cat %}
+                                    {{ org.target_cat }}
+                                    {% else %}
+                                    <span class="text-muted">
+                                        {% trans 'لم يذكر' %}
+                                    </span>
+                                    {% endif %}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label> {% trans 'تاريخ سنة التأسيس' %} </label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>
+                                    {% if org.date_of_establishment %}
+                                    {{ org.date_of_establishment }}
+                                    {% else %}
+                                    <span class="text-muted">
+                                        {% trans 'لم يذكر' %}
+                                    </span>
+                                    {% endif %}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label> {% trans 'هل المنظمة مسجلة ؟' %} </label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>
+                                    {% if org.is_org_registered == '1' %}
+                                    {% trans 'نعم مسجلة' %}
+                                    {% elif org.is_org_registered == '0' %}
+                                    <span class="text-muted">
+                                        {% trans 'غير مسجلة' %}
+                                    </span>
+                                    {% endif %}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label> {% trans 'بلد التسجيل' %} </label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>
+                                    {% if org.org_registered_country %}
+                                    {{ org.org_registered_country }}
+                                    {% else %}
+                                    <span class="text-muted">
+                                        {% trans 'لم يذكر' %}
+                                    </span>
+                                    {% endif %}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label> {% trans 'عدد اﻷعضاء' %} </label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>
+                                    {% if org.org_members_count %}
+                                    {{ org.org_members_count }}
+                                    {% else %}
+                                    <span class="text-muted">
+                                        {% trans 'لم يذكر' %}
+                                    </span>
+                                    {% endif %}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label> {% trans 'عدد النساء من اﻷعضاء' %} </label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>
+                                    {% if org.org_members_womans_count %}
+                                    {{ org.org_members_womans_count }}
+                                    {% else %}
+                                    <span class="text-muted">
+                                        {% trans 'لم يذكر' %}
+                                    </span>
+                                    {% endif %}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label> {% trans 'السياسات واللوائح المكتوبة' %} </label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>
+                                    {% if org.w_polic_regulations %}
+                                    {{ org.w_polic_regulations }}
+                                    {% else %}
+                                    <span class="text-muted">
+                                        {% trans 'لم يذكر' %}
+                                    </span>
+                                    {% endif %}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label> {% trans 'ھل المؤسسة عضو في اي شبكة او تحالف او جسم تنسیقي؟' %} </label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>
+                                    {% if org.org_member_with == '1' %}
+                                    {% trans 'نعم' %}
+                                    {% else %}
+                                    <span class="text-muted">
+                                        {% trans 'ليست عضو' %}
+                                    </span>
+                                    {% endif %}
+                                </p>
+                            </div>
+                        </div>
+                        {% if org.org_member_with == '1' %}
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label> {% trans 'اسم الشبكة أو التحالف' %} </label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>
+                                    {% if org.coalition_name %}
+                                    {{ org.coalition_name }}
+                                    {% else %}
+                                    <span class="text-muted">
+                                        {% trans 'لم يذكر' %}
+                                    </span>
+                                    {% endif %}
+                                </p>
+                            </div>
+                        </div>
+                        {% endif %}
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label> {% trans 'التأكيد من اﻹدارة على أنها منظمة' %} </label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>
+                                    {% if org.publish %}
+                                    {{ org.publish }}
+                                    {% else %}
+                                    <span class="text-muted">
+                                        {% trans 'لم يتم التأكيد بعد' %}
+                                    </span>
+                                    {% endif %}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label> {% trans 'عنوان المقر الرئيسي' %} </label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>
+                                    {% if org.org_adress %}
+                                    {{ org.org_adress }}
+                                    {% else %}
+                                    <span class="text-muted">
+                                        {% trans 'لم يذكر' %}
+                                    </span>
+                                    {% endif %}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label> {% trans 'الموقع الالكتروني' %} </label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>
+                                    {% if org.site_web %}
+                                    <a href="https://www.{{ org.site_web }}" target="_blank">{{ org.site_web }}</a>
+                                    {% else %}
+                                    <span class="text-muted">
+                                        {% trans 'لم يذكر' %}
+                                    </span>
+                                    {% endif %}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label> {% trans 'صفحة فيسبوك' %} </label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>
+                                    {% if org.facebook %}
+                                    <a href="https://www.{{ org.facebook }}" target="_blank">{{ org.facebook }}</a>
+                                    {% else %}
+                                    <span class="text-muted">
+                                        {% trans 'لم يذكر' %}
+                                    </span>
+                                    {% endif %}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label> {% trans 'صفحة تويتر' %} </label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>
+                                    {% if org.twitter %}
+                                    <a href="https://www.{{ org.twitter }}" target="_blank">{{ org.twitter }}</a>
+                                    {% else %}
+                                    <span class="text-muted">
+                                        {% trans 'لم يذكر' %}
+                                    </span>
+                                    {% endif %}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label> {% trans 'البريد الاكتروني' %} </label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>
+                                    {% if org.email %}
+                                    {{ org.email }}
+                                    {% else %}
+                                    <span class="text-muted">
+                                        {% trans 'لم يذكر' %}
+                                    </span>
+                                    {% endif %}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label> {% trans 'رقم الهاتف' %} </label>
+                            </div>
+                            <div class="col-md-6" dir="ltr">
+                                <p class="{% if LANGUAGE_CODE == 'ar' %} float-right {% endif %}">
+                                    {% if org.phone %}
+                                    {{ org.phone|phonenumber:"FR" }}
+                                    {% else %}
+                                    <span class="text-muted">
+                                        {% trans 'لم يذكر' %}
+                                    </span>
+                                    {% endif %}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label> {% trans 'اسم الشخص المسؤول عن التواصل' %} </label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>
+                                    {% if org.name_person_contact %}
+                                    {{ org.name_person_contact }}
+                                    {% else %}
+                                    <span class="text-muted">
+                                        {% trans 'لم يذكر' %}
+                                    </span>
+                                    {% endif %}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label> {% trans 'البريد الاكتروني للشخص المسؤول عن التواصل' %} </label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>
+                                    {% if org.email_person_contact %}
+                                    {{ org.email_person_contact }}
+                                    {% else %}
+                                    <span class="text-muted">
+                                        {% trans 'لم يذكر' %}
+                                    </span>
+                                    {% endif %}
+                                </p>
+                            </div>
+                        </div>
+
+
+
+
+                        <!-- <div class="row">
+                            <div class="col-md-12">
+                                <label>Your Bio</label><br />
+                                <p>Your detail description</p>
+                            </div>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
 </div>
+
+
+
+
+
+
+
+<div class="row border-top pt-4">
+    {% if request.user.is_authenticated and request.user.is_staff %}
+    <div class="col">
+
+        {% if org.publish == False %}
+        <form action="" class="confirm" method="post">
+            {% csrf_token %}
+            {{form.publish}}
+            <div class="form-group">
+                <input type="submit" id="org_confirm_btn" class="btn btn-block" value="{% trans 'قبول الطلب' %}">
+            </div>
+        </form>
+        {% elif org.publish == True %}
+        <form action="" class="deconfirm" method="post">
+            {% csrf_token %}
+            {{form.publish}}
+            <div class="form-group">
+                <input type="submit" id="org_deconfirm_btn" class="btn btn-block" value="{% trans 'رفض الطلب' %}">
+            </div>
+        </form>
+        {% endif %}
+
+    </div>
+    <!-- <div class="col">
+        <a href="" class="btn btn-block"> {% trans 'حذف الطلب' %} </a>
+    </div> -->
+    {% endif %}
+    {% if request.user.is_authenticated and request.user == org.user %}
+    <div class="col">
+        <a href="{% url 'org_profile_edit' org.id %}" class="btn btn-block"> {% trans 'تعديل ملفي الشخصي' %} </a>
+    </div>
+    {% endif %}
+    <div class="col">
+        <a href="{% url 'guide' %}" class="btn btn-block"> عودة إلى صفحة دليل المجتمع المدني </a>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
 
 {% endblock %}

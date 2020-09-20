@@ -40,7 +40,9 @@ INSTALLED_APPS = [
     'orgs',
     'crispy_forms',
     'django_countries',
-    # 'django_i18n',
+    'phonenumber_filter',
+    'django_filters',
+
 ]
 
 MIDDLEWARE = [

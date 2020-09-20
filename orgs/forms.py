@@ -54,3 +54,11 @@ class OrgProfileForm(forms.ModelForm):
             'org_member_with',
             'coalition_name',
         ]
+
+
+class OrgConfirmForm(forms.ModelForm):
+    class Meta:
+        model = OrgProfile
+        fields = [
+            'publish',
+        ]

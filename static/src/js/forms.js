@@ -54,3 +54,16 @@ let field = $('input#year').val();
 // $('input#year').attr('oninput', "this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');");
 $('input#year').attr('maxlength', '4');
 $('input#year').attr('spellcheck', 'false');
+
+
+// ACCEPT ORG 
+$('form.confirm').find('#id_publish').hide();
+$('form.confirm').submit(function () {
+    $('form.confirm').find('#id_publish').attr('checked', true);
+});
+
+// REFIOUSE ORG
+$('form.deconfirm').find('#id_publish').hide();
+$('form.deconfirm').submit(function () {
+    $('form.deconfirm').find('#id_publish').attr('checked', false);
+});

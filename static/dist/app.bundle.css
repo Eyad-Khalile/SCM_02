@@ -7061,7 +7061,9 @@ button.close {
 
 body {
   padding-top: 80px;
-  font-family: "Tajawal", sans-serif; }
+  font-family: "Tajawal", sans-serif;
+  /* About Me 
+---------------------*/ }
   body .text-al-just {
     text-align: justify !important; }
   body h1, body .h1,
@@ -7081,104 +7083,50 @@ body {
     text-shadow: 0.5px 0.5px 6.5px rgba(255, 255, 255, 0.7);
     border: none;
     padding: 0.5em;
-    transition: all 0.5s ease-in-out;
-    /* About Me 
----------------------*/ }
+    transition: all 0.5s ease-in-out; }
     body .btn:hover {
       background-image: linear-gradient(to right, white, rgba(4, 109, 184, 0.7), rgba(8, 81, 133, 0.7), white) !important;
       text-shadow: 0.5px 0.5px 6.5px rgba(0, 0, 0, 0.7);
       color: #fff; }
-    body .btn .prof_body {
-      color: #6F8BA4;
-      margin-top: 20px; }
-    body .btn .section {
-      padding: 100px 0;
-      position: relative; }
-    body .btn .gray-bg {
-      background-color: #f5f5f5; }
-    body .btn img {
-      max-width: 100%; }
-    body .btn img {
-      vertical-align: middle;
-      border-style: none; }
-    body .btn .about-text h3, body .btn .about-text .h3 {
-      font-size: 45px;
-      font-weight: 700;
-      margin: 0 0 6px; }
-    @media (max-width: 767px) {
-      body .btn .about-text h3, body .btn .about-text .h3 {
-        font-size: 35px; } }
-    body .btn .about-text h6, body .btn .about-text .h6 {
-      font-weight: 600;
-      margin-bottom: 15px; }
-    @media (max-width: 767px) {
-      body .btn .about-text h6, body .btn .about-text .h6 {
-        font-size: 18px; } }
-    body .btn .about-text p {
-      font-size: 18px;
-      max-width: 450px; }
-    body .btn .about-text p mark, body .btn .about-text p .mark {
-      font-weight: 600;
-      color: #20247b; }
-    body .btn .about-list {
-      padding-top: 10px; }
-    body .btn .about-list .media {
-      padding: 5px 0; }
-    body .btn .about-list label {
-      color: #20247b;
-      font-weight: 600;
-      width: 88px;
-      margin: 0;
-      position: relative; }
-    body .btn .about-list label:after {
-      content: "";
+  body div.pagination center .btn {
+    padding: 0.375rem 0.75rem;
+    margin-left: 0.5em;
+    margin-right: 0.5em; }
+  body div.pagination center .btn-current {
+    background-image: linear-gradient(to right, white, rgba(4, 109, 184, 0.7), rgba(8, 81, 133, 0.7), white) !important;
+    text-shadow: 0.5px 0.5px 6.5px rgba(0, 0, 0, 0.7);
+    color: #fff; }
+  body .well {
+    min-height: 20px;
+    padding: 19px;
+    margin-bottom: 20px;
+    background-color: #f5f5f5;
+    border: 1px solid #e3e3e3;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+    -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+    position: relative;
+    padding-bottom: 50px; }
+    body .well a.btn {
       position: absolute;
-      top: 0;
       bottom: 0;
-      right: 11px;
-      width: 1px;
-      height: 12px;
-      background: #20247b;
-      -moz-transform: rotate(15deg);
-      -o-transform: rotate(15deg);
-      -ms-transform: rotate(15deg);
-      -webkit-transform: rotate(15deg);
-      transform: rotate(15deg);
-      margin: auto;
-      opacity: 0.5; }
-    body .btn .about-list p {
-      margin: 0;
-      font-size: 15px; }
-    @media (max-width: 991px) {
-      body .btn .about-avatar {
-        margin-top: 30px; } }
-    body .btn .about-section .counter {
-      padding: 22px 20px;
-      background: #ffffff;
-      border-radius: 10px;
-      box-shadow: 0 0 30px rgba(31, 45, 61, 0.125); }
-    body .btn .about-section .counter .count-data {
-      margin-top: 10px;
-      margin-bottom: 10px; }
-    body .btn .about-section .counter .count {
-      font-weight: 700;
-      color: #20247b;
-      margin: 0 0 5px; }
-    body .btn .about-section .counter p {
-      font-weight: 600;
-      margin: 0; }
-    body .btn mark, body .btn .mark {
-      background-image: linear-gradient(rgba(252, 83, 86, 0.6), rgba(252, 83, 86, 0.6));
-      background-size: 100% 3px;
-      background-repeat: no-repeat;
-      background-position: 0 bottom;
-      background-color: transparent;
-      padding: 0;
-      color: currentColor; }
-    body .btn .theme-color {
-      color: #fc5356; }
-    body .btn .dark-color {
-      color: #20247b; }
+      right: 0;
+      left: 0; }
+  @media (min-width: 1200px) {
+    body .span3 {
+      width: 270px; } }
+  @media (min-width: 1200px) {
+    body [class*="span"] {
+      float: left;
+      min-height: 1px;
+      margin-left: 30px; } }
+  body .img-circle {
+    -webkit-border-radius: 500px;
+    -moz-border-radius: 500px;
+    border-radius: 500px; }
 
 nav {
   background-image: linear-gradient(to right, #046db8, #085185); }
@@ -7427,6 +7375,9 @@ form #div_id_logo div {
   color: #fff; }
   form #div_id_logo div a {
     color: #fff; }
+
+div.emp-profile img {
+  width: 70%; }
 
 
 /*# sourceMappingURL=app.bundle.css.map*/
