@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'orgs',
     'crispy_forms',
     'django_countries',
-    # 'phonenumber_filter',
+    'phonenumber_filter',
     'django_filters',
 
 ]

@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% load static i18n %}
+{% load static i18n phonenumber_filters %}
 {% block title %} {% trans 'الملف الشخصي' %} {% endblock %}
 
 {% block content %}
@@ -15,8 +15,7 @@
         <div class="row">
             <div class="col-md-4 mb-4">
                 <div class="profile-img">
-                    <img src="{{ prof.logo.url }}" alt="{{ prof.name }}"
-                        title="{{ prof.name }}" />
+                    <img src="{{ prof.logo.url }}" alt="{{ prof.name }}" title="{{ prof.name }}" />
                     <!-- <div class="file">
                         Change Photo
                         <input type="file" name="file" />
@@ -31,12 +30,12 @@
                     <!-- <p class="proile-rating">RANKINGS : <span>8/10</span></p> -->
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
                         <li class="nav-item">
-                            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab"
-                                aria-controls="home" aria-selected="true">About</a>
+                            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home-{{prof.id}}"
+                                role="tab" aria-controls="home-{{prof.id}}" aria-selected="true">About</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
-                                aria-controls="profile" aria-selected="false">Contact</a>
+                            <a class="nav-link" id="profile-tab-1" data-toggle="tab" href="#profile-{{prof.id}}"
+                                role="tab" aria-controls="profile-{{prof.id}}" aria-selected="false">Contact</a>
                         </li>
                     </ul>
                 </div>
@@ -58,8 +57,9 @@
                 </div>
             </div>
             <div class="col-md-8">
-                <div class="tab-content profile-tab" id="myTabContent">
-                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                <div class="tab-content profile-tab-1" id="myTabContent">
+                    <div class="tab-pane fade show active" id="home-{{prof.id}}" role="tabpanel"
+                        aria-labelledby="home-tab">
                         <div class="row">
                             <div class="col-md-6">
                                 <label> {% trans 'اسم رئيس مجلس اﻹدارة' %} </label>
@@ -242,7 +242,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                    <div class="tab-pane fade" id="profile-{{prof.id}}" role="tabpanel" aria-labelledby="profile-tab-1">
                         <div class="row">
                             <div class="col-md-6">
                                 <label> {% trans 'عنوان المقر الرئيسي' %} </label>
@@ -317,7 +317,7 @@
                             </div>
                             <div class="col-md-6" dir="ltr">
                                 <p class="{% if LANGUAGE_CODE == 'ar' %} float-right {% endif %}">
-                                    {% if prof.phone %} {{ prof.phone}} {% else %}
+                                    {% if prof.phone %} {{ prof.phone|phonenumber:"FR" }} {% else %}
                                     <span class="text-muted"> {% trans 'لم يذكر' %} </span>
                                     {% endif %}
                                 </p>
