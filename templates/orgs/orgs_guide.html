@@ -58,56 +58,6 @@
 
 
 
-        <!-- TABLES OF ORGS -->
-        <!-- <div class="collapse mt-4" id="collapseListOrgs">
-            <h2> {% trans 'طلبات اشتراك المنظمات' %} </h2> -->
-
-
-
-
-        <!-- 
-            <table class="table table-dark">
-                <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">First</th>
-                        <th scope="col">Last</th>
-                        <th scope="col">Handle</th>
-                        <th scope="col">Status</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                        <td>
-                            <a href="{% url 'particip_detail' 1 %}" class="btn btn-info">تفاصيل الطلب</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th scope="row">2</th>
-                        <td>Jacob</td>
-                        <td>Thornton</td>
-                        <td>@fat</td>
-                        <td>
-                            <a href="{% url 'particip_detail' 2 %}" class="btn btn-info">تفاصيل الطلب</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th scope="row">3</th>
-                        <td>Larry</td>
-                        <td>the Bird</td>
-                        <td>@twitter</td>
-                        <td>
-                            <a href="{% url 'particip_detail' 3 %}" class="btn btn-info">تفاصيل الطلب</a>
-                        </td>
-                    </tr>
-                </tbody>
-            </table> -->
-        <!-- </div> -->
-
         <div class="mt-4">
             {% if orgs %}
             <h2>قائمة منظمات المجتمع المدني</h2>
@@ -143,6 +93,7 @@
 
                 <div class="pagination row border-top mt-4 pt-4" dir="ltr">
                     <center>
+                        {% if orgs.paginator.num_pages > 1 %}
                         {% if orgs.has_previous %}
 
                         <a href="?page=1" class="btn">
@@ -169,6 +120,8 @@
                                 class="fa fa-angle-double-right"></i></a>
 
                         {% endif %}
+                        {% endif %}
+
                     </center>
                 </div>
 
@@ -180,65 +133,20 @@
             <h3> {% trans 'حالياً لا يوجد منظمات مسجله او موافق عليها' %} </h3>
             {% endif %}
 
+
+
+
+
+
             <!-- <p>{{ orgs.has_previous }}</p>
-            <p>{{ orgs.number }}</p>
-            <p>{{ orgs.paginator.count }}</p>
+            <p>{{ orgs.number }}</p> -->
+            <!-- <p>{{ orgs.paginator.count }}</p>
             <p>{{ orgs.paginator.num_pages }}</p>
             <p>{{ orgs.paginator.page_range }}</p>
             <p>{{ orgs.has_next }}</p> -->
 
 
 
-
-            <!-- <table class="table table-dark">
-                <thead>
-                    <tr>
-                        <th scope="col">اسم المنظمة</th>
-                        <th scope="col">الاسم المختصر</th>
-
-                        <th scope="col">اللوغو</th>
-                        <th scope="col">الرؤية والرسالة</th>
-                        <th scope="col">تفاصيل المنظمة</th>
-
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>
-                            <img src="{% static 'media/article_img.jpg' %}" alt="" width="50">
-                        </td>
-                        <td>Mark</td>
-                        <td>
-                            <a href="{% url 'particip_detail' 5 %}" class="btn btn-info">تفاصيل المنظمة</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Jacob</td>
-                        <td>Thornton</td>
-                        <td>
-                            <img src="{% static 'media/article_img.jpg' %}" alt="" width="50">
-                        </td>
-                        <td>Jacob</td>
-                        <td>
-                            <a href="{% url 'particip_detail' 6 %}" class="btn btn-info">تفاصيل المنظمة</a>
-                        </td>
-
-                    </tr>
-                    <tr>
-                        <td>Larry</td>
-                        <td>the Bird</td>
-                        <td>
-                            <img src="{% static 'media/article_img.jpg' %}" alt="" width="50">
-                        </td>
-                        <td>Larry</td>
-                        <td>
-                            <a href="{% url 'particip_detail' 7 %}" class="btn btn-info">تفاصيل المنظمة</a>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>-->
         </div>
 
 
@@ -265,58 +173,6 @@
 
             <hr>
 
-            <!-- <form action="" class="form-inline">
-                <div class="form-group">
-                    <select class="form-select mt-4" aria-label="Default select example">
-                        <option selected>اسم المنظمة</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <select class="form-select mt-4" aria-label="Default select example">
-                        <option selected>مكان العمل</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <select class="form-select mt-4" aria-label="Default select example">
-                        <option selected>مجال العمل</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
-                    </select>
-                </div>
-
-                <div class="row">
-                    <div class="form-group mt-4">
-                        <label for="">تاريخ التأسيس / من :</label>
-                        <input type="text" class="form-control" id="year" name="year" placeholder="سنة التأسيس"
-                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
-
-                    </div>
-                    <div class="form-group mb-4">
-                        <label for="">إلى :</label>
-                        <input type="text" class="form-control" id="year" name="year" placeholder="سنة التأسيس"
-                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
-                    </div>
-                </div>
-                <div class="form-group mt-4">
-                    <select class="form-select mt-4" aria-label="Default select example">
-                        <option selected>الفئات المستهدفة</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <input type="submit" class="btn btn-block btn-success mt-4" value="بحث">
-                </div>
-            </form> -->
-
             <!-- BUTTONS -->
             <soan class="hr-white">
                 <hr>
@@ -327,7 +183,7 @@
             {% endif %}
 
             {% if request.user.is_authenticated and request.user.is_staff %}
-            <a href="{% url 'guide_conf' %}" class="btn btn-block"> {% trans 'طلبات اشتراك المنظمات' %} </a>
+            <a href="{% url 'guide_conf' %}" class="btn btn-block"> {% trans 'طلبات اشتراك المنظمات قيد الدراسة' %} </a>
 
             {% endif %}
 

@@ -113,7 +113,7 @@ class OrgProfile(models.Model):
         ('Other', _('أخرى')),
     )
 
-    user = models.OneToOneField(
+    user = models.ForeignKey(
         User, on_delete=models.CASCADE)
 
     name = models.CharField(max_length=255, null=False,

@@ -1,4 +1,4 @@
-import phonenumbers
+# import phonenumbers
 from django.http import HttpResponse, JsonResponse, HttpResponseRedirect, Http404
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login
@@ -102,6 +102,8 @@ def activate(request, uidb64, token):
 
 @login_required(login_url='signe_in')
 def profile(request):
+    profs = OrgProfile.objects.filter(user=request.user)
+    print(profs)
 
     context = {
 
@@ -112,7 +114,7 @@ def profile(request):
 @login_required(login_url='signe_in')
 def org_profile(request):
     if request.method == 'POST':
-        form = OrgProfileForm(request.POST or None)
+        form = OrgProfileForm(request.POST or None, files=request.FILES)
         if form.is_valid():
             user = form.save(commit=False)
             user.user = request.user
@@ -136,7 +138,7 @@ def org_profile_edit(request, pk):
     org_prof = OrgProfile.objects.get(id=pk)
 
     if request.method == 'POST':
-        form = OrgProfileForm(request.POST or None, instance=org_prof)
+        form = OrgProfileForm(request.POST or None, files=request.FILES, instance=org_prof)
         if form.is_valid():
             user = form.save(commit=False)
             user.updated_at = datetime.utcnow()
@@ -213,6 +215,13 @@ def guide_not_pub(request):
 def particip_detail(request, par_id):
     org = get_object_or_404(OrgProfile, id=par_id)
 
+    org_type = org.get_org_type_display()
+    city_work = org.get_city_work_display()
+    work_domain = org.get_work_domain_display()
+    target_cat = org.get_target_cat_display()
+    org_registered_country = org.get_org_registered_country_display()
+    w_polic_regulations = org.get_w_polic_regulations_display()
+
     if request.method == 'POST':
         print('request ======', request)
         form = OrgConfirmForm(request.POST or None, instance=org)
@@ -240,6 +249,12 @@ def particip_detail(request, par_id):
     context = {
         'org': org,
         'form': form,
+        'org_type': org_type,
+        'city_work': city_work,
+        'work_domain': work_domain,
+        'target_cat': target_cat,
+        'org_registered_country': org_registered_country,
+        'w_polic_regulations': w_polic_regulations,
     }
     return render(request, 'orgs/particip_detail.html', context)
 

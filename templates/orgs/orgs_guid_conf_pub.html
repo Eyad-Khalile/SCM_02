@@ -37,10 +37,10 @@
     </div>
     {% endfor %}
 
-    <hr>
 
-    <div class="pagination row mt-2" dir="ltr">
+    <div class="pagination row border-top mt-4 pt-4" dir="ltr">
         <center>
+            {% if orgs.paginator.num_pages > 1 %}
             {% if orgs.has_previous %}
 
             <a href="?page=1" class="btn">
@@ -66,6 +66,8 @@
             <a href="?page={{ orgs.paginator.num_pages }}" class="btn"><i class="fa fa-angle-double-right"></i></a>
 
             {% endif %}
+            {% endif %}
+
         </center>
     </div>
 
@@ -74,7 +76,8 @@
 
 </div>
 {% else %}
-<h3> {% trans 'حالياً لا يوجد منظمات مسجله او للموافق عليها' %} </h3>
+<h3 class="pt-5 mt-5 mb-5"> {% trans 'حالياً لا يوجد طلبات للمنظمات للموافق عليها' %} </h3>
+<a href="{% url 'guide' %}" class="btn btn-block mt-5"> {% trans 'عودة إلى صفحة دليل المنظمات' %} </a>
 {% endif %}
 
 

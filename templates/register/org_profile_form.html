@@ -5,7 +5,7 @@
 <h1> {% trans 'تقديم طلب اشتراك' %} </h1>
 
 <div class="register">
-    <form action="" method="post">
+    <form action="" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form|crispy }}
         <input type="submit" value="{% trans 'احفظ' %}" class="btn btn-block">
