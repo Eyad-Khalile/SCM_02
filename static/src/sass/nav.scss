@@ -4,6 +4,7 @@
 nav {
     background-image: $bg-color;
 
+
     ul {
 
         .bg-main-color {
@@ -45,7 +46,28 @@ nav {
         }
     }
 
+
+
 }
+
+.f-d {
+    flex-direction: inherit !important;
+}
+
+// NAV MOUVE UP AND DOWN
+.scrolled-down {
+    transform: translateY(-100%);
+    transition: all 0.8s ease-in-out;
+}
+
+.scrolled-up {
+    transform: translateY(0);
+    transition: all 0.8s ease-in-out;
+}
+
+
+
+
 
 // SUIT OF NAVBAR
 .li-news-dropdown-menu {
@@ -56,6 +78,12 @@ nav {
 
 .li-resource-dropdown-menu {
     &:hover .ul-resource-dropdown-menu {
+        display: block;
+    }
+}
+
+.li-user-dropdown-menu {
+    &:hover .ul-user-dropdown-menu {
         display: block;
     }
 }

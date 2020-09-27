@@ -95,7 +95,7 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Alert", function() { return Alert; });
+/* WEBPACK VAR INJECTION */(function(__webpack_provided_window_dot_jQuery) {/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Alert", function() { return Alert; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Button", function() { return Button; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Carousel", function() { return Carousel; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Collapse", function() { return Collapse; });
@@ -351,7 +351,7 @@ var reflow = function reflow(element) {
 
 var getjQuery = function getjQuery() {
   var _window = window,
-      jQuery = _window.jQuery;
+      jQuery = __webpack_provided_window_dot_jQuery;
 
   if (jQuery && !document.body.hasAttribute('data-no-jquery')) {
     return jQuery;
@@ -5146,6 +5146,7 @@ if ($$b) {
 
 //# sourceMappingURL=bootstrap.esm.js.map
 
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js")))
 
 /***/ }),
 
@@ -18694,6 +18695,37 @@ module.exports = g;
 
 /***/ }),
 
+/***/ "./src/js/form_validation.js":
+/*!***********************************!*\
+  !*** ./src/js/form_validation.js ***!
+  \***********************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function($) {$('form#fill_form').find('#id_name').blur(function () {
+  if ($(this).val().length < 3) {
+    $('#org_name').removeClass('d-none');
+  }
+});
+$('form#fill_form').find('#id_name_en_ku').blur(function () {
+  if ($(this).val().length < 3) {
+    $('#org_name_en_ku').removeClass('d-none');
+  }
+});
+$('form#fill_form').find('#id_short_cut').blur(function () {
+  if ($(this).val().length < 3) {
+    $('#short_cut').removeClass('d-none');
+  }
+});
+$('form#fill_form').find('#id_message').blur(function () {
+  if ($(this).val().length < 3) {
+    $('#message_alert').removeClass('d-none');
+  }
+});
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js")))
+
+/***/ }),
+
 /***/ "./src/js/forms.js":
 /*!*************************!*\
   !*** ./src/js/forms.js ***!
@@ -18704,62 +18736,138 @@ module.exports = g;
 /* WEBPACK VAR INJECTION */(function($) {// make the Email in the form register required filde
 // let astr = '<span class="asteriskField">*</span>';
 // $('input.emailinput').parent().prev('label').addClass('requiredField').append(astr);
-$('form.form-signin').find('label[for="id_username"]').addClass('d-none');
-$('form.form-signin').find('#id_username').attr('placeholder', 'اسم المستخدم');
-$('form.form-signin').find('label[for="id_password"]').addClass('d-none');
-$('form.form-signin').find('#id_password').attr('placeholder', 'كلمة المرور'); // ORG PROFILE
+$("form.form-signin").find('label[for="id_username"]').addClass("d-none");
+$("form.form-signin").find("#id_username").attr("placeholder", "اسم المستخدم");
+$("form.form-signin").find('label[for="id_password"]').addClass("d-none");
+$("form.form-signin").find("#id_password").attr("placeholder", "كلمة المرور"); // ORG PROFILE
 
-$('#div_id_city_work').hide();
+$("#div_id_city_work").hide();
 
-if ($('#id_position_work').val() == 'SY') {
-  $('#div_id_city_work').show();
+if ($("#id_position_work").val() == "SY") {
+  $("#div_id_city_work").show();
 }
 
-$('#id_position_work').change(function () {
-  let country = $('#id_position_work').val();
+$("#id_position_work").change(function () {
+  let country = $("#id_position_work").val();
 
   switch (country) {
-    case 'SY':
-      $('#div_id_city_work').show();
+    case "SY":
+      $("#div_id_city_work").show();
       break;
 
     default:
-      $('#div_id_city_work').hide();
+      $("#div_id_city_work").hide();
       break;
   }
 });
-$('#div_id_org_registered_country').hide();
+$("#div_id_org_registered_country").hide();
 
-if ($('#id_is_org_registered').val() == '1') {
-  $('#div_id_org_registered_country').show();
+if ($("#id_is_org_registered").val() == "1") {
+  $("#div_id_org_registered_country").show();
 }
 
-$('#id_is_org_registered').change(function () {
-  let org_reg = $('#id_is_org_registered').val();
+$("#id_is_org_registered").change(function () {
+  let org_reg = $("#id_is_org_registered").val();
 
   switch (org_reg) {
-    case '1':
-      $('#div_id_org_registered_country').show();
+    case "1":
+      $("#div_id_org_registered_country").show();
       break;
 
     default:
-      $('#div_id_org_registered_country').hide();
+      $("#div_id_org_registered_country").hide();
       break;
   }
 }); // INPUT ACCEPT YEAR ONLY
 
-let field = $('input#year').val(); // let reg = field.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');
-// $('input#year').attr('oninput', "this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');");
+$("input#id_start_date,  input#id_end_date, input#id_date_of_establishment").attr({
+  maxlength: "4",
+  spellcheck: "false",
+  oninput: "this.value = this.value.replace(/[^0-9]/g, '').replace(/(\\..*)\\./g, '$1').replace(/^(0*)/,'');",
+  placeholder: "Ex : YYYY"
+}); // FIELD PHONE
 
-$('input#year').attr('maxlength', '4');
-$('input#year').attr('spellcheck', 'false');
-$('form.confirm').find('#id_publish').hide();
-$('form.deconfirm').find('#id_publish').hide();
-$('form.confirm').submit(function () {
-  $('form.confirm').find('#id_publish').attr('checked', true);
+$("#id_phone").attr({
+  maxlength: "16",
+  oninput: "this.value = this.value.replace(/[^0-9+]/g, '');",
+  placeholder: "Ex : 00963 / +963"
+}); // LES CHARACTERS SPECIAUX
+
+$("#id_name, #id_name_en_ku, #id_short_cut, #id_message, #id_name_managing_director, #id_name_ceo, #id_name_person_contact, #id_org_adress, #id_coalition_name").attr({
+  minlength: "3",
+  oninput: "this.value = this.value.replace(/[^a-zA-Z0-9]/gi, '');"
+}); // MEMBERS COUNT
+
+$("#id_org_members_count, #id_org_members_womans_count").attr({
+  maxlength: "3",
+  oninput: "this.value = this.value.replace(/[^0-9.]/g, '');",
+  placeholder: "Ex : 1 - 900"
 });
-$('form.deconfirm').submit(function () {
-  $('form.deconfirm').find('#id_publish').attr('checked', false);
+$("#div_id_coalition_name").hide();
+
+if ($("#id_org_member_with").val() == "1") {
+  $("#div_id_coalition_name").show();
+}
+
+$("#id_org_member_with").change(function () {
+  let mem = $("#id_org_member_with").val();
+
+  switch (mem) {
+    case "":
+      $("#div_id_coalition_name").hide();
+      break;
+
+    case "0":
+      $("#div_id_coalition_name").hide();
+      break;
+
+    case "1":
+      $("#div_id_coalition_name").show();
+      break;
+  }
+}); // ACCEPT ORG
+
+$("form.confirm").find("#id_publish").hide();
+$("form.confirm").submit(function () {
+  $("form.confirm").find("#id_publish").attr("checked", true);
+}); // REFIOUSE ORG
+
+$("form.deconfirm").find("#id_publish").hide();
+$("form.deconfirm").submit(function () {
+  $("form.deconfirm").find("#id_publish").attr("checked", false);
+}); // URL
+
+var pathname = window.location.pathname; // Returns path only (/path/example.html)
+// var url = window.location.href;     // Returns full URL (https://example.com/path/example.html)
+
+var origin = window.location.origin; // Returns base URL (https://example.com)
+// console.log('olde path : ' + pathname);
+// console.log(url);
+// console.log(origin);
+// console.log(location);
+
+function removeCharacter(str) {
+  let tmp = str.split("");
+  return tmp.slice(3).join("");
+} // if (pathname[1] == "e" && pathname[2] == "n") {
+//     let output = removeCharacter(pathname);
+//     console.log(`Output is ${output}`);
+// }
+// LANGE SWICHER
+
+
+$("#chnage-lange").change(function () {
+  let lan_sel = $("#chnage-lange").val();
+
+  switch (lan_sel) {
+    case "ar":
+      document.location.href = origin + removeCharacter(pathname);
+      break;
+
+    case "en":
+      document.location.href = origin + "/en" + pathname;
+      break;
+  }
 });
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js")))
 
@@ -18783,9 +18891,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _main_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_main_js__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var _forms_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./forms.js */ "./src/js/forms.js");
 /* harmony import */ var _forms_js__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_forms_js__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _form_validation__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./form_validation */ "./src/js/form_validation.js");
+/* harmony import */ var _form_validation__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_form_validation__WEBPACK_IMPORTED_MODULE_5__);
 // const x = "this is a test";
 // alert(x);
 // You can specify which plugins you need
+
 
 
 
@@ -18801,9 +18912,26 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function($) {$(".alert").delay(6000).slideUp(1000, function () {
+/* WEBPACK VAR INJECTION */(function($) {$('body').css('padding-top', $('.navbar').outerHeight() + 'px');
+$(".alert").delay(6000).slideUp(1000, function () {
   $(this).alert('close');
 });
+
+if ($('nav').length > 0) {
+  // check if element exists
+  var last_scroll_top = 0;
+  $(window).on('scroll', function () {
+    scroll_top = $(this).scrollTop();
+
+    if (scroll_top < last_scroll_top) {
+      $('nav').removeClass('scrolled-down').addClass('scrolled-up');
+    } else {
+      $('nav').removeClass('scrolled-up').addClass('scrolled-down');
+    }
+
+    last_scroll_top = scroll_top;
+  });
+}
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js")))
 
 /***/ }),

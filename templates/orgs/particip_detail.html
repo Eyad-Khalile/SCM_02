@@ -44,8 +44,9 @@ LANGUAGE_CODE %} {% block title %} {% trans 'تفاصيل المنظمة' %} {% 
         <div class="profile-work">
           <p>{% trans 'معلومات عن المنظمة' %}</p>
           <p>{% trans 'نوع المنظمة' %} : {{ org_type }}</p>
-          <p>{% trans 'مكان العمل' %} : {{ org.position_work }}</p>
-          <p>{% trans 'المحافظة' %} : {{ city_work }}</p>
+          <p>{% trans 'مكان العمل' %} : {{ position_work }}</p>
+          <p>{% trans 'المحافظة' %} : {% if city_work %} {{ city_work }} {% else %} <span class="text-muted">
+              {% trans 'لم يذكر' %} </span> {% endif %} </p>
 
           <p>{% trans 'الرؤية و الرسالة' %}</p>
           <p>{{ org.message }}</p>

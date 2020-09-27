@@ -3,6 +3,7 @@ from .models import *
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
+from django.utils.translation import gettext_lazy as _
 
 
 # ============ User =============================
@@ -22,6 +23,42 @@ class LoginForm(forms.Form):
 
 
 class OrgProfileForm(forms.ModelForm):
+    name = forms.CharField(max_length=255, min_length=3, label=_('اسم المنظمة'),
+                           widget=forms.TextInput(
+                               attrs={'placeholder': _('هذا الحقل لا يقبل الحروف الخاصه و الرموز')})
+                           )
+    name_en_ku = forms.CharField(max_length=255, min_length=3, required=False, label=_('اسم المنظمة باللغة الانكليزية أو الكردية'),
+                                 widget=forms.TextInput(
+        attrs={'placeholder': _('هذا الحقل لا يقبل الحروف الخاصه و الرموز')})
+    )
+    short_cut = forms.CharField(max_length=255, min_length=3, required=False, label=_('الاسم المختصر'),
+                                widget=forms.TextInput(
+        attrs={'placeholder': _('هذا الحقل لا يقبل الحروف الخاصه و الرموز')})
+    )
+    message = forms.CharField(max_length=2000, min_length=3, required=False, label="الرؤية و الرسالة", widget=forms.Textarea(
+        attrs={'placeholder': 'هذا الحقل لا يقبل الحروف الخاصه و الرموز'}))
+
+    name_managing_director = forms.CharField(max_length=255, min_length=3, required=False, label=_('اسم رئيس مجلس اﻹدارة'),
+                                             widget=forms.TextInput(
+        attrs={'placeholder': _('هذا الحقل لا يقبل الحروف الخاصه و الرموز')})
+    )
+    name_ceo = forms.CharField(max_length=255, min_length=3, required=False, label=_('اسم المدير التنفيذي'),
+                               widget=forms.TextInput(
+        attrs={'placeholder': _('هذا الحقل لا يقبل الحروف الخاصه و الرموز')})
+    )
+    name_person_contact = forms.CharField(max_length=255, min_length=3, required=False, label=_('اسم الشخص المسؤول عن التواصل'),
+                                          widget=forms.TextInput(
+        attrs={'placeholder': _('هذا الحقل لا يقبل الحروف الخاصه و الرموز')})
+    )
+    org_adress = forms.CharField(max_length=255, min_length=3, label=_('عنوان المقر الرئيسي'),
+                                 widget=forms.TextInput(
+        attrs={'placeholder': _('هذا الحقل لا يقبل الحروف الخاصه و الرموز')})
+    )
+    coalition_name = forms.CharField(max_length=255, min_length=3, required=False, label=_('اسم الشبكة / التحالف'),
+                                     widget=forms.TextInput(
+        attrs={'placeholder': _('هذا الحقل لا يقبل الحروف الخاصه و الرموز')})
+    )
+
     class Meta:
         model = OrgProfile
         fields = [

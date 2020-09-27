@@ -139,7 +139,7 @@ class OrgProfile(models.Model):
         max_length=255, null=True, blank=True, verbose_name=_('اسم المدير التنفيذي'))
 
     # CONTACT INFO
-    site_web = models.CharField(
+    site_web = models.URLField(
         max_length=255, null=True, blank=True, verbose_name=_('الموقع الالكتروني'))
     facebook = models.URLField(
         max_length=255, null=True, blank=True, verbose_name=_('صفحة فيسبوك'))
@@ -151,7 +151,7 @@ class OrgProfile(models.Model):
                              blank=True, verbose_name=_('رقم الهاتف'))
     name_person_contact = models.CharField(
         max_length=255, null=True, blank=True, verbose_name=_('اسم الشخص المسؤول عن التواصل'))
-    email_person_contact = models.CharField(
+    email_person_contact = models.EmailField(
         max_length=255, null=True, blank=True, verbose_name=_('البريد الاكتروني للشخص المسؤول عن التواصل'))
     org_adress = models.CharField(
         max_length=255, null=False, verbose_name=_('عنوان المقر الرئيسي'))

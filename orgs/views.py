@@ -103,12 +103,89 @@ def activate(request, uidb64, token):
 @login_required(login_url='signe_in')
 def profile(request):
     profs = OrgProfile.objects.filter(user=request.user)
-    print(profs)
+    # profs = OrgProfile.objects.all()
+
+    org_type = profs.get_org_type_display()
+    position_work = profs.get_position_work_display()
+    city_work = profs.get_city_work_display()
+    work_domain = profs.get_work_domain_display()
+    target_cat = profs.get_target_cat_display()
+    org_registered_country = profs.get_org_registered_country_display()
+    w_polic_regulations = profs.get_w_polic_regulations_display()
+
+    if request.user.is_superuser:
+        return redirect('profile_supper')
+
+    if request.user.is_staff:
+        return redirect('profile_staff')
 
     context = {
-
+        'profs': profs,
+        'org_type': org_type,
+        'position_work': position_work,
+        'city_work': city_work,
+        'work_domain': work_domain,
+        'target_cat': target_cat,
+        'org_registered_country': org_registered_country,
+        'w_polic_regulations': w_polic_regulations,
     }
     return render(request, 'register/profile.html', context)
+
+
+@login_required(login_url='signe_in')
+def profile_supper(request):
+    if request.user.is_superuser:
+        profs = OrgProfile.objects.all()
+
+        for pro in profs:
+            org_type = pro.get_org_type_display()
+            position_work = pro.get_position_work_display()
+            city_work = pro.get_city_work_display()
+            work_domain = pro.get_work_domain_display()
+            target_cat = pro.get_target_cat_display()
+            org_registered_country = pro.get_org_registered_country_display()
+            w_polic_regulations = pro.get_w_polic_regulations_display()
+
+        context = {
+            'profs': profs,
+            'org_type': org_type,
+            'position_work': position_work,
+            'city_work': city_work,
+            'work_domain': work_domain,
+            'target_cat': target_cat,
+            'org_registered_country': org_registered_country,
+            'w_polic_regulations': w_polic_regulations,
+        }
+        return render(request, 'register/super_profile.html', context)
+
+
+@login_required(login_url='signe_in')
+def profile_staff(request):
+    if request.user.is_staff:
+        profs = OrgProfile.objects.all()
+
+        for pro in profs:
+            org_type = pro.get_org_type_display()
+            position_work = pro.get_position_work_display()
+            city_work = pro.get_city_work_display()
+            work_domain = pro.get_work_domain_display()
+            target_cat = pro.get_target_cat_display()
+            org_registered_country = pro.get_org_registered_country_display()
+            w_polic_regulations = pro.get_w_polic_regulations_display()
+
+        context = {
+            'profs': profs,
+            'org_type': org_type,
+            'position_work': position_work,
+            'city_work': city_work,
+            'work_domain': work_domain,
+            'target_cat': target_cat,
+            'org_registered_country': org_registered_country,
+            'w_polic_regulations': w_polic_regulations,
+        }
+        return render(request, 'register/staff_profile.html', context)
+    else:
+        return redirect('profile')
 
 
 @login_required(login_url='signe_in')
@@ -138,7 +215,8 @@ def org_profile_edit(request, pk):
     org_prof = OrgProfile.objects.get(id=pk)
 
     if request.method == 'POST':
-        form = OrgProfileForm(request.POST or None, files=request.FILES, instance=org_prof)
+        form = OrgProfileForm(request.POST or None,
+                              files=request.FILES, instance=org_prof)
         if form.is_valid():
             user = form.save(commit=False)
             user.updated_at = datetime.utcnow()
@@ -174,7 +252,7 @@ def guide(request):
     orgs = myFilter.qs
 
     # PAGINATEUR
-    paginator = Paginator(orgs, 9)
+    paginator = Paginator(orgs, 12)
     page = request.GET.get('page')
     try:
         orgs = paginator.get_page(page)
@@ -193,7 +271,7 @@ def guide_not_pub(request):
     orgs = OrgProfile.objects.filter(publish=False).order_by('-created_at')
 
     # PAGINATEUR
-    paginator = Paginator(orgs, 9)
+    paginator = Paginator(orgs, 12)
     page = request.GET.get('page')
     try:
         orgs = paginator.get_page(page)
@@ -216,6 +294,7 @@ def particip_detail(request, par_id):
     org = get_object_or_404(OrgProfile, id=par_id)
 
     org_type = org.get_org_type_display()
+    position_work = org.get_position_work_display()
     city_work = org.get_city_work_display()
     work_domain = org.get_work_domain_display()
     target_cat = org.get_target_cat_display()
@@ -250,6 +329,7 @@ def particip_detail(request, par_id):
         'org': org,
         'form': form,
         'org_type': org_type,
+        'position_work': position_work,
         'city_work': city_work,
         'work_domain': work_domain,
         'target_cat': target_cat,

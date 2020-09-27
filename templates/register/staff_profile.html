@@ -4,19 +4,9 @@
 
 {% block content %}
 
+{% if request.user.is_authenticated and request.user.is_staff %}
 
-<!-- {% for pr in profs %}
-<p>{{ pr.name }}</p>
-<p>{{ pr.user }}</p>
-<hr>
-{% endfor %} -->
-
-{% if request.user.is_authenticated %}
-
-{# {% for prof in request.user.orgprofile_set.all %} #}
-{% for prof in profs %}
-
-
+{% for prof in request.user.orgprofile_set.all %}
 <div class="container emp-profile mt-4">
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
@@ -362,6 +352,12 @@
                             </div>
                         </div>
 
+                        <!-- <div class="row">
+                            <div class="col-md-12">
+                                <label>Your Bio</label><br />
+                                <p>Your detail description</p>
+                            </div>
+                        </div> -->
                     </div>
                 </div>
             </div>
@@ -371,54 +367,37 @@
 
 <div class="row border-top pt-4">
 
-    <!-- {% if request.user.is_authenticated and request.user == prof.user %} -->
+
+
 
     <div class="col">
         <a href="{% url 'org_profile_edit' prof.id %}" class="btn btn-block">
             {% trans 'تعديل الطلب' %}
         </a>
     </div>
-    <div class="col">
-        <a href="{% url 'password_change' %}" class="btn btn-block mt-2 mb-2"> {% trans 'تغيير كلمة المرور' %} </a>
-    </div>
-    <div class="col">
-        <a href="{% url 'guide' %}" class="btn btn-block mt-2 mb-2">
-            عودة إلى صفحة دليل المجتمع المدني
-        </a>
-    </div>
-    <!-- {% endif %} -->
+
+
+
 
 
 </div>
 {% endfor %}
 
-
-
-
-
-
-{% if not request.user.orgprofile_set.all %}
-<h3 class="mt-4 mb-4 pt-4 pb-4">
-    {% trans 'رجاءً أتمم ملف المنظمة الشخصي لنتمكن من التحقق من معلوماتكم و يمكنكم استخدام الموقع' %}
-</h3>
-
-
-
-<div class="row pt-4">
+<div class="row border-top pt-4 mt-4">
 
     <div class="col">
-        <a href="{% url 'org_profile' %}" class="btn btn-block"> {% trans 'ملف المنظمة الشخصي' %} </a>
+        <a href="{% url 'org_profile' %}" class="btn btn-block"> {% trans 'تقديم طلب اشتراك لمنظمة' %} </a>
     </div>
 
-    {% endif %}
 
-    {% if request.user.is_authenticated %}
-    <div class="row border-top mt-4 pt-2"></div>
+
+
+    <div class="row  mt-4 pt-2"></div>
     <!-- CHNAGE PASSWORD -->
     <div class="col">
         <a href="{% url 'password_change' %}" class="btn btn-block mt-2 mb-2"> {% trans 'تغيير كلمة المرور' %} </a>
     </div>
-    {% endif %}
+
 
     <div class="col">
         <a href="{% url 'guide' %}" class="btn btn-block mt-2 mb-2">

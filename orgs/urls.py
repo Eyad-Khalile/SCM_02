@@ -68,7 +68,12 @@ urlpatterns = [
          views.activate, name='activate'),
     path('logout/', auth_views.LogoutView.as_view(template_name='register/logged_out.html'), name='logout'),
     path('profile/', views.profile, name="profile"),
+    path('profile_supper/', views.profile_supper, name="profile_supper"),
+    path('profile_staff/', views.profile_staff, name="profile_staff"),
+
+    # Org Fill the form
     path('org_profile/', views.org_profile, name='org_profile'),
+    # Org Edit the form
     path('org_profile_edit/<str:pk>',
          views.org_profile_edit, name='org_profile_edit'),
     path('particip_detail/<str:par_id>',

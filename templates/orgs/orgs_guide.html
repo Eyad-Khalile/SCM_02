@@ -6,11 +6,11 @@
 
 
 
-<div class="row">
+<div class="pt-4 mt-4">
 
 
     <!-- SECTION 1 -->
-    <div class="col-9">
+    <div class="">
         <article>
             <h1 class="text-center mb-4"> {% trans 'دليل المجتمع المدني' %} </h1>
             <!-- Text Descriptions -->
@@ -58,18 +58,76 @@
 
 
 
-        <div class="mt-4">
+        <div class="row mt-4">
             {% if orgs %}
-            <h2>قائمة منظمات المجتمع المدني</h2>
+            <h2> {% trans 'قائمة منظمات المجتمع المدني' %} </h2>
+
+            <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
+                {% if not request.user.orgprofile_set.all or request.user.is_staff %}
+                <a href="{% url 'org_profile' %}" class="btn btn-primary btn-block mt-4">تقديم طلب اشتراك</a>
+                {% endif %}
+            </div>
+            <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
+                {% if request.user.is_authenticated and request.user.is_superuser %}
+                <a href="{% url 'guide_conf' %}" class="btn btn-block mt-4">
+                    {% trans 'طلبات اشتراك المنظمات قيد الدراسة' %} </a>
+                {% endif %}
+            </div>
+            <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
+                <a class="btn btn-block mt-4" data-toggle="collapse" href="#collapseFiltre" aria-expanded="false"
+                    aria-controls="collapseFiltre">{% trans 'فرز' %}</a>
+            </div>
 
 
-            <div class="row pt-4">
+            <!-- SECTION 2 -->
+            <div class="fieldset pt-3 px-4 pb-2 mt-4 collapse" id="collapseFiltre">
 
+                <!-- FILTERS -->
+
+                <form action="" method="get"
+                    class="row justify-content-center align-items-center flex-wrap form my-2 my-lg-0">
+                    <div class="col-sm-12 col-md-4  mt-3">
+                        {{ myFilter.form.name|as_crispy_field }}
+                    </div>
+                    <div class="col-sm-12 col-md-4 mt-3">
+                        {{ myFilter.form.position_work|as_crispy_field }}
+                    </div>
+                    <div class="col-sm-12 col-md-4 mt-3">
+                        {{ myFilter.form.work_domain|as_crispy_field }}
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-6 col-sm-6 col-md-4 mt-3">
+                            {{ myFilter.form.start_date|as_crispy_field }}
+                        </div>
+                        <div class="col-xs-6 col-sm-6 col-md-4 mt-3">
+                            {{ myFilter.form.end_date|as_crispy_field }}
+                        </div>
+                        <div class="col-sm-12 col-md-4 mt-3">
+                            {{ myFilter.form.target_cat|as_crispy_field }}
+                        </div>
+                        <!-- <div class="form-group">
+                            <input type="text" name="" placeholder="{% trans 'test' %}" id="">
+                        </div> -->
+                    </div>
+
+                    <div class="form-group mt-3">
+                        <button class="btn btn-block mt-3">{% trans 'بحث' %}</button>
+                    </div>
+                </form>
+
+
+
+
+
+
+
+            </div>
+
+
+
+            <div class="row justify-content-center pt-4">
                 <br>
                 <br>
-
-
-
                 {% for org in orgs %}
 
                 <div class="span3 well">
@@ -133,11 +191,6 @@
             <h3> {% trans 'حالياً لا يوجد منظمات مسجله او موافق عليها' %} </h3>
             {% endif %}
 
-
-
-
-
-
             <!-- <p>{{ orgs.has_previous }}</p>
             <p>{{ orgs.number }}</p> -->
             <!-- <p>{{ orgs.paginator.count }}</p>
@@ -145,50 +198,10 @@
             <p>{{ orgs.paginator.page_range }}</p>
             <p>{{ orgs.has_next }}</p> -->
 
-
-
         </div>
 
-
-
-
     </div>
 
-    <!-- SECTION 2 -->
-    <div class="col-3">
-        <fieldset class="fieldset pt-5 px-4 pb-2 mt-4">
-            <!-- FILTERS -->
-            <h2>فرز بحسب :</h2>
-
-            <div id="filter" class="container-search">
-                <form action="" method="get" class="form my-2 my-lg-0">
-                    <div class="form-group">
-                        {{ myFilter.form|crispy }}
-                    </div>
-                    <div class="form-group">
-                        <button class="btn btn-block mt-3">{% trans 'بحث' %}</button>
-                    </div>
-                </form>
-            </div>
-
-            <hr>
-
-            <!-- BUTTONS -->
-            <soan class="hr-white">
-                <hr>
-            </soan>
-
-            {% if not request.user.orgprofile %}
-            <a href="{% url 'org_profile' %}" class="btn btn-primary btn-block mt-4">تقديم طلب اشتراك</a>
-            {% endif %}
-
-            {% if request.user.is_authenticated and request.user.is_staff %}
-            <a href="{% url 'guide_conf' %}" class="btn btn-block"> {% trans 'طلبات اشتراك المنظمات قيد الدراسة' %} </a>
-
-            {% endif %}
-
-        </fieldset>
-    </div>
 </div>
 
 

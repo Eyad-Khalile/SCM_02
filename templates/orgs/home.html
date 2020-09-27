@@ -1,15 +1,17 @@
 {% extends 'base.html' %}
 {% load static i18n %}
 
-{% block title %} بوابة المجتمع المدني {% endblock %}
+{% block title %} {% trans 'بوابة المجتمع المدني' %} {% endblock %}
 
 {% block content %}
 
 
 
 
+
+
 <article>
-    <h1 class="text-center mb-4 mt-5 pt-5">بوابة المجتمع المدني</h1>
+    <h1 class="text-center mb-4 mt-5 pt-5"> {% trans 'بوابة المجتمع المدني' %} </h1>
     <p class="text-right p-color text-al-just h4 pt-5 mt-5">
         "لوريم ايبسوم دولار سيت أميت ,كونسيكتيتور أدايبا يسكينج أليايت,سيت دو أيوسمود تيمبور
 
@@ -53,31 +55,44 @@
 <div class="row org-work mb-2">
     <h2 class="text-center mt-5 mb-5">مجال عمل المنظمات</h2>
 
-    <div class="col-lg-2 col-md-4 col-sm-6">
-        <a href="{% url 'guide_filter' 1 %}"
-            class="btn btn-button d-flex justify-content-center align-items-center h-100 w-100 border-0">إعلام</a>
+    <div class="mt-2 col-md-4 col-sm-6  col-xs-12 d-flex justify-content-center align-items-center">
+        <span class="d-flex justify-content-center align-items-center">
+            <a href="{% url 'guide_filter' 1 %}"
+                class="btn btn-button d-flex justify-content-center align-items-center h-100 w-100 border-0"> <span
+                    class="shadow"></span> إعلام</a>
+        </span>
     </div>
-    <div class="col-lg-2 col-md-4 col-sm-6">
-        <a href="{% url 'guide_filter' 2 %}"
-            class="btn btn-button d-flex justify-content-center align-items-center h-100 w-100 border-0">تعليم</a>
+    <div class="mt-2 col-md-4 col-sm-6  col-xs-12 d-flex justify-content-center align-items-center">
+        <span>
+            <a href="{% url 'guide_filter' 2 %}"
+                class="btn btn-button d-flex justify-content-center align-items-center h-100 w-100 border-0">تعليم</a>
+        </span>
     </div>
-    <div class="col-lg-2 col-md-4 col-sm-6">
-        <a href="{% url 'guide_filter' 3 %}"
-            class="btn btn-button d-flex justify-content-center align-items-center h-100 w-100 border-0">حماية</a>
+    <div class="mt-2 col-md-4 col-sm-6  col-xs-12 d-flex justify-content-center align-items-center">
+        <span>
+            <a href="{% url 'guide_filter' 3 %}"
+                class="btn btn-button d-flex justify-content-center align-items-center h-100 w-100 border-0">حماية</a>
+        </span>
     </div>
-    <div class="col-lg-2 col-md-4 col-sm-6">
-        <a href="{% url 'guide_filter' 4 %}"
-            class="btn btn-button d-flex justify-content-center align-items-center h-100 w-100 border-0">سبل
-            العيش والأمن الغذائي</a>
+    <div class="mt-2 col-md-4 col-sm-6  col-xs-12 d-flex justify-content-center align-items-center">
+        <span>
+            <a href="{% url 'guide_filter' 4 %}"
+                class="btn btn-button d-flex justify-content-center align-items-center h-100 w-100 border-0">سبل
+                العيش والأمن الغذائي</a>
+        </span>
     </div>
-    <div class="col-lg-2 col-md-4 col-sm-6">
-        <a href="{% url 'guide_filter' 5 %}"
-            class="btn btn-button d-flex justify-content-center align-items-center h-100 w-100 border-0">مشاريع
-            النظافة والمياه والصرف الصحي</a>
+    <div class="mt-2 col-md-4 col-sm-6  col-xs-12 d-flex justify-content-center align-items-center">
+        <span>
+            <a href="{% url 'guide_filter' 5 %}"
+                class="btn btn-button d-flex justify-content-center align-items-center h-100 w-100 border-0">مشاريع
+                النظافة والمياه والصرف الصحي</a>
+        </span>
     </div>
-    <div class="col-lg-2 col-md-4 col-sm-6">
-        <a href="{% url 'guide_filter' 6 %}"
-            class="btn btn-button d-flex justify-content-center align-items-center h-100 w-100 border-0">تنمیة</a>
+    <div class="mt-2 col-md-4 col-sm-6  col-xs-12 d-flex justify-content-center align-items-center">
+        <span>
+            <a href="{% url 'guide_filter' 6 %}"
+                class="btn btn-button d-flex justify-content-center align-items-center h-100 w-100 border-0">تنمیة</a>
+        </span>
     </div>
 </div>
 
@@ -85,34 +100,46 @@
 
 
 <div class="row org-work mt-2 mb-2">
-    <div class="col-lg-2 col-md-4 col-sm-6">
-        <a href="{% url 'guide_filter' 7 %}"
-            class="btn btn-button d-flex justify-content-center align-items-center h-100 w-100 border-0">قانون و
-            مناصرة و سیاسة</a>
+    <div class="mt-2 col-md-4 col-sm-6 col-xs-12  d-flex justify-content-center align-items-center">
+        <span>
+            <a href="{% url 'guide_filter' 7 %}"
+                class="btn btn-button d-flex justify-content-center align-items-center h-100 w-100 border-0">قانون و
+                مناصرة و سیاسة</a>
+        </span>
     </div>
-    <div class="col-lg-2 col-md-4 col-sm-6">
-        <a href="{% url 'guide_filter' 8 %}"
-            class="btn btn-button d-flex justify-content-center align-items-center h-100 w-100 border-0">مانحین و
-            دعم العمل التطوعي</a>
+    <div class="mt-2 col-md-4 col-sm-6 col-xs-12  d-flex justify-content-center align-items-center">
+        <span>
+            <a href="{% url 'guide_filter' 8 %}"
+                class="btn btn-button d-flex justify-content-center align-items-center h-100 w-100 border-0">مانحین و
+                دعم العمل التطوعي</a>
+        </span>
     </div>
-    <div class="col-lg-2 col-md-4 col-sm-6">
-        <a href="{% url 'guide_filter' 9 %}"
-            class="btn btn-button d-flex justify-content-center align-items-center h-100 w-100 border-0">منظمات
-            دینیة</a>
+    <div class="mt-2 col-md-4 col-sm-6 col-xs-12  d-flex justify-content-center align-items-center">
+        <span>
+            <a href="{% url 'guide_filter' 9 %}"
+                class="btn btn-button d-flex justify-content-center align-items-center h-100 w-100 border-0">منظمات
+                دینیة</a>
+        </span>
     </div>
-    <div class="col-lg-2 col-md-4 col-sm-6">
-        <a href="{% url 'guide_filter' 10 %}"
-            class="btn btn-button d-flex justify-content-center align-items-center h-100 w-100 border-0">تجمعات و
-            اتحادات مھنیة</a>
+    <div class="mt-2 col-md-4 col-sm-6 col-xs-12  d-flex justify-content-center align-items-center">
+        <span>
+            <a href="{% url 'guide_filter' 10 %}"
+                class="btn btn-button d-flex justify-content-center align-items-center h-100 w-100 border-0">تجمعات و
+                اتحادات مھنیة</a>
+        </span>
     </div>
-    <div class="col-lg-2 col-md-4 col-sm-6">
-        <a href="{% url 'guide_filter' 11 %}"
-            class="btn btn-button d-flex justify-content-center align-items-center h-100 w-100 border-0">صحة</a>
+    <div class="mt-2 col-md-4 col-sm-6 col-xs-12  d-flex justify-content-center align-items-center">
+        <span>
+            <a href="{% url 'guide_filter' 11 %}"
+                class="btn btn-button d-flex justify-content-center align-items-center h-100 w-100 border-0">صحة</a>
+        </span>
     </div>
-    <div class="col-lg-2 col-md-4 col-sm-6">
-        <a href="{% url 'guide_filter' 12 %}"
-            class="btn btn-button d-flex justify-content-center align-items-center h-100 w-100 border-0">دراسات
-            وأبحاث</a>
+    <div class="mt-2 col-md-4 col-sm-6 col-xs-12  d-flex justify-content-center align-items-center">
+        <span>
+            <a href="{% url 'guide_filter' 12 %}"
+                class="btn btn-button d-flex justify-content-center align-items-center h-100 w-100 border-0">دراسات
+                وأبحاث</a>
+        </span>
     </div>
 </div>
 
