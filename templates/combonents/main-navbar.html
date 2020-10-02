@@ -199,12 +199,19 @@
                 </li>
                 {% if request.user.is_authenticated %}
                 <li class="nav-item dropdown mx-2 li-user-dropdown-menu d-none d-lg-block">
-                    <a class="nav-link" href="#" tabindex="-1" aria-disabled="true"> {% trans 'أهلاً' %} {{user}}</a>
+                    <a class="nav-link" href="#" tabindex="-1" aria-disabled="true"> <i class="fa fa-ellipsis-v mx-2"
+                            aria-hidden="false"></i> {% trans 'أهلاً' %} {{user}} </a>
 
                     <ul class="dropdown-menu ul-user-dropdown-menu bg-main-color" aria-labelledby="navbarDropdown">
                         <li>
+
+                            <!-- <a class="dropdown-item {% if request.resolver_match.url_name == 'profile' %} active {% endif %}"
+                                href="{% url 'profile' %}"> {% trans 'لوحة التحكم الخاصة باﻹدارة' %} </a> -->
+
+                            {% if request.user.is_authenticated and not request.user.is_superuser %}
                             <a class="dropdown-item {% if request.resolver_match.url_name == 'profile' %} active {% endif %}"
                                 href="{% url 'profile' %}"> {% trans 'ملفي الشخصي' %} </a>
+                            {% endif %}
                         </li>
                         <li>
                             <a class="dropdown-item {% if request.resolver_match.url_name == 'password_change' %} active {% endif %}"
@@ -220,16 +227,19 @@
                 </li>
 
                 <!-- menu berg -->
+
                 <li class="nav-item dropdown d-block d-lg-none">
-                    <a class="nav-link dropdown-toggle " href="#" id="navbarDropdown" role="button"
+                    <a class="nav-link dropdown-toggle welcome-user" href="#" id="navbarDropdown" role="button"
                         data-toggle="dropdown" aria-expanded="false">
                         {% trans 'أهلاً' %} {{user}}
                     </a>
                     <ul class="dropdown-menu bg-main-color border-0" aria-labelledby="navbarDropdown">
+                        {% if request.user.is_authenticated and not request.user.is_superuser %}
                         <li>
                             <a class="dropdown-item {% if request.resolver_match.url_name == 'profile' %} active {% endif %}"
                                 href="{% url 'profile' %}"> {% trans 'ملفي الشخصي' %} </a>
                         </li>
+                        {% endif %}
                         <li>
                             <a class="dropdown-item {% if request.resolver_match.url_name == 'password_change' %} active {% endif %}"
                                 href="{% url 'password_change' %}"> {% trans 'تغيير كلمة المرور' %} </a>

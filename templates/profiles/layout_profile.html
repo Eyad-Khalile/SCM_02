@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static i18n phonenumber_filters %}
+{% block title %} {% trans 'لوحة التحكم الخاصة باﻹدارة' %} {% endblock %}
+
+{% get_current_language as LANGUAGE_CODE %}
+
+{% block content %}
+
+
+<!-- SIDEBAR -->
+
+
+
+
+<!-- PAGE CONTENT -->
+<div id="page-contant-wrapper min-vh-100"
+    class="{% if LANGUAGE_CODE == 'ar'%} padding-right {% else %} padding-left {% endif %}">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <h1 class="text-center pt-4 mt-4">{% trans 'لوحة التحكم الخاصة باﻹدارة' %}</h1>
+                <hr>
+                <!-- CONTANTS -->
+                <div class="contante">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+{% endblock %}

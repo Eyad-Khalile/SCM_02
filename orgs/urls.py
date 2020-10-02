@@ -68,7 +68,7 @@ urlpatterns = [
          views.activate, name='activate'),
     path('logout/', auth_views.LogoutView.as_view(template_name='register/logged_out.html'), name='logout'),
     path('profile/', views.profile, name="profile"),
-    path('profile_supper/', views.profile_supper, name="profile_supper"),
+    path('profile_supper/', views.admin_dashboard, name="profile_supper"),
     path('profile_staff/', views.profile_staff, name="profile_staff"),
 
     # Org Fill the form
@@ -76,6 +76,9 @@ urlpatterns = [
     # Org Edit the form
     path('org_profile_edit/<str:pk>',
          views.org_profile_edit, name='org_profile_edit'),
+    path('orgs_orders_etude/', views.orgs_orders_etude, name='orgs_orders_etude'),
+    path('orgs_orders_published/', views.orgs_orders_published,
+         name='orgs_orders_published'),
     path('particip_detail/<str:par_id>',
          views.particip_detail, name="particip_detail"),
 

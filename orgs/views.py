@@ -102,16 +102,6 @@ def activate(request, uidb64, token):
 
 @login_required(login_url='signe_in')
 def profile(request):
-    profs = OrgProfile.objects.filter(user=request.user)
-    # profs = OrgProfile.objects.all()
-
-    org_type = profs.get_org_type_display()
-    position_work = profs.get_position_work_display()
-    city_work = profs.get_city_work_display()
-    work_domain = profs.get_work_domain_display()
-    target_cat = profs.get_target_cat_display()
-    org_registered_country = profs.get_org_registered_country_display()
-    w_polic_regulations = profs.get_w_polic_regulations_display()
 
     if request.user.is_superuser:
         return redirect('profile_supper')
@@ -119,21 +109,41 @@ def profile(request):
     if request.user.is_staff:
         return redirect('profile_staff')
 
-    context = {
-        'profs': profs,
-        'org_type': org_type,
-        'position_work': position_work,
-        'city_work': city_work,
-        'work_domain': work_domain,
-        'target_cat': target_cat,
-        'org_registered_country': org_registered_country,
-        'w_polic_regulations': w_polic_regulations,
-    }
-    return render(request, 'register/profile.html', context)
+    # profs = OrgProfile.objects.filter(user=request.user)
+    profs = OrgProfile.objects.all().filter(user=request.user)
+
+    for prof in profs:
+        if prof and prof.user_id == request.user.id:
+            org_type = prof.get_org_type_display()
+            position_work = prof.get_position_work_display()
+            city_work = prof.get_city_work_display()
+            work_domain = prof.get_work_domain_display()
+            target_cat = prof.get_target_cat_display()
+            org_registered_country = prof.get_org_registered_country_display()
+            w_polic_regulations = prof.get_w_polic_regulations_display()
+
+            context = {
+                'profs': profs,
+                'org_type': org_type,
+                'position_work': position_work,
+                'city_work': city_work,
+                'work_domain': work_domain,
+                'target_cat': target_cat,
+                'org_registered_country': org_registered_country,
+                'w_polic_regulations': w_polic_regulations,
+            }
+
+        # else:
+
+        #     context = {
+        #         'profs': profs,
+        #     }
+            return render(request, 'profiles/profile.html', context)
 
 
 @login_required(login_url='signe_in')
-def profile_supper(request):
+def admin_dashboard(request):
+
     if request.user.is_superuser:
         profs = OrgProfile.objects.all()
 
@@ -156,7 +166,51 @@ def profile_supper(request):
             'org_registered_country': org_registered_country,
             'w_polic_regulations': w_polic_regulations,
         }
-        return render(request, 'register/super_profile.html', context)
+        return render(request, 'profiles/layout_profile.html', context)
+
+
+@login_required(login_url='signe_in')
+def orgs_orders_etude(request):
+    orgs = OrgProfile.objects.filter(publish=False)
+
+    myFilter = OrgsFilter(request.GET, queryset=orgs)
+    orgs = myFilter.qs
+
+    # PAGINATEUR
+    paginator = Paginator(orgs, 12)
+    page = request.GET.get('page')
+    try:
+        orgs = paginator.get_page(page)
+    except(EmptyPage, InvalidPage):
+        orgs = paginator.page(paginator.num_pages)
+
+    context = {
+        'orgs': orgs,
+        'myFilter': myFilter,
+    }
+    return render(request, 'profiles/orgs_orders_etude.html', context)
+
+
+@login_required(login_url='signe_in')
+def orgs_orders_published(request):
+    orgs = OrgProfile.objects.filter(publish=True)
+
+    myFilter = OrgsFilter(request.GET, queryset=orgs)
+    orgs = myFilter.qs
+
+    # PAGINATEUR
+    paginator = Paginator(orgs, 12)
+    page = request.GET.get('page')
+    try:
+        orgs = paginator.get_page(page)
+    except(EmptyPage, InvalidPage):
+        orgs = paginator.page(paginator.num_pages)
+
+    context = {
+        'orgs': orgs,
+        'myFilter': myFilter,
+    }
+    return render(request, 'profiles/orgs_orders_published.html', context)
 
 
 @login_required(login_url='signe_in')
@@ -183,7 +237,7 @@ def profile_staff(request):
             'org_registered_country': org_registered_country,
             'w_polic_regulations': w_polic_regulations,
         }
-        return render(request, 'register/staff_profile.html', context)
+        return render(request, 'profiles/staff_profile.html', context)
     else:
         return redirect('profile')
 
@@ -207,7 +261,7 @@ def org_profile(request):
     context = {
         'form': form
     }
-    return render(request, 'register/org_profile_form.html', context)
+    return render(request, 'profiles/org_profile_form.html', context)
 
 
 @login_required(login_url='signe_in')
@@ -232,7 +286,7 @@ def org_profile_edit(request, pk):
     context = {
         'form': form
     }
-    return render(request, 'register/org_profile_update.html', context)
+    return render(request, 'profiles/org_profile_update.html', context)
 
 
 # =========== Page 404 ==================

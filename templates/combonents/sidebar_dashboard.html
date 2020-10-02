@@ -1,0 +1,39 @@
+{% load static i18n phonenumber_filters %}
+
+{% get_current_language as LANGUAGE_CODE %}
+
+<div id="sidebar-wrapper">
+
+
+    <!-- <i class="fas fa-tachometer-alt"></i> -->
+
+
+    <a href=""
+        class=" position-absolute sidebar-btn {% if LANGUAGE_CODE == 'ar' %} btn-left {% else %} btn-right {% endif %} "
+        id="menu-toggle">
+        <!-- <i class="fa fa-bars "></i> -->
+        <i
+            class="fa {% if LANGUAGE_CODE == 'ar' %} fa-angle-double-right {% else %} fa-angle-double-left {% endif %}"></i>
+    </a>
+    <!-- <a href="#" class="" id="menu-toggle"><i class="fas fa-bars"></i></a> -->
+    <ul class="sidebar-navbar">
+        <li class="nav-item">
+            <a href="{% url 'password_change' %}" class="nav-link">{% trans 'تغيير كلمة المرور' %}</a>
+        </li>
+        <li class="nav-item">
+            <a href="{% url 'org_profile' %}" class="nav-link">{% trans 'تقديم طلب اشتراك جديد لمنظمة' %}</a>
+        </li>
+
+        <li class="nav-item">
+            <a href="{% url 'orgs_orders_etude' %}" class="nav-link">{% trans 'طلبات المنظمات قيد الدراسة' %}</a>
+        </li>
+
+        <li class="nav-item">
+            <a href="{% url 'orgs_orders_published' %}" class="nav-link">{% trans 'طلبات المنظمات الموافق عليها' %}</a>
+        </li>
+
+        <li class="nav-item">
+            <a href="{% url 'guide' %}" class="nav-link active"> {% trans 'عودة إلى صفحة دليل المجتمع المدني' %} </a>
+        </li>
+    </ul>
+</div>

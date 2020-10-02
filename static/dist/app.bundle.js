@@ -18721,7 +18721,17 @@ $('form#fill_form').find('#id_message').blur(function () {
   if ($(this).val().length < 3) {
     $('#message_alert').removeClass('d-none');
   }
-});
+}); // var forms = document.getElementsByClassName('form');
+// // Loop over them and prevent submission
+// var validation = Array.prototype.filter.call(forms, function (form) {
+//     form.addEventListener('submit', function (event) {
+//         if (form.checkValidity() === false) {
+//             event.preventDefault();
+//             event.stopPropagation();
+//         }
+//         form.classList.add('was-validated');
+//     }, false);
+// });
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js")))
 
 /***/ }),
@@ -18795,7 +18805,7 @@ $("#id_phone").attr({
 
 $("#id_name, #id_name_en_ku, #id_short_cut, #id_message, #id_name_managing_director, #id_name_ceo, #id_name_person_contact, #id_org_adress, #id_coalition_name").attr({
   minlength: "3",
-  oninput: "this.value = this.value.replace(/[^a-zA-Z0-9]/gi, '');"
+  oninput: "this.value = this.value.replace(/[^a-zA-Z0-9 ]/gi, '');"
 }); // MEMBERS COUNT
 
 $("#id_org_members_count, #id_org_members_womans_count").attr({
@@ -18901,7 +18911,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
+ // import "@fortawesome/fontawesome-free/js/all.js";
 
 /***/ }),
 
@@ -18912,10 +18922,12 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function($) {$('body').css('padding-top', $('.navbar').outerHeight() + 'px');
+/* WEBPACK VAR INJECTION */(function($) {$('body').css('padding-top', $('.navbar').outerHeight() + 'px'); // $('#sidebar-wrapper').css('height', $('#sidebar-wrapper').parent().parent('div.col-2').outerHeight() + 'px');
+
+$('#sidebar-wrapper').css('height', $('div.main-content').outerHeight() + 'px');
 $(".alert").delay(6000).slideUp(1000, function () {
   $(this).alert('close');
-});
+}); // NAVBAR ANIMATIONS
 
 if ($('nav').length > 0) {
   // check if element exists
@@ -18931,7 +18943,28 @@ if ($('nav').length > 0) {
 
     last_scroll_top = scroll_top;
   });
-}
+} // URL
+// var pathname = window.location.pathname;
+// if (pathname == "/profile_supper/" || pathname == "/en/profile_supper/") {
+//     $('div.main-container').removeClass('container').addClass('container-fluid');
+// }
+// TOGEL CLASS SHOW FROM THE COLLEPAS
+
+
+$('a[data-toggle="collapse"]').on('click', function () {
+  $('div.collapse.show').removeClass('show');
+  $(this).addClass('show');
+}); // DASHBOARD SIDEBAR
+
+$('#menu-toggle').click(function (e) {
+  e.preventDefault();
+  $('#wrapper').toggleClass('menuDisplayed', 7000, "easeInQuad");
+  $('.sidebar-navbar').toggleClass('d-none', 7000, "easeOutSine");
+  $('i.fa').toggleClass('fa-angle-double-right fa-angle-double-left');
+  $('#wrapper').parent().toggleClass('col-2');
+  $('#wrapper').parent().toggleClass('min-vh-100');
+  $('#wrapper').parent().next().toggleClass('col-10 col-12');
+});
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js")))
 
 /***/ }),

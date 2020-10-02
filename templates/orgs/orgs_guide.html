@@ -63,8 +63,15 @@
             <h2> {% trans 'قائمة منظمات المجتمع المدني' %} </h2>
 
             <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
+                <a class="btn btn-block mt-4" data-toggle="collapse" href="#collapseFiltre" aria-expanded="false"
+                    aria-controls="collapseFiltre">{% trans 'فرز' %}</a>
+            </div>
+
+            <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
+                {% if request.user.is_authenticated %}
                 {% if not request.user.orgprofile_set.all or request.user.is_staff %}
                 <a href="{% url 'org_profile' %}" class="btn btn-primary btn-block mt-4">تقديم طلب اشتراك</a>
+                {% endif %}
                 {% endif %}
             </div>
             <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
@@ -73,10 +80,7 @@
                     {% trans 'طلبات اشتراك المنظمات قيد الدراسة' %} </a>
                 {% endif %}
             </div>
-            <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
-                <a class="btn btn-block mt-4" data-toggle="collapse" href="#collapseFiltre" aria-expanded="false"
-                    aria-controls="collapseFiltre">{% trans 'فرز' %}</a>
-            </div>
+
 
 
             <!-- SECTION 2 -->

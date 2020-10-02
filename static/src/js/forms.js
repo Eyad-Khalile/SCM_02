@@ -64,7 +64,7 @@ $(
     "#id_name, #id_name_en_ku, #id_short_cut, #id_message, #id_name_managing_director, #id_name_ceo, #id_name_person_contact, #id_org_adress, #id_coalition_name"
 ).attr({
     minlength: "3",
-    oninput: "this.value = this.value.replace(/[^a-zA-Z0-9]/gi, '');",
+    oninput: "this.value = this.value.replace(/[^a-zA-Z0-9 ]/gi, '');",
 });
 
 // MEMBERS COUNT
@@ -106,6 +106,8 @@ $("form.deconfirm").submit(function () {
     $("form.deconfirm").find("#id_publish").attr("checked", false);
 });
 
+
+
 // URL
 var pathname = window.location.pathname; // Returns path only (/path/example.html)
 // var url = window.location.href;     // Returns full URL (https://example.com/path/example.html)
@@ -116,10 +118,12 @@ var origin = window.location.origin; // Returns base URL (https://example.com)
 // console.log(origin);
 // console.log(location);
 
+
 function removeCharacter(str) {
     let tmp = str.split("");
     return tmp.slice(3).join("");
 }
+
 
 // if (pathname[1] == "e" && pathname[2] == "n") {
 //     let output = removeCharacter(pathname);
@@ -137,4 +141,13 @@ $("#chnage-lange").change(function () {
             document.location.href = origin + "/en" + pathname;
             break;
     }
+
+
+
+
+
+
+
+
+
 });

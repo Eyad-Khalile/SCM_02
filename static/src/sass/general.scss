@@ -28,10 +28,12 @@ $bg-color-new: radial-gradient(rgba(pink, 1) 10%, rgba($color-1, 1));
 $bg-color-new-hover: radial-gradient(rgba($color-2, 1) 20%, rgba(pink, 1));
 
 // FONTS
-$main-font: "Tajawal",
-sans-serif;
-$title-font: "Reem Kufi",
-sans-serif;
+// $main-font: "Tajawal", sans-serif;
+// $title-font: "Reem Kufi", sans-serif;
+$title-font: "Neo Sans Arabic Regular" !important;
+$main-font: "GretaArabic-Regular",
+"arabic typesetting",
+serif !important;
 
 // FUNCTIONS
 
@@ -157,9 +159,8 @@ html {
         left bottom,
         left top,
         color-stop(0.44, rgb(195, 209, 236)),
-        color-stop(0.72, rgb(122, 153, 217)),
-        color-stop(0.86, $color-1));
-
+        color-stop(0.72, $color-2),
+        color-stop(0.86, rgb(195, 209, 236)));
   }
 
   ::-webkit-scrollbar-thumb:hover {
@@ -169,17 +170,19 @@ html {
       box-shadow: inset 0 0 6px #a6d5f7;
     }
   }
-
-
-
-
-
 }
 
 body {
+
   // BODY GENERAL
   // padding-top: 80px;
+  .main-container {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
   font-family: $main-font;
+
   // background-color: #aaa;
 
   .text-al-just {
@@ -187,6 +190,7 @@ body {
   }
 
   // GENERAL
+  a,
   h1,
   h2 {
     font-family: $title-font;
@@ -224,6 +228,31 @@ body {
   [type="reset"],
   [type="submit"] {
     -webkit-appearance: auto;
+  }
+
+  .profile-head {
+    .nav-tabs {
+      border-bottom: 2px solid $color-1;
+
+      a {
+        background: $bg-color-btn-hover;
+        color: #fff;
+        text-shadow: 0 0 5px $color-1;
+        padding-left: 2em;
+        padding-right: 2em;
+      }
+
+      a.active {
+        border-color: $color-1 $color-1 #fff;
+
+        background: $bg-color-btn;
+        color: #fff;
+
+        &:hover {
+          background: $bg-color-btn-hover;
+        }
+      }
+    }
   }
 
   // PROFILE

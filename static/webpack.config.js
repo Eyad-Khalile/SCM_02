@@ -33,7 +33,26 @@ module.exports = {
       },
       {
         test: /\.(gif|png|jpe?g|svg)$/i,
-        use: ["file-loader", { loader: "image-webpack-loader" }],
+        use: [
+          "file-loader",
+          {
+            loader: "image-webpack-loader",
+          },
+        ],
+      },
+      {
+        test: /\.(woff|woff2|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/i,
+        exclude: /node_modules/,
+        use: [
+          {
+            loader: "file-loader",
+            options: {
+              publicPath: "./fonts/",
+              name: "../fonts/[name].[ext]",
+              limit: 1000,
+            },
+          },
+        ],
       },
     ],
   },

@@ -15,3 +15,4 @@ import 'jquery';
 import "./main.js";
 import "./forms.js";
 import "./form_validation";
+// import "@fortawesome/fontawesome-free/js/all.js";

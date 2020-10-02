@@ -65,6 +65,9 @@ nav {
     transition: all 0.8s ease-in-out;
 }
 
+.welcome-user {
+    // background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='white' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
+}
 
 
 
@@ -94,3 +97,113 @@ nav {
     color: $color-1 !important;
     background-color: #fff;
 }
+
+
+// :::::::: DASHBOARD SIDEBAR ::::::::::::   
+#wrapper {
+
+
+    #sidebar-wrapper {
+        padding-top: 3em;
+
+        a {
+            // color: rgba(255, 255, 255, 0.55);
+            // border-color: rgba(255, 255, 255, 0.1);
+            // border-color: red;
+            cursor: pointer;
+
+            i {
+                padding: 8px;
+                display: inline-block;
+                vertical-align: middle;
+                background-repeat: no-repeat;
+                background-position: center;
+                background-size: 100%;
+                color: $color-1;
+                font-size: 26px;
+            }
+
+        }
+
+        .sidebar-navbar {
+            padding: 0;
+            list-style: none;
+
+            li {
+                text-indent: 20px;
+                line-height: 40px;
+
+                a {
+                    display: block;
+                    color: #ddd;
+
+                    &:hover {
+                        background: #eee;
+                        color: $color-1;
+                    }
+                }
+            }
+        }
+    }
+
+
+
+    #sidebar-wrapper {
+        z-index: 1;
+        position: absolute;
+        width: 0;
+        height: 100%;
+        // overflow-y: hidden;
+        background: $bg-color;
+        opacity: 0.9;
+        @include myTransition;
+    }
+
+    // Main content
+    #page-contant-wrapper {
+        width: 100%;
+        position: absolute;
+        padding: 15px;
+        padding-top: 0;
+    }
+
+    #page-contant-wrapper.padding-left {
+        // padding-left: 63px;
+    }
+
+    #page-contant-wrapper.padding-right {
+        // padding-right: 63px;
+    }
+
+
+
+}
+
+
+
+#wrapper.menuDisplayed {
+    #sidebar-wrapper {
+        width: 300px;
+    }
+
+    #page-contant-wrapper.padding-left {
+        padding-left: 300px;
+    }
+
+    #page-contant-wrapper.padding-right {
+        padding-right: 300px;
+    }
+
+}
+
+.sidebar-btn.btn-left {
+    left: -25px;
+}
+
+.sidebar-btn.btn-right {
+    right: -25px;
+}
+
+// .main-content {
+//     @include myTransition;
+// }

@@ -19,12 +19,14 @@
 
 
   <!-- FONT AWESOME -->
-  <link rel="stylesheet" href="{% static 'fonts/font-awesome/css/font-awesome.min.css' %}" />
+  <link rel="stylesheet" href="{% static 'src/fonts/font-awesome/css/font-awesome.min.css' %}" />
 
   <!-- GOOGLE FONTS -->
-  <link rel="stylesheet" href="{% static 'fonts/Almarai/Almarai-Regular.woff' %}" />
-  <link rel="stylesheet" href="{% static 'fonts/Tajawal/Tajawal-Regular.woff' %}" />
-  <link href="https://fonts.googleapis.com/css2?family=Reem+Kufi&display=swap" rel="stylesheet" />
+  <!-- <link rel="stylesheet" href="{% static 'src/fonts/Almarai/Almarai-Regular.woff' %}" />
+  <link rel="stylesheet" href="{% static 'src/fonts/Tajawal/Tajawal-Regular.woff' %}" />
+  <link rel="stylesheet" href="{% static 'src/fonts/Greta Arabic Regular/Greta Arabic Regular.ttf' %}" /> -->
+
+  <!-- <link href="https://fonts.googleapis.com/css2?family=Reem+Kufi&display=swap" rel="stylesheet" /> -->
 
   <!-- SITE STYLES -->
   <link rel="stylesheet" href="{% static 'dist/app.bundle.css' %}" />
@@ -36,35 +38,62 @@
   <header>{% include 'combonents/main-navbar.html' %}</header>
 
 
-
   <!-- ============ BODY CONTENT ========= -->
-  <div class="container min-vh-100 mb-5 pb-5">
-    <div class="messages">
-      <!-- ======== L'affichage des Messages ====== -->
-      {% if messages %}
-      {% for message in messages %}
-      {% if message.tags == 'error' %}
-      <div class="alert alert-danger">
-        {{ message }}
-      </div>
-      {% else %}
-      <div class="alert alert-{{message.tags}}">
-        {{ message }}
+  <div
+    class="{% if request.user.is_superuser %} main-container overflow-hidden {% else %} container  min-vh-100 mb-5 pb-5 {% endif %}">
+    <div class="row">
+      {% if request.user.is_authenticated and request.user.is_superuser %}
+      <div class="col-2 min-vh-100">
+
+        <div id="wrapper" class="menuDisplayed">
+          <!-- SIDEBAR -->
+          {% include 'combonents/sidebar_dashboard.html' %}
+
+        </div>
+
       </div>
       {% endif %}
-      {% endfor %}
-      {% endif %}
+      <div class="main-content {% if request.user.is_superuser %} col-10 {% else %} col-12 {% endif %}">
+        <div class="messages">
+          <!-- ======== L'affichage des Messages ====== -->
+          {% if messages %}
+          {% for message in messages %}
+          {% if message.tags == 'error' %}
+          <div class="alert alert-danger">
+            {{ message }}
+          </div>
+          {% else %}
+          <div class="alert alert-{{message.tags}}">
+            {{ message }}
+          </div>
+          {% endif %}
+          {% endfor %}
+          {% endif %}
+        </div>
+
+        <div class="container">
+          {% block content %} {% endblock %}
+        </div>
+
+      </div>
     </div>
 
-    {% block content %} {% endblock %}
+
+
+
+
   </div>
 
+
   <!-- ========== FOOTER ========== -->
-  {% include 'combonents/footer.html' %}
+  <footer class="page-footer font-small text-white pt-4">
+    {% include 'combonents/footer.html' %}
+  </footer>
 
 
   <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
   <script src="{% static 'dist/app.bundle.js' %}"></script>
+  {% block javascript %} {% endblock %}
 </body>
 
 </html>
