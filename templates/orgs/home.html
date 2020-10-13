@@ -1,150 +1,195 @@
-{% extends 'base.html' %}
-{% load static i18n %}
+{% extends 'base.html' %} {% load static i18n %} {% block title %}
+{% trans 'بوابة المجتمع المدني' %} {% endblock %} {% block content-home %}
 
-{% block title %} {% trans 'بوابة المجتمع المدني' %} {% endblock %}
+<div id="carouselHomePage" class="carouselHomePage carousel slide carousel-fade" data-ride="carousel">
+  <div class="carousel-inner">
+    <div class="carousel-item slide-item-1 active">
+      <!-- <img src="{% static 'media/slider/img_01.jpg' %}" class="d-block w-100 img-responsive" alt="..."> -->
+    </div>
+    <div class="carousel-item slide-item-2">
+      <!-- <img src="{% static 'media/slider/img_02.jpg' %}" class="d-block w-100 img-responsive" alt="..."> -->
+    </div>
+    <div class="carousel-item slide-item-3">
+      <!-- <img src="{% static 'media/slider/img_03.jpg' %}" class="d-block w-100 img-responsive" alt="..."> -->
+    </div>
+    <div class="carousel-item slide-item-4">
+      <!-- <img src="{% static 'media/slider/img_04.jpg' %}" class="d-block w-100 img-responsive" alt="..."> -->
+    </div>
+    <div class="carousel-item slide-item-5">
+      <!-- <img src="{% static 'media/slider/img_05.jpg' %}" class="d-block w-100 img-responsive" alt="..."> -->
+    </div>
+  </div>
+  <a class="carousel-control-prev" href="#carouselHomePage" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <!-- <span class="visually-hidden">Previous</span> -->
+  </a>
+  <a class="carousel-control-next" href="#carouselHomePage" role="button" data-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <!-- <span class="visually-hidden">Next</span> -->
+  </a>
+</div>
 
-{% block content %}
+<!-- <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="{% static '../media/slider/img_01.jpg' %}" class="d-block w-100" alt="...">
+    </div>
+    <div class="carousel-item">
+      <img src="{% static '../media/slider/img_02.jpg' %}" class="d-block w-100" alt="...">
+    </div>
+    <div class="carousel-item">
+      <img src="{% static '../media/slider/img_03.jpg' %}" class="d-block w-100" alt="...">
+    </div>
+    <div class="carousel-item">
+      <img src="{% static '../media/slider/img_04.jpg' %}" class="d-block w-100" alt="...">
+    </div>
+    <div class="carousel-item">
+      <img src="{% static '../media/slider/img_05.jpg' %}" class="d-block w-100" alt="...">
+    </div>
+  </div>
+</div> -->
 
 
 
+<!-- <div id="sider_bg">
+  <br><br><br>
+  <h1 class="text-center text-white mb-4 pt-5 slide-text">
+    {% trans 'بوابة المجتمع المدني' %}
+  </h1>
 
+  <div class="text-center">
+    <p class="text_1 d-none text-white text-center">text 1</p>
+    <p class="text_2 d-none text-white text-center">text 2</p>
+    <p class="text_3 d-none text-white text-center">text 3</p>
+    <p class="text_4 d-none text-white text-center">text 4</p>
+    <p class="text_5 d-none text-white text-center">text 5</p>
+  </div>
+  
+</div> -->
 
-
-<article>
-    <h1 class="text-center mb-4 mt-5 pt-5"> {% trans 'بوابة المجتمع المدني' %} </h1>
+<div class="container">
+  <article>
+    <h1 class="text-center mb-4 mt-5 pt-5">
+      {% trans 'بوابة المجتمع المدني' %}
+    </h1>
     <p class="text-right p-color text-al-just h4 pt-5 mt-5">
-        "لوريم ايبسوم دولار سيت أميت ,كونسيكتيتور أدايبا يسكينج أليايت,سيت دو أيوسمود تيمبور
-
-        أنكايديديونتيوت لابوري ات دولار ماجنا أليكيوا . يوت انيم أد مينيم فينايم,كيواس نوستريد
-
-        أكسير سيتاشن يللأمكو لابورأس نيسي يت أليكيوب أكس أيا كوممودو كونسيكيوات . ديواس
-
-        أيوتي أريري دولار إن ريبريهينديرأيت فوليوبتاتي فيلايت أيسسي كايلليوم دولار أيو فيجايت
-
-        نيولا باراياتيور. أيكسسيبتيور ساينت أوككايكات كيوبايداتات نون بروايدينت ,سيونت ان كيولبا
-
-        كيو أوفيسيا ديسيريونتموليت انيم أيدي ايست لابوريوم."
-
-        "سيت يتبيرسبايكياتيس يوندي أومنيس أستي ناتيس أيررور سيت فوليبتاتيم أكيسأنتييوم
-
-        دولاريمكيو لايودانتيوم,توتام ريم أبيرأم,أيكيو أبسا كيواي أب أللو أنفينتوري فيرأتاتيس ايت
-
-        كياسي أرشيتيكتو بيتاي فيتاي ديكاتا سيونت أكسبليكابو. نيمو أنيم أبسام فوليوباتاتيم كيواي
-
-        فوليوبتاس سايت أسبيرناتشر أيوت أودايت أيوت فيوجايت, سيد كيواي كونسيكيونتشر ماجناي
-
-        دولارس أيوس كيواي راتاشن فوليوبتاتيم سيكيواي نيسكايونت. نيكيو بوررو كيوايسكيوم
-
-        ايست,كيواي دولوريم ايبسيوم كيوا دولار سايت أميت, كونسيكتيتيور,أديبايسكاي فيلايت, سيد
-
-        كيواي نون نيومكيوام ايايوس موداي تيمبورا انكايديونت يوت لابوري أيت دولار ماجنام
-
-        ألايكيوام كيوايرات فوليوبتاتيم. يوت اينايم أد مينيما فينيام, كيواس نوستريوم أكسيركايتاشيم
-
-        يلامكوربوريس سيوسكايبيت لابورايوسام, نايساي يوت ألايكيوايد أكس أيا كوموداي
-
-        كونسيكيواتشر؟ كيوايس أيوتيم فيل أيوم أيوري ريبريهينديرايت كيواي ان إيا فوليوبتاتي
-
-        فيلايت ايسسي كيوم نايهايل موليستايا كونسيكيواتيو,فيلايليوم كيواي دولوريم أيوم فيوجايات كيو
-
-        فوليوبتاس نيولا باراياتيور؟"
+      "لوريم ايبسوم دولار سيت أميت ,كونسيكتيتور أدايبا يسكينج أليايت,سيت دو
+      أيوسمود تيمبور أنكايديديونتيوت لابوري ات دولار ماجنا أليكيوا . يوت انيم أد
+      مينيم فينايم,كيواس نوستريد أكسير سيتاشن يللأمكو لابورأس نيسي يت أليكيوب
+      أكس أيا كوممودو كونسيكيوات . ديواس أيوتي أريري دولار إن ريبريهينديرأيت
+      فوليوبتاتي فيلايت أيسسي كايلليوم دولار أيو فيجايت نيولا باراياتيور.
+      أيكسسيبتيور ساينت أوككايكات كيوبايداتات نون بروايدينت ,سيونت ان كيولبا كيو
+      أوفيسيا ديسيريونتموليت انيم أيدي ايست لابوريوم." "سيت يتبيرسبايكياتيس
+      يوندي أومنيس أستي ناتيس أيررور سيت فوليبتاتيم أكيسأنتييوم دولاريمكيو
+      لايودانتيوم,توتام ريم أبيرأم,أيكيو أبسا كيواي أب أللو أنفينتوري فيرأتاتيس
+      ايت كياسي أرشيتيكتو بيتاي فيتاي ديكاتا سيونت أكسبليكابو. نيمو أنيم أبسام
+      فوليوباتاتيم كيواي فوليوبتاس سايت أسبيرناتشر أيوت أودايت أيوت فيوجايت, سيد
+      كيواي كونسيكيونتشر ماجناي دولارس أيوس كيواي راتاشن فوليوبتاتيم سيكيواي
+      نيسكايونت. نيكيو بوررو كيوايسكيوم ايست,كيواي دولوريم ايبسيوم كيوا دولار
+      سايت أميت, كونسيكتيتيور,أديبايسكاي فيلايت, سيد كيواي نون نيومكيوام ايايوس
+      موداي تيمبورا انكايديونت يوت لابوري أيت دولار ماجنام ألايكيوام كيوايرات
+      فوليوبتاتيم. يوت اينايم أد مينيما فينيام, كيواس نوستريوم أكسيركايتاشيم
+      يلامكوربوريس سيوسكايبيت لابورايوسام, نايساي يوت ألايكيوايد أكس أيا كوموداي
+      كونسيكيواتشر؟ كيوايس أيوتيم فيل أيوم أيوري ريبريهينديرايت كيواي ان إيا
+      فوليوبتاتي فيلايت ايسسي كيوم نايهايل موليستايا كونسيكيواتيو,فيلايليوم
+      كيواي دولوريم أيوم فيوجايات كيو فوليوبتاس نيولا باراياتيور؟"
     </p>
-</article>
-<br>
-<hr>
-<div class="row org-work mb-2">
-    <h2 class="text-center mt-5 mb-5">مجال عمل المنظمات</h2>
+  </article>
+  <br />
 
-    <div class="mt-2 col-md-4 col-sm-6  col-xs-12 d-flex justify-content-center align-items-center">
-        <span class="d-flex justify-content-center align-items-center">
-            <a href="{% url 'guide_filter' 1 %}"
-                class="btn btn-button d-flex justify-content-center align-items-center h-100 w-100 border-0"> <span
-                    class="shadow"></span> إعلام</a>
-        </span>
+
+
+
+  <div class="orgs_slide mt-4 pt-4">
+    <h2 class="text-center mb-4"> {% trans "المنظمات المنضمة حديثاً" %} </h2>
+    <div id="carouselOrgs" class="carouselOrgs carousel slide carousel-fade" data-ride="carousel">
+      <div class="carousel-inner">
+
+        {% for org in orgs|slice:3 %}
+
+        {% if last_org == org.id %}
+        <div class="carousel-item slide-item-1 active">
+          <div class=" well" id="org_{{org.id}}">
+            <center>
+              <a href="{% url 'particip_detail' org.id %}">
+                <img src="{{ org.logo.url }}" name="{{ org.name_en_ku }}" title="{{ org.name_en_ku }}" width="140"
+                  height="140" class="img-circle" /></a>
+              <h3 class="mt-4">{{ org.name }}</h3>
+              <p>{{ org.short_cut }}</p>
+              <p>{{ org.message|truncatechars:80 }}</p>
+              <p>
+                <a href="{% url 'particip_detail' org.id %}" class="btn btn-block">
+                  {% trans 'للمزيد عن المنظمة' %}
+                </a>
+              </p>
+            </center>
+          </div>
+        </div>
+
+        {% elif av_last_org == org.id %}
+        <div class="carousel-item slide-item-2">
+          <div class=" well" id="org_{{org.id}}">
+            <center>
+              <a href="{% url 'particip_detail' org.id %}">
+                <img src="{{ org.logo.url }}" name="{{ org.name_en_ku }}" title="{{ org.name_en_ku }}" width="140"
+                  height="140" class="img-circle" /></a>
+              <h3 class="mt-4">{{ org.name }}</h3>
+              <p>{{ org.short_cut }}</p>
+              <p>{{ org.message|truncatechars:80 }}</p>
+              <p>
+                <a href="{% url 'particip_detail' org.id %}" class="btn btn-block">
+                  {% trans 'للمزيد عن المنظمة' %}
+                </a>
+              </p>
+            </center>
+          </div>
+        </div>
+
+        {% elif av_av_last_org == org.id %}
+        <div class="carousel-item slide-item-3">
+          <div class=" well" id="org_{{org.id}}">
+            <center>
+              <a href="{% url 'particip_detail' org.id %}">
+                <img src="{{ org.logo.url }}" name="{{ org.name_en_ku }}" title="{{ org.name_en_ku }}" width="140"
+                  height="140" class="img-circle" /></a>
+              <h3 class="mt-4">{{ org.name }}</h3>
+              <p>{{ org.short_cut }}</p>
+              <p>{{ org.message|truncatechars:80 }}</p>
+              <p>
+                <a href="{% url 'particip_detail' org.id %}" class="btn btn-block">
+                  {% trans 'للمزيد عن المنظمة' %}
+                </a>
+              </p>
+            </center>
+          </div>
+        </div>
+
+        {% endif %}
+
+        {% endfor %}
+
+      </div>
+      <a class="carousel-control-prev" href="#carouselOrgs" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      </a>
+      <a class="carousel-control-next" href="#carouselOrgs" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      </a>
     </div>
-    <div class="mt-2 col-md-4 col-sm-6  col-xs-12 d-flex justify-content-center align-items-center">
-        <span>
-            <a href="{% url 'guide_filter' 2 %}"
-                class="btn btn-button d-flex justify-content-center align-items-center h-100 w-100 border-0">تعليم</a>
-        </span>
-    </div>
-    <div class="mt-2 col-md-4 col-sm-6  col-xs-12 d-flex justify-content-center align-items-center">
-        <span>
-            <a href="{% url 'guide_filter' 3 %}"
-                class="btn btn-button d-flex justify-content-center align-items-center h-100 w-100 border-0">حماية</a>
-        </span>
-    </div>
-    <div class="mt-2 col-md-4 col-sm-6  col-xs-12 d-flex justify-content-center align-items-center">
-        <span>
-            <a href="{% url 'guide_filter' 4 %}"
-                class="btn btn-button d-flex justify-content-center align-items-center h-100 w-100 border-0">سبل
-                العيش والأمن الغذائي</a>
-        </span>
-    </div>
-    <div class="mt-2 col-md-4 col-sm-6  col-xs-12 d-flex justify-content-center align-items-center">
-        <span>
-            <a href="{% url 'guide_filter' 5 %}"
-                class="btn btn-button d-flex justify-content-center align-items-center h-100 w-100 border-0">مشاريع
-                النظافة والمياه والصرف الصحي</a>
-        </span>
-    </div>
-    <div class="mt-2 col-md-4 col-sm-6  col-xs-12 d-flex justify-content-center align-items-center">
-        <span>
-            <a href="{% url 'guide_filter' 6 %}"
-                class="btn btn-button d-flex justify-content-center align-items-center h-100 w-100 border-0">تنمیة</a>
-        </span>
-    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
 </div>
-
-
-
-
-<div class="row org-work mt-2 mb-2">
-    <div class="mt-2 col-md-4 col-sm-6 col-xs-12  d-flex justify-content-center align-items-center">
-        <span>
-            <a href="{% url 'guide_filter' 7 %}"
-                class="btn btn-button d-flex justify-content-center align-items-center h-100 w-100 border-0">قانون و
-                مناصرة و سیاسة</a>
-        </span>
-    </div>
-    <div class="mt-2 col-md-4 col-sm-6 col-xs-12  d-flex justify-content-center align-items-center">
-        <span>
-            <a href="{% url 'guide_filter' 8 %}"
-                class="btn btn-button d-flex justify-content-center align-items-center h-100 w-100 border-0">مانحین و
-                دعم العمل التطوعي</a>
-        </span>
-    </div>
-    <div class="mt-2 col-md-4 col-sm-6 col-xs-12  d-flex justify-content-center align-items-center">
-        <span>
-            <a href="{% url 'guide_filter' 9 %}"
-                class="btn btn-button d-flex justify-content-center align-items-center h-100 w-100 border-0">منظمات
-                دینیة</a>
-        </span>
-    </div>
-    <div class="mt-2 col-md-4 col-sm-6 col-xs-12  d-flex justify-content-center align-items-center">
-        <span>
-            <a href="{% url 'guide_filter' 10 %}"
-                class="btn btn-button d-flex justify-content-center align-items-center h-100 w-100 border-0">تجمعات و
-                اتحادات مھنیة</a>
-        </span>
-    </div>
-    <div class="mt-2 col-md-4 col-sm-6 col-xs-12  d-flex justify-content-center align-items-center">
-        <span>
-            <a href="{% url 'guide_filter' 11 %}"
-                class="btn btn-button d-flex justify-content-center align-items-center h-100 w-100 border-0">صحة</a>
-        </span>
-    </div>
-    <div class="mt-2 col-md-4 col-sm-6 col-xs-12  d-flex justify-content-center align-items-center">
-        <span>
-            <a href="{% url 'guide_filter' 12 %}"
-                class="btn btn-button d-flex justify-content-center align-items-center h-100 w-100 border-0">دراسات
-                وأبحاث</a>
-        </span>
-    </div>
-</div>
-
-
-
 
 
 

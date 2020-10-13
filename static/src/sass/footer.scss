@@ -3,17 +3,92 @@
 
 footer {
     // margin-top: 2.25rem !important;
-    background-image: $bg-color;
+    // background-color: #17678C;
+    background-color: $color-1;
+    // color: #11A0DA !important;
+    // position: relative;
+
+
+    .logo {
+        position: relative;
+        
+        img {
+            padding: 0.50em;
+            position: absolute;
+            top: -114px;
+            border: 2px solid #17678C;
+            border-bottom-color: rgb(23, 103, 140);
+            border-bottom-style: solid;
+            border-bottom-width: 6px;
+            border-bottom: none;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+            width: 120px;
+            box-shadow: 1px 1px 5px #17678c,
+            -1px -1px 5px #17678c;
+
+            @include myTransition;
+        }
+
+        &:hover {
+            img {
+                background-color: rgba(tomato, 0.7);
+            }
+        }
+    }
+
+    @media screen and (max-width: 768px) {
+        h5 {
+            text-align: center;
+            border-bottom: none !important;
+        }
+        ul {
+            li {
+                p {
+                    text-align: center;
+                }
+            }
+        }
+        .social-icon {
+            display: flex;
+            justify-content: center;
+        }
+
+        .btn-scroll-top {
+            right: 20px;
+        }
+    }
+
+    .icon-ml {
+        svg {
+            margin-left: 8px;
+        }
+    }
+    .icon-mr {
+        svg {
+            margin-right: 8px;
+        }
+    }
 
     a {
         text-decoration: none;
     }
 
-    .logo-shadow {
-        background-image: linear-gradient(to right, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 1), rgba(255, 255, 255, 0.1));
-        border-radius: 15px;
-        // box-shadow: 1px 1px 35px #fff;
-        padding: 5px;
+    // .logo-shadow {
+    //     background-image: linear-gradient(to right, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 1), rgba(255, 255, 255, 0.1));
+    //     border-radius: 15px;
+    //     // box-shadow: 1px 1px 35px #fff;
+    //     padding: 5px;
+    // }
+
+    h5 {
+        
+        a {
+            @include myTransition;
+            &:hover {
+                color: tomato !important;
+            }
+        }
     }
 
 
@@ -25,11 +100,9 @@ footer {
             margin: 0.75em;
             font-size: 1.5em;
 
-            @include myTransition;
-
             &:hover {
-                transform: scale(2);
-                color: #fff;
+                transform: scale(1.5);
+                color: tomato !important;
             }
         }
     }
@@ -43,8 +116,10 @@ footer {
         &:hover {
             font-size: 1.25em;
             font-weight: bold;
-            color: $color-1;
-            text-shadow: 1px 1px 3px #fff;
+            color: tomato;
+            // text-shadow: 1px 1px 3px #fff;
         }
     }
+
+    
 }

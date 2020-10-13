@@ -9,7 +9,7 @@ from django.utils.translation import gettext_lazy as _
 # ============ User =============================
 class SignUpForm(UserCreationForm):
     email = forms.EmailField(max_length=254,  required=True,
-                             help_text='حقل إجباري, يرجى إدخال بريد إلكتروني صحيح لتتمكن من تفعيل حسابك', label='عنوان بريد إلكتروني')
+                             help_text=_('حقل إجباري, يرجى إدخال بريد إلكتروني صحيح لتتمكن من تفعيل حسابك'), label=_('عنوان بريد إلكتروني'))
 
     class Meta:
         model = User
@@ -24,6 +24,8 @@ class LoginForm(forms.Form):
 
 class OrgProfileForm(forms.ModelForm):
     name = forms.CharField(max_length=255, min_length=3, label=_('اسم المنظمة'),
+                           help_text=_(
+                               ''),
                            widget=forms.TextInput(
                                attrs={'placeholder': _('هذا الحقل لا يقبل الحروف الخاصه و الرموز')})
                            )
@@ -46,10 +48,26 @@ class OrgProfileForm(forms.ModelForm):
                                widget=forms.TextInput(
         attrs={'placeholder': _('هذا الحقل لا يقبل الحروف الخاصه و الرموز')})
     )
+    site_web = forms.URLField(
+        max_length=255, min_length=3, required=False, label=_('الموقع الالكتروني'), widget=forms.TextInput(attrs={'placeholder': "Ex: mysite.com"}))
+
+    facebook = forms.URLField(
+        max_length=255, min_length=3, required=False, label=_('صفحة فيسبوك'), widget=forms.TextInput(attrs={'placeholder': ""}))
+
+    twitter = forms.URLField(
+        max_length=255, min_length=3, required=False, label=_('صفحة تويتر'), widget=forms.TextInput(attrs={'placeholder': ""}))
+
+    email = forms.EmailField(
+        max_length=255, min_length=3, required=False, label=_('البريد الاكتروني'), widget=forms.TextInput(attrs={'placeholder': "Ex: myemail@example.com"}))
+
     name_person_contact = forms.CharField(max_length=255, min_length=3, required=False, label=_('اسم الشخص المسؤول عن التواصل'),
                                           widget=forms.TextInput(
         attrs={'placeholder': _('هذا الحقل لا يقبل الحروف الخاصه و الرموز')})
     )
+
+    email_person_contact = forms.EmailField(
+        max_length=255, min_length=3, required=False, label=_('البريد الاكتروني للشخص المسؤول عن التواصل'), widget=forms.TextInput(attrs={'placeholder': "Ex: email@example.com"}))
+
     org_adress = forms.CharField(max_length=255, min_length=3, label=_('عنوان المقر الرئيسي'),
                                  widget=forms.TextInput(
         attrs={'placeholder': _('هذا الحقل لا يقبل الحروف الخاصه و الرموز')})

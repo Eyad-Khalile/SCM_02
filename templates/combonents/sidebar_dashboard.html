@@ -2,38 +2,90 @@
 
 {% get_current_language as LANGUAGE_CODE %}
 
-<div id="sidebar-wrapper">
+<div id="sidebar-wrapper" class=" {% if LANGUAGE_CODE == 'ar' %} br-left {% else %} br-right {% endif %}">
 
+    <!-- DASBOARD ICONS -->
+    <!-- <div class="brand sidebar-brand d-flex justify-content-center align-items-center mb-3 pb-3">
+        <i class="fas fa-tachometer-alt text-white text-center display-3"></i>
+    </div> -->
 
-    <!-- <i class="fas fa-tachometer-alt"></i> -->
-
-
-    <a href=""
+    <!-- SIDEBAR BTN -->
+    <!-- <a href=""
         class=" position-absolute sidebar-btn {% if LANGUAGE_CODE == 'ar' %} btn-left {% else %} btn-right {% endif %} "
         id="menu-toggle">
-        <!-- <i class="fa fa-bars "></i> -->
-        <i
-            class="fa {% if LANGUAGE_CODE == 'ar' %} fa-angle-double-right {% else %} fa-angle-double-left {% endif %}"></i>
-    </a>
-    <!-- <a href="#" class="" id="menu-toggle"><i class="fas fa-bars"></i></a> -->
+        <i class="fa {% if LANGUAGE_CODE == 'ar' %} fa-angle-double-right {% else %} fa-angle-double-left {% endif %}"
+            aria-hidden="true"></i>
+    </a> -->
+
+    <!-- MENU -->
     <ul class="sidebar-navbar">
+        <hr>
         <li class="nav-item">
-            <a href="{% url 'password_change' %}" class="nav-link">{% trans 'تغيير كلمة المرور' %}</a>
+            <a class="nav-link nav-link-icon d-flex justify-content-center" title="{% trans 'لوحة التحكم الخاصة باﻹدارة' %}">
+                <i class="fas fa-tachometer-alt text-center {% if LANGUAGE_CODE == 'ar' %} left {% else %} right {% endif %} "></i>
+            </a>
         </li>
+        <hr>
         <li class="nav-item">
-            <a href="{% url 'org_profile' %}" class="nav-link">{% trans 'تقديم طلب اشتراك جديد لمنظمة' %}</a>
-        </li>
+            <!-- <a href="{% url 'password_change' %}" class="nav-link">
+                {% trans 'تغيير كلمة المرور' %}
+                <i class="fas fa-key {% if LANGUAGE_CODE == 'ar' %} left {% else %} right {% endif %} "></i>
+            </a> -->
 
-        <li class="nav-item">
-            <a href="{% url 'orgs_orders_etude' %}" class="nav-link">{% trans 'طلبات المنظمات قيد الدراسة' %}</a>
-        </li>
+            <a href="{% url 'password_change' %}" class="nav-link nav-link-icon d-flex justify-content-center" title="{% trans 'تغيير كلمة المرور' %}">
+                <i class="fas fa-key {% if LANGUAGE_CODE == 'ar' %} left {% else %} right {% endif %} "></i>
+            </a>
 
-        <li class="nav-item">
-            <a href="{% url 'orgs_orders_published' %}" class="nav-link">{% trans 'طلبات المنظمات الموافق عليها' %}</a>
         </li>
+        <hr class="{% if request.resolver_match.url_name == 'home' %} hr-home {% endif %}">
+        <li class="nav-item">
+            <!-- <a href="{% url 'org_profile' %}" class="nav-link">
+                {% trans 'تقديم طلب اشتراك جديد لمنظمة' %}
+                <i class="fa fa-id-card {% if LANGUAGE_CODE == 'ar' %} left {% else %} right {% endif %}"></i>
+            </a> -->
+            <a href="{% url 'org_profile' %}" class="nav-link nav-link-icon d-flex justify-content-center" title="{% trans 'تقديم طلب اشتراك جديد لمنظمة' %}">
+                <i class="fa fa-id-card {% if LANGUAGE_CODE == 'ar' %} left {% else %} right {% endif %}"></i>
+            </a>
 
-        <li class="nav-item">
-            <a href="{% url 'guide' %}" class="nav-link active"> {% trans 'عودة إلى صفحة دليل المجتمع المدني' %} </a>
         </li>
+        <hr>
+        <li class="nav-item">
+            <!-- <a href="{% url 'orgs_orders_etude' %}" class="nav-link">
+                {% trans 'طلبات المنظمات قيد الدراسة' %}
+                <i
+                    class="fas fa-chalkboard-teacher {% if LANGUAGE_CODE == 'ar' %} left {% else %} right {% endif %}"></i>
+            </a> -->
+            <a href="{% url 'orgs_orders_etude' %}" class="nav-link nav-link-icon d-flex justify-content-center" title="{% trans 'طلبات المنظمات قيد الدراسة' %}">
+                <i
+                    class="fas fa-chalkboard-teacher {% if LANGUAGE_CODE == 'ar' %} left {% else %} right {% endif %}"></i>
+            </a>
+
+        </li>
+        <hr>
+        <li class="nav-item">
+            <!-- <a href="{% url 'orgs_orders_published' %}" class="nav-link">
+                {% trans 'طلبات المنظمات الموافق عليها' %}
+                <i class="fa fa-check-circle {% if LANGUAGE_CODE == 'ar' %} left {% else %} right {% endif %}"
+                    aria-hidden="true"></i>
+            </a> -->
+            <a href="{% url 'orgs_orders_published' %}" class="nav-link nav-link-icon d-flex justify-content-center" title="{% trans 'طلبات المنظمات الموافق عليها' %}">
+                <i class="fa fa-check-circle {% if LANGUAGE_CODE == 'ar' %} left {% else %} right {% endif %}"
+                    aria-hidden="true"></i>
+            </a>
+        </li>
+        <hr>
+        <li class="nav-item">
+            <!-- <a href="{% url 'guide' %}" class="nav-link active">
+                {% trans 'عودة إلى صفحة دليل المجتمع المدني' %}
+                <i class="fa {% if LANGUAGE_CODE == 'ar' %} fa-chevron-circle-right left {% else %} fa-chevron-circle-left right {% endif %}"
+                    aria-hidden="true"></i>
+            </a> -->
+            <a href="{% url 'guide' %}" class="nav-link active nav-link-icon d-flex justify-content-center" title="{% trans 'عودة إلى صفحة دليل المجتمع المدني' %}">
+                <i class="fa {% if LANGUAGE_CODE == 'ar' %} fa-chevron-circle-right left {% else %} fa-chevron-circle-left right {% endif %}"
+                    aria-hidden="true"></i>
+            </a>
+
+        </li>
+        <hr>
     </ul>
 </div>

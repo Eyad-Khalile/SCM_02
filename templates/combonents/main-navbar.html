@@ -4,7 +4,7 @@
 
 
 
-<nav class="navbar fixed-top navbar-expand-lg navbar-dark">
+<nav class="navbar fixed-top navbar-expand-xl pt-lg-0 pb-lg-0    navbar-dark {% if not request.resolver_match.url_name == 'home' %} nav-bg {% endif %} ">
 
     <div class="container-fluid">
         <!-- BRAND -->
@@ -39,7 +39,7 @@
                         href="{% url 'news' %}">
                         {% trans 'أخبار المجتمع المدني' %}
                     </a>
-                    <ul class="dropdown-menu ul-news-dropdown-menu bg-main-color" aria-labelledby="navbarDropdown">
+                    <ul class="dropdown-menu ul-news-dropdown-menu {% if not request.resolver_match.url_name == 'home' %} bg-main-color {% endif %}" aria-labelledby="navbarDropdown">
                         <li>
                             <a class="dropdown-item {% if request.resolver_match.url_name == 'orgs_news' %} active {% endif %}"
                                 href="{% url 'orgs_news' %}"> {% trans 'أخبار المنظمات' %} </a>
@@ -78,7 +78,7 @@
                             <hr class="dropdown-divider" />
                         </li>
                         <li>
-                            <a class="dropdown-item disabled" href="#"> {% trans 'اﻷخبار' %} <i class="fa fa-arrow-down"
+                            <a class="dropdown-item disabled" href="#"> {% trans 'اﻷخبار' %} <i class="fas fa-angle-down"
                                     aria-hidden="true"></i></a>
                         </li>
                         <li>
@@ -119,7 +119,7 @@
                         href="{% url 'resource' %}">
                         {% trans 'موارد المجتمع المدني' %}
                     </a>
-                    <ul class="dropdown-menu ul-resource-dropdown-menu bg-main-color" aria-labelledby="navbarDropdown">
+                    <ul class="dropdown-menu ul-resource-dropdown-menu {% if not request.resolver_match.url_name == 'home' %} bg-main-color {% endif %}" aria-labelledby="navbarDropdown">
                         <li>
                             <a class="dropdown-item {% if request.resolver_match.url_name == 'resource_work' %} active {% endif %}"
                                 href="{% url 'resource_work' %}"> {% trans 'فرص العمل' %} </a>
@@ -156,7 +156,7 @@
                         </li>
                         <li>
                             <a class="dropdown-item disabled" href="#"> {% trans 'الموارد' %} <i
-                                    class="fa fa-arrow-down" aria-hidden="true"></i></a>
+                                    class="fas fa-angle-down" aria-hidden="true"></i></a>
                         </li>
                         <li>
                             <hr class="dropdown-divider" />
@@ -202,7 +202,7 @@
                     <a class="nav-link" href="#" tabindex="-1" aria-disabled="true"> <i class="fa fa-ellipsis-v mx-2"
                             aria-hidden="false"></i> {% trans 'أهلاً' %} {{user}} </a>
 
-                    <ul class="dropdown-menu ul-user-dropdown-menu bg-main-color" aria-labelledby="navbarDropdown">
+                    <ul class="dropdown-menu ul-user-dropdown-menu {% if not request.resolver_match.url_name == 'home' %} bg-main-color {% endif %}" aria-labelledby="navbarDropdown">
                         <li>
 
                             <!-- <a class="dropdown-item {% if request.resolver_match.url_name == 'profile' %} active {% endif %}"
@@ -319,8 +319,8 @@
                             <div>
                                 <input type="hidden" name="next" value="{{ redirect_to }}">
                                 <select
-                                    class="form-select w-auto {% if LANGUAGE_CODE == 'ar' %} float-right {% else %} float-left {% endif %} "
-                                    name="language" id="chnage-lange">
+                                    class="form-select w-auto {% if LANGUAGE_CODE == 'ar' %} float-right {% else %} float-left {% endif %} {% if request.resolver_match.url_name == 'home' %} bg-trans {% endif %} "
+                                    name="language" id="chnage-lange"   >
                                     {% get_available_languages as LANGUAGES %}
                                     {% get_language_info_list for LANGUAGES as languages %}
                                     {% for language in languages %}
@@ -376,7 +376,7 @@
 
             </ul>
 
-            <!--     
+            <!--
               <form class="d-flex">
                 <input class="form-control mr-2" type="search" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-success" type="submit">Search</button>

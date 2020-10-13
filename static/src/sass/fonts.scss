@@ -1,6 +1,6 @@
 // FONTAWESOME
-// $fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
-// @import '~@fortawesome/fontawesome-free/css/all.css';
+$fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
+@import '~@fortawesome/fontawesome-free/css/all.css';
 
 
 // @import url(//db.onlinewebfonts.com/c/f6e895d8c1d12739e54a0ca9df6903d5?family=NeoSansArabic);
@@ -83,5 +83,5 @@
     font-style: normal;
     font-weight: normal;
     src: local("GretaArabic-Regular"),
-        url("../fonts/Greta Arabic Regular/Greta Arabic Regular.ttf") format("woff");
+        url("../fonts/Greta Arabic Regular/Greta Arabic Regular.ttf") format("ttf");
 }

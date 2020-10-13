@@ -32,30 +32,29 @@ module.exports = {
         ],
       },
       {
-        test: /\.(gif|png|jpe?g|svg)$/i,
-        use: [
-          "file-loader",
-          {
-            loader: "image-webpack-loader",
-          },
-        ],
+        test: /\.(png|svg|jpg|jpeg|gif|ico)$/i,
+        loader: "file-loader",
+        options: {
+          name: "[name].[ext]",
+          // publicPath: '../dist/media',
+          publicPath: "../../media",
+          outputPath: "/media",
+        },
       },
       {
-        test: /\.(woff|woff2|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/i,
-        exclude: /node_modules/,
-        use: [
-          {
-            loader: "file-loader",
-            options: {
-              publicPath: "./fonts/",
-              name: "../fonts/[name].[ext]",
-              limit: 1000,
-            },
-          },
-        ],
+        test: /\.(woff|woff2|otf|ttf|eot|svg)$/i,
+        loader: "file-loader",
+        options: {
+          name: "[name].[ext]",
+          publicPath: "../dist/fonts",
+          outputPath: "/fonts",
+        },
       },
     ],
   },
+  // devServer: {
+  //   contentBase: './dist'
+  // },
   plugins: [
     new webpack.ProvidePlugin({
       $: "jquery",

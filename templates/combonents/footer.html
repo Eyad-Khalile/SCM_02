@@ -1,183 +1,158 @@
-{% load static %}
+{% load static i18n %}
+{% get_current_language as LANGUAGE_CODE %}
 
 <!-- Footer -->
 
-    <!-- Footer Links -->
-    <div class="container text-center text-md-right">
-        <!-- Grid row -->
-        <div class="row">
-            <!-- Grid column -->
-            <div class="col-md-4 col-lg-3 mr-auto my-md-4 my-0 mt-4 mb-1">
-                <!-- Content -->
+<!-- Footer Links -->
+<div class="container text-md-right">
 
-                <a href="{% url 'home' %}" class="d-flex justify-content-center mb-4 logo-shadow">
-                    <img src="{% static 'media/scroll-logo.png' %}" width="90" alt="Logo" loading="lazy" />
-                </a>
-                <h5 class="font-weight-bold text-uppercase mb-4">
-                    <a href="{% url 'home' %}" class="btn btn-block">بوابة المجتمع المدني</a>
-                </h5>
-                <!-- <p>بوابة المجتمع المدني</p>
-                    <p>"لوريم ايبسوم دولار سيت أميت ,كونسيكتيتور أدايبا يسكينج أليايت,سيت دو أيوسمود تيمبور
+    
+    <!-- Grid row -->
+    <div class="row">
+        <!-- Grid column -->
+        <div class="col-md-6 col-lg-3 mr-auto my-md-4 my-0 mt-4 mb-1">
+            <!-- Content -->
 
-                        أنكايديديونتيوت لابوري ات دولار ماجنا أليكيوا . يوت انيم أد مينيم فينايم,كيواس نوستريد
+            <a href="https://scm.bz/" target="_blank" class="logo mb-5 d-block" title="{% trans 'المركز السوري للإعلام و حرية التعبير' %}">
+                <img src="{% static 'media/scroll-logo.png' %}" width="90" alt="Logo" loading="lazy" />
+            </a>
+            <h5 class="font-weight-bold text-uppercase mb-4">
+                <a href="{% url 'home' %}" class="text-white"> {% trans "بوابة المجتمع المدني" %} </a>
+            </h5>
+            
 
-                        أكسير سيتاشن يللأمكو لابورأس نيسي يت أليكيوب أكس أيا كوممودو كونسيكيوات . ديواس
-
-                        أيوتي أريري دولار إن ريبريهينديرأيت فوليوبتاتي فيلايت أيسسي كايلليوم دولار أيو فيجايت
-
-                        نيولا باراياتيور. أيكسسيبتيور ساينت أوككايكات كيوبايداتات نون بروايدينت ,سيونت ان كيولبا
-
-                        كيو أوفيسيا ديسيريونتموليت انيم أيدي ايست لابوريوم."</p> -->
-
-                <a href="{% url 'site_politic' %}" class="btn btn-block">
-                    سياسة الخصوصية
-                </a>
-            </div>
-            <!-- Grid column -->
-
-            <hr class="clearfix w-100 d-md-none" />
-
-            <!-- Grid column -->
-            <div class="col-md-2 col-lg-2 mx-auto my-md-4 my-0 mt-4 mb-1">
-                <a href="#collapseContact" data-toggle="collapse" class="btn btn-block mb-2" role="button"
-                    aria-expanded="false" aria-controls="collapseContact">
-                    للتواصل معنا
-                </a>
-
-                <div class="collapse" id="collapseContact">
-                    <ul class="list-unstyled pr-0">
-                        <li>
-                            <p>
-                                <i class="fa fa-home" aria-hidden="true"></i> New York, NY
-                                10012, US
-                            </p>
-                        </li>
-                        <li>
-                            <p>
-                                <i class="fa fa-envelope" aria-hidden="true"></i>
-                                info@example.com
-                            </p>
-                        </li>
-                        <li>
-                            <p>
-                                <i class="fa fa-phone" aria-hidden="true"></i> + 01 234 567
-                                88
-                            </p>
-                        </li>
-                        <li>
-                            <p>
-                                <i class="fa fa-print" aria-hidden="true"></i> + 01 234 567
-                                89
-                            </p>
-                        </li>
-                    </ul>
-                </div>
-
-                <!-- <h5 class="font-weight-bold text-uppercase mb-4">
-                        <a href="" class="btn btn-block btn-primary">للتوصل معنا</a>
-                    </h5> -->
-
-                <!-- Links -->
-                <!-- <h5 class="font-weight-bold text-uppercase mb-4">About</h5>
-
-                    <ul class="list-unstyled pr-0">
-                        <li>
-                        <p>
-                            <a href="#!">PROJECTS</a>
-                        </p>
-                        </li>
-                        <li>
-                        <p>
-                            <a href="#!">ABOUT US</a>
-                        </p>
-                        </li>
-                        <li>
-                        <p>
-                            <a href="#!">BLOG</a>
-                        </p>
-                        </li>
-                        <li>
-                        <p>
-                            <a href="#!">AWARDS</a>
-                        </p>
-                        </li>
-                    </ul> -->
-            </div>
-            <!-- Grid column -->
-
-            <hr class="clearfix w-100 d-md-none" />
-
-            <!-- Grid column -->
-            <div class="col-md-4 social col-lg-3 mx-auto my-md-4 my-0 mt-4 mb-1">
-                <!-- Social buttons -->
-                <h5 class="font-weight-bold text-uppercase mb-4">تابعونا على</h5>
-
-                <!-- Facebook -->
-                <a type="button" class="btn-floating btn-fb">
-                    <i class="fa fa-facebook" aria-hidden="true"></i>
-                </a>
-                <!-- Twitter -->
-                <a type="button" class="btn-floating btn-tw">
-                    <i class="fa fa-twitter" aria-hidden="true"></i>
-                </a>
-
-                <!-- Dribbble -->
-                <a type="button" class="btn-floating btn-dribbble">
-                    <i class="fa fa-dribbble" aria-hidden="true"></i>
-                </a>
-                <!-- Contact details -->
-
-                <!-- <a href="{% url 'site_politic' %}" class="btn btn-primary"> سياسة الخصوصية </a> -->
-            </div>
-            <!-- Grid column -->
-
-            <hr class="clearfix w-100 d-md-none" />
-
-            <!-- Grid column -->
-            <div class="col-md-2 col-lg-2 text-center mx-auto my-4 overflow-hidden">
-                <!-- Email -->
-                <h5 class="font-weight-bold text-uppercase mb-4">
-                    للاشتراك باخر الأخبار
-                </h5>
-                <a href="#collapseForm" data-toggle="collapse" class="btn btn-block mb-2" role="button"
-                    aria-expanded="false" aria-controls="collapseForm">
-                    اشترك معنا
-                </a>
-                <div class="collapse" id="collapseForm">
-                    <form action="" method="POST">
-                        <div class="form-group">
-                            <input type="text" class="form-control" placeholder="الاسم و الكنية" required />
-                        </div>
-                        <div class="form-group">
-                            <input type="text" class="form-control" required placeholder="العمل" />
-                        </div>
-                        <div class="form-group">
-                            <input type="text" class="form-control" placeholder="اسم المنظمة" />
-                        </div>
-                        <div class="form-group">
-                            <!-- <label for="email">عنوان البريد الألكتروني</label> -->
-                            <input type="email" class="form-control" name="email" id="email"
-                                placeholder="البريد الالكتروني" required />
-                        </div>
-                        <div class="form-group">
-                            <input type="button" value="اشترك" class="btn btn-success btn-block" />
-                        </div>
-                    </form>
-                </div>
-
-                <br />
-            </div>
-            <!-- Grid column -->
+            <h5 class="font-weight-bold text-uppercase">
+                <a href="{% url 'site_politic' %}" class="text-white">
+                {% trans "سياسة الخصوصية" %}
+            </a>
+            </h5>
+            <h5 class="font-weight-bold text-uppercase mt-4 pt-4 d-none " id="f-5-top">
+                <a href="" id="scroll_top" class="btn-scroll-top" title="Top"><i class="fas fa-angle-double-up"></i></a>
+            </h5>
+            
         </div>
-        <!-- Grid row -->
-    </div>
-    <!-- Footer Links -->
+        <!-- Grid column -->
 
-    <!-- Copyright -->
-    <div class="footer-copyright text-center py-3">
-        © 2020 Copyright :
-        <a href="https://scm.bz/" target="_blanck" class="footer-brand"> SCM</a>
+        <hr class="clearfix w-100 d-md-none" />
+
+        <!-- Grid column -->
+        <div class="col-md-6 col-lg-3 mx-auto my-md-4 my-0 mt-4 mb-1">
+            <!-- <a href="#collapseContact" data-toggle="collapse" class="btn btn-block mb-2" role="button"
+                aria-expanded="false" aria-controls="collapseContact">
+                
+            </a> -->
+            <h5 class="border-bottom pb-2 font-weight-bold text-uppercase mb-5"> {% trans "للتواصل معنا"%} </h5>
+
+            <div class="{% if LANGUAGE_CODE == 'ar'%} icon-ml {% else %} icon-mr {% endif %}" id="collapseContact">
+                <ul class="list-unstyled pr-0">
+                    <li>
+                        <p>
+                            <i class="fa fa-home" aria-hidden="true"></i> New York, NY
+                            10012, US
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            <i class="fa fa-envelope" aria-hidden="true"></i>
+                            info@example.com
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            <i class="fa fa-phone" aria-hidden="true"></i> + 01 234 567
+                            88
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            <i class="fa fa-print" aria-hidden="true"></i> + 01 234 567
+                            89
+                        </p>
+                    </li>
+                </ul>
+            </div>
+
+            
+        </div>
+        <!-- Grid column -->
+
+        <hr class="clearfix w-100 d-md-none" />
+
+        <!-- Grid column -->
+        <div class="col-md-6 social col-lg-3 mx-auto my-md-4 my-0 mt-4 mb-1">
+            <!-- Social buttons -->
+            <h5 class="font-weight-bold text-uppercase mb-4 border-bottom pb-2"> {% trans "تابعونا على"%} </h5>
+
+            <div class="social-icon">
+                <!-- Facebook -->
+            <a  role="button" class="btn btn-floating btn-fb">
+                <i class="fab fa-facebook-f" aria-hidden="true"></i>
+            </a>
+            <!-- Twitter -->
+            <a  role="button" class="btn btn-floating btn-tw">
+                <i class="fab fa-twitter" aria-hidden="true"></i>
+            </a>
+
+            <!-- Dribbble -->
+            <a  role="button" class="btn btn-floating btn-dribbble">
+                <i class="fab fa-dribbble" aria-hidden="true"></i>
+            </a>
+            </div>
+            <!-- Contact details -->
+
+            <!-- <a href="{% url 'site_politic' %}" class="btn btn-primary"> سياسة الخصوصية </a> -->
+        </div>
+        <!-- Grid column -->
+
+        <hr class="clearfix w-100 d-md-none" />
+
+        <!-- Grid column -->
+        <div class="col-md-6 col-lg-3 mx-auto my-4 overflow-hidden">
+            <!-- Email -->
+            <h5 class="font-weight-bold text-uppercase mb-5 border-bottom pb-2">
+                {% trans "للاشتراك باخر الأخبار" %}
+            </h5>
+            <!-- <a href="#collapseForm" data-toggle="collapse" class="btn btn-block mb-2" role="button"
+                aria-expanded="false" aria-controls="collapseForm">
+                اشترك معنا
+            </a> -->
+            <div class="" id="collapseForm">
+                <form action="" method="POST" class="form-news-latter">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="الاسم و الكنية" required />
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" required placeholder="العمل" />
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="اسم المنظمة" />
+                    </div>
+                    <div class="form-group">
+                        <!-- <label for="email">عنوان البريد الألكتروني</label> -->
+                        <input type="email" class="form-control" name="email" id="email" placeholder="البريد الالكتروني"
+                            required />
+                    </div>
+                    <div class="form-group">
+                        <!-- <input type="button" value="اشترك" class="btn btn-success btn-block" /> -->
+                        <a href="" type="submit" class="btn btn-block"><i class="fa fa-paper-plane" aria-hidden="true"></i>
+</a>
+                    </div>
+                </form>
+            </div>
+
+            <br />
+        </div>
+        <!-- Grid column -->
     </div>
-    <!-- Copyright -->
+    <!-- Grid row -->
+</div>
+<!-- Footer Links -->
+
+<!-- Copyright -->
+<div class="footer-copyright text-center py-3">
+    © 2020 Copyright :
+    <a href="https://scm.bz/" target="_blanck" class="footer-brand"> SCM</a>
+</div>
+<!-- Copyright -->
 
 <!-- Footer -->

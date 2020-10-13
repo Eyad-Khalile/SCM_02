@@ -1,10 +1,15 @@
 @charset "UTF-8";
 @import "fonts.scss";
+@import "slickfix.scss";
 @import "general.scss";
 @import "nav.scss";
 @import "footer.scss";
 @import "olde.scss";
 @import "forms.scss";
+
+@import "~slick-carousel/slick/slick";
+@import "~slick-carousel/slick/slick-theme";
+
 
 // FontAwesome
 // @import "fontawesome/scss/fontawesome.scss";

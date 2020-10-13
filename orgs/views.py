@@ -295,7 +295,25 @@ def page_not_found_view(request, exception):
 
 
 def home(request):
-    return render(request, 'orgs/home.html')
+    orgs = OrgProfile.objects.filter(publish=True).order_by('created_at')
+
+    # the 3 last prgs
+    last = orgs.last()
+    last_org = last.id
+    av_last_org = last_org - 1
+    av_av_last_org = av_last_org - 1
+
+    print(last_org)
+    print(av_last_org)
+    print(av_av_last_org)
+
+    context = {
+        'orgs': orgs,
+        'last_org': last_org,
+        'av_last_org': av_last_org,
+        'av_av_last_org': av_av_last_org,
+    }
+    return render(request, 'orgs/home.html', context)
 
 
 # L'AFFICHAGE DES ORGS PUBLISHED

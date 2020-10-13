@@ -6,105 +6,162 @@
 {% block content %}
 <h1 class="pt-4 mt-4"> {% trans 'تقديم طلب اشتراك' %} </h1>
 
-<div class="register">
+<div class="register mb-5">
     <form action="" id="fill_form" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
-        <!-- {{ form|crispy }} -->
-        <div>
-            {{ form.name|as_crispy_field }}
-            <div class="alert alert-warning d-none" id="org_name" role="alert">
-                {% trans 'هذا الحقل لا يقبل أقل من 3 حروف و لا يقبل اﻷحرف الخاصه و الرموز' %}
+
+        
+
+        <div class="row">
+            <div class="form-group col-xl-4">
+                {{ form.name|as_crispy_field }}
+                <div class="alert alert-warning d-none" id="org_name" role="alert">
+                    {% trans 'هذا الحقل لا يقبل أقل من 3 حروف و لا يقبل اﻷحرف الخاصه و الرموز' %}
+                </div>
+            </div>
+            <div class="form-group col-xl-4">
+                {{ form.name_en_ku|as_crispy_field }}
+                <div class="alert alert-warning d-none" id="org_name" role="alert">
+                    {% trans 'هذا الحقل لا يقبل أقل من 3 حروف و لا يقبل اﻷحرف الخاصه و الرموز' %}
+                </div>
+            </div>
+            <div class="form-group col-xl-4">
+                {{ form.short_cut|as_crispy_field }}
+                <div class="alert alert-warning d-none" id="org_name_en_ku" role="alert">
+                    {% trans 'هذا الحقل لا يقبل أقل من 3 حروف و لا يقبل اﻷحرف الخاصه و الرموز' %}
+                </div>
             </div>
         </div>
-        <div>
-            {{ form.name_en_ku|as_crispy_field }}
-            <div class="alert alert-warning d-none" id="org_name_en_ku" role="alert">
-                {% trans 'هذا الحقل لا يقبل أقل من 3 حروف و لا يقبل اﻷحرف الخاصه و الرموز' %}
+
+        <hr class="d-none d-xl-block">
+
+        <div class="row">
+            <div class="form-group col-xl-3">
+                {{ form.org_type|as_crispy_field }}
+            </div>
+            <div class="form-group col-xl-3">
+                {{ form.position_work|as_crispy_field }}
+            </div>
+            <div class="form-group col-xl-3">
+                {{ form.city_work|as_crispy_field }}
+            </div>
+            <div class="form-group col-xl-3">
+                {{ form.logo|as_crispy_field }}
+                <span class="logo_file_name text-muted"></span>
             </div>
         </div>
-        <div>
-            {{ form.short_cut|as_crispy_field }}
-            <div class="alert alert-warning d-none" id="short_cut" role="alert">
-                {% trans 'هذا الحقل لا يقبل أقل من 3 حروف و لا يقبل اﻷحرف الخاصه و الرموز' %}
-            </div>
-        </div>
-        <div>
-            {{ form.org_type|as_crispy_field }}
-        </div>
-        <div>
-            {{ form.position_work|as_crispy_field }}
-        </div>
-        <div>
-            {{ form.city_work|as_crispy_field }}
-        </div>
-        <div>
-            {{ form.logo|as_crispy_field }}
-        </div>
+
+        
+
         <div>
             {{ form.message|as_crispy_field }}
             <div class="alert alert-warning d-none" id="message_alert" role="alert">
                 {% trans 'هذا الحقل لا يقبل أقل من 3 حروف و لا يقبل اﻷحرف الخاصه و الرموز' %}
             </div>
         </div>
-        <div>
-            {{ form.name_managing_director|as_crispy_field }}
+
+      
+
+        <div class="row">
+            <div class="form-group col-xl-6">
+                {{ form.name_managing_director|as_crispy_field }}
+            </div>
+            <div class="form-group col-xl-6">
+                {{ form.name_ceo|as_crispy_field }}
+            </div>
         </div>
-        <div>
-            {{ form.name_ceo|as_crispy_field }}
+
+        <hr class="d-none d-xl-block">
+
+        <div class="row">
+            <div class="form-group col-xl-4">
+                {{ form.site_web|as_crispy_field }}
+            </div>
+            <div class="form-group col-xl-4">
+                {{ form.facebook|as_crispy_field }}
+            </div>
+            <div class="form-group col-xl-4">
+                {{ form.twitter|as_crispy_field }}
+            </div>
         </div>
-        <div>
-            {{ form.site_web|as_crispy_field }}
+
+        <hr class="d-none d-xl-block">
+        
+        <div class="row">
+            <div class="form-group col-xl-6">
+                {{ form.email|as_crispy_field }}
+            </div>
+            <div class="form-group col-xl-6">
+                {{ form.phone|as_crispy_field }}
+            </div>
         </div>
-        <div>
-            {{ form.facebook|as_crispy_field }}
+
+        <hr class="d-none d-xl-block">
+        
+        <div class="row">
+            <div class="form-group col-xl-6">
+                {{ form.name_person_contact|as_crispy_field }}
+            </div>
+            <div class="form-group col-xl-6">
+                {{ form.email_person_contact|as_crispy_field }}
+            </div>
         </div>
-        <div>
-            {{ form.twitter|as_crispy_field }}
+
+        <hr class="d-none d-xl-block">
+        
+        <div class="row">
+            <div class="form-group col-xl-4">
+                {{ form.work_domain|as_crispy_field }}
+            </div>
+            <div class="form-group col-xl-4">
+                {{ form.target_cat|as_crispy_field }}
+            </div>
+            <div class="form-group col-xl-4">
+                {{ form.date_of_establishment|as_crispy_field }}
+            </div>
         </div>
-        <div>
-            {{ form.email|as_crispy_field }}
+
+        <hr class="d-none d-xl-block">
+        
+        
+        <div class="row">
+            <div class="form-group col-xl-6">
+                {{ form.is_org_registered|as_crispy_field }}
+            </div>
+            <div class="form-group col-xl-6">
+                {{ form.org_registered_country|as_crispy_field }}
+            </div>
         </div>
-        <div>
-            {{ form.phone|as_crispy_field }}
-        </div>
-        <div>
-            {{ form.name_person_contact|as_crispy_field }}
-        </div>
-        <div>
-            {{ form.email_person_contact|as_crispy_field }}
-        </div>
-        <div>
-            {{ form.work_domain|as_crispy_field }}
-        </div>
-        <div>
-            {{ form.target_cat|as_crispy_field }}
-        </div>
-        <div>
-            {{ form.date_of_establishment|as_crispy_field }}
-        </div>
-        <div>
-            {{ form.is_org_registered|as_crispy_field }}
-        </div>
-        <div>
-            {{ form.org_registered_country|as_crispy_field }}
-        </div>
+
+        <hr class="d-none d-xl-block">
+       
         <div>
             {{ form.org_adress|as_crispy_field }}
         </div>
-        <div>
-            {{ form.org_members_count|as_crispy_field }}
+
+        <hr class="d-none d-xl-block">
+
+        <div class="row">
+            <div class="form-group col-xl-4">
+                {{ form.org_members_count|as_crispy_field }}
+            </div>
+            <div class="form-group col-xl-4">
+                {{ form.org_members_womans_count|as_crispy_field }}
+            </div>
+            <div class="form-group col-xl-4">
+                {{ form.w_polic_regulations|as_crispy_field }}
+            </div>
         </div>
-        <div>
-            {{ form.org_members_womans_count|as_crispy_field }}
-        </div>
-        <div>
-            {{ form.w_polic_regulations|as_crispy_field }}
-        </div>
-        <div>
-            {{ form.org_member_with|as_crispy_field }}
-        </div>
-        <div>
-            {{ form.coalition_name|as_crispy_field }}
+
+        <hr class="d-none d-xl-block">
+            
+        <div class="row">
+            <div class="form-group col-xl-6">
+                {{ form.org_member_with|as_crispy_field }}
+            </div>
+            <div class="form-group col-xl-6">
+                {{ form.coalition_name|as_crispy_field }}
+            </div>
         </div>
 
 

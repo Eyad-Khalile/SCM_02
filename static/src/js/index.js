@@ -8,6 +8,8 @@ import {
     Popover
 } from 'bootstrap';
 
+// import 'bootstrap';
+
 import "../sass/index.scss";
 
 
@@ -15,4 +17,6 @@ import 'jquery';
 import "./main.js";
 import "./forms.js";
 import "./form_validation";
-// import "@fortawesome/fontawesome-free/js/all.js";
+import "@fortawesome/fontawesome-free/js/all.js";
+import "slick-carousel";
+// import "skitter-slider";

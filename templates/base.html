@@ -19,7 +19,7 @@
 
 
   <!-- FONT AWESOME -->
-  <link rel="stylesheet" href="{% static 'src/fonts/font-awesome/css/font-awesome.min.css' %}" />
+  <!-- <link rel="stylesheet" href="{% static 'src/fonts/font-awesome/css/font-awesome.min.css' %}" /> -->
 
   <!-- GOOGLE FONTS -->
   <!-- <link rel="stylesheet" href="{% static 'src/fonts/Almarai/Almarai-Regular.woff' %}" />
@@ -28,24 +28,27 @@
 
   <!-- <link href="https://fonts.googleapis.com/css2?family=Reem+Kufi&display=swap" rel="stylesheet" /> -->
 
+
+
+
   <!-- SITE STYLES -->
   <link rel="stylesheet" href="{% static 'dist/app.bundle.css' %}" />
 
   <title>{% block title %} {% endblock %}</title>
 </head>
 
-<body>
+<body class="{% if request.resolver_match.url_name == 'home' %} pt-0 {% endif %}">
   <header>{% include 'combonents/main-navbar.html' %}</header>
 
 
   <!-- ============ BODY CONTENT ========= -->
-  <div
-    class="{% if request.user.is_superuser %} main-container overflow-hidden {% else %} container  min-vh-100 mb-5 pb-5 {% endif %}">
-    <div class="row">
-      {% if request.user.is_authenticated and request.user.is_superuser %}
-      <div class="col-2 min-vh-100">
+  <div class=" main-container overflow-hidden min-vh-100">
 
-        <div id="wrapper" class="menuDisplayed">
+    <div class="d-flex flex-row p-0">
+      {% if request.user.is_authenticated and request.user.is_superuser %}
+      <div class="sidebar-bg ">
+
+        <div id="wrapper" class="pt-5 mt-5">
           <!-- SIDEBAR -->
           {% include 'combonents/sidebar_dashboard.html' %}
 
@@ -53,7 +56,7 @@
 
       </div>
       {% endif %}
-      <div class="main-content {% if request.user.is_superuser %} col-10 {% else %} col-12 {% endif %}">
+      <div class="main-content p-0 col-12 mb-4">
         <div class="messages">
           <!-- ======== L'affichage des Messages ====== -->
           {% if messages %}
@@ -71,9 +74,16 @@
           {% endif %}
         </div>
 
+
+        {% if request.resolver_match.url_name == "home" %}
+        <div class="container-fluid p-0">
+          {% block content-home %} {% endblock %}
+        </div>
+        {% else %}
         <div class="container">
           {% block content %} {% endblock %}
         </div>
+        {% endif %}
 
       </div>
     </div>
@@ -86,13 +96,15 @@
 
 
   <!-- ========== FOOTER ========== -->
-  <footer class="page-footer font-small text-white pt-4">
+  <footer class="page-footer font-small text-white pt-4  mt-5 ">
     {% include 'combonents/footer.html' %}
   </footer>
 
 
   <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
+
   <script src="{% static 'dist/app.bundle.js' %}"></script>
+
   {% block javascript %} {% endblock %}
 </body>
 
