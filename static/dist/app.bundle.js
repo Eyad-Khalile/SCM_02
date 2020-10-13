@@ -27045,9 +27045,9 @@ $(window).scroll(function () {
 
 
   if ($(document).scrollTop() > $(window).height() - 500) {
-    $('#f-5-top').fadeOut("slow").removeClass('d-none').fadeIn(1500);
+    $('#f-5-top').fadeOut(1500).removeClass('d-none').fadeIn(1500);
   } else {
-    $('#f-5-top').fadeIn("slow").addClass('d-none').fadeOut(1500);
+    $('#f-5-top').fadeIn(1500).addClass('d-none').fadeOut(1500);
   }
 });
 $('#carouselOrgs').carousel({
