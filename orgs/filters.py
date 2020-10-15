@@ -1,6 +1,6 @@
 import django_filters
 from django_filters import DateFilter, CharFilter
-from .models import OrgProfile
+from .models import OrgProfile, OrgNews
 from django.utils.translation import gettext_lazy as _
 
 
@@ -32,3 +32,26 @@ class OrgsFilter(django_filters.FilterSet):
         ]
 
         # exclude = ['date_published', 'date_updated', 'likes', 'is_published']
+
+
+class OrgsNewsFilter(django_filters.FilterSet):
+
+    title = CharFilter(field_name="title",
+                       lookup_expr='icontains', label=_('كلمات من عنوان الخبر'))
+    content = CharFilter(field_name="content",
+                         lookup_expr='icontains', label=_('كلمات من تفاصيل الخبر'))
+
+    start_date_pub = DateFilter(field_name="date_published",
+                                lookup_expr='gte', label=_('تاريخ نشر الخبر / من :'))
+    end_date_pub = DateFilter(field_name="date_published",
+                              lookup_expr='lte', label=_('إلى :'))
+
+    class Meta:
+        model = OrgNews
+        fields = [
+            'org_name',
+            'title',
+            'content',
+            'start_date_pub',
+            'end_date_pub',
+        ]

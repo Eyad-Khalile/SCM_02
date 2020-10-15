@@ -52,6 +52,8 @@ $(
     placeholder: "Ex : YYYY",
 });
 
+$('input#id_start_date_pub, input#id_end_date_pub').attr('type', 'date');
+
 // FIELD PHONE
 $("#id_phone").attr({
     maxlength: "16",

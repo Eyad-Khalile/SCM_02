@@ -364,7 +364,7 @@ LANGUAGE_CODE %} {% block title %} {% trans 'تفاصيل المنظمة' %} {% 
 </div>
 
 <div class="row border-top pt-4">
-  {% if request.user.is_authenticated and request.user.is_staff %}
+  {% if request.user.is_authenticated and request.user.is_superuser %}
   <div class="col">
     {% if org.publish == False %}
     <form action="" class="confirm" method="post">
@@ -380,8 +380,8 @@ LANGUAGE_CODE %} {% block title %} {% trans 'تفاصيل المنظمة' %} {% 
         <input type="submit" id="org_deconfirm_btn" class="btn btn-block" value="{% trans 'رفض الطلب' %}" />
       </div>
     </form>
-    {% endif %}
   </div>
+  {% endif %}
   <!-- <div class="col">
         <a href="" class="btn btn-block"> {% trans 'حذف الطلب' %} </a>
     </div> -->

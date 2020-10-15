@@ -13,9 +13,9 @@
 
   <!-- Favicon -->
   <link rel="apple-touch-icon" sizes="180x180" href="{% static 'media/favicon_io/' %}" />
-  <link rel="icon" type="image/png" sizes="32x32" href="{% static 'media/favicon_io//favicon-32x32.png' %}" />
-  <link rel="icon" type="image/png" sizes="16x16" href="{% static 'media/favicon_io//favicon-16x16.png' %}" />
-  <link rel="manifest" href="{% static 'media/favicon_io//site.webmanifest' %}" />
+  <link rel="icon" type="image/png" sizes="32x32" href="{% static 'media/favicon_io/favicon-32x32.png' %}" />
+  <link rel="icon" type="image/png" sizes="16x16" href="{% static 'media/favicon_io/favicon-16x16.png' %}" />
+  <link rel="manifest" href="{% static 'media/favicon_io/site.webmanifest' %}" />
 
 
   <!-- FONT AWESOME -->
@@ -57,7 +57,8 @@
       </div>
       {% endif %}
       <div class="main-content p-0 col-12 mb-4">
-        <div class="messages">
+        <div class="container messages-container">
+          <div class="messages">
           <!-- ======== L'affichage des Messages ====== -->
           {% if messages %}
           {% for message in messages %}
@@ -72,6 +73,7 @@
           {% endif %}
           {% endfor %}
           {% endif %}
+        </div>
         </div>
 
 

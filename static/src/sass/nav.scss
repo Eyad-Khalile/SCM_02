@@ -13,15 +13,11 @@ nav {
                 color: #fff !important;
                 font-weight: bold;
                 padding-top: 1em !important;
-                // background-color: red;
-
-                // &:hover {
-                //     // border-bottom: 2px solid #fff;
-                // }
-
-                // &.disabled {
-                //     color: #fff !important;
-                // }
+                
+                &:hover {
+                    background-color: #fff;
+                    color: $color-1 !important;
+                }
             }
         }
     }
@@ -158,21 +154,23 @@ ul.dropdown-menu {
         @include myTransition;
 
 
-        a {
-            // color: rgba(255, 255, 255, 0.55);
-            // border-color: rgba(255, 255, 255, 0.1);
-            // border-color: red;
-            cursor: pointer;
-            top: 50%;
-            color: $color-1;
+        // a {
+        //     // color: rgba(255, 255, 255, 0.55);
+        //     // border-color: rgba(255, 255, 255, 0.1);
+        //     // border-color: red;
+        //     cursor: pointer;
+        //     top: 50%;
+        //     color: $color-1;
 
-            i {
-                padding: 8px;
-                color: #085185;
-                font-size: 26px;
-            }
+        //     i {
+        //         padding: 8px;
+        //         color: #085185;
+        //         font-size: 26px;
+        //     }
 
-        }
+        // }
+
+
         .sidebar-btn {
           background: rgba(255, 255, 255, 0.5);
           padding: 1em 1.3em;
@@ -231,6 +229,24 @@ ul.dropdown-menu {
                 a.nav-link-icon {
                   padding-top: 1em;
                   padding-bottom: 2em;
+                }
+
+                button {
+                    display: block;
+                    color: tomato;
+                    background-color: $color-1;
+                    position: relative;
+                    border: none;
+                    padding-top: 1em;
+                    padding-bottom: 1em;
+                    width: 50px;
+
+                    @include myTransition;
+
+                    &:hover {
+                        background: tomato;
+                        color: $color-1;
+                    }
                 }
 
             }

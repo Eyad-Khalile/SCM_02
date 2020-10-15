@@ -11,18 +11,21 @@ footer {
 
     .logo {
         position: relative;
+        border: 2px solid #17678C;
+        // border-bottom-color: rgb(23, 103, 140);
+        // border-bottom-style: solid;
+        // border-bottom-width: 6px;
+        border-bottom: none;
         
+       
+
         img {
             padding: 0.50em;
             position: absolute;
             top: -114px;
-            border: 2px solid #17678C;
-            border-bottom-color: rgb(23, 103, 140);
-            border-bottom-style: solid;
-            border-bottom-width: 6px;
-            border-bottom: none;
             border-top-left-radius: 10px;
             border-top-right-radius: 10px;
+            
             width: 120px;
             box-shadow: 1px 1px 5px #17678c,
             -1px -1px 5px #17678c;
@@ -32,7 +35,8 @@ footer {
 
         &:hover {
             img {
-                background-color: rgba(tomato, 0.7);
+                // background-color: rgba(tomato, 0.7);
+                transform: rotate(-10deg);
             }
         }
     }

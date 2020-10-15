@@ -117,3 +117,25 @@ class OrgConfirmForm(forms.ModelForm):
         fields = [
             'publish',
         ]
+
+
+# ::::::::::::::::: ORGS NEWS :::::::::::::::::
+class NewsForm(forms.ModelForm):
+
+    class Meta:
+        model = OrgNews
+        fields = [
+            'org_name',
+            'title',
+            'content',
+            'image',
+        ]
+
+
+class NewsConfirmForm(forms.ModelForm):
+
+    class Meta:
+        model = OrgNews
+        fields = [
+            'publish',
+        ]

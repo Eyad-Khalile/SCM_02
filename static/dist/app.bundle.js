@@ -26819,7 +26819,8 @@ $("input#id_start_date,  input#id_end_date, input#id_date_of_establishment").att
   spellcheck: "false",
   oninput: "this.value = this.value.replace(/[^0-9]/g, '').replace(/(\\..*)\\./g, '$1').replace(/^(0*)/,'');",
   placeholder: "Ex : YYYY"
-}); // FIELD PHONE
+});
+$('input#id_start_date_pub, input#id_end_date_pub').attr('type', 'date'); // FIELD PHONE
 
 $("#id_phone").attr({
   maxlength: "16",

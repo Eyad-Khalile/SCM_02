@@ -19,7 +19,7 @@ from django.core.mail import EmailMessage
 from django.utils.timezone import datetime
 from django.utils.translation import gettext as _
 from django.core.paginator import Paginator
-from .filters import OrgsFilter
+from .filters import OrgsFilter, OrgsNewsFilter
 
 
 # ::::::::::::: SIGNE UP :::::::::::::::
@@ -335,7 +335,7 @@ def guide(request):
         'orgs': orgs,
         'myFilter': myFilter,
     }
-    return render(request, 'orgs/orgs_guide.html', context)
+    return render(request, 'orgs//guid/orgs_guide.html', context)
 
 
 # L'AFFICHAGE DES ORGS NOT PUBLISHED
@@ -353,7 +353,7 @@ def guide_not_pub(request):
     context = {
         'orgs': orgs,
     }
-    return render(request, 'orgs/orgs_guid_conf_pub.html', context)
+    return render(request, 'orgs/guid/orgs_guid_conf_pub.html', context)
 
 
 # @register.filter(name='phonenumber')
@@ -408,7 +408,7 @@ def particip_detail(request, par_id):
         'org_registered_country': org_registered_country,
         'w_polic_regulations': w_polic_regulations,
     }
-    return render(request, 'orgs/particip_detail.html', context)
+    return render(request, 'profiles/particip_detail.html', context)
 
 
 def guide_filter(request, work_id):
@@ -444,23 +444,147 @@ def guide_filter(request, work_id):
         'id': id,
         'list_work': list_work
     }
-    return render(request, 'orgs/orgs_guide_filter.html', context)
+    return render(request, 'orgs/guid/orgs_guide_filter.html', context)
 
 
+# أخبار المجتمع المدني
 def news(request):
-    return render(request, 'orgs/orgs_news.html')
+    return render(request, 'orgs/news/orgs_news.html')
 
 
-def news_detail(request, news_id):
-    id = news_id
-    context = {
-        'id': id,
-    }
-    return render(request, 'orgs/orgs_news_detail.html', context)
-
-
+# ORGS NEWS / NEWS PUBLISHED أخبار المنظمات
 def orgs_news(request):
-    return render(request, 'orgs/orgs_news_news.html')
+    news = OrgNews.objects.filter(publish=True).order_by('-date_published')
+
+    myFilter = OrgsNewsFilter(request.GET, queryset=news)
+    news = myFilter.qs
+
+    # PAGINATEUR
+    paginator = Paginator(news, 12)
+    page = request.GET.get('page')
+    try:
+        news = paginator.get_page(page)
+    except(EmptyPage, InvalidPage):
+        news = paginator.page(paginator.num_pages)
+
+    context = {
+        'news': news,
+        'myFilter': myFilter,
+    }
+    return render(request, 'orgs/news/orgs_news_news.html', context)
+
+
+# ORGS ADD NEWS
+@login_required(login_url='signe_in')
+def orgs_add_news(request):
+
+    if request.method == 'POST':
+        form = NewsForm(request.POST or None, files=request.FILES)
+        if form.is_valid():
+            user = form.save(commit=False)
+            user.user = request.user
+            org_name = form.cleaned_data.get('org_name')
+            if org_name:
+                user.org_name = org_name
+            else:
+                user.org_name = request.user
+            user.save()
+
+            messages.success(request, _(
+                'لقد تمت إضافة الخبر بنجاح و ستتم دراسته قريباً'))
+
+            return redirect('orgs_news')
+    else:
+        form = NewsForm()
+
+    context = {
+        'form': form,
+    }
+    return render(request, 'orgs/news/org_add_news.html', context)
+
+
+# أخبار المنظمات قيد الدراسة
+@login_required(login_url='signe_in')
+def org_news_not_pub(request):
+    news = OrgNews.objects.filter(publish=False).order_by('-date_published')
+
+    # PAGINATEUR
+    paginator = Paginator(news, 12)
+    page = request.GET.get('page')
+    try:
+        news = paginator.get_page(page)
+    except(EmptyPage, InvalidPage):
+        news = paginator.page(paginator.num_pages)
+
+    context = {
+        'news': news,
+    }
+    return render(request, 'orgs/news/org_news_not_pub.html', context)
+
+
+# ORG NEWS DETAIL
+def news_detail(request, news_id):
+    new = get_object_or_404(OrgNews, id=news_id)
+
+    if request.method == 'POST':
+        form = NewsConfirmForm(request.POST or None, instance=new)
+        if form.is_valid():
+            form.save()
+
+            messages.success(request, _(
+                'لقد تم تغيير حالة الخبر بنجاح'))
+            return redirect('orgs_news')
+    else:
+        form = NewsConfirmForm(instance=new)
+
+    context = {
+        'new': new,
+        'form': form,
+    }
+    return render(request, 'orgs/news/orgs_news_detail.html', context)
+
+
+# NEWS EDIT
+@login_required(login_url='signe_in')
+def news_edit(request, news_id):
+    new = get_object_or_404(OrgNews, id=news_id)
+
+    if request.method == 'POST':
+        form = NewsForm(request.POST or None,
+                        files=request.FILES, instance=new)
+        if form.is_valid():
+            form.save()
+
+            messages.success(request, _(
+                'لقد تم تعديل الخبر بنجاح'))
+            return redirect('orgs_news')
+    else:
+        form = NewsForm(instance=new)
+
+    context = {
+        'new': new,
+        'form': form,
+    }
+    return render(request, 'orgs/news/org_edit_news.html', context)
+
+# NEWS DELETE
+
+
+@login_required(login_url='signe_in')
+def news_delete(request, news_id):
+    new = get_object_or_404(OrgNews, id=news_id)
+
+    if request.method == 'POST' and request.user.is_superuser:
+        new.delete()
+
+        messages.success(request, _(
+            'لقد تم حذف الخبر بنجاح'))
+        return redirect('orgs_news')
+
+    context = {
+        'new': new,
+    }
+    return render(request, 'orgs/news/org_news_delete.html', context)
 
 
 def site_politic(request):
@@ -468,7 +592,7 @@ def site_politic(request):
 
 
 def orgs_rapport(request):
-    return render(request, 'orgs/orgs_rapport.html')
+    return render(request, 'orgs/rapport/orgs_rapport.html')
 
 
 def orgs_rapport_detail(request, rapport_id):
@@ -476,11 +600,11 @@ def orgs_rapport_detail(request, rapport_id):
     context = {
         'id': id,
     }
-    return render(request, 'orgs/orgs_rapport_detail.html', context)
+    return render(request, 'orgs/rapport/orgs_rapport_detail.html', context)
 
 
 def data(request):
-    return render(request, 'orgs/orgs_data.html')
+    return render(request, 'orgs/data/orgs_data.html')
 
 
 def data_detail(request, data_id):
@@ -488,11 +612,11 @@ def data_detail(request, data_id):
     context = {
         'id': id,
     }
-    return render(request, 'orgs/orgs_data_detail.html', context)
+    return render(request, 'orgs/data/orgs_data_detail.html', context)
 
 
 def media(request):
-    return render(request, 'orgs/orgs_media.html')
+    return render(request, 'orgs/media/orgs_media.html')
 
 
 def media_detail(request, media_id):
@@ -500,11 +624,11 @@ def media_detail(request, media_id):
     context = {
         'id': id,
     }
-    return render(request, 'orgs/orgs_media_detail.html', context)
+    return render(request, 'orgs/media/orgs_media_detail.html', context)
 
 
 def research(request):
-    return render(request, 'orgs/orgs_research.html')
+    return render(request, 'orgs/research/orgs_research.html')
 
 
 def research_detail(request, res_id):
@@ -512,17 +636,17 @@ def research_detail(request, res_id):
     context = {
         'id': id,
     }
-    return render(request, 'orgs/orgs_research_detail.html', context)
+    return render(request, 'orgs/research/orgs_research_detail.html', context)
+
 
 # RECOURCE
 
-
 def resource(request):
-    return render(request, 'orgs/resource.html')
+    return render(request, 'orgs/resource/resource.html')
 
 
 def resource_work(request):
-    return render(request, 'orgs/resource_work.html')
+    return render(request, 'orgs/resource/resource_work.html')
 
 
 def resource_work_detail(request, work_id):
@@ -530,15 +654,15 @@ def resource_work_detail(request, work_id):
     context = {
         'id': id,
     }
-    return render(request, 'orgs/resource_work_detail.html', context)
+    return render(request, 'orgs/resource/resource_work_detail.html', context)
 
 
 def resource_finance(request):
-    return render(request, 'orgs/resource_finance.html')
+    return render(request, 'orgs/resource/resource_finance.html')
 
 
 def resource_finance_perso(request):
-    return render(request, 'orgs/resource_finance_perso.html')
+    return render(request, 'orgs/resource/resource_finance_perso.html')
 
 
 def resource_finance_perso_detail(request, id):
@@ -546,11 +670,12 @@ def resource_finance_perso_detail(request, id):
     context = {
         'id': id,
     }
-    return render(request, 'orgs/resource_finance_perso_detail.html', context)
+    # 6
+    return render(request, 'orgs/resource/resource_finance_perso_detail.html', context)
 
 
 def resource_finance_orgs(request):
-    return render(request, 'orgs/resource_finance_orgs.html')
+    return render(request, 'orgs/resource/resource_finance_orgs.html')
 
 
 def resource_finance_orgs_detail(request, id):
@@ -558,11 +683,12 @@ def resource_finance_orgs_detail(request, id):
     context = {
         'id': id,
     }
-    return render(request, 'orgs/resource_finance_orgs_detail.html', context)
+    # 8
+    return render(request, 'orgs/resource/resource_finance_orgs_detail.html', context)
 
 
 def resource_stectur(request):
-    return render(request, 'orgs/resource_strectur.html')
+    return render(request, 'orgs/resource/resource_strectur.html')
 
 
 def resource_stectur_detail(request, id):
@@ -570,11 +696,12 @@ def resource_stectur_detail(request, id):
     context = {
         'id': id,
     }
-    return render(request, 'orgs/resource_strectur_detail.html', context)
+    # 10
+    return render(request, 'orgs/resource/resource_strectur_detail.html', context)
 
 
 def resource_upgrade(request):
-    return render(request, 'orgs/resource_upgrade.html')
+    return render(request, 'orgs/resource/resource_upgrade.html')
 
 
 def resource_upgrade_detail(request, id):
@@ -582,7 +709,8 @@ def resource_upgrade_detail(request, id):
     context = {
         'id': id,
     }
-    return render(request, 'orgs/resource_upgrade_detail.html', context)
+    # 12
+    return render(request, 'orgs/resource/resource_upgrade_detail.html', context)
 
 
 # CENTRE NEWS

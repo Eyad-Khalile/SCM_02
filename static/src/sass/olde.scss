@@ -185,3 +185,23 @@
     transform: translateY(-20px);
   }
 }
+
+
+
+
+.orgs-news {
+  .btn-button {
+    @include work-btn;
+    background: $color-1 !important;
+
+    &:hover {
+      border: 1px solid $color-1 !important;
+      // box-shadow: 1px 1px 10px tomato !important;
+      background: #fff !important;
+      color: $color-1 !important;
+    }
+
+  }
+}
+
+

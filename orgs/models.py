@@ -32,6 +32,7 @@ def save_user_profile(sender, instance, **kwargs):
     instance.profile.save()
 
 
+# :::::::::::: ORGS PROFILE ::::::::::::::::::::::
 class OrgProfile(models.Model):
 
     type_CHOICES = (
@@ -203,3 +204,33 @@ class OrgProfile(models.Model):
             img.thumbnail(output_size)
             # img.thumbnail(basewidth)
             img.save(self.logo.path)
+
+
+# :::::::::::::: ORGS NEWS ::::::::::::::::
+class OrgNews(models.Model):
+    user = models.ForeignKey(
+        User, on_delete=models.CASCADE)
+    org_name = models.ForeignKey(OrgProfile, on_delete=models.CASCADE)
+    title = models.CharField(max_length=255, null=False,
+                             verbose_name=_('عنوان الخبر'))
+    content = models.TextField(
+        max_length=5000, null=False, verbose_name=_('تفاصيل الخبر'))
+    image = models.ImageField(upload_to="news_images",
+                              null=False, default='news_images/article_img.jpg', verbose_name=_("صورة الخبر"))
+    publish = models.BooleanField(default=False)
+    date_published = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.title
+
+    def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
+        super().save(force_insert, force_update, using, update_fields)
+
+        img = Image.open(self.image.path)
+
+        if img.height > 1000 or img.width > 1000:
+            output_size = (1000, 1000)
+            # basewidth = 300
+            img.thumbnail(output_size)
+            # img.thumbnail(basewidth)
+            img.save(self.image.path)

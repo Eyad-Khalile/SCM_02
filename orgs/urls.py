@@ -18,14 +18,26 @@ urlpatterns = [
     # ORGS NEWS
     path('news/', views.news, name="news"),
     path('orgs_news/', views.orgs_news, name="orgs_news"),
+    path('orgs_add_news/', views.orgs_add_news, name="orgs_add_news"),
     path('news_detail/<str:news_id>', views.news_detail, name="news_detail"),
+    path('news_edit/<str:news_id>', views.news_edit, name="news_edit"),
+    path('news_delete/<str:news_id>', views.news_delete, name="news_delete"),
+    path('org_news_not_pub/', views.org_news_not_pub, name="org_news_not_pub"),
+
+    # ORGS RAPPORT
     path('orgs_rapport/', views.orgs_rapport, name="orgs_rapport"),
     path('orgs_rapport_detail/<str:rapport_id>',
          views.orgs_rapport_detail, name="orgs_rapport_detail"),
+
+    # ORGS DATA
     path('data/', views.data, name="data"),
     path('data_detail/<str:data_id>', views.data_detail, name="data_detail"),
+
+    # ORGS MEDIA
     path('media/', views.media, name="media"),
     path('media_detail/<str:media_id>', views.media_detail, name="media_detail"),
+
+    # ORGS RESEARCH
     path('research/', views.research, name="research"),
     path('research_detail/<str:res_id>',
          views.research_detail, name="research_detail"),
