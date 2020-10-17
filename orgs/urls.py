@@ -25,13 +25,24 @@ urlpatterns = [
     path('org_news_not_pub/', views.org_news_not_pub, name="org_news_not_pub"),
 
     # ORGS RAPPORT
+    path('add_rapport/', views.add_rapport, name="add_rapport"),
     path('orgs_rapport/', views.orgs_rapport, name="orgs_rapport"),
     path('orgs_rapport_detail/<str:rapport_id>',
          views.orgs_rapport_detail, name="orgs_rapport_detail"),
+    path('edit_rapport/<str:rapport_id>',
+         views.edit_rapport, name="edit_rapport"),
+    path('orgs_rapport_delete/<str:rapport_id>',
+         views.orgs_rapport_delete, name="orgs_rapport_delete"),
+    path('orgs_rapport_not_pub/', views.orgs_rapport_not_pub,
+         name="orgs_rapport_not_pub"),
 
     # ORGS DATA
     path('data/', views.data, name="data"),
+    path('add_data/', views.add_data, name="add_data"),
     path('data_detail/<str:data_id>', views.data_detail, name="data_detail"),
+    path('edit_data/<str:data_id>', views.edit_data, name="edit_data"),
+    path('delete_data/<str:data_id>', views.delete_data, name="delete_data"),
+    path('data_not_pub/', views.data_not_pub, name="data_not_pub"),
 
     # ORGS MEDIA
     path('media/', views.media, name="media"),

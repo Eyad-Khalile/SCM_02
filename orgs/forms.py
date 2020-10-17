@@ -139,3 +139,44 @@ class NewsConfirmForm(forms.ModelForm):
         fields = [
             'publish',
         ]
+
+
+# ::::::::::::::::: ORGS RAPPORT :::::::::::::::::
+class RapportForm(forms.ModelForm):
+
+    class Meta:
+        model = OrgRapport
+        fields = [
+            'org_name',
+            'title',
+            'media',
+        ]
+
+
+class RapportConfirmForm(forms.ModelForm):
+
+    class Meta:
+        model = OrgRapport
+        fields = [
+            'publish',
+        ]
+
+
+class DataForm(forms.ModelForm):
+
+    class Meta:
+        model = OrgData
+        fields = [
+            'org_name',
+            'title',
+            'media',
+        ]
+
+
+class DataConfirmForm(forms.ModelForm):
+
+    class Meta:
+        model = OrgData
+        fields = [
+            'publish',
+        ]

@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+{% load static i18n crispy_forms_tags %}
+
+{% block title %} {% trans "تقارير و دراسات المنظمات قيد الدراسة" %} {% endblock %}
+
+{% block content %}
+
+
+<div class="row mt-4 pt-4">
+    <h1> {% trans "تقارير و دراسات المنظمات قيد الدراسة" %} </h1>
+    <hr>
+
+    <div class="row justify-content-center pt-4">
+        {% if rapports %}
+        {% for rapport in rapports %}
+
+        <div class="span3 well">
+            <center>
+                {% if '.pdf' in rapport.media.url %}
+                    <p class="text-muted"> {% trans 'لقراءة ملف الدراسة يجب الدخول إلى التفاصيل' %} </p>
+                    <hr>
+                    
+                {% else  %}
+                    <a href="{% url 'orgs_rapport_detail' rapport.id %}">
+                    <img src="{{ rapport.media.url }}" name="{{ rapport.title }}" title="{{ rapport.title }}" alt="{{ rapport.title }}"
+                        width="140" height="140" class="img-circle"></a>
+                {% endif %}
+                
+                <h3 class="mt-4">{{ rapport.org_name }}</h3>
+                <p>{{ rapport.title }}</p>
+                <p class="text-muted">{{ rapport.created_at }}</p>
+                <p>
+                    <a href="{% url 'orgs_rapport_detail' rapport.id %}" class="btn btn-block">
+                        {% trans 'لقراءة المزيد' %} </a>
+                </p>
+
+            </center>
+        </div>
+
+        {% endfor %}
+
+
+        <div class="pagination row border-top mt-4 pt-4" dir="ltr">
+            <center>
+                {% if rapports.paginator.num_pages > 1 %}
+                {% if rapports.has_previous %}
+
+                <a href="?page=1" class="btn">
+                    <i class="fa fa-angle-double-left"></i>
+                </a>
+                <a href="?page={{ rapports.previous_page_number }}" class="btn">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+
+                {% endif %}
+
+                {% for num in rapports.paginator.page_range %}
+                {% if rapports.number == num %}
+                <a href="?page={{ num }}" class="btn btn-current">{{ num }}</a>
+                {% elif num > rapports.number|add:'-3' and num < rapports.number|add:'3' %}
+                <a href="?page={{ num }}" class="btn">{{ num }}</a>
+                {% endif %}
+                {% endfor %}
+
+
+                {% if orgs.has_next %}
+                <a href="?page={{ rapports.next_page_number }}" class="btn"><i class="fa fa-angle-right"></i></a>
+                <a href="?page={{ rapports.paginator.num_pages }}" class="btn"><i class="fa fa-angle-double-right"></i></a>
+
+                {% endif %}
+                {% endif %}
+
+            </center>
+        </div>
+
+
+        {% else %}
+        <h3> {% trans "لا يوجد حالياً تقارير و دراسات للموافقة على النشر" %} </h3>
+        {% endif %}
+
+    </div>
+</div>
+
+{% endblock %}

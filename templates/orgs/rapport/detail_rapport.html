@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% load static i18n crispy_forms_tags %}
+{% block title %} {% trans 'تفاصيل التقرير او الدراسة' %} {% endblock %}
+
+{% block content %}
+
+
+<div class="row justify-content-center mt-4 pt-4">
+    <h1> {% trans 'تفاصيل التقرير او الدراسة' %} </h1>
+
+
+    <div class="span1 well">
+    <!-- <center>   -->
+    
+    {% if request.user.is_authenticated and request.user.is_superuser %}
+    <h3 class="mt-4"> {% trans "اسم اللذي أضاف التقرير" %} : {{ rapport.user }}</h3>
+    {% endif %}
+
+    <h3 class="mt-4"> {% trans "اسم المنظمة" %} : {{ rapport.org_name }}</h3>
+    <span class="text-muted">{% trans "تاريخ إضافة التقرير" %} : {{ rapport.created_at }} </span>
+
+    <p class="mt-3"> {% trans "عنوان التقرير" %} : {{ rapport.title }}</p>
+    <p> {% trans "محتوى التقرير" %} : <br> </p>
+    {% if '.pdf' in rapport.media.url %}
+        <object data="{{ rapport.media.url }}" type="application/pdf" title="{{rapport.title}}" width="800" height="885">
+            <!-- <embed src="{{ rapport.media.url  }}" > -->
+        </object>
+    {% else %}
+        <a href="">
+      <img src="{{ rapport.media.url }}" name="{{ rapport.title }}" title="{{ rapport.title }}" alt="{{ rapport.title }}"></a>
+    {% endif %}
+
+    <!-- </center> -->
+  </div>
+  <div class="row">
+
+      <div class="col">
+        {% if request.user.is_authenticated and request.user.is_superuser %}
+        
+        {% if rapport.publish == False %}
+        <form action="" class="confirm" method="post">
+          {% csrf_token %} {{form.publish}}
+          <div class="form-group">
+            <input type="submit" id="org_confirm_btn" class="btn btn-block"
+              value="{% trans 'الموافقة على نشر التقرير' %}" />
+          </div>
+        </form>
+        {% elif rapport.publish == True %}
+        <form action="" class="deconfirm" method="post">
+          {% csrf_token %} {{form.publish}}
+          <div class="form-group">
+            <input type="submit" id="org_deconfirm_btn" class="btn btn-block" value="{% trans 'إلغاء نشر التقرير' %}" />
+          </div>
+        </form>
+        {% endif %}
+        {% endif %}
+      </div>
+      
+      
+        
+        {% if request.user == rapport.user  or request.user.is_superuser %}
+        <div class="col">
+          <a href="{% url 'edit_rapport' rapport.id %}" class="btn btn-block"> {% trans 'تعديل التقرير' %} </a>
+        </div>
+
+        <div class="col">
+          <a href="{% url 'orgs_rapport_delete' rapport.id %}" class="btn btn-block"> {% trans 'حذف التقرير' %} </a>
+        </div>
+        
+      {% endif %}
+
+    </div>
+
+
+
+</div>
+
+{% endblock %}

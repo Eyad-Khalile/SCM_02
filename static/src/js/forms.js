@@ -144,12 +144,7 @@ $("#chnage-lange").change(function () {
             break;
     }
 
-
-
-
-
-
-
-
-
 });
+
+// RAPPORT
+$('form#form_rapport').find('#id_media').attr('accept', 'application/pdf,image/*');

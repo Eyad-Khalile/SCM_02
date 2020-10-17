@@ -26903,7 +26903,9 @@ $("#chnage-lange").change(function () {
       document.location.href = origin + "/en" + pathname;
       break;
   }
-});
+}); // RAPPORT
+
+$('form#form_rapport').find('#id_media').attr('accept', 'application/pdf,image/*');
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js")))
 
 /***/ }),

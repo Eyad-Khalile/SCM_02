@@ -1,6 +1,6 @@
 import django_filters
 from django_filters import DateFilter, CharFilter
-from .models import OrgProfile, OrgNews
+from .models import OrgProfile, OrgNews, OrgRapport, OrgData
 from django.utils.translation import gettext_lazy as _
 
 
@@ -41,9 +41,9 @@ class OrgsNewsFilter(django_filters.FilterSet):
     content = CharFilter(field_name="content",
                          lookup_expr='icontains', label=_('كلمات من تفاصيل الخبر'))
 
-    start_date_pub = DateFilter(field_name="date_published",
+    start_date_pub = DateFilter(field_name="created_at",
                                 lookup_expr='gte', label=_('تاريخ نشر الخبر / من :'))
-    end_date_pub = DateFilter(field_name="date_published",
+    end_date_pub = DateFilter(field_name="created_at",
                               lookup_expr='lte', label=_('إلى :'))
 
     class Meta:
@@ -52,6 +52,46 @@ class OrgsNewsFilter(django_filters.FilterSet):
             'org_name',
             'title',
             'content',
+            'start_date_pub',
+            'end_date_pub',
+        ]
+
+
+class OrgsRapportFilter(django_filters.FilterSet):
+
+    title = CharFilter(field_name="title",
+                       lookup_expr='icontains', label=_('كلمات من عنوان التقرير'))
+
+    start_date_pub = DateFilter(field_name="created_at",
+                                lookup_expr='gte', label=_('تاريخ نشر التقرير / من :'))
+    end_date_pub = DateFilter(field_name="created_at",
+                              lookup_expr='lte', label=_('إلى :'))
+
+    class Meta:
+        model = OrgRapport
+        fields = [
+            'org_name',
+            'title',
+            'start_date_pub',
+            'end_date_pub',
+        ]
+
+
+class OrgsDataFilter(django_filters.FilterSet):
+
+    title = CharFilter(field_name="title",
+                       lookup_expr='icontains', label=_('كلمات من عنوان البيان'))
+
+    start_date_pub = DateFilter(field_name="created_at",
+                                lookup_expr='gte', label=_('تاريخ نشر البيان / من :'))
+    end_date_pub = DateFilter(field_name="created_at",
+                              lookup_expr='lte', label=_('إلى :'))
+
+    class Meta:
+        model = OrgData
+        fields = [
+            'org_name',
+            'title',
             'start_date_pub',
             'end_date_pub',
         ]

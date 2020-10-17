@@ -19,7 +19,7 @@ from django.core.mail import EmailMessage
 from django.utils.timezone import datetime
 from django.utils.translation import gettext as _
 from django.core.paginator import Paginator
-from .filters import OrgsFilter, OrgsNewsFilter
+from .filters import *
 
 
 # ::::::::::::: SIGNE UP :::::::::::::::
@@ -361,7 +361,7 @@ def guide_not_pub(request):
 #     return phonenumbers.parse(value, country)
 
 
-# ORG DETAIL
+# ORG DETAIL تفاصيل المنظمة مع الموافقة و الرفض
 def particip_detail(request, par_id):
     org = get_object_or_404(OrgProfile, id=par_id)
 
@@ -377,10 +377,9 @@ def particip_detail(request, par_id):
         print('request ======', request)
         form = OrgConfirmForm(request.POST or None, instance=org)
         if form.is_valid():
-            # pub = form.save(commit=False)
-            # pub.publish = True
-            # pub.save()
-            form.save()
+            pub = form.save(commit=False)
+            pub.published_at = datetime.utcnow()
+            pub.save()
 
             messages.success(request, _(
                 'لقد تم تغيير حالة الطلب للمنظمة بنجاح'))
@@ -454,7 +453,7 @@ def news(request):
 
 # ORGS NEWS / NEWS PUBLISHED أخبار المنظمات
 def orgs_news(request):
-    news = OrgNews.objects.filter(publish=True).order_by('-date_published')
+    news = OrgNews.objects.filter(publish=True).order_by('-created_at')
 
     myFilter = OrgsNewsFilter(request.GET, queryset=news)
     news = myFilter.qs
@@ -506,7 +505,7 @@ def orgs_add_news(request):
 # أخبار المنظمات قيد الدراسة
 @login_required(login_url='signe_in')
 def org_news_not_pub(request):
-    news = OrgNews.objects.filter(publish=False).order_by('-date_published')
+    news = OrgNews.objects.filter(publish=False).order_by('-created_at')
 
     # PAGINATEUR
     paginator = Paginator(news, 12)
@@ -529,7 +528,9 @@ def news_detail(request, news_id):
     if request.method == 'POST':
         form = NewsConfirmForm(request.POST or None, instance=new)
         if form.is_valid():
-            form.save()
+            at = form.save(commit=False)
+            at.published_at = datetime.utcnow()
+            at.save()
 
             messages.success(request, _(
                 'لقد تم تغيير حالة الخبر بنجاح'))
@@ -553,7 +554,9 @@ def news_edit(request, news_id):
         form = NewsForm(request.POST or None,
                         files=request.FILES, instance=new)
         if form.is_valid():
-            form.save()
+            at = form.save(commit=False)
+            at.updated_at = datetime.utcnow()
+            at.save()
 
             messages.success(request, _(
                 'لقد تم تعديل الخبر بنجاح'))
@@ -567,7 +570,7 @@ def news_edit(request, news_id):
     }
     return render(request, 'orgs/news/org_edit_news.html', context)
 
-# NEWS DELETE
+# :: NEWS DELETE ::
 
 
 @login_required(login_url='signe_in')
@@ -587,34 +590,273 @@ def news_delete(request, news_id):
     return render(request, 'orgs/news/org_news_delete.html', context)
 
 
-def site_politic(request):
-    return render(request, 'orgs/politic.html')
+# ::::::::::::: RAPPORT ::::::::::::::::::::::
+@login_required(login_url='signe_in')
+def add_rapport(request):
 
+    if request.method == 'POST':
+        form = RapportForm(request.POST or None, files=request.FILES)
+        if form.is_valid():
+            user = form.save(commit=False)
+            user.user = request.user
+            org_name = form.cleaned_data.get('org_name')
+            if org_name:
+                user.org_name = org_name
+            else:
+                user.org_name = request.user
+            user.save()
 
-def orgs_rapport(request):
-    return render(request, 'orgs/rapport/orgs_rapport.html')
+            messages.success(request, _(
+                'لقد تمت إضافة التقرير بنجاح و ستتم دراسته قريباً'))
 
+            return redirect('orgs_rapport')
+    else:
+        form = RapportForm()
 
-def orgs_rapport_detail(request, rapport_id):
-    id = rapport_id
     context = {
-        'id': id,
+        "form": form,
     }
-    return render(request, 'orgs/rapport/orgs_rapport_detail.html', context)
+    return render(request, 'orgs/rapport/add_rapport.html', context)
 
 
+# ::::::::: L'AFFICHAGE DES ORGS RAPPORTS ::::::::::::::::
+def orgs_rapport(request):
+    rapports = OrgRapport.objects.filter(publish=True).order_by('-created_at')
+
+    myFilter = OrgsRapportFilter(request.GET, queryset=rapports)
+    rapports = myFilter.qs
+
+    # PAGINATEUR
+    paginator = Paginator(rapports, 12)
+    page = request.GET.get('page')
+    try:
+        rapports = paginator.get_page(page)
+    except(EmptyPage, InvalidPage):
+        rapports = paginator.page(paginator.num_pages)
+
+    context = {
+        'rapports': rapports,
+        'myFilter': myFilter,
+    }
+    return render(request, 'orgs/rapport/rapport.html', context)
+
+
+@login_required(login_url='signe_in')
+def orgs_rapport_not_pub(request):
+    rapports = OrgRapport.objects.filter(publish=False).order_by('-created_at')
+
+    myFilter = OrgsRapportFilter(request.GET, queryset=rapports)
+    rapports = myFilter.qs
+
+    # PAGINATEUR
+    paginator = Paginator(rapports, 12)
+    page = request.GET.get('page')
+    try:
+        rapports = paginator.get_page(page)
+    except(EmptyPage, InvalidPage):
+        rapports = paginator.page(paginator.num_pages)
+
+    context = {
+        'rapports': rapports,
+        'myFilter': myFilter,
+    }
+    return render(request, 'orgs/rapport/rapport_not_pub.html', context)
+
+
+# RAPPORT DETAIL
+def orgs_rapport_detail(request, rapport_id):
+    rapport = get_object_or_404(OrgRapport, id=rapport_id)
+
+    if request.method == 'POST':
+        form = RapportConfirmForm(request.POST or None,
+                                  files=request.FILES, instance=rapport)
+        if form.is_valid():
+            at = form.save(commit=False)
+            at.published_at = datetime.utcnow()
+            at.save()
+
+            messages.success(request, _(
+                'لقد تم تعديل التقرير بنجاح'))
+            return redirect('orgs_rapport')
+    else:
+        form = RapportConfirmForm(instance=rapport)
+
+    context = {
+        'rapport': rapport,
+        'form': form,
+    }
+    return render(request, 'orgs/rapport/detail_rapport.html', context)
+
+
+# DELETE RAPPORT
+@login_required(login_url='signe_in')
+def orgs_rapport_delete(request, rapport_id):
+    rapport = get_object_or_404(OrgRapport, id=rapport_id)
+    context = {
+        'rapport': rapport,
+    }
+    return render(request, 'orgs/rapport/delete_rapport.html', context)
+
+
+# UPDATE RAPPORT
+@login_required(login_url='signe_in')
+def edit_rapport(request, rapport_id):
+    rapport = get_object_or_404(OrgRapport, id=rapport_id)
+
+    if request.method == 'POST':
+        form = RapportForm(request.POST or None,
+                           files=request.FILES, instance=rapport)
+        if form.is_valid():
+            user = form.save(commit=False)
+            user.updated_at = datetime.utcnow()
+            user.save()
+
+            messages.success(request, _(
+                'لقد تمت تعديل التقرير بنجاح'))
+
+            return redirect('orgs_rapport')
+    else:
+        form = RapportForm(instance=rapport)
+
+    context = {
+        "rapport": rapport,
+        "form": form,
+    }
+    return render(request, 'orgs/rapport/edit_rapport.html', context)
+
+
+# ::::::::::: DATA :::::::::::::::
+# DATA PUB
 def data(request):
-    return render(request, 'orgs/data/orgs_data.html')
+    datas = OrgData.objects.filter(publish=True).order_by('-created_at')
+
+    myFilter = OrgsDataFilter(request.GET, queryset=datas)
+    datas = myFilter.qs
+
+    # PAGINATEUR
+    paginator = Paginator(datas, 12)
+    page = request.GET.get('page')
+    try:
+        datas = paginator.get_page(page)
+    except(EmptyPage, InvalidPage):
+        datas = paginator.page(paginator.num_pages)
+
+    context = {
+        'datas': datas,
+        'myFilter': myFilter,
+    }
+    return render(request, 'orgs/data/data.html', context)
+
+
+@login_required(login_url='signe_in')
+def add_data(request):
+    if request.method == 'POST':
+        form = DataForm(request.POST or None, files=request.FILES)
+        if form.is_valid():
+            user = form.save(commit=False)
+            user.user = request.user
+            org_name = form.cleaned_data.get('org_name')
+            if org_name:
+                user.org_name = org_name
+            else:
+                user.org_name = request.user
+            user.save()
+
+            messages.success(request, _(
+                'لقد تمت إضافة التقرير بنجاح و ستتم دراسته قريباً'))
+
+            return redirect('data')
+    else:
+        form = DataForm()
+    context = {
+        'form': form,
+    }
+
+    return render(request, 'orgs/data/add_data.html', context)
 
 
 def data_detail(request, data_id):
-    id = data_id
+    data = get_object_or_404(OrgData, id=data_id)
+
+    if request.method == 'POST':
+        form = DataConfirmForm(request.POST or None,
+                               files=request.FILES, instance=data)
+        if form.is_valid():
+            at = form.save(commit=False)
+            at.published_at = datetime.utcnow()
+            at.save()
+
+            messages.success(request, _(
+                'لقد تم تعديل حالة البيان بنجاح'))
+            return redirect('data')
+
+    else:
+        form = DataConfirmForm(instance=data)
+
     context = {
-        'id': id,
+        'data': data,
+        'form': form,
     }
-    return render(request, 'orgs/data/orgs_data_detail.html', context)
+    return render(request, 'orgs/data/detail_data.html', context)
 
 
+@login_required(login_url='signe_in')
+def data_not_pub(request):
+    datas = OrgData.objects.filter(publish=False).order_by('-created_at')
+
+    myFilter = OrgsDataFilter(request.GET, queryset=datas)
+    datas = myFilter.qs
+
+    # PAGINATEUR
+    paginator = Paginator(datas, 12)
+    page = request.GET.get('page')
+    try:
+        datas = paginator.get_page(page)
+    except(EmptyPage, InvalidPage):
+        datas = paginator.page(paginator.num_pages)
+
+    context = {
+        'datas': datas,
+        'myFilter': myFilter,
+    }
+    return render(request, 'orgs/data/data_not_pub.html', context)
+
+
+@login_required(login_url='signe_in')
+def edit_data(request, data_id):
+    data = get_object_or_404(OrgData, id=data_id)
+
+    if request.method == 'POST':
+        form = DataForm(request.POST or None,
+                        files=request.FILES, instance=data)
+        if form.is_valid():
+            at = form.save(commit=False)
+            at.updated = datetime.utcnow()
+            at.save()
+
+            messages.success(request, _(
+                'لقد تم تعديل البيان بنجاح'))
+            return redirect('data')
+
+    else:
+        form = DataForm(instance=data)
+
+    context = {
+        'form': form,
+    }
+    return render(request, 'orgs/data/edit_data.html', context)
+
+
+@login_required(login_url='signe_in')
+def delete_data(request, data_id):
+    data = get_object_or_404(OrgData, id=data_id)
+    context = {
+        'data': data,
+    }
+    return render(request, 'orgs/data/delete_data.html', context)
+
+
+# MEDIA
 def media(request):
     return render(request, 'orgs/media/orgs_media.html')
 
@@ -725,6 +967,11 @@ def centre_news_detail(request, id):
         'id': id,
     }
     return render(request, 'orgs/centre_news_detail.html', context)
+
+
+# SITE POLITIQUE
+def site_politic(request):
+    return render(request, 'orgs/politic.html')
 
 
 # CONTACT-US

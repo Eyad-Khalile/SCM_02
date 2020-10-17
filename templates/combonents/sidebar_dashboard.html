@@ -44,7 +44,7 @@
                 <i class="fa fa-id-card {% if LANGUAGE_CODE == 'ar' %} left {% else %} right {% endif %}"></i>
             </a> -->
             <a href="{% url 'org_profile' %}" class="nav-link nav-link-icon d-flex justify-content-center" title="{% trans 'تقديم طلب اشتراك جديد لمنظمة' %}">
-                <i class="fa fa-id-card {% if LANGUAGE_CODE == 'ar' %} left {% else %} right {% endif %}"></i>
+                <i class="fas fa-plus-square {% if LANGUAGE_CODE == 'ar' %} left {% else %} right {% endif %}"></i>
             </a>
 
         </li>
@@ -62,31 +62,57 @@
 
         </li>
         <hr>
-        <li class="nav-item">
-            <!-- <a href="{% url 'orgs_orders_published' %}" class="nav-link">
-                {% trans 'طلبات المنظمات الموافق عليها' %}
-                <i class="fa fa-check-circle {% if LANGUAGE_CODE == 'ar' %} left {% else %} right {% endif %}"
-                    aria-hidden="true"></i>
-            </a> -->
+        <!-- <li class="nav-item">
             <a href="{% url 'orgs_orders_published' %}" class="nav-link nav-link-icon d-flex justify-content-center" title="{% trans 'طلبات المنظمات الموافق عليها' %}">
                 <i class="fa fa-check-circle {% if LANGUAGE_CODE == 'ar' %} left {% else %} right {% endif %}"
                     aria-hidden="true"></i>
             </a>
         </li>
-        <hr>
+        <hr> -->
         <li class="nav-item">
             <a href="{% url 'orgs_add_news' %}" class="nav-link nav-link-icon d-flex justify-content-center" title="{% trans 'إضافة خبر لمنظمة' %}">
-                <i class="fas fa-newspaper {% if LANGUAGE_CODE == 'ar' %} left {% else %} right {% endif %}"
+                <i class="fas fa-plus-square {% if LANGUAGE_CODE == 'ar' %} left {% else %} right {% endif %}"
                     aria-hidden="true"></i>
             </a>
         </li>
         <hr>
-        <!-- <li class="nav-item">
-            <a href="{% url 'guide' %}" class="nav-link active nav-link-icon d-flex justify-content-center" title="{% trans 'عودة إلى صفحة دليل المجتمع المدني' %}">
-                <i class="fa {% if LANGUAGE_CODE == 'ar' %} fa-chevron-circle-right left {% else %} fa-chevron-circle-left right {% endif %}"
+        <li class="nav-item">
+            <a href="{% url 'org_news_not_pub' %}" class="nav-link nav-link-icon d-flex justify-content-center" title="{% trans 'أخبار المنظمات قيد الدراسة' %}">
+                <i class="fas fa-chalkboard-teacher {% if LANGUAGE_CODE == 'ar' %} left {% else %} right {% endif %}"
                     aria-hidden="true"></i>
             </a>
-        </li> -->
+        </li>
+        <hr>
+        <li class="nav-item">
+            <a href="{% url 'add_rapport' %}" class="nav-link nav-link-icon d-flex justify-content-center" title="{% trans 'إضافة تقرير أو دراسة لمنظمة' %}">
+                <i class="fas fa-plus-square {% if LANGUAGE_CODE == 'ar' %} left {% else %} right {% endif %}"
+                    aria-hidden="true"></i>
+            </a>
+        </li>
+        <hr>
+        <li class="nav-item">
+            <a href="{% url 'orgs_rapport_not_pub' %}" class="nav-link nav-link-icon d-flex justify-content-center" title="{% trans 'تقارير و دراسات المنظمات قيد الدراسة' %}">
+                <i class="fas fa-chalkboard-teacher {% if LANGUAGE_CODE == 'ar' %} left {% else %} right {% endif %}"
+                    aria-hidden="true"></i>
+            </a>
+        </li>
+        <hr>
+        <li class="nav-item">
+            <a href="{% url 'add_data' %}" class="nav-link nav-link-icon d-flex justify-content-center" title="{% trans 'إضافة بيان لمنظمة' %}">
+                <i class="fas fa-plus-square {% if LANGUAGE_CODE == 'ar' %} left {% else %} right {% endif %}"
+                    aria-hidden="true"></i>
+            </a>
+        </li>
+        <hr>
+        <li class="nav-item">
+            <a href="{% url 'data_not_pub' %}" class="nav-link nav-link-icon d-flex justify-content-center" title="{% trans 'بيانات المنظمات قيد الدراسة' %}">
+                <i class="fas fa-chalkboard-teacher {% if LANGUAGE_CODE == 'ar' %} left {% else %} right {% endif %}"
+                    aria-hidden="true"></i>
+            </a>
+        </li>
+        <hr>
+
+        <!-- BACK -->
         <hr>
         <li class="nav-item">
             <button type="button" class="nav-link active nav-link-icon d-flex justify-content-center" onclick="history.back();" title="{% trans 'عودة إلى الصفحة السابقة' %}">
