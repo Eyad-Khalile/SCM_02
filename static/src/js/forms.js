@@ -140,10 +140,7 @@ $("#chnage-lange").change(function () {
             document.location.href = origin + removeCharacter(pathname);
             break;
         case "en":
-            document.location.href = origin + "/en" + removeCharacter(pathname);
-            break;
-        case "ku":
-            document.location.href = origin + "/ku" + removeCharacter(pathname) ;
+            document.location.href = origin + "/en" + pathname;
             break;
     }
 
