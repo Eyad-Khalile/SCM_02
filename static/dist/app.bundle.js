@@ -26889,19 +26889,28 @@ function removeCharacter(str) {
 //     console.log(`Output is ${output}`);
 // }
 // LANGE SWICHER
+// $("#chnage-lange").change(function () {
+//     let lan_sel = $("#chnage-lange").val();
+//     switch (lan_sel) {
+//         case "ar":
+//             document.location.href = origin + removeCharacter(pathname);
+//             console.log(pathname);
+//             break;
+//         case "en":
+//             document.location.href = origin + "/en" + pathname;
+//             console.log(pathname);
+//             break;
+//     }
+// });
 
 
 $("#chnage-lange").change(function () {
   let lan_sel = $("#chnage-lange").val();
 
-  switch (lan_sel) {
-    case "ar":
-      document.location.href = origin + removeCharacter(pathname);
-      break;
-
-    case "en":
-      document.location.href = origin + "/en" + pathname;
-      break;
+  if (lan_sel == "ar") {
+    document.location.href = origin + removeCharacter(pathname);
+  } else if (lan_sel == "en") {
+    document.location.href = origin + "/en" + pathname;
   }
 }); // RAPPORT
 
