@@ -1,0 +1,1409 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#: orgs/forms.py:28
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-10-18 16:16+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: orgs/admin.py:7 orgs/admin.py:8
+msgid "إدارة موقع SCM "
+msgstr ""
+
+#: orgs/filters.py:15
+msgid "تاريخ التأسيس / من :"
+msgstr ""
+
+#: orgs/filters.py:17 orgs/filters.py:47 orgs/filters.py:68 orgs/filters.py:88
+#: orgs/filters.py:108
+msgid "إلى :"
+msgstr ""
+
+#: orgs/filters.py:19 orgs/forms.py:26 orgs/models.py:121
+#: templates/orgs/data/detail_data.html:19
+#: templates/orgs/media/media_detail.html:19
+#: templates/orgs/news/orgs_news_detail.html:18
+#: templates/orgs/rapport/detail_rapport.html:19
+#: templates/profiles/profile.html:38 templates/profiles/staff_profile.html:25
+msgid "اسم المنظمة"
+msgstr ""
+
+#: orgs/filters.py:40
+msgid "كلمات من عنوان الخبر"
+msgstr ""
+
+#: orgs/filters.py:42
+msgid "كلمات من تفاصيل الخبر"
+msgstr ""
+
+#: orgs/filters.py:45
+msgid "تاريخ نشر الخبر / من :"
+msgstr ""
+
+#: orgs/filters.py:63
+msgid "كلمات من عنوان التقرير"
+msgstr ""
+
+#: orgs/filters.py:66
+msgid "تاريخ نشر التقرير / من :"
+msgstr ""
+
+#: orgs/filters.py:83
+msgid "كلمات من عنوان البيان"
+msgstr ""
+
+#: orgs/filters.py:86
+msgid "تاريخ نشر البيان / من :"
+msgstr ""
+
+#: orgs/filters.py:103
+msgid "كلمات من عنوان المحتوى"
+msgstr ""
+
+#: orgs/filters.py:106
+msgid "تاريخ نشر المحتوى / من :"
+msgstr ""
+
+#: orgs/forms.py:12
+msgid "حقل إجباري, يرجى إدخال بريد إلكتروني صحيح لتتمكن من تفعيل حسابك"
+msgstr ""
+
+#: orgs/forms.py:12
+msgid "عنوان بريد إلكتروني"
+msgstr ""
+
+#: orgs/forms.py:30 orgs/forms.py:34 orgs/forms.py:38 orgs/forms.py:45
+#: orgs/forms.py:49 orgs/forms.py:65 orgs/forms.py:73 orgs/forms.py:77
+msgid "هذا الحقل لا يقبل الحروف الخاصه و الرموز"
+msgstr ""
+
+#: orgs/forms.py:32 orgs/models.py:123 templates/profiles/profile.html:39
+#: templates/profiles/staff_profile.html:26
+msgid "اسم المنظمة باللغة الانكليزية أو الكردية"
+msgstr ""
+
+#: orgs/forms.py:36 orgs/models.py:125
+msgid "الاسم المختصر"
+msgstr ""
+
+#: orgs/forms.py:43 orgs/models.py:138
+#: templates/profiles/particip_detail.html:60
+#: templates/profiles/profile.html:77 templates/profiles/staff_profile.html:64
+msgid "اسم رئيس مجلس اﻹدارة"
+msgstr ""
+
+#: orgs/forms.py:47 orgs/models.py:140
+#: templates/profiles/particip_detail.html:74
+#: templates/profiles/profile.html:91 templates/profiles/staff_profile.html:78
+msgid "اسم المدير التنفيذي"
+msgstr ""
+
+#: orgs/forms.py:52 orgs/models.py:144
+#: templates/profiles/particip_detail.html:257
+#: templates/profiles/profile.html:274
+#: templates/profiles/staff_profile.html:261
+msgid "الموقع الالكتروني"
+msgstr ""
+
+#: orgs/forms.py:55 orgs/models.py:146
+#: templates/profiles/particip_detail.html:271
+#: templates/profiles/profile.html:288
+#: templates/profiles/staff_profile.html:275
+msgid "صفحة فيسبوك"
+msgstr ""
+
+#: orgs/forms.py:58 orgs/models.py:148
+#: templates/profiles/particip_detail.html:285
+#: templates/profiles/profile.html:302
+#: templates/profiles/staff_profile.html:289
+msgid "صفحة تويتر"
+msgstr ""
+
+#: orgs/forms.py:61 orgs/models.py:150
+#: templates/profiles/particip_detail.html:299
+#: templates/profiles/profile.html:316
+#: templates/profiles/staff_profile.html:303
+msgid "البريد الاكتروني"
+msgstr ""
+
+#: orgs/forms.py:63 orgs/models.py:154
+#: templates/profiles/particip_detail.html:325
+#: templates/profiles/profile.html:340
+#: templates/profiles/staff_profile.html:327
+msgid "اسم الشخص المسؤول عن التواصل"
+msgstr ""
+
+#: orgs/forms.py:69 orgs/models.py:156
+#: templates/profiles/particip_detail.html:339
+#: templates/profiles/profile.html:354
+#: templates/profiles/staff_profile.html:341
+msgid "البريد الاكتروني للشخص المسؤول عن التواصل"
+msgstr ""
+
+#: orgs/forms.py:71 orgs/models.py:158
+#: templates/profiles/particip_detail.html:243
+#: templates/profiles/profile.html:260
+#: templates/profiles/staff_profile.html:247
+msgid "عنوان المقر الرئيسي"
+msgstr ""
+
+#: orgs/forms.py:75 orgs/models.py:181
+msgid "اسم الشبكة / التحالف"
+msgstr ""
+
+#: orgs/models.py:39
+msgid "مؤسسة"
+msgstr ""
+
+#: orgs/models.py:40
+msgid "جمعية أو منظمة"
+msgstr ""
+
+#: orgs/models.py:41
+msgid "مبادرة / فريق"
+msgstr ""
+
+#: orgs/models.py:42
+msgid "اتحاد / تحالف / تجمع"
+msgstr ""
+
+#: orgs/models.py:43
+msgid "لجنة / تنسيقية / مجموعة"
+msgstr ""
+
+#: orgs/models.py:47
+msgid "حلب"
+msgstr ""
+
+#: orgs/models.py:48
+msgid "دمشق"
+msgstr ""
+
+#: orgs/models.py:49
+msgid "ريف دمشق"
+msgstr ""
+
+#: orgs/models.py:50
+msgid "درعا"
+msgstr ""
+
+#: orgs/models.py:51
+msgid "دير الزور"
+msgstr ""
+
+#: orgs/models.py:52
+msgid "حماه"
+msgstr ""
+
+#: orgs/models.py:53
+msgid "الحسكة"
+msgstr ""
+
+#: orgs/models.py:54
+msgid "حمص"
+msgstr ""
+
+#: orgs/models.py:55
+msgid "إدلب"
+msgstr ""
+
+#: orgs/models.py:56
+msgid "اللاذقية"
+msgstr ""
+
+#: orgs/models.py:57
+msgid "القنيطرة"
+msgstr ""
+
+#: orgs/models.py:58
+msgid "الرقة"
+msgstr ""
+
+#: orgs/models.py:59
+msgid "السويداء"
+msgstr ""
+
+#: orgs/models.py:60
+msgid "طرطوس"
+msgstr ""
+
+#: orgs/models.py:64
+msgid "إعلام"
+msgstr ""
+
+#: orgs/models.py:65
+msgid "تعليم"
+msgstr ""
+
+#: orgs/models.py:66
+msgid "حماية"
+msgstr ""
+
+#: orgs/models.py:67
+msgid "سبل العيش والأمن الغذائي"
+msgstr ""
+
+#: orgs/models.py:69
+msgid "مشاريع النظافة والمياه والصرف الصحي"
+msgstr ""
+
+#: orgs/models.py:70
+msgid "تنمية"
+msgstr ""
+
+#: orgs/models.py:71
+msgid "قانون و مناصرة و سیاسة"
+msgstr ""
+
+#: orgs/models.py:72
+msgid "مانحین و دعم العمل التطوعي"
+msgstr ""
+
+#: orgs/models.py:73
+msgid "منظمات دینیة"
+msgstr ""
+
+#: orgs/models.py:74
+msgid "تجمعات و اتحادات مھنیة"
+msgstr ""
+
+#: orgs/models.py:75
+msgid "صحة"
+msgstr ""
+
+#: orgs/models.py:76
+msgid "دراسات وأبحاث"
+msgstr ""
+
+#: orgs/models.py:77 orgs/models.py:94 orgs/models.py:114
+msgid "أخرى"
+msgstr ""
+
+#: orgs/models.py:81
+msgid "لا يوجد فئة محددة"
+msgstr ""
+
+#: orgs/models.py:82
+msgid "نساء"
+msgstr ""
+
+#: orgs/models.py:83
+msgid "رجال"
+msgstr ""
+
+#: orgs/models.py:84
+msgid "شباب 18-24"
+msgstr ""
+
+#: orgs/models.py:85
+msgid "أطفال 0-18"
+msgstr ""
+
+#: orgs/models.py:86
+msgid "مجموعات دینیة"
+msgstr ""
+
+#: orgs/models.py:87
+msgid "مجموعة عرقیة"
+msgstr ""
+
+#: orgs/models.py:88
+msgid "فاقدي المعیل"
+msgstr ""
+
+#: orgs/models.py:89
+msgid "ذوي الاحتیاجات الخاصة"
+msgstr ""
+
+#: orgs/models.py:90
+msgid "لاجئین"
+msgstr ""
+
+#: orgs/models.py:91
+msgid "نازحین"
+msgstr ""
+
+#: orgs/models.py:92
+msgid "عائدین"
+msgstr ""
+
+#: orgs/models.py:93
+msgid "منظمات مجتمع مدني اخرى"
+msgstr ""
+
+#: orgs/models.py:98
+msgid "لا"
+msgstr ""
+
+#: orgs/models.py:99 templates/profiles/particip_detail.html:200
+#: templates/profiles/profile.html:217
+#: templates/profiles/staff_profile.html:204
+msgid "نعم"
+msgstr ""
+
+#: orgs/models.py:103
+msgid "لا يوجد"
+msgstr ""
+
+#: orgs/models.py:104
+msgid "مدونة السلوك"
+msgstr ""
+
+#: orgs/models.py:105
+msgid "حماية الطفل"
+msgstr ""
+
+#: orgs/models.py:106
+msgid "مكافحة الفساد"
+msgstr ""
+
+#: orgs/models.py:107
+msgid "سياسة الموارد البشرية"
+msgstr ""
+
+#: orgs/models.py:108
+msgid "سياسة المشتريات"
+msgstr ""
+
+#: orgs/models.py:109
+msgid "سياسة التطوع"
+msgstr ""
+
+#: orgs/models.py:110
+msgid "سياسة منع التحرش"
+msgstr ""
+
+#: orgs/models.py:111
+msgid "السياسة المالية"
+msgstr ""
+
+#: orgs/models.py:112
+msgid "سياسة استخدام المعدات"
+msgstr ""
+
+#: orgs/models.py:113 templates/combonents/footer.html:26
+msgid "سياسة الخصوصية"
+msgstr ""
+
+#: orgs/models.py:127 templates/profiles/particip_detail.html:46
+#: templates/profiles/profile.html:62 templates/profiles/staff_profile.html:49
+msgid "نوع المنظمة"
+msgstr ""
+
+#: orgs/models.py:129 templates/profiles/particip_detail.html:47
+#: templates/profiles/profile.html:63 templates/profiles/staff_profile.html:50
+msgid "مكان العمل"
+msgstr ""
+
+#: orgs/models.py:131 templates/profiles/particip_detail.html:48
+#: templates/profiles/profile.html:64 templates/profiles/staff_profile.html:51
+msgid "المحافظة"
+msgstr ""
+
+#: orgs/models.py:133
+msgid "شعار المنظمة"
+msgstr ""
+
+#: orgs/models.py:135 templates/profiles/particip_detail.html:51
+#: templates/profiles/profile.html:67 templates/profiles/staff_profile.html:54
+msgid "الرؤية و الرسالة"
+msgstr ""
+
+#: orgs/models.py:152 templates/profiles/particip_detail.html:311
+#: templates/profiles/profile.html:328
+#: templates/profiles/staff_profile.html:315
+msgid "رقم الهاتف"
+msgstr ""
+
+#: orgs/models.py:162 templates/profiles/particip_detail.html:86
+#: templates/profiles/profile.html:103 templates/profiles/staff_profile.html:90
+msgid "مجال العمل"
+msgstr ""
+
+#: orgs/models.py:164 templates/profiles/particip_detail.html:98
+#: templates/profiles/profile.html:115
+#: templates/profiles/staff_profile.html:102
+msgid "الفئات المستهدفة"
+msgstr ""
+
+#: orgs/models.py:166 templates/profiles/particip_detail.html:110
+#: templates/profiles/profile.html:127
+#: templates/profiles/staff_profile.html:114
+msgid "تاريخ سنة التأسيس"
+msgstr ""
+
+#: orgs/models.py:168 templates/profiles/particip_detail.html:124
+#: templates/profiles/profile.html:141
+#: templates/profiles/staff_profile.html:128
+msgid "هل المنظمة مسجلة ؟"
+msgstr ""
+
+#: orgs/models.py:170 templates/profiles/particip_detail.html:137
+#: templates/profiles/profile.html:154
+#: templates/profiles/staff_profile.html:141
+msgid "بلد التسجيل"
+msgstr ""
+
+#: orgs/models.py:173 templates/profiles/particip_detail.html:151
+#: templates/profiles/profile.html:168
+#: templates/profiles/staff_profile.html:155
+msgid "عدد اﻷعضاء"
+msgstr ""
+
+#: orgs/models.py:175 templates/profiles/particip_detail.html:165
+#: templates/profiles/profile.html:182
+#: templates/profiles/staff_profile.html:169
+msgid "عدد النساء من اﻷعضاء"
+msgstr ""
+
+#: orgs/models.py:177 templates/profiles/particip_detail.html:179
+#: templates/profiles/profile.html:196
+#: templates/profiles/staff_profile.html:183
+msgid "السياسات واللوائح المكتوبة"
+msgstr ""
+
+#: orgs/models.py:179 templates/profiles/particip_detail.html:194
+#: templates/profiles/profile.html:211
+#: templates/profiles/staff_profile.html:198
+msgid "ھل المؤسسة عضو في اي شبكة او تحالف او جسم تنسیقي؟"
+msgstr ""
+
+#: orgs/models.py:219 templates/orgs/news/orgs_news_detail.html:21
+msgid "عنوان الخبر"
+msgstr ""
+
+#: orgs/models.py:221 templates/orgs/news/orgs_news_detail.html:3
+#: templates/orgs/news/orgs_news_detail.html:7
+msgid "تفاصيل الخبر"
+msgstr ""
+
+#: orgs/models.py:223
+msgid "صورة الخبر"
+msgstr ""
+
+#: orgs/models.py:255 templates/orgs/rapport/detail_rapport.html:22
+msgid "عنوان التقرير"
+msgstr ""
+
+#: orgs/models.py:257
+msgid "صورة او ملف التقرير"
+msgstr ""
+
+#: orgs/models.py:276 templates/orgs/data/detail_data.html:22
+msgid "عنوان البيان"
+msgstr ""
+
+#: orgs/models.py:278
+msgid "صورة او ملف البيان"
+msgstr ""
+
+#: orgs/models.py:297 templates/orgs/media/media_detail.html:22
+msgid "عنوان المحتوى"
+msgstr ""
+
+#: orgs/models.py:299
+msgid "صورة او ملف المحتوى"
+msgstr ""
+
+#: orgs/models.py:301 templates/orgs/media/media_detail.html:23
+msgid "رابط المحتوى"
+msgstr ""
+
+#: orgs/views.py:280
+msgid "لقد تم تعديل الملف الشخصي بنجاح"
+msgstr ""
+
+#: orgs/views.py:385
+msgid "لقد تم تغيير حالة الطلب للمنظمة بنجاح"
+msgstr ""
+
+#: orgs/views.py:493
+msgid "لقد تمت إضافة الخبر بنجاح و ستتم دراسته قريباً"
+msgstr ""
+
+#: orgs/views.py:536
+msgid "لقد تم تغيير حالة الخبر بنجاح"
+msgstr ""
+
+#: orgs/views.py:562
+msgid "لقد تم تعديل الخبر بنجاح"
+msgstr ""
+
+#: orgs/views.py:584
+msgid "لقد تم حذف الخبر بنجاح"
+msgstr ""
+
+#: orgs/views.py:610 orgs/views.py:774
+msgid "لقد تمت إضافة التقرير بنجاح و ستتم دراسته قريباً"
+msgstr ""
+
+#: orgs/views.py:679
+msgid "لقد تم تعديل التقرير بنجاح"
+msgstr ""
+
+#: orgs/views.py:700
+msgid "لقد تم حذف التقرري بنجاح"
+msgstr ""
+
+#: orgs/views.py:723
+msgid "لقد تمت تعديل التقرير بنجاح"
+msgstr ""
+
+#: orgs/views.py:798
+msgid "لقد تم تعديل حالة البيان بنجاح"
+msgstr ""
+
+#: orgs/views.py:846
+msgid "لقد تم تعديل البيان بنجاح"
+msgstr ""
+
+#: orgs/views.py:865
+msgid "لقد تم حذف البيان بنجاح"
+msgstr ""
+
+#: orgs/views.py:909
+msgid "لقد تمت إضافة المحتوى بنجاح و ستتم دراسته قريباً"
+msgstr ""
+
+#: orgs/views.py:934
+msgid "لقد تم تعديل حالة المحتوى بنجاح"
+msgstr ""
+
+#: orgs/views.py:980
+msgid "لقد تم تعديل المحتوى بنجاح"
+msgstr ""
+
+#: orgs/views.py:999
+msgid "لقد تم حذف المحتوى بنجاح"
+msgstr ""
+
+#: scm/urls.py:42
+msgid "admin/"
+msgstr ""
+
+#: templates/combonents/footer.html:16
+msgid "المركز السوري للإعلام و حرية التعبير"
+msgstr ""
+
+#: templates/combonents/footer.html:20 templates/combonents/main-navbar.html:23
+#: templates/orgs/home.html:2 templates/orgs/home.html:79
+#: templates/orgs/home.html:95
+msgid "بوابة المجتمع المدني"
+msgstr ""
+
+#: templates/combonents/footer.html:45
+msgid "للتواصل معنا"
+msgstr ""
+
+#: templates/combonents/footer.html:85
+msgid "تابعونا على"
+msgstr ""
+
+#: templates/combonents/footer.html:114
+msgid "للاشتراك باخر الأخبار"
+msgstr ""
+
+#: templates/combonents/main-navbar.html:30
+#: templates/orgs/guid/orgs_guide.html:3 templates/orgs/guid/orgs_guide.html:15
+msgid "دليل المجتمع المدني"
+msgstr ""
+
+#: templates/combonents/main-navbar.html:40
+#: templates/combonents/main-navbar.html:69
+#: templates/combonents/main-navbar.html:74
+#: templates/orgs/news/orgs_news.html:4 templates/orgs/news/orgs_news.html:11
+msgid "أخبار المجتمع المدني"
+msgstr ""
+
+#: templates/combonents/main-navbar.html:45
+#: templates/combonents/main-navbar.html:90
+#: templates/orgs/news/orgs_news_news.html:4
+#: templates/orgs/news/orgs_news_news.html:10
+msgid "أخبار المنظمات"
+msgstr ""
+
+#: templates/combonents/main-navbar.html:49
+#: templates/combonents/main-navbar.html:94
+msgid "تقارير ودراسات"
+msgstr ""
+
+#: templates/combonents/main-navbar.html:53
+#: templates/combonents/main-navbar.html:98
+msgid "بيانات"
+msgstr ""
+
+#: templates/combonents/main-navbar.html:57
+#: templates/combonents/main-navbar.html:102
+msgid "سمعي وبصري"
+msgstr ""
+
+#: templates/combonents/main-navbar.html:61
+#: templates/combonents/main-navbar.html:106
+msgid "أبحاث خارجية"
+msgstr ""
+
+#: templates/combonents/main-navbar.html:81
+msgid "اﻷخبار"
+msgstr ""
+
+#: templates/combonents/main-navbar.html:120
+#: templates/combonents/main-navbar.html:146
+#: templates/combonents/main-navbar.html:151
+msgid "موارد المجتمع المدني"
+msgstr ""
+
+#: templates/combonents/main-navbar.html:125
+#: templates/combonents/main-navbar.html:166
+msgid "فرص العمل"
+msgstr ""
+
+#: templates/combonents/main-navbar.html:129
+#: templates/combonents/main-navbar.html:170
+msgid "فرص التمويل"
+msgstr ""
+
+#: templates/combonents/main-navbar.html:133
+#: templates/combonents/main-navbar.html:174
+msgid "فرص بناء القدرات"
+msgstr ""
+
+#: templates/combonents/main-navbar.html:137
+#: templates/combonents/main-navbar.html:178
+msgid "دليل التطوير"
+msgstr ""
+
+#: templates/combonents/main-navbar.html:158
+msgid "الموارد"
+msgstr ""
+
+#: templates/combonents/main-navbar.html:188
+msgid "أخبار المركز"
+msgstr ""
+
+#: templates/combonents/main-navbar.html:203
+#: templates/combonents/main-navbar.html:234
+msgid "أهلاً"
+msgstr ""
+
+#: templates/combonents/main-navbar.html:209
+#: templates/combonents/sidebar_dashboard.html:24
+#: templates/profiles/layout_profile.html:3
+#: templates/profiles/layout_profile.html:21
+msgid "لوحة التحكم الخاصة باﻹدارة"
+msgstr ""
+
+#: templates/combonents/main-navbar.html:213
+#: templates/combonents/main-navbar.html:240
+msgid "ملفي الشخصي"
+msgstr ""
+
+#: templates/combonents/main-navbar.html:218
+#: templates/combonents/main-navbar.html:245
+#: templates/combonents/sidebar_dashboard.html:31
+#: templates/combonents/sidebar_dashboard.html:35
+#: templates/profiles/profile.html:385 templates/profiles/profile.html:423
+#: templates/profiles/staff_profile.html:394
+#: templates/register/password_change.html:5
+#: templates/register/password_change.html:10
+msgid "تغيير كلمة المرور"
+msgstr ""
+
+#: templates/combonents/main-navbar.html:222
+#: templates/combonents/main-navbar.html:249
+msgid "تسجيل الخروج"
+msgstr ""
+
+#: templates/combonents/main-navbar.html:281
+#: templates/register/password_change_done.html:23
+#: templates/register/signe-in.html:6 templates/register/signe-in.html:11
+#: templates/register/signe-in.html:17
+msgid "تسجيل الدخول"
+msgstr ""
+
+#: templates/combonents/sidebar_dashboard.html:43
+#: templates/combonents/sidebar_dashboard.html:46
+msgid "تقديم طلب اشتراك جديد لمنظمة"
+msgstr ""
+
+#: templates/combonents/sidebar_dashboard.html:54
+#: templates/combonents/sidebar_dashboard.html:58
+#: templates/profiles/orgs_orders_etude.html:4
+#: templates/profiles/orgs_orders_etude.html:15
+#: templates/profiles/orgs_orders_published.html:15
+msgid "طلبات المنظمات قيد الدراسة"
+msgstr ""
+
+#: templates/combonents/sidebar_dashboard.html:66
+#: templates/profiles/orgs_orders_published.html:4
+msgid "طلبات المنظمات الموافق عليها"
+msgstr ""
+
+#: templates/combonents/sidebar_dashboard.html:73
+msgid "إضافة خبر لمنظمة"
+msgstr ""
+
+#: templates/combonents/sidebar_dashboard.html:80
+#: templates/orgs/news/org_news_not_pub.html:4
+#: templates/orgs/news/org_news_not_pub.html:10
+#: templates/orgs/news/orgs_news_news.html:32
+msgid "أخبار المنظمات قيد الدراسة"
+msgstr ""
+
+#: templates/combonents/sidebar_dashboard.html:87
+msgid "إضافة تقرير أو دراسة لمنظمة"
+msgstr ""
+
+#: templates/combonents/sidebar_dashboard.html:94
+#: templates/orgs/rapport/rapport.html:30
+#: templates/orgs/rapport/rapport_not_pub.html:4
+#: templates/orgs/rapport/rapport_not_pub.html:10
+msgid "تقارير و دراسات المنظمات قيد الدراسة"
+msgstr ""
+
+#: templates/combonents/sidebar_dashboard.html:101
+msgid "إضافة بيان لمنظمة"
+msgstr ""
+
+#: templates/combonents/sidebar_dashboard.html:108
+#: templates/orgs/data/data.html:29
+msgid "بيانات المنظمات قيد الدراسة"
+msgstr ""
+
+#: templates/combonents/sidebar_dashboard.html:115
+msgid "إضافة محتوى سمعي و بصري لمنظمة"
+msgstr ""
+
+#: templates/combonents/sidebar_dashboard.html:122
+#: templates/orgs/media/media.html:30
+msgid "المحتوى السمعي و البصري للمنظمات قيد الدراسة"
+msgstr ""
+
+#: templates/combonents/sidebar_dashboard.html:132
+#: templates/orgs/data/delete_data.html:21
+#: templates/orgs/data/delete_data.html:22
+#: templates/orgs/media/delete_media.html:21
+#: templates/orgs/media/delete_media.html:22
+#: templates/orgs/news/org_news_delete.html:21
+#: templates/orgs/news/org_news_delete.html:22
+#: templates/orgs/rapport/delete_rapport.html:19
+#: templates/orgs/rapport/delete_rapport.html:20
+msgid "عودة إلى الصفحة السابقة"
+msgstr ""
+
+#: templates/errors/404.html:4
+msgid "Erreur 404, Page introuvable"
+msgstr ""
+
+#: templates/errors/404.html:8
+msgid "Page introuvable"
+msgstr ""
+
+#: templates/errors/404.html:9
+msgid "Cette page manque ou n’existe pas"
+msgstr ""
+
+#: templates/errors/404.html:11
+msgid "Revenir à la page d'accueil"
+msgstr ""
+
+#: templates/orgs/data/add_data.html:3 templates/orgs/data/add_data.html:9
+#: templates/orgs/data/data.html:17 templates/orgs/data/data_not_pub.html:19
+msgid "إضافة بيان"
+msgstr ""
+
+#: templates/orgs/data/add_data.html:19 templates/orgs/data/edit_data.html:18
+#: templates/orgs/media/add_media.html:20
+#: templates/orgs/media/edit_media.html:19
+#: templates/orgs/rapport/add_rapport.html:18
+#: templates/orgs/rapport/edit_rapport.html:18
+#: templates/profiles/org_profile_form.html:169
+#: templates/profiles/org_profile_update.html:11
+msgid "احفظ"
+msgstr ""
+
+#: templates/orgs/data/data.html:3 templates/orgs/data/data.html:8
+msgid "البيانات"
+msgstr ""
+
+#: templates/orgs/data/data.html:23 templates/orgs/data/data_not_pub.html:25
+#: templates/orgs/guid/orgs_guide.html:65 templates/orgs/media/media.html:24
+#: templates/orgs/media/media_not_pub.html:24
+#: templates/orgs/news/orgs_news_news.html:26
+#: templates/orgs/rapport/rapport.html:24
+msgid "فرز"
+msgstr ""
+
+#: templates/orgs/data/data.html:54 templates/orgs/data/data_not_pub.html:51
+#: templates/orgs/guid/orgs_guide.html:114 templates/orgs/media/media.html:55
+#: templates/orgs/media/media_not_pub.html:50
+#: templates/orgs/news/orgs_news_news.html:60
+#: templates/orgs/rapport/rapport.html:55
+msgid "بحث"
+msgstr ""
+
+#: templates/orgs/data/data.html:80 templates/orgs/data/data_not_pub.html:77
+#: templates/orgs/media/media.html:81
+#: templates/orgs/media/media_not_pub.html:76
+#: templates/orgs/news/org_news_not_pub.html:26
+#: templates/orgs/news/orgs_news_news.html:83
+#: templates/orgs/rapport/rapport.html:82
+#: templates/orgs/rapport/rapport_not_pub.html:34
+msgid "لقراءة المزيد"
+msgstr ""
+
+#: templates/orgs/data/data.html:126 templates/orgs/data/data_not_pub.html:123
+#: templates/orgs/media/media.html:127
+#: templates/orgs/media/media_not_pub.html:122
+#: templates/orgs/news/orgs_news_news.html:129
+#: templates/orgs/rapport/rapport.html:128
+msgid " لا يوجد حالياً أخبار منشورة للمنظمات"
+msgstr ""
+
+#: templates/orgs/data/data_not_pub.html:3
+#: templates/orgs/data/data_not_pub.html:10
+msgid "بيانات قيد الدراسة"
+msgstr ""
+
+#: templates/orgs/data/delete_data.html:3
+#: templates/orgs/data/delete_data.html:10
+#: templates/orgs/data/delete_data.html:18
+msgid "حذف البيان"
+msgstr ""
+
+#: templates/orgs/data/delete_data.html:12
+msgid "هل أنت متأكد من رغبتك في حذف البيان بعنوان "
+msgstr ""
+
+#: templates/orgs/data/detail_data.html:3
+#: templates/orgs/data/detail_data.html:9
+msgid "تفاصيل البيان"
+msgstr ""
+
+#: templates/orgs/data/detail_data.html:16
+msgid "اسم اللذي أضاف البيان"
+msgstr ""
+
+#: templates/orgs/data/detail_data.html:20
+msgid "تاريخ إضافة البيان"
+msgstr ""
+
+#: templates/orgs/data/detail_data.html:23
+msgid "محتوى البيان"
+msgstr ""
+
+#: templates/orgs/data/detail_data.html:45
+msgid "الموافقة على نشر البيان"
+msgstr ""
+
+#: templates/orgs/data/detail_data.html:52
+msgid "إلغاء نشر البيان"
+msgstr ""
+
+#: templates/orgs/data/detail_data.html:63
+#: templates/orgs/rapport/detail_rapport.html:63
+#: templates/orgs/rapport/edit_rapport.html:3
+#: templates/orgs/rapport/edit_rapport.html:8
+msgid "تعديل التقرير"
+msgstr ""
+
+#: templates/orgs/data/detail_data.html:67
+#: templates/orgs/rapport/delete_rapport.html:3
+#: templates/orgs/rapport/delete_rapport.html:8
+#: templates/orgs/rapport/delete_rapport.html:16
+#: templates/orgs/rapport/detail_rapport.html:67
+msgid "حذف التقرير"
+msgstr ""
+
+#: templates/orgs/data/edit_data.html:3 templates/orgs/data/edit_data.html:8
+msgid "تعديل البيان"
+msgstr ""
+
+#: templates/orgs/guid/orgs_guid_conf_pub.html:3
+#: templates/orgs/guid/orgs_guid_conf_pub.html:10
+msgid "قائمة دليل المجتمع المدني للموافقة على النشر"
+msgstr ""
+
+#: templates/orgs/guid/orgs_guid_conf_pub.html:33
+#: templates/orgs/guid/orgs_guide.html:136 templates/orgs/home.html:168
+#: templates/orgs/home.html:187 templates/orgs/home.html:206
+#: templates/profiles/orgs_orders_etude.html:32
+#: templates/profiles/orgs_orders_published.html:32
+msgid "للمزيد عن المنظمة"
+msgstr ""
+
+#: templates/orgs/guid/orgs_guid_conf_pub.html:79
+msgid "حالياً لا يوجد طلبات للمنظمات للموافق عليها"
+msgstr ""
+
+#: templates/orgs/guid/orgs_guid_conf_pub.html:80
+msgid "عودة إلى صفحة دليل المنظمات"
+msgstr ""
+
+#: templates/orgs/guid/orgs_guide.html:61
+msgid "قائمة منظمات المجتمع المدني"
+msgstr ""
+
+#: templates/orgs/guid/orgs_guide.html:78
+msgid "طلبات اشتراك المنظمات قيد الدراسة"
+msgstr ""
+
+#: templates/orgs/guid/orgs_guide.html:109
+msgid "test"
+msgstr ""
+
+#: templates/orgs/guid/orgs_guide.html:184
+#: templates/profiles/orgs_orders_etude.html:79
+#: templates/profiles/orgs_orders_published.html:79
+msgid "حالياً لا يوجد منظمات مسجله او موافق عليها"
+msgstr ""
+
+#: templates/orgs/home.html:150
+msgid "المنظمات المنضمة حديثاً"
+msgstr ""
+
+#: templates/orgs/media/add_media.html:3 templates/orgs/media/add_media.html:9
+#: templates/orgs/media/media.html:18
+#: templates/orgs/media/media_not_pub.html:18
+msgid "إضافة محتوى سمعي و بصري"
+msgstr ""
+
+#: templates/orgs/media/delete_media.html:3
+#: templates/orgs/media/delete_media.html:10
+msgid "حذف المحتوى السمعي و البصري"
+msgstr ""
+
+#: templates/orgs/media/delete_media.html:12
+msgid "هل أنت متأكد من رغبتك في حذف المحتوى بعنوان "
+msgstr ""
+
+#: templates/orgs/media/delete_media.html:18
+#: templates/orgs/media/media_detail.html:68
+msgid "حذف المحتوى"
+msgstr ""
+
+#: templates/orgs/media/edit_media.html:3
+#: templates/orgs/media/edit_media.html:8
+msgid "تعديل المحتوى السمعي و البصري"
+msgstr ""
+
+#: templates/orgs/media/media.html:3 templates/orgs/media/media.html:9
+msgid "المحتوى السمعي و البصري"
+msgstr ""
+
+#: templates/orgs/media/media_detail.html:3
+#: templates/orgs/media/media_detail.html:9
+msgid "تفاصيل المحتوى السمعي والبصري"
+msgstr ""
+
+#: templates/orgs/media/media_detail.html:16
+msgid "اسم اللذي أضاف المحتوى"
+msgstr ""
+
+#: templates/orgs/media/media_detail.html:20
+msgid "تاريخ إضافة المحتوى"
+msgstr ""
+
+#: templates/orgs/media/media_detail.html:24
+msgid "مضمون المحتوى السمعي و البصري"
+msgstr ""
+
+#: templates/orgs/media/media_detail.html:46
+msgid "الموافقة على نشر المحتوى"
+msgstr ""
+
+#: templates/orgs/media/media_detail.html:53
+msgid "إلغاء نشر المحتوى"
+msgstr ""
+
+#: templates/orgs/media/media_detail.html:64
+msgid "تعديل المحتوى"
+msgstr ""
+
+#: templates/orgs/media/media_not_pub.html:3
+#: templates/orgs/media/media_not_pub.html:9
+msgid " المحتوى السمعي و البصري قيد الدراسة"
+msgstr ""
+
+#: templates/orgs/news/org_add_news.html:4
+#: templates/orgs/news/org_add_news.html:10
+#: templates/orgs/news/orgs_news_news.html:20
+msgid "إضافة خبر"
+msgstr ""
+
+#: templates/orgs/news/org_add_news.html:32
+msgid "انشر الخبر"
+msgstr ""
+
+#: templates/orgs/news/org_edit_news.html:4
+#: templates/orgs/news/org_edit_news.html:10
+msgid "تعديل خبر"
+msgstr ""
+
+#: templates/orgs/news/org_edit_news.html:34
+#: templates/orgs/news/orgs_news_detail.html:54
+msgid "تعديل الخبر"
+msgstr ""
+
+#: templates/orgs/news/org_news_delete.html:4
+#: templates/orgs/news/org_news_delete.html:10
+msgid "حذف خبر"
+msgstr ""
+
+#: templates/orgs/news/org_news_delete.html:12
+msgid "هل أنت متأكد من رغبتك في حذف الخبر بعنوان "
+msgstr ""
+
+#: templates/orgs/news/org_news_delete.html:18
+#: templates/orgs/news/orgs_news_detail.html:58
+msgid "حذف الخبر"
+msgstr ""
+
+#: templates/orgs/news/org_news_not_pub.html:70
+msgid "لا يوجد حالياً أخبار للموافقة على النشر"
+msgstr ""
+
+#: templates/orgs/news/orgs_news.html:51
+msgid "إقراء المزيد"
+msgstr ""
+
+#: templates/orgs/news/orgs_news_detail.html:15
+msgid "اسم اللذي أضاف الخبر"
+msgstr ""
+
+#: templates/orgs/news/orgs_news_detail.html:19
+msgid "تاريخ إضافة الخبر"
+msgstr ""
+
+#: templates/orgs/news/orgs_news_detail.html:22
+msgid "محتوى الخبر"
+msgstr ""
+
+#: templates/orgs/news/orgs_news_detail.html:36
+msgid "الموافقة على نشر الخبر"
+msgstr ""
+
+#: templates/orgs/news/orgs_news_detail.html:43
+msgid "إلغاء نشر الخبر"
+msgstr ""
+
+#: templates/orgs/rapport/add_rapport.html:3
+#: templates/orgs/rapport/add_rapport.html:8
+msgid "إضافة تقرير"
+msgstr ""
+
+#: templates/orgs/rapport/delete_rapport.html:10
+msgid "هل أنت متأكد من رغبتك في حذف التقرير بعنوان "
+msgstr ""
+
+#: templates/orgs/rapport/detail_rapport.html:3
+#: templates/orgs/rapport/detail_rapport.html:9
+msgid "تفاصيل التقرير او الدراسة"
+msgstr ""
+
+#: templates/orgs/rapport/detail_rapport.html:16
+msgid "اسم اللذي أضاف التقرير"
+msgstr ""
+
+#: templates/orgs/rapport/detail_rapport.html:20
+msgid "تاريخ إضافة التقرير"
+msgstr ""
+
+#: templates/orgs/rapport/detail_rapport.html:23
+msgid "محتوى التقرير"
+msgstr ""
+
+#: templates/orgs/rapport/detail_rapport.html:45
+msgid "الموافقة على نشر التقرير"
+msgstr ""
+
+#: templates/orgs/rapport/detail_rapport.html:52
+msgid "إلغاء نشر التقرير"
+msgstr ""
+
+#: templates/orgs/rapport/rapport.html:3 templates/orgs/rapport/rapport.html:8
+msgid "التقارير و الدراسات"
+msgstr ""
+
+#: templates/orgs/rapport/rapport.html:18
+msgid "إضافة تقرير أو دراسة"
+msgstr ""
+
+#: templates/orgs/rapport/rapport_not_pub.html:20
+msgid "لقراءة ملف الدراسة يجب الدخول إلى التفاصيل"
+msgstr ""
+
+#: templates/orgs/rapport/rapport_not_pub.html:78
+msgid "لا يوجد حالياً تقارير و دراسات للموافقة على النشر"
+msgstr ""
+
+#: templates/profiles/org_profile_form.html:4
+msgid "اتمام الملف الشخصي للمنظمة"
+msgstr ""
+
+#: templates/profiles/org_profile_form.html:7
+msgid "تقديم طلب اشتراك"
+msgstr ""
+
+#: templates/profiles/org_profile_form.html:19
+#: templates/profiles/org_profile_form.html:25
+#: templates/profiles/org_profile_form.html:31
+#: templates/profiles/org_profile_form.html:60
+msgid "هذا الحقل لا يقبل أقل من 3 حروف و لا يقبل اﻷحرف الخاصه و الرموز"
+msgstr ""
+
+#: templates/profiles/org_profile_update.html:2
+msgid "تغديل الملف الشخصي للمنظمة"
+msgstr ""
+
+#: templates/profiles/org_profile_update.html:5
+msgid "تعديل الملف الشخصي للمنظمة"
+msgstr ""
+
+#: templates/profiles/particip_detail.html:2
+#: templates/profiles/particip_detail.html:5
+msgid "تفاصيل المنظمة"
+msgstr ""
+
+#: templates/profiles/particip_detail.html:45
+#: templates/profiles/profile.html:61 templates/profiles/staff_profile.html:48
+msgid "معلومات عن المنظمة"
+msgstr ""
+
+#: templates/profiles/particip_detail.html:49
+#: templates/profiles/particip_detail.html:67
+#: templates/profiles/particip_detail.html:79
+#: templates/profiles/particip_detail.html:91
+#: templates/profiles/particip_detail.html:103
+#: templates/profiles/particip_detail.html:117
+#: templates/profiles/particip_detail.html:144
+#: templates/profiles/particip_detail.html:158
+#: templates/profiles/particip_detail.html:172
+#: templates/profiles/particip_detail.html:186
+#: templates/profiles/particip_detail.html:217
+#: templates/profiles/particip_detail.html:250
+#: templates/profiles/particip_detail.html:264
+#: templates/profiles/particip_detail.html:278
+#: templates/profiles/particip_detail.html:292
+#: templates/profiles/particip_detail.html:304
+#: templates/profiles/particip_detail.html:318
+#: templates/profiles/particip_detail.html:331
+#: templates/profiles/particip_detail.html:347
+#: templates/profiles/profile.html:64 templates/profiles/profile.html:84
+#: templates/profiles/profile.html:96 templates/profiles/profile.html:108
+#: templates/profiles/profile.html:120 templates/profiles/profile.html:134
+#: templates/profiles/profile.html:161 templates/profiles/profile.html:175
+#: templates/profiles/profile.html:189 templates/profiles/profile.html:203
+#: templates/profiles/profile.html:234 templates/profiles/profile.html:267
+#: templates/profiles/profile.html:281 templates/profiles/profile.html:295
+#: templates/profiles/profile.html:309 templates/profiles/profile.html:321
+#: templates/profiles/profile.html:333 templates/profiles/profile.html:346
+#: templates/profiles/profile.html:362 templates/profiles/staff_profile.html:51
+#: templates/profiles/staff_profile.html:71
+#: templates/profiles/staff_profile.html:83
+#: templates/profiles/staff_profile.html:95
+#: templates/profiles/staff_profile.html:107
+#: templates/profiles/staff_profile.html:121
+#: templates/profiles/staff_profile.html:148
+#: templates/profiles/staff_profile.html:162
+#: templates/profiles/staff_profile.html:176
+#: templates/profiles/staff_profile.html:190
+#: templates/profiles/staff_profile.html:221
+#: templates/profiles/staff_profile.html:254
+#: templates/profiles/staff_profile.html:268
+#: templates/profiles/staff_profile.html:282
+#: templates/profiles/staff_profile.html:296
+#: templates/profiles/staff_profile.html:308
+#: templates/profiles/staff_profile.html:320
+#: templates/profiles/staff_profile.html:333
+#: templates/profiles/staff_profile.html:349
+msgid "لم يذكر"
+msgstr ""
+
+#: templates/profiles/particip_detail.html:128
+#: templates/profiles/profile.html:145
+#: templates/profiles/staff_profile.html:132
+msgid "نعم مسجلة"
+msgstr ""
+
+#: templates/profiles/particip_detail.html:130
+#: templates/profiles/profile.html:147
+#: templates/profiles/staff_profile.html:134
+msgid "غير مسجلة"
+msgstr ""
+
+#: templates/profiles/particip_detail.html:202
+#: templates/profiles/profile.html:219
+#: templates/profiles/staff_profile.html:206
+msgid "ليست عضو"
+msgstr ""
+
+#: templates/profiles/particip_detail.html:210
+#: templates/profiles/profile.html:227
+#: templates/profiles/staff_profile.html:214
+msgid "اسم الشبكة أو التحالف"
+msgstr ""
+
+#: templates/profiles/particip_detail.html:225
+#: templates/profiles/profile.html:242
+#: templates/profiles/staff_profile.html:229
+msgid "التأكيد من اﻹدارة على أنها منظمة"
+msgstr ""
+
+#: templates/profiles/particip_detail.html:230
+#: templates/profiles/profile.html:247
+#: templates/profiles/staff_profile.html:234
+msgid "تمت الموافقة عليها"
+msgstr ""
+
+#: templates/profiles/particip_detail.html:233
+#: templates/profiles/profile.html:250
+#: templates/profiles/staff_profile.html:237
+msgid "لم يتم التأكيد بعد"
+msgstr ""
+
+#: templates/profiles/particip_detail.html:373
+msgid "قبول الطلب"
+msgstr ""
+
+#: templates/profiles/particip_detail.html:380
+msgid "رفض الطلب"
+msgstr ""
+
+#: templates/profiles/particip_detail.html:386
+msgid "حذف الطلب"
+msgstr ""
+
+#: templates/profiles/particip_detail.html:392
+msgid "تعديل ملفي الشخصي"
+msgstr ""
+
+#: templates/profiles/profile.html:3 templates/profiles/staff_profile.html:3
+msgid "الملف الشخصي"
+msgstr ""
+
+#: templates/profiles/profile.html:40 templates/profiles/staff_profile.html:27
+msgid "اسم المنظمة المختصر"
+msgstr ""
+
+#: templates/profiles/profile.html:381
+#: templates/profiles/staff_profile.html:372
+msgid "تعديل الطلب"
+msgstr ""
+
+#: templates/profiles/profile.html:407
+msgid ""
+"رجاءً أتمم ملف المنظمة الشخصي لنتمكن من التحقق من معلوماتكم و يمكنكم استخدام "
+"الموقع"
+msgstr ""
+
+#: templates/profiles/profile.html:414
+msgid "ملف المنظمة الشخصي"
+msgstr ""
+
+#: templates/profiles/staff_profile.html:385
+msgid "تقديم طلب اشتراك لمنظمة"
+msgstr ""
+
+#: templates/register/active.html:5
+msgid "Activer"
+msgstr ""
+
+#: templates/register/active.html:10
+msgid "Compte Activer"
+msgstr ""
+
+#: templates/register/password_change.html:22
+msgid "تغيير"
+msgstr ""
+
+#: templates/register/password_change_done.html:5
+#: templates/register/password_change_done.html:12
+msgid "لقد تم تغيير كلمة المرور بنجاح"
+msgstr ""
+
+#: templates/register/password_change_done.html:19
+msgid "يمكنك اﻵن تسجيل الدخول باستخدام كلمة المرور الجديدة"
+msgstr ""
+
+#: templates/register/password_reset.html:6
+#: templates/register/password_reset.html:34
+#: templates/register/password_reset_confirm.html:25
+#: templates/register/signe-in.html:23
+msgid "إعادة تعيين كلمة المرور"
+msgstr ""
+
+#: templates/register/password_reset.html:12
+msgid "لا يمكنك إعادة تعيين كلمة المرور بحال تسجيل الدخول"
+msgstr ""
+
+#: templates/register/password_reset.html:18
+#: templates/register/password_reset_complete.html:36
+msgid "الذهاب للصفحة الرئيسية"
+msgstr ""
+
+#: templates/register/password_reset.html:23
+msgid "تغيير كلمة السر"
+msgstr ""
+
+#: templates/register/password_reset.html:46
+msgid "إعادة تعيين"
+msgstr ""
+
+#: templates/register/password_reset_complete.html:5
+#: templates/register/password_reset_complete.html:13
+msgid "لقد تم إعادة تعيين كلمة المرور بنجاح"
+msgstr ""
+
+#: templates/register/password_reset_complete.html:25
+msgid "يمكنك ﻵن"
+msgstr ""
+
+#: templates/register/password_reset_complete.html:27
+msgid "تسحيل الدخول"
+msgstr ""
+
+#: templates/register/password_reset_complete.html:31
+msgid "أو"
+msgstr ""
+
+#: templates/register/password_reset_complete.html:37
+#: templates/register/password_reset_done.html:26
+msgid "الصفحة الرئيسية"
+msgstr ""
+
+#: templates/register/password_reset_confirm.html:6
+#: templates/register/password_reset_confirm.html:13
+msgid "تأكيد إعادة تعيين كلمة المرور"
+msgstr ""
+
+#: templates/register/password_reset_done.html:5
+msgid "يتم إعادى تعيين كلمة المرور"
+msgstr ""
+
+#: templates/register/password_reset_done.html:14
+msgid "لقد تم إرسال بريد الكتروني يتضمن رابط ﻹعادة تعيين كلمة المرور"
+msgstr ""
+
+#: templates/register/password_reset_done.html:21
+msgid "يمكنك الذهاب إلى"
+msgstr ""
+
+#: templates/register/signe-in.html:22
+msgid "هل نسيت كلمة المرور"
+msgstr ""
+
+#: templates/register/signe-in.html:27
+msgid "إنشاء حساب"
+msgstr ""

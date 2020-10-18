@@ -180,3 +180,24 @@ class DataConfirmForm(forms.ModelForm):
         fields = [
             'publish',
         ]
+
+
+class MediaForm(forms.ModelForm):
+
+    class Meta:
+        model = OrgMedia
+        fields = [
+            'org_name',
+            'title',
+            'media',
+            'url',
+        ]
+
+
+class MediaConfirmForm(forms.ModelForm):
+
+    class Meta:
+        model = OrgMedia
+        fields = [
+            'publish',
+        ]

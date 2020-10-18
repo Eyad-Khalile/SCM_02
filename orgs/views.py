@@ -692,6 +692,14 @@ def orgs_rapport_detail(request, rapport_id):
 @login_required(login_url='signe_in')
 def orgs_rapport_delete(request, rapport_id):
     rapport = get_object_or_404(OrgRapport, id=rapport_id)
+
+    if request.method == 'POST' and request.user.is_superuser:
+        rapport.delete()
+
+        messages.success(request, _(
+            'لقد تم حذف التقرري بنجاح'))
+        return redirect('orgs_rapport')
+
     context = {
         'rapport': rapport,
     }
@@ -850,25 +858,153 @@ def edit_data(request, data_id):
 @login_required(login_url='signe_in')
 def delete_data(request, data_id):
     data = get_object_or_404(OrgData, id=data_id)
+    if request.method == 'POST' and request.user.is_superuser:
+        data.delete()
+
+        messages.success(request, _(
+            'لقد تم حذف البيان بنجاح'))
+        return redirect('data')
     context = {
         'data': data,
     }
     return render(request, 'orgs/data/delete_data.html', context)
 
 
-# MEDIA
+# :::::::::: MEDIA :::::::::::::::
 def media(request):
-    return render(request, 'orgs/media/orgs_media.html')
+    medias = OrgMedia.objects.filter(publish=True).order_by('-created_at')
+
+    myFilter = OrgsMediaFilter(request.GET, queryset=medias)
+    medias = myFilter.qs
+
+    # PAGINATEUR
+    paginator = Paginator(medias, 12)
+    page = request.GET.get('page')
+    try:
+        medias = paginator.get_page(page)
+    except(EmptyPage, InvalidPage):
+        medias = paginator.page(paginator.num_pages)
+
+    context = {
+        'medias': medias,
+        'myFilter': myFilter,
+    }
+    return render(request, 'orgs/media/media.html', context)
+
+
+def add_media(request):
+    if request.method == 'POST':
+        form = MediaForm(request.POST or None, files=request.FILES)
+        if form.is_valid():
+            user = form.save(commit=False)
+            user.user = request.user
+            org_name = form.cleaned_data.get('org_name')
+            if org_name:
+                user.org_name = org_name
+            else:
+                user.org_name = request.user
+            user.save()
+
+            messages.success(request, _(
+                'لقد تمت إضافة المحتوى بنجاح و ستتم دراسته قريباً'))
+
+            return redirect('media')
+    else:
+        form = MediaForm()
+
+    context = {
+        'form': form,
+    }
+
+    return render(request, 'orgs/media/add_media.html', context)
 
 
 def media_detail(request, media_id):
-    id = media_id
+    media = get_object_or_404(OrgMedia, id=media_id)
+
+    if request.method == 'POST':
+        form = MediaConfirmForm(request.POST or None,
+                                files=request.FILES, instance=media)
+        if form.is_valid():
+            at = form.save(commit=False)
+            at.published_at = datetime.utcnow()
+            at.save()
+
+            messages.success(request, _(
+                'لقد تم تعديل حالة المحتوى بنجاح'))
+            return redirect('media')
+
+    else:
+        form = MediaConfirmForm(instance=media)
+
     context = {
-        'id': id,
+        'media': media,
+        'form': form,
     }
-    return render(request, 'orgs/media/orgs_media_detail.html', context)
+    return render(request, 'orgs/media/media_detail.html', context)
 
 
+def media_not_pub(request):
+    medias = OrgMedia.objects.filter(publish=False).order_by('-created_at')
+
+    myFilter = OrgsMediaFilter(request.GET, queryset=medias)
+    medias = myFilter.qs
+
+    # PAGINATEUR
+    paginator = Paginator(medias, 12)
+    page = request.GET.get('page')
+    try:
+        medias = paginator.get_page(page)
+    except(EmptyPage, InvalidPage):
+        medias = paginator.page(paginator.num_pages)
+
+    context = {
+        'medias': medias,
+        'myFilter': myFilter,
+    }
+    return render(request, 'orgs/media/media_not_pub.html', context)
+
+
+def edit_media(request, media_id):
+    media = get_object_or_404(OrgMedia, id=media_id)
+
+    if request.method == 'POST':
+        form = MediaForm(request.POST or None,
+                         files=request.FILES, instance=media)
+        if form.is_valid():
+            at = form.save(commit=False)
+            at.updated = datetime.utcnow()
+            at.save()
+
+            messages.success(request, _(
+                'لقد تم تعديل المحتوى بنجاح'))
+            return redirect('media')
+
+    else:
+        form = MediaForm(instance=media)
+
+    context = {
+        'media': media,
+        'form': form,
+    }
+    return render(request, 'orgs/media/edit_media.html', context)
+
+
+def delete_media(request, media_id):
+    media = get_object_or_404(OrgMedia, id=media_id)
+    if request.method == 'POST' and request.user.is_superuser:
+        media.delete()
+
+        messages.success(request, _(
+            'لقد تم حذف المحتوى بنجاح'))
+        return redirect('media')
+    context = {
+        'media': media,
+    }
+    return render(request, 'orgs/media/delete_media.html', context)
+
+
+# RESEARCH
 def research(request):
     return render(request, 'orgs/research/orgs_research.html')
 

@@ -322,6 +322,7 @@
                                     class="form-select w-auto {% if LANGUAGE_CODE == 'ar' %} float-right {% else %} float-left {% endif %} {% if request.resolver_match.url_name == 'home' %} bg-trans {% endif %} "
                                     name="language" id="chnage-lange"   >
                                     {% get_available_languages as LANGUAGES %}
+                                    
                                     {% get_language_info_list for LANGUAGES as languages %}
                                     {% for language in languages %}
                                     <option value="{{ language.code }}" {% if language.code == LANGUAGE_CODE %} selected
@@ -383,4 +384,5 @@
               </form> -->
         </div>
     </div>
+    
 </nav>

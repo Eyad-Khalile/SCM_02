@@ -95,3 +95,23 @@ class OrgsDataFilter(django_filters.FilterSet):
             'start_date_pub',
             'end_date_pub',
         ]
+
+
+class OrgsMediaFilter(django_filters.FilterSet):
+
+    title = CharFilter(field_name="title",
+                       lookup_expr='icontains', label=_('كلمات من عنوان المحتوى'))
+
+    start_date_pub = DateFilter(field_name="created_at",
+                                lookup_expr='gte', label=_('تاريخ نشر المحتوى / من :'))
+    end_date_pub = DateFilter(field_name="created_at",
+                              lookup_expr='lte', label=_('إلى :'))
+
+    class Meta:
+        model = OrgData
+        fields = [
+            'org_name',
+            'title',
+            'start_date_pub',
+            'end_date_pub',
+        ]

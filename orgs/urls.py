@@ -46,7 +46,11 @@ urlpatterns = [
 
     # ORGS MEDIA
     path('media/', views.media, name="media"),
+    path('add_media/', views.add_media, name="add_media"),
     path('media_detail/<str:media_id>', views.media_detail, name="media_detail"),
+    path('edit_media/<str:media_id>', views.edit_media, name="edit_media"),
+    path('delete_media/<str:media_id>', views.delete_media, name="delete_media"),
+    path('media_not_pub/', views.media_not_pub, name="media_not_pub"),
 
     # ORGS RESEARCH
     path('research/', views.research, name="research"),

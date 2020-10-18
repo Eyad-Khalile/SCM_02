@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
+from django.conf.locale import LANG_INFO
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -110,6 +111,15 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
 
+if 'ku' not in LANG_INFO:
+    LANG_INFO['ku'] = {
+        'bidi': False,
+        'code': 'ku',
+        'name': 'Kurdish',
+        'name_local': 'Kurdi',
+    }
+
+
 # LANGUAGE_CODE = 'en-us'
 LANGUAGE_CODE = 'ar'
 
@@ -130,6 +140,7 @@ LOCALE_PATHS = [
 LANGUAGES = [
     ('ar', 'عربي'),
     ('en', 'English'),
+    # ('ku', 'Kurdish'),
 ]
 
 

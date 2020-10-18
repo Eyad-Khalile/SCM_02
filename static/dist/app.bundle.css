@@ -11942,6 +11942,13 @@ body {
     z-index: 5; }
     body h5#f-5-top .btn-scroll-top:hover, body #f-5-top.h5 .btn-scroll-top:hover {
       background-color: rgba(255, 255, 255, 0.5) !important; }
+  body .main-video {
+    position: relative;
+    padding: 0 !important; }
+    body .main-video video {
+      position: absolute;
+      bottom: 0;
+      width: 100%; }
 
 nav.nav-bg {
   background-color: #17678C; }

@@ -1,6 +1,8 @@
 {% extends 'base.html' %} {% load static i18n %} {% block title %}
 {% trans 'بوابة المجتمع المدني' %} {% endblock %} {% block content-home %}
 
+{% get_current_language as LANGUAGE_CODE %}
+
 <div id="carouselHomePage" class="carouselHomePage carousel slide carousel-fade" data-ride="carousel">
   <div class="carousel-inner">
     <div class="carousel-item slide-item-1 active">
@@ -24,7 +26,7 @@
         <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
       </div>
     </div>
-    <div class="carousel-item slide-item-4">  
+    <div class="carousel-item slide-item-4">
       <!-- <img src="{% static 'media/slider/img_04.jpg' %}" class="d-block w-100 img-responsive" alt="..."> -->
       <div class="carousel-caption d-none d-md-block">
         <h2>Fourth slide label</h2>
@@ -88,33 +90,80 @@
 </div> -->
 
 <div class="container">
-  <article>
-    <h1 class="text-center mb-4 mt-5 pt-5">
-      {% trans 'بوابة المجتمع المدني' %}
-    </h1>
-    <p class="text-right p-color text-al-just h4 pt-5 mt-5">
-      "لوريم ايبسوم دولار سيت أميت ,كونسيكتيتور أدايبا يسكينج أليايت,سيت دو
-      أيوسمود تيمبور أنكايديديونتيوت لابوري ات دولار ماجنا أليكيوا . يوت انيم أد
-      مينيم فينايم,كيواس نوستريد أكسير سيتاشن يللأمكو لابورأس نيسي يت أليكيوب
-      أكس أيا كوممودو كونسيكيوات . ديواس أيوتي أريري دولار إن ريبريهينديرأيت
-      فوليوبتاتي فيلايت أيسسي كايلليوم دولار أيو فيجايت نيولا باراياتيور.
-      أيكسسيبتيور ساينت أوككايكات كيوبايداتات نون بروايدينت ,سيونت ان كيولبا كيو
-      أوفيسيا ديسيريونتموليت انيم أيدي ايست لابوريوم." "سيت يتبيرسبايكياتيس
-      يوندي أومنيس أستي ناتيس أيررور سيت فوليبتاتيم أكيسأنتييوم دولاريمكيو
-      لايودانتيوم,توتام ريم أبيرأم,أيكيو أبسا كيواي أب أللو أنفينتوري فيرأتاتيس
-      ايت كياسي أرشيتيكتو بيتاي فيتاي ديكاتا سيونت أكسبليكابو. نيمو أنيم أبسام
-      فوليوباتاتيم كيواي فوليوبتاس سايت أسبيرناتشر أيوت أودايت أيوت فيوجايت, سيد
-      كيواي كونسيكيونتشر ماجناي دولارس أيوس كيواي راتاشن فوليوبتاتيم سيكيواي
-      نيسكايونت. نيكيو بوررو كيوايسكيوم ايست,كيواي دولوريم ايبسيوم كيوا دولار
-      سايت أميت, كونسيكتيتيور,أديبايسكاي فيلايت, سيد كيواي نون نيومكيوام ايايوس
-      موداي تيمبورا انكايديونت يوت لابوري أيت دولار ماجنام ألايكيوام كيوايرات
-      فوليوبتاتيم. يوت اينايم أد مينيما فينيام, كيواس نوستريوم أكسيركايتاشيم
-      يلامكوربوريس سيوسكايبيت لابورايوسام, نايساي يوت ألايكيوايد أكس أيا كوموداي
-      كونسيكيواتشر؟ كيوايس أيوتيم فيل أيوم أيوري ريبريهينديرايت كيواي ان إيا
-      فوليوبتاتي فيلايت ايسسي كيوم نايهايل موليستايا كونسيكيواتيو,فيلايليوم
-      كيواي دولوريم أيوم فيوجايات كيو فوليوبتاس نيولا باراياتيور؟"
-    </p>
-  </article>
+  <div class="row">
+    <h1 class="text-center mt-5 pt-5">
+          {% trans 'بوابة المجتمع المدني' %}
+        </h1>
+    <div class="col-6">
+      <article>
+        
+        {% if LANGUAGE_CODE == 'ar' %}
+        <p class="text-right p-color text-al-just h4 pt-5 mt-5">"بوابة المجتمع المدني" هي منصة مخصصة لمنظمات المجتمع
+          المدني
+          السورية، تهدف إلى تعزيز دور المجتمع المدني السوري، وتعميق المعرفة بمنظماته ومؤسساته مع عملها، من خلال خلق
+          مساحة
+          لهذه المنظمات في التواصل وتبادل الخبرات والمعرفة والموارد، في سبيل الوصول إلى آليات عمل مشتركة بينها، تقود
+          بالضرورة إلى تنسيق واستجابة أفضل ومشاركة أكثر فاعلية في الحياة الاجتماعية والسياسية لبناء مستقبل سوريا.
+          بوابة المجتمع المدني السوري هي منصة تابعة للمركز السوري للإعلام وحرية التعبير وهو مؤسّسة مدنيّة مستقلة غير
+          حكومية
+          وغير ربحية تعمل على بناء مجتمع يقوم على العدالة، ويضمن حرية التعبير والاعتقاد، ويحترم كرامة الإنسان وحقوقه.
+          تتيح المنصة للمنظمات، المسجلة فيها، إمكانية عرض بياناتها، أنشطتها، والتعريف بها، وأيضا نشر التقارير والأخبار
+          والدراسات، الصادرة عن المنظمات السورية وتلك الصادرة عن المنظمات الدولية ووكالات الأمم المتحدة، بالإضافة إلى
+          امكانية الاطلاع على إعلانات عن فرص العمل وفرص التمويل، التي ستكون متاحة للزائرين غير المسجلين أيضا.
+        </p>
+        {% elif LANGUAGE_CODE == 'en' %}
+        <p class="text-left p-color text-al-just h4 pt-5 mt-5">
+          The civil society gateway is a platform for the organizations of the Syrian civil society aiming at:
+          Strengthening the role of the Syrian civil society, and deepening the knowledge of its organizations and
+          institutes and how they work through creating a space for these organizations to communicate and exchange
+          experiences, knowledge and resources in order to reach mutual work mechanisms between them which necessarily
+          leads
+          to coordination a better response and more participation in social and political life for the building of
+          Syria’s
+          future.
+          The Syrian civil society gateway is a platform run by the Syrian Center for Media and Freedom of Expression
+          (SCM)
+          is an independent non-governmental non-profit organization. We seek to build a society that guarantees freedom
+          of
+          expression and belief, human rights, and justice. Our vision is a democratic world based on justice, freedom,
+          equality and respect for human rights and dignity.
+          The platform provides its organization with the possibility of displaying their data and activities and the
+          ability to identify them.
+          It also publishes the reports, studies and news issued by Syrian organizations and these international
+          organizations and UN agencies. Besides, the platform allows the visitors who are not registered to see ads for
+          work and funding opportunity.
+        </p>
+        {% elif LANGUAGE_CODE == 'ku'%}
+        <p class="text-left p-color text-al-just h4 pt-5 mt-5">
+          Bewaba bo Civaka Sivîl, ew pilatformeke taybete bo rêxistinên civaka sivîl yên Sûrî, armance xwe bo xortkirina
+          rola civaka sivîl a Sûrî, û zêde naskirin bi rêxistin û sazîyên wê û karên wan, di rêya pêdakirina derfetekê
+          ji
+          van rêxistinan ra di danûstandinê da û lihevguhertina ezmûn û zaniyarî û çavkaniyan, bo gihiştin ber
+          rêkeftinê 
+          di
+          karên wan da, ku rê vedike ber bi hemahengî di navbera wan da bo sûdemendîyek pitir di warên jiyan sivîl û
+          siyasî
+          da bo avakirina dehatiya Sûriya yê.
+          Bewaba bo Civaka Sivîl, ew pilatformeke girêdayî ye bi Navenda Sûrî ya Ragihandinê û Azadîya Derbirînê, ku
+          dezgeheke sivîl a serbixwe, nehikûmî û neqezencker e. li ser avakirina civakekê ku azadîya derbirînê, mafên
+          mirovan û gihaştina bo dadmendîyê garantî dike, dixebite.
+          Pilatform derfetê dide rêxistinên abonkirî, daku zaniyarî, çalakî û pênasayên xwe pişkêş bikin, her wiha, bo
+          belavkirina rapor, nûçe û vekolîn çi yên ji aliyên rêxistinên sûrî ve û yên ji aliyê rexistinên navdewletî û
+          saziyên Neteweyên Yekbûyî, digel şopandina derfetên kar, derfetên perepêdanê, bo tevahiya serdançiyên
+          malperê. 
+        </p>
+
+        {% endif  %}
+
+      </article>
+    </div>
+    <div class="col-6 d-flex {% if LANGUAGE_CODE == 'ar'%} align-items-end {% else  %} align-items-center {% endif  %} justify-content-center">
+      <video width="100%"  controls>
+        <source src="{% static 'video/hiba.mp4'%}" type="video/mp4">
+      </video>
+    </div>
+  </div>
+
   <br />
 
 

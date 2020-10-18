@@ -643,5 +643,16 @@ body {
     }
   }
 
+  .main-video {
+    position: relative;
+    padding: 0 !important;
+
+    video {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+    }
+  }
+
   
 }
