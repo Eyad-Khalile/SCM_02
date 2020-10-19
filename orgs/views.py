@@ -295,7 +295,7 @@ def page_not_found_view(request, exception):
 
 
 def home(request):
-    orgs = OrgProfile.objects.filter(publish=True).order_by('created_at')
+    orgs = OrgProfile.objects.filter(publish=True).order_by('published_at')
 
     # the 3 last prgs
     last = orgs.last()
