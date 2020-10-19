@@ -94,7 +94,7 @@
     <h1 class="text-center mt-5 pt-5">
           {% trans 'بوابة المجتمع المدني' %}
         </h1>
-    <div class="col-6">
+    <div class="col-lg-6 col-xs-12">
       <article>
         
         {% if LANGUAGE_CODE == 'ar' %}
@@ -157,7 +157,7 @@
 
       </article>
     </div>
-    <div class="col-6 d-flex {% if LANGUAGE_CODE == 'ar'%} align-items-end {% else  %} align-items-center {% endif  %} justify-content-center">
+    <div class="col-lg-6 col-xs-12 d-flex {% if LANGUAGE_CODE == 'ar'%} align-items-end {% else  %} align-items-center {% endif %} justify-content-center">
       <video width="100%"  controls>
         <source src="{% static 'video/hiba.mp4'%}" type="video/mp4">
       </video>
