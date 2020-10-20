@@ -11939,7 +11939,7 @@ body {
     color: tomato;
     border: 1px solid tomato;
     border-radius: 5px;
-    z-index: 100; }
+    z-index: 1000; }
     body h5#f-5-top .btn-scroll-top:hover, body #f-5-top.h5 .btn-scroll-top:hover {
       background-color: rgba(255, 255, 255, 0.5) !important; }
   body .main-video {
