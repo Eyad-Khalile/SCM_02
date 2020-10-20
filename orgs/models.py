@@ -64,7 +64,7 @@ class OrgProfile(models.Model):
         ('Media', _('إعلام')),
         ('Education', _('تعليم')),
         ('Protection', _('حماية')),
-        ('Livelihoods and food security', _('سبل العيش والأمن الغذائي')),
+        ('Livelihoods and food security', _('سبل العيش واﻷمن الغذائي')),
         ('Project of clean ,water, sanitation ', _(
             'مشاريع النظافة والمياه والصرف الصحي')),
         ('Development', _('تنمية')),
@@ -299,6 +299,48 @@ class OrgMedia(models.Model):
                              verbose_name=_('صورة او ملف المحتوى'))
     url = models.URLField(blank=True, max_length=255,
                           null=True, verbose_name=_('رابط المحتوى'))
+
+    publish = models.BooleanField(default=False)
+
+    created_at = models.DateTimeField(auto_now_add=True)
+    published_at = models.DateTimeField(blank=True, null=True, default=None)
+    updated_at = models.DateTimeField(blank=True, null=True, default=None)
+
+    def __str__(self):
+        return self.title
+
+
+class OrgResearch(models.Model):
+    
+    domain_CHOICES = (
+        ('Media', _('إعلام')),
+        ('Education', _('تعليم')),
+        ('Protection', _('حماية')),
+        ('Livelihoods and food security', _('سبل العيش واﻷمن الغذائي')),
+        ('Project of clean ,water, sanitation ', _(
+            'مشاريع النظافة والمياه والصرف الصحي')),
+        ('Development', _('تنمية')),
+        ('Law, suport, policy', _('قانون و مناصرة و سیاسة')),
+        ('Donors and support volunteering', _('مانحین و دعم العمل التطوعي')),
+        ('Religious org', _('منظمات دینیة')),
+        ('Prof association and assembles', _('تجمعات و اتحادات مھنیة')),
+        ('Health', _('صحة')),
+        ('Studies and research', _('دراسات وأبحاث')),
+        ('Other', _('أخرى')),
+    )
+
+    user = models.ForeignKey(
+        User, on_delete=models.CASCADE)
+    org_name = models.ForeignKey(
+        OrgProfile, on_delete=models.CASCADE, null=False, blank=True)
+
+    title = models.CharField(max_length=255, null=False,
+                             verbose_name=_('عنوان البحث'))
+    domaine = models.CharField(max_length=150, null=False, blank=False, choices=domain_CHOICES, verbose_name=_('مجال البحث'))
+    media = models.FileField(upload_to="rapport_files",
+                             verbose_name=_('ملف البحث'))
+    url = models.URLField(blank=True, max_length=255,
+                          null=True, verbose_name=_('رابط البحث'))
 
     publish = models.BooleanField(default=False)
 

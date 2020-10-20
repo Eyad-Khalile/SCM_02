@@ -1,6 +1,6 @@
 import django_filters
 from django_filters import DateFilter, CharFilter
-from .models import OrgProfile, OrgNews, OrgRapport, OrgData
+from .models import OrgProfile, OrgNews, OrgRapport, OrgData, OrgResearch
 from django.utils.translation import gettext_lazy as _
 
 
@@ -112,6 +112,27 @@ class OrgsMediaFilter(django_filters.FilterSet):
         fields = [
             'org_name',
             'title',
+            'start_date_pub',
+            'end_date_pub',
+        ]
+
+
+class OrgsResearchFilter(django_filters.FilterSet):
+
+    title = CharFilter(field_name="title",
+                       lookup_expr='icontains', label=_('كلمات من عنوان البحث'))
+
+    start_date_pub = DateFilter(field_name="created_at",
+                                lookup_expr='gte', label=_('تاريخ نشر البحث / من :'))
+    end_date_pub = DateFilter(field_name="created_at",
+                              lookup_expr='lte', label=_('إلى :'))
+
+    class Meta:
+        model = OrgResearch
+        fields = [
+            'org_name',
+            'title',
+            'domaine',
             'start_date_pub',
             'end_date_pub',
         ]

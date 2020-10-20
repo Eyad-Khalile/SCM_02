@@ -54,8 +54,14 @@ urlpatterns = [
 
     # ORGS RESEARCH
     path('research/', views.research, name="research"),
-    path('research_detail/<str:res_id>',
+    path('add_research/', views.add_research, name="add_research"),
+    path('research_detail/<str:research_id>',
          views.research_detail, name="research_detail"),
+    path('edit_research/<str:research_id>',
+         views.edit_research, name="edit_research"),
+    path('delete_research/<str:research_id>',
+         views.delete_research, name="delete_research"),
+    path('research_not_pub/', views.research_not_pub, name="research_not_pub"),
 
     # RECOURCE
     path('resource/', views.resource, name="resource"),

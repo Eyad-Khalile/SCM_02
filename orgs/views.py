@@ -297,15 +297,10 @@ def page_not_found_view(request, exception):
 def home(request):
     orgs = OrgProfile.objects.filter(publish=True).order_by('published_at')
 
-    # the 3 last prgs
-    last = orgs.last()
-    last_org = last.id
+    # the 3 last orgs
+    last_org = orgs.last().id
     av_last_org = last_org - 1
     av_av_last_org = av_last_org - 1
-
-    print(last_org)
-    print(av_last_org)
-    print(av_av_last_org)
 
     context = {
         'orgs': orgs,
@@ -318,7 +313,7 @@ def home(request):
 
 # L'AFFICHAGE DES ORGS PUBLISHED
 def guide(request):
-    orgs = OrgProfile.objects.filter(publish=True).order_by('-created_at')
+    orgs = OrgProfile.objects.filter(publish=True).order_by('-published_at')
 
     myFilter = OrgsFilter(request.GET, queryset=orgs)
     orgs = myFilter.qs
@@ -892,6 +887,7 @@ def media(request):
     return render(request, 'orgs/media/media.html', context)
 
 
+@login_required(login_url='signe_in')
 def add_media(request):
     if request.method == 'POST':
         form = MediaForm(request.POST or None, files=request.FILES)
@@ -944,6 +940,7 @@ def media_detail(request, media_id):
     return render(request, 'orgs/media/media_detail.html', context)
 
 
+@login_required(login_url='signe_in')
 def media_not_pub(request):
     medias = OrgMedia.objects.filter(publish=False).order_by('-created_at')
 
@@ -965,6 +962,7 @@ def media_not_pub(request):
     return render(request, 'orgs/media/media_not_pub.html', context)
 
 
+@login_required(login_url='signe_in')
 def edit_media(request, media_id):
     media = get_object_or_404(OrgMedia, id=media_id)
 
@@ -990,6 +988,7 @@ def edit_media(request, media_id):
     return render(request, 'orgs/media/edit_media.html', context)
 
 
+@login_required(login_url='signe_in')
 def delete_media(request, media_id):
     media = get_object_or_404(OrgMedia, id=media_id)
     if request.method == 'POST' and request.user.is_superuser:
@@ -1006,15 +1005,142 @@ def delete_media(request, media_id):
 
 # RESEARCH
 def research(request):
-    return render(request, 'orgs/research/orgs_research.html')
+    researchs = OrgResearch.objects.filter(
+        publish=True).order_by('-created_at')
 
+    myFilter = OrgsResearchFilter(request.GET, queryset=researchs)
+    researchs = myFilter.qs
 
-def research_detail(request, res_id):
-    id = res_id
+    # PAGINATEUR
+    paginator = Paginator(researchs, 12)
+    page = request.GET.get('page')
+    try:
+        researchs = paginator.get_page(page)
+    except(EmptyPage, InvalidPage):
+        researchs = paginator.page(paginator.num_pages)
+
     context = {
-        'id': id,
+        'researchs': researchs,
+        'myFilter': myFilter,
     }
-    return render(request, 'orgs/research/orgs_research_detail.html', context)
+    return render(request, 'orgs/research/research.html', context)
+
+
+@login_required(login_url='signe_in')
+def add_research(request):
+    if request.method == 'POST':
+        form = ResearchForm(request.POST or None, files=request.FILES)
+        if form.is_valid():
+            user = form.save(commit=False)
+            user.user = request.user
+            org_name = form.cleaned_data.get('org_name')
+            if org_name:
+                user.org_name = org_name
+            else:
+                user.org_name = request.user
+            user.save()
+
+            messages.success(request, _(
+                'لقد تمت إضافة البحث بنجاح و ستتم دراسته قريباً'))
+
+            return redirect('research')
+    else:
+        form = ResearchForm()
+
+    context = {
+        'form': form,
+    }
+
+    return render(request, 'orgs/research/add_research.html', context)
+
+
+def research_detail(request, research_id):
+    research = get_object_or_404(OrgResearch, id=research_id)
+
+    if request.method == 'POST':
+        form = ResearchConfirmForm(request.POST or None,
+                                   files=request.FILES, instance=research)
+        if form.is_valid():
+            at = form.save(commit=False)
+            at.published_at = datetime.utcnow()
+            at.save()
+
+            messages.success(request, _(
+                'لقد تم تعديل حالة البحث بنجاح'))
+            return redirect('research')
+
+    else:
+        form = ResearchConfirmForm(instance=research)
+
+    context = {
+        'research': research,
+        'form': form,
+    }
+    return render(request, 'orgs/research/detail_research.html', context)
+
+
+@login_required(login_url='signe_in')
+def research_not_pub(request):
+    researchs = OrgResearch.objects.filter(
+        publish=False).order_by('-created_at')
+
+    myFilter = OrgsResearchFilter(request.GET, queryset=researchs)
+    researchs = myFilter.qs
+
+    # PAGINATEUR
+    paginator = Paginator(researchs, 12)
+    page = request.GET.get('page')
+    try:
+        researchs = paginator.get_page(page)
+    except(EmptyPage, InvalidPage):
+        researchs = paginator.page(paginator.num_pages)
+
+    context = {
+        'researchs': researchs,
+        'myFilter': myFilter,
+    }
+    return render(request, 'orgs/research/research_not_pub.html', context)
+
+
+@login_required(login_url='signe_in')
+def edit_research(request, research_id):
+    research = get_object_or_404(OrgResearch, id=research_id)
+
+    if request.method == 'POST':
+        form = ResearchForm(request.POST or None,
+                            files=request.FILES, instance=research)
+        if form.is_valid():
+            at = form.save(commit=False)
+            at.updated = datetime.utcnow()
+            at.save()
+
+            messages.success(request, _(
+                'لقد تم تعديل البحث بنجاح'))
+            return redirect('research')
+
+    else:
+        form = ResearchForm(instance=research)
+
+    context = {
+        'research': research,
+        'form': form,
+    }
+    return render(request, 'orgs/research/edit_research.html', context)
+
+
+@login_required(login_url='signe_in')
+def delete_research(request, research_id):
+    research = get_object_or_404(OrgResearch, id=research_id)
+    if request.method == 'POST' and request.user.is_superuser:
+        research.delete()
+
+        messages.success(request, _(
+            'لقد تم حذف البحث بنجاح'))
+        return redirect('research')
+    context = {
+        'research': research,
+    }
+    return render(request, 'orgs/research/delete_research.html', context)
 
 
 # RECOURCE

@@ -201,3 +201,23 @@ class MediaConfirmForm(forms.ModelForm):
         fields = [
             'publish',
         ]
+
+class ResearchForm(forms.ModelForm):
+
+    class Meta:
+        model = OrgResearch
+        fields = [
+            'org_name',
+            'title',
+            'domaine',
+            'media',
+            'url',  
+        ]
+
+class ResearchConfirmForm(forms.ModelForm):
+
+    class Meta:
+        model = OrgResearch
+        fields = [
+            'publish',
+        ]

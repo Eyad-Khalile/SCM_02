@@ -629,13 +629,13 @@ body {
     // BTN SCROLL TOP
     .btn-scroll-top {
       position: fixed;
-      bottom: 22px;
-      right: 20px;
+      bottom: 15px;
+      right: 30px;
       padding: 1rem;
       color: tomato;
       border: 1px solid tomato;
       border-radius: 5px;
-      z-index: 5;
+      z-index: 100;
 
       &:hover {
         background-color: rgba(255, 255, 255, 0.5) !important;

@@ -174,9 +174,9 @@
     <div id="carouselOrgs" class="carouselOrgs carousel slide carousel-fade" data-ride="carousel">
       <div class="carousel-inner">
 
-        {% for org in orgs|slice:3 %}
+        {% for org in orgs %}
         
-        {% if org.id == 1 %}
+        {% if org.id == last_org %}
         <div class="carousel-item slide-item-1 active">
           <div class=" well" id="org_{{org.id}}">
             <center>
@@ -185,6 +185,8 @@
                   height="140" class="img-circle" /></a>
               <h3 class="mt-4">{{ org.name }}</h3>
               <p>{{ org.short_cut }}</p>
+              <!-- <p class="text-muted">{{ org.created_at|timesince }}</p>
+              <p class="text-muted">{{ org.published_at|timesince }}</p> -->
               <p>{{ org.message|truncatechars:80 }}</p>
               <p>
                 <a href="{% url 'particip_detail' org.id %}" class="btn btn-block">
@@ -195,7 +197,7 @@
           </div>
         </div>
 
-        {% elif org.id == 2  %}
+        {% elif org.id == av_last_org  %}
         <div class="carousel-item slide-item-2">
           <div class=" well" id="org_{{org.id}}">
             <center>
@@ -214,7 +216,7 @@
           </div>
         </div>
 
-        {% elif org.id == 3 %}
+        {% elif org.id == av_av_last_org %}
         <div class="carousel-item slide-item-3">
           <div class=" well" id="org_{{org.id}}">
             <center>

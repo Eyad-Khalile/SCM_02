@@ -125,6 +125,20 @@
             </a>
         </li>
         <hr>
+        <li class="nav-item">
+            <a href="{% url 'add_research' %}" class="nav-link nav-link-icon d-flex justify-content-center" title="{% trans 'إضافة بحث خارجي لمنظمة' %}">
+                <i class="fas fa-plus-square {% if LANGUAGE_CODE == 'ar' %} left {% else %} right {% endif %}"
+                    aria-hidden="true"></i>
+            </a>
+        </li>
+        <hr>
+        <li class="nav-item">
+            <a href="{% url 'research_not_pub' %}" class="nav-link nav-link-icon d-flex justify-content-center" title="{% trans 'اﻷبحاث الخارجية للمنظمات قيد الدراسة' %}">
+                <i class="fas fa-chalkboard-teacher {% if LANGUAGE_CODE == 'ar' %} left {% else %} right {% endif %}"
+                    aria-hidden="true"></i>
+            </a>
+        </li>
+        <hr>
 
         <!-- BACK -->
         <hr>
