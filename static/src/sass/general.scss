@@ -102,6 +102,16 @@ serif !important;
   }
 }
 
+@keyframes mouseDown {
+  0% {
+    bottom: 20px;
+  }
+
+  100% {
+    bottom: 0;
+  }
+}
+
 html {
   scroll-behavior: smooth;
 
@@ -201,7 +211,7 @@ body {
     // height: 50px;
     // width: 50px;
     // display: block;
-    z-index: 2000;
+    z-index: 10;
     position: absolute;
     bottom: 20px;
     left: 50%;
@@ -216,17 +226,7 @@ body {
     }
   }
 
-  @keyframes mouseDown {
-    0% {
-      bottom: 20px;
-    }
-    100% {
-      bottom: 0;
-    }
-    // 100% {
-    //   bottom: 20px;
-    // }
-  }
+  
 
   
 
