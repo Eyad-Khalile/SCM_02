@@ -168,9 +168,10 @@
 
 
 
-
+  <!-- ORGS SLIDER -->
+  {% if orgs|length > 2 %}
   <div class="orgs_slide mt-4 pt-4">
-    <h2 class="text-center mb-4"> {% trans "المنظمات المنضمة حديثاً" %} </h2>
+    <h2 class="text-center mb-4"> {% trans "المنظمات المضافة حديثاً" %} </h2>
     <div id="carouselOrgs" class="carouselOrgs carousel slide carousel-fade" data-ride="carousel">
       <div class="carousel-inner">
 
@@ -248,6 +249,88 @@
       </a>
     </div>
   </div>
+  {% endif %}
+
+
+  <!-- NEWS SLIDER -->
+  {% if news|length > 2 %}
+  <div class="news_slide mt-4 pt-4">
+    <h2 class="text-center mb-4"> {% trans " أخبار المنظمات المضافة حديثاً" %} </h2>
+    <div id="carouselNews" class="carouselNews carousel slide carousel-fade" data-ride="carousel">
+      <div class="carousel-inner">
+
+        {% for new in news %}        
+        {% if new.id == last_news %}
+        <div class="carousel-item slide-item-1 active">
+          <div class=" well" id="news_{{new.id}}">
+            <center>
+              <a href="{% url 'news_detail' new.id %}">
+                <img src="{{ new.image.url }}" name="{{ new.title }}" title="{{ new.title }}" width="140"
+                  height="140" class="img-circle" /></a>
+              <h3 class="mt-4">{{ new.org_name }}</h3>
+              <h3 class="mt-4">{{ new.title }}</h3>
+              <p>{{ new.content|truncatechars:80 }}</p>
+              <p>
+                <a href="{% url 'news_detail' new.id %}" class="btn btn-block">
+                  {% trans 'للمزيد عن الخبر' %}
+                </a>
+              </p>
+            </center>
+          </div>
+        </div>
+
+        {% elif new.id == av_last_news  %}
+        <div class="carousel-item slide-item-1">
+          <div class=" well" id="news_{{new.id}}">
+            <center>
+              <a href="{% url 'news_detail' new.id %}">
+                <img src="{{ new.image.url }}" name="{{ new.title }}" title="{{ new.title }}" width="140"
+                  height="140" class="img-circle" /></a>
+              <h3 class="mt-4">{{ new.org_name }}</h3>
+              <h3 class="mt-4">{{ new.title }}</h3>
+              <p>{{ new.content|truncatechars:80 }}</p>
+              <p>
+                <a href="{% url 'news_detail' new.id %}" class="btn btn-block">
+                  {% trans 'للمزيد عن الخبر' %}
+                </a>
+              </p>
+            </center>
+          </div>
+        </div>
+
+        {% elif new.id == av_av_last_news %}
+        <div class="carousel-item slide-item-1">
+          <div class=" well" id="news_{{new.id}}">
+            <center>
+              <a href="{% url 'news_detail' new.id %}">
+                <img src="{{ new.image.url }}" name="{{ new.title }}" title="{{ new.title }}" width="140"
+                  height="140" class="img-circle" /></a>
+              <h3 class="mt-4">{{ new.org_name }}</h3>
+              <h3 class="mt-4">{{ new.title }}</h3>
+              <p>{{ new.content|truncatechars:80 }}</p>
+              <p>
+                <a href="{% url 'news_detail' new.id %}" class="btn btn-block">
+                  {% trans 'للمزيد عن الخبر' %}
+                </a>
+              </p>
+            </center>
+          </div>
+        </div>
+
+        {% endif %}
+
+        {% endfor %}
+
+      </div>
+      <a class="carousel-control-prev" href="#carouselNews" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      </a>
+      <a class="carousel-control-next" href="#carouselNews" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      </a>
+    </div>
+  </div>
+  {% endif %}
 
 
 

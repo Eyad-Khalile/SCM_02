@@ -118,7 +118,8 @@ class OrgsMediaFilter(django_filters.FilterSet):
 
 
 class OrgsResearchFilter(django_filters.FilterSet):
-
+    name_entity = CharFilter(field_name="name_entity",
+                             lookup_expr='icontains', label=_('كلمات من اسم الجهة'))
     title = CharFilter(field_name="title",
                        lookup_expr='icontains', label=_('كلمات من عنوان البحث'))
 
@@ -130,7 +131,7 @@ class OrgsResearchFilter(django_filters.FilterSet):
     class Meta:
         model = OrgResearch
         fields = [
-            'org_name',
+            'name_entity',
             'title',
             'domaine',
             'start_date_pub',

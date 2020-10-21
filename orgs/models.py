@@ -311,7 +311,7 @@ class OrgMedia(models.Model):
 
 
 class OrgResearch(models.Model):
-    
+
     domain_CHOICES = (
         ('Media', _('إعلام')),
         ('Education', _('تعليم')),
@@ -331,12 +331,16 @@ class OrgResearch(models.Model):
 
     user = models.ForeignKey(
         User, on_delete=models.CASCADE)
-    org_name = models.ForeignKey(
-        OrgProfile, on_delete=models.CASCADE, null=False, blank=True)
+    # org_name = models.ForeignKey(
+    #     OrgProfile, on_delete=models.CASCADE, null=False, blank=True)
+
+    name_entity = models.CharField(
+        max_length=255, null=False,  verbose_name=_('اسم الجهة'))
 
     title = models.CharField(max_length=255, null=False,
                              verbose_name=_('عنوان البحث'))
-    domaine = models.CharField(max_length=150, null=False, blank=False, choices=domain_CHOICES, verbose_name=_('مجال البحث'))
+    domaine = models.CharField(max_length=150, null=False, blank=False,
+                               choices=domain_CHOICES, verbose_name=_('مجال البحث'))
     media = models.FileField(upload_to="rapport_files",
                              verbose_name=_('ملف البحث'))
     url = models.URLField(blank=True, max_length=255,

@@ -202,17 +202,19 @@ class MediaConfirmForm(forms.ModelForm):
             'publish',
         ]
 
+
 class ResearchForm(forms.ModelForm):
 
     class Meta:
         model = OrgResearch
         fields = [
-            'org_name',
+            'name_entity',
             'title',
             'domaine',
             'media',
-            'url',  
+            'url',
         ]
+
 
 class ResearchConfirmForm(forms.ModelForm):
 
