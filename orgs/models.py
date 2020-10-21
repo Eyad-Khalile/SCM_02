@@ -9,6 +9,8 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 from PIL import Image
 
 
+# https://github.com/akjasim/cb_dj_dependent_dropdown
+
 class Profile(models.Model):
     user = models.OneToOneField(
         User, on_delete=models.CASCADE)
@@ -43,7 +45,7 @@ class OrgProfile(models.Model):
         ('group', _('لجنة / تنسيقية / مجموعة'))
     )
 
-    city_CHOICES = (
+    syr_city_CHOICES = (
         ('aleppo', _('حلب')),
         ('damascus', _('دمشق')),
         ('suburb of damascus', _('ريف دمشق')),
@@ -58,6 +60,139 @@ class OrgProfile(models.Model):
         ('raqqa', _('الرقة')),
         ('as-Suwayda', _('السويداء')),
         ('tartus', _('طرطوس')),
+    )
+
+    turky_city_CHOICES = (
+        ('Adana', _('أضنة')),
+        ('Adıyaman', _('أديامان')),
+        ('Afyon', _('أفيون')),
+        ('Ağrı', _('أغري')),
+        ('Amasya', _('أماسيا')),
+        ('Ankara', _('أنقرة')),
+        ('Antalya', _('أنطاليا')),
+        ('Artvin', _('أرتوين')),
+        ('Aydın', _('أيطن')),
+        ('Balıkesir', _('بالق أسير')),
+        ('Bilecik', _('بيله جك')),
+        ('Bingöl', _('بينكُل')),
+        ('Bitlis', _('بيطليس')),
+        ('Bolu', _('بولو')),
+        ('Burdur', _('بوردور')),
+        ('Bursa', _('بورصة')),
+        ('Çanakkale', _('جاناكالي')),
+        ('Çankırı', _('جانقري')),
+        ('Çorum', _('جوروم')),
+        ('Denizli', _('دنيزلي')),
+        ('Diyarbakır', _('ديار بكر')),
+        ('Edirne', _('أدرنة')),
+        ('Elazığ', _('إلازِغ')),
+        ('Erzincan', _('أرزينجان')),
+        ('Erzurum', _('أرضروم')),
+        ('Eskişehir', _('أسكي شهر')),
+        ('Gaziantep', _('غازي عينتاب')),
+        ('Giresun', _('غيرسون')),
+        ('Gümüşhane', _('كوموش خانة')),
+        ('Hakkari', _('حقاري')),
+        ('Hattay', _('خطاي')),
+        ('Isparta', _('إسبرطة')),
+        ('Mersin', _('مرسين')),
+        ('İstanbul', _('إسطنبول')),
+        ('İzmir', _('إزمير')),
+        ('Kars', _('كارس')),
+        ('Kastamonu', _('قسطموني')),
+        ('Kayseri', _('قيصرية')),
+        ('Kırklareli', _('كيركلاريلي')),
+        ('Kırşehir', _('قرشهر')),
+        ('Kocaeli', _('قوجه ايلي')),
+        ('Konya', _('قونية')),
+        ('Kütahya', _('كوتاهيا')),
+        ('Malatya', _('ملاطية')),
+        ('Manisa', _('مانيسا')),
+        ('Kahramanmaraş', _('كارامان')),
+        ('Mardin', _('ماردين')),
+        ('Muğla', _('موغلا')),
+        ('Muş', _('موس')),
+        ('Nevşehir', _('نوشهر')),
+        ('Niğde', _('نيدا')),
+        ('Ordu', _('أردو')),
+        ('Rize', _('ريزه')),
+        ('Sakarya', _('صقاريا')),
+        ('Samsun', _('سامسون')),
+        ('Siirt', _('سيرت')),
+        ('Sinop', _('سينوب')),
+        ('Sivas', _('سيواس')),
+        ('Tekirdağ', _('تكيرطاغ')),
+        ('Tokat', _('توكات')),
+        ('Trabzon', _('طرابزون')),
+        ('Tunceli', _('تونجلي')),
+        ('Şanlıurfa', _('شانلي أورفا')),
+        ('Uşak', _('أوشاك')),
+        ('Van', _('وان')),
+        ('Yozgat', _('يوزكات')),
+        ('Zonguldak', _('زونغولداك')),
+        ('Aksaray', _('أق سراي')),
+        ('Bayburt', _('بايبورت')),
+        ('Karaman', _('قرة مان')),
+        ('Kırıkkale', _('كيرِك قلعة')),
+        ('Batman', _('باتمان')),
+        ('Şırnak', _('شرناق')),
+        ('Bartın', _('بارتين')),
+        ('Ardahan', _('أرض خان')),
+        ('Iğdır', _('إغدير')),
+        ('Yalova', _('يالوفا')),
+        ('Karabük', _('قرة بوك')),
+        ('Kilis', _('كيليس')),
+        ('Osmaniye', _('عثمانية')),
+        ('Düzce', _('دوزجه')),
+    )
+
+    jordan_city_CHOICES = (
+        ('irbid', _('إربد')),
+        ('balka', _('البلقاء')),
+        ('jerash', _('جرش')),
+        ('zarqa', _('الزرقاء')),
+        ('tafilah', _('الطفيلة')),
+        ('ajlon', _('عجلون')),
+        ('aqaba', _('العقبة')),
+        ('amman', _('عمان')),
+        ('karak', _('الكرك')),
+        ('madaba', _('مادبا')),
+        ('ma`an', _('معان')),
+        ('mafraq', _('المفرق')),
+    )
+
+    liban_city_CHOICES = (
+        ('Beirut', _('بيروت')),
+        ('Mount Lebanon', _('جبل لبنان')),
+        ('North', _('لبنان الشمالي')),
+        ('South', _('لبنان الجنوبي')),
+        ('Beqaa', _('البقاع')),
+        ('Nabatieh', _('النبطية')),
+        ('Akkar', _('عكار')),
+        ('Baalbek-Hermel', _('بعبلك الهرمل')),
+        ('kiserwan', _('كسروان جبيل')),
+    )
+
+    iraq_city_CHOICES = (
+        ('Erbil', _('أربيل')),
+        ('Al Anbar', _('اﻷنبار')),
+        ('Babil', _('بابل')),
+        ('Baghdad', _('بغداد')),
+        ('Basra', _('البصرة')),
+        ('Halabja ', _('حلبجة')),
+        ('Duhok', _('دهوك')),
+        ('Al-Qādisiyyah', _('القادسية')),
+        ('Diyala', _('ديالي')),
+        ('Dhi Qar', _('ذي قار')),
+        ('Sulaymaniyah ', _('السليمانية')),
+        ('Saladin', _('صلاح الدين')),
+        ('Kirkuk', _('كركوك')),
+        ('Karbala', _('كربلاء')),
+        ('Muthanna', _('المثنى')),
+        ('Maysan', _('ميسان')),
+        ('Najaf', _('النجف')),
+        ('Nineveh', _('نينوى')),
+        ('Wasit', _('واسط')),
     )
 
     domain_CHOICES = (
@@ -128,7 +263,7 @@ class OrgProfile(models.Model):
     position_work = CountryField(
         max_length=255, null=False, verbose_name=_("مكان العمل"))
     city_work = models.CharField(
-        max_length=150, choices=city_CHOICES, null=True, blank=True, verbose_name=_("المحافظة"))
+        max_length=150, choices=syr_city_CHOICES, null=True, blank=True, verbose_name=_("المحافظة"))
     logo = models.ImageField(upload_to="org_logos",
                              null=False, default='org_logos/default_logo.jpg', verbose_name=_("شعار المنظمة"))
     message = models.TextField(
