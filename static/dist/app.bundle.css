@@ -11791,9 +11791,10 @@ body {
   body .sym-mouse {
     z-index: 2000;
     position: absolute;
+    bottom: 20px;
     left: 50%;
-    border: 1px solid #fff;
-    animation: mouseDown 0.5s infinite linear ease-in-out; }
+    animation: mouseDown 1.5s linear infinite;
+    animation-timing-function: ease-in-out; }
     body .sym-mouse svg {
       font-size: 2em;
       color: #fff; }

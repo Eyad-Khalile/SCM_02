@@ -203,12 +203,12 @@ body {
     // display: block;
     z-index: 2000;
     position: absolute;
-    // bottom: 20px;
+    bottom: 20px;
     left: 50%;
-    border: 1px solid #fff;
-    animation: mouseDown 0.5s infinite linear ease-in-out;
+    // border: 1px solid #fff;
+    animation: mouseDown 1.5s linear infinite ;
     // animation: mouseDown 1s linear infinite 0.5s;
-    // animation-timing-function: ease-in-out;
+    animation-timing-function: ease-in-out;
 
     svg {
       font-size: 2em;
