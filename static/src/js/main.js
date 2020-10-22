@@ -2,6 +2,8 @@ $('body').css('padding-top', $('.navbar').outerHeight() + 'px')
 
 $('#navbarSupportedContent').find('.nav-link').css('height', $('.navbar').outerHeight() + 'px');
 
+// AOS.init();
+
 // $('#sidebar-wrapper').css('height', $('#sidebar-wrapper').parent().parent('div.col-2').outerHeight() + 'px');
 // $('#sidebar-wrapper').css('height', $('div.min-vh-100').outerHeight() + 'px');
 
@@ -154,4 +156,27 @@ $("#scroll_top").click(function() {
   return false;
 });
 
+let i = 0;
+$('#sidebar-wrapper').find('.btn-down').each(function () {
+    $(this).on('click', function () {
+        i++;
+        let m_t = $('#sidebar-wrapper').find('ul.sidebar-navbar').css('margin-top');
+        if (m_t != '-240px') {
+            $('#sidebar-wrapper').find('ul.sidebar-navbar').css({'margin-top': '-'+i+'rem'}, "slow");
+        }
+    });    
+});
+
+
+$('#sidebar-wrapper').find('.btn-up').each(function () {
+    $(this).on('click', function () {
+        i++;
+        let m_t = $('#sidebar-wrapper').find('ul.sidebar-navbar').css('margin-top');
+        if (m_t < 0) {
+            $('#sidebar-wrapper').find('ul.sidebar-navbar').css({'margin-top': i+'rem'}, "slow");
+        } else {
+            $('#sidebar-wrapper').find('ul.sidebar-navbar').css({'margin-top':'0'}, "slow");
+        }
+    });    
+});
 

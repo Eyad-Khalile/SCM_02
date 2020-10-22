@@ -26954,7 +26954,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
- // import "skitter-slider";
+ // import AOS from 'aos';
+// import 'aos/dist/aos.css';
+// import "skitter-slider";
 
 /***/ }),
 
@@ -26966,7 +26968,8 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function($) {$('body').css('padding-top', $('.navbar').outerHeight() + 'px');
-$('#navbarSupportedContent').find('.nav-link').css('height', $('.navbar').outerHeight() + 'px'); // $('#sidebar-wrapper').css('height', $('#sidebar-wrapper').parent().parent('div.col-2').outerHeight() + 'px');
+$('#navbarSupportedContent').find('.nav-link').css('height', $('.navbar').outerHeight() + 'px'); // AOS.init();
+// $('#sidebar-wrapper').css('height', $('#sidebar-wrapper').parent().parent('div.col-2').outerHeight() + 'px');
 // $('#sidebar-wrapper').css('height', $('div.min-vh-100').outerHeight() + 'px');
 
 $(".alert").delay(6000).slideUp(1000, function () {
@@ -27078,6 +27081,35 @@ $("#scroll_top").click(function () {
     scrollTop: 0
   }, "slow");
   return false;
+});
+let i = 0;
+$('#sidebar-wrapper').find('.btn-down').each(function () {
+  $(this).on('click', function () {
+    i++;
+    let m_t = $('#sidebar-wrapper').find('ul.sidebar-navbar').css('margin-top');
+
+    if (m_t != '-240px') {
+      $('#sidebar-wrapper').find('ul.sidebar-navbar').css({
+        'margin-top': '-' + i + 'rem'
+      }, "slow");
+    }
+  });
+});
+$('#sidebar-wrapper').find('.btn-up').each(function () {
+  $(this).on('click', function () {
+    i++;
+    let m_t = $('#sidebar-wrapper').find('ul.sidebar-navbar').css('margin-top');
+
+    if (m_t < 0) {
+      $('#sidebar-wrapper').find('ul.sidebar-navbar').css({
+        'margin-top': i + 'rem'
+      }, "slow");
+    } else {
+      $('#sidebar-wrapper').find('ul.sidebar-navbar').css({
+        'margin-top': '0'
+      }, "slow");
+    }
+  });
 });
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js")))
 

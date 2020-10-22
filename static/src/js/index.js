@@ -19,4 +19,7 @@ import "./forms.js";
 import "./form_validation";
 import "@fortawesome/fontawesome-free/js/all.js";
 import "slick-carousel";
+
+// import AOS from 'aos';
+// import 'aos/dist/aos.css';
 // import "skitter-slider";
