@@ -27081,35 +27081,41 @@ $("#scroll_top").click(function () {
     scrollTop: 0
   }, "slow");
   return false;
-});
-let i = 0;
-$('#sidebar-wrapper').find('.btn-down').each(function () {
-  $(this).on('click', function () {
-    i++;
-    let m_t = $('#sidebar-wrapper').find('ul.sidebar-navbar').css('margin-top');
+}); // SIDE NAVBAR UP AND DOWN  
 
-    if (m_t != '-240px') {
-      $('#sidebar-wrapper').find('ul.sidebar-navbar').css({
-        'margin-top': '-' + i + 'rem'
-      }, "slow");
-    }
-  });
-});
-$('#sidebar-wrapper').find('.btn-up').each(function () {
-  $(this).on('click', function () {
-    i++;
-    let m_t = $('#sidebar-wrapper').find('ul.sidebar-navbar').css('margin-top');
+$('#sidebar-wrapper').find('.btn-down').on('click', function () {
+  let m_t = $('#sidebar-wrapper').find('ul.sidebar-navbar').css('margin-top'); // Margin top
 
-    if (m_t < 0) {
-      $('#sidebar-wrapper').find('ul.sidebar-navbar').css({
-        'margin-top': i + 'rem'
-      }, "slow");
-    } else {
-      $('#sidebar-wrapper').find('ul.sidebar-navbar').css({
-        'margin-top': '0'
-      }, "slow");
-    }
-  });
+  let li_height = $('#sidebar-wrapper').find('li.nav-item').css('height'); // Height of the Li
+
+  let li_count = $('ul.sidebar-navbar li').length - 9; // Number of li
+
+  let lemite = Math.abs(parseInt(li_height)) * li_count; // Lemite of animation 
+  // console.log(li_height + '-' + li_count + '-' + lemite);
+
+  if (parseInt(m_t) > -lemite) {
+    $('#sidebar-wrapper').find('ul.sidebar-navbar').animate({
+      'margin-top': '-=' + li_height
+    }, 500);
+  } else {
+    $('#sidebar-wrapper').find('ul.sidebar-navbar').animate({
+      'margin-top': '-288px'
+    }, 500);
+  }
+});
+$('#sidebar-wrapper').find('.btn-up').on('click', function () {
+  let m_t = $('#sidebar-wrapper').find('ul.sidebar-navbar').css('margin-top');
+  let li_height = $('#sidebar-wrapper').find('li.nav-item').css('height');
+
+  if (parseInt(m_t) < 0) {
+    $('#sidebar-wrapper').find('ul.sidebar-navbar').animate({
+      'margin-top': '+=' + li_height
+    }, 500);
+  } else {
+    $('#sidebar-wrapper').find('ul.sidebar-navbar').animate({
+      'margin-top': '0'
+    }, 500);
+  }
 });
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js")))
 
