@@ -9,8 +9,8 @@ $("form.form-signin").find('label[for="id_password"]').addClass("d-none");
 $("form.form-signin").find("#id_password").attr("placeholder", "كلمة المرور");
 
 // ORG PROFILE
-$("#div_id_city_work").hide();
-if ($("#id_position_work").val() == "SY") {
+// $("#div_id_city_work").hide();
+if ($("#id_position_work").val() == "SY" || $("#id_position_work").val() == "TR" || $("#id_position_work").val() == "JO" || $("#id_position_work").val() == "LB" || $("#id_position_work").val() == "IQ") {
     $("#div_id_city_work").show();
 }
 $("#id_position_work").change(function () {
@@ -19,12 +19,57 @@ $("#id_position_work").change(function () {
         case "SY":
             $("#div_id_city_work").show();
             break;
+        case "TR":
+            $("#div_id_city_work").show();
+            break;
+        case "JO":
+            $("#div_id_city_work").show();
+            break;
+        case "LB":
+            $("#div_id_city_work").show();
+            break;
+        case "IQ":
+            $("#div_id_city_work").show();
+            break;
 
         default:
             $("#div_id_city_work").hide();
             break;
     }
 });
+
+
+
+$("#id_position_work").change(function () {
+    
+    const url = $("#fill_form").attr("data-cities-url");  // get the url of the `load_cities` view
+    const countryId = $(this).val();  // get the selected country ID from the HTML input
+
+    $.ajax({                       // initialize an AJAX request
+        url: url,                    // set the url of the request (= /persons/ajax/load-cities/ )
+        data: {
+            'position_work': countryId       // add the country id to the GET parameters
+        },
+        
+        success: function (data) {   // `data` is the return of the `load_cities` view function
+            $("#id_city_work").html(data);  // replace the contents of the city input with the data that came from the server
+            
+            /*
+
+            let html_data = '<option value="">---------</option>';
+            data.forEach(function (city) {
+                html_data += `<option value="${city.id}">${city.name}</option>`
+            });
+            console.log(html_data);
+            $("#id_city").html(html_data);
+
+            */
+        }
+    });
+
+});
+
+
 
 $("#div_id_org_registered_country").hide();
 if ($("#id_is_org_registered").val() == "1") {

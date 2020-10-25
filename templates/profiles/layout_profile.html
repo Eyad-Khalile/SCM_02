@@ -22,7 +22,11 @@
                 <hr>
                 <!-- CONTANTS -->
                 <div class="contante">
-
+                    <div class="col">
+                        <a href="{% url 'org_profile_edit' request.user.id %}" class="btn btn-block">
+                            {% trans 'تعديل ملفي الشخصي' %}
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>

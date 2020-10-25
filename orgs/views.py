@@ -100,6 +100,93 @@ def activate(request, uidb64, token):
         return render(request, 'register/active.html')
 
 
+# CITYES
+@login_required(login_url='signe_in')
+def add_city(request):
+
+    if request.method == 'POST':
+        form = CityForm(request.POST or None)
+        if form.is_valid():
+            form.save()
+            form = CityForm()
+
+            messages.success(
+                request, 'لقد تمت إضافة المحافظة بنجاح')
+
+            # return redirect('city')
+    else:
+        form = CityForm()
+
+    context = {
+        'form': form
+    }
+    return render(request, 'city/add_city.html', context)
+
+
+@login_required(login_url='signe_in')
+def edit_city(request, city_id):
+    city = get_object_or_404(City, id=city_id)
+
+    if request.method == 'POST':
+        form = CityForm(request.POST or None, instance=city)
+        if form.is_valid():
+            date = form.save(commit=False)
+            date.updated_at = datetime.utcnow()
+            date.save()
+
+            form = CityForm()
+
+            messages.success(
+                request, 'لقد تمت تعديل المحافظة بنجاح')
+
+            # return redirect('city')
+
+    else:
+        form = CityForm(instance=city)
+
+    context = {
+        'city': city,
+        'form': form
+    }
+    return render(request, 'city/edite_city.html', context)
+
+
+@login_required(login_url='signe_in')
+def delete_city(request, city_id):
+    city = get_object_or_404(City, id=city_id)
+
+    if request.method == 'POST' and request.user.is_superuser:
+        city.delete()
+
+        messages.success(request, _(
+            'لقد تم حذف المحافظه بنجاح'))
+        return redirect('city')
+
+    context = {
+        'city': city,
+    }
+    return render(request, 'city/delete_city.html', context)
+
+
+@login_required(login_url='signe_in')
+def view_city(request):
+    cityes = City.objects.all().order_by('id')
+
+    context = {
+        'cityes': cityes,
+    }
+    return render(request, 'city/view_city.html', context)
+
+
+# AJAX
+def load_cities(request):
+    position_work = request.GET.get('position_work')
+    cities = City.objects.filter(position_work=position_work).all()
+    return render(request, 'city/city_dropdown_list_options.html', {'cities': cities})
+    # return JsonResponse(list(cities.values('id', 'name')), safe=False)
+
+
+# PROFILE
 @login_required(login_url='signe_in')
 def profile(request):
 
@@ -150,7 +237,7 @@ def admin_dashboard(request):
         for pro in profs:
             org_type = pro.get_org_type_display()
             position_work = pro.get_position_work_display()
-            city_work = pro.get_city_work_display()
+            # city_work = pro.get_city_work_display()
             work_domain = pro.get_work_domain_display()
             target_cat = pro.get_target_cat_display()
             org_registered_country = pro.get_org_registered_country_display()
@@ -160,7 +247,7 @@ def admin_dashboard(request):
             'profs': profs,
             'org_type': org_type,
             'position_work': position_work,
-            'city_work': city_work,
+            # 'city_work': city_work,
             'work_domain': work_domain,
             'target_cat': target_cat,
             'org_registered_country': org_registered_country,

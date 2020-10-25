@@ -22,6 +22,18 @@ class LoginForm(forms.Form):
     password = forms.CharField(widget=forms.PasswordInput)
 
 
+# CITYES
+class CityForm(forms.ModelForm):
+
+    class Meta:
+        model = City
+        fields = [
+            'position_work',
+            'city_work',
+        ]
+
+
+# ORG PROFILE
 class OrgProfileForm(forms.ModelForm):
     name = forms.CharField(max_length=255, min_length=3, label=_('اسم المنظمة'),
                            help_text=_(
@@ -109,6 +121,44 @@ class OrgProfileForm(forms.ModelForm):
             'org_member_with',
             'coalition_name',
         ]
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['city_work'].queryset = City.objects.none()
+
+        if 'position_work' in self.data:
+            try:
+                position_work = self.data.get('position_work')
+                self.fields['city_work'].queryset = City.objects.filter(
+                    position_work=position_work)
+            except (ValueError, TypeError):
+                pass  # invalid input from the client; ignore and fallback to empty City queryset
+        # elif 'city_work' in self.data:
+        #     self.fields['city_work'].queryset = self.instance.position_work.city_work_set.all()
+        # else:
+        #     self.fields['city_work'].queryset = City.objects.all()
+        elif self.instance.pk and self.instance.city_work:
+            print(self.instance.city_work)
+            position_work = self.instance.position_work
+            self.fields['city_work'].queryset = City.objects.filter(
+                position_work=position_work)
+        # else:
+        #     self.fields['city_work'].queryset = City.objects.all()
+
+        elif self.instance.pk and not self.instance.city_work:
+            self.fields['city_work'].queryset = City.objects.all()
+            # if 'position_work' in self.data:
+            #     print(self.data)
+        #         try:
+        #             position_work = self.data.get('position_work')
+        #             self.fields['city_work'].queryset = City.objects.filter(
+        #                 position_work=position_work)
+        #         except (ValueError, TypeError):
+        #             pass  # invalid input from the client; ignore and fallback to empty City queryset
+
+            # self.fields['city_work'].queryset = self.instance.position_work.city_work_set.order_by(
+            #     'city_work')
+            # self.fields['city_work'].queryset = self.instance.position_work.city_work_set.all()
 
 
 class OrgConfirmForm(forms.ModelForm):

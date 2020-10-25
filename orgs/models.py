@@ -34,6 +34,30 @@ def save_user_profile(sender, instance, **kwargs):
     instance.profile.save()
 
 
+# :::::::::::: CITYES ::::::::::::::::::::::
+class City(models.Model):
+
+    country_CHOICES = (
+        ('IQ', _('العراق')),
+        ('LB', _('لبنان')),
+        ('JO', _('اﻷردن')),
+        ('SY', _('سوريا')),
+        ('TR', _('تركيا')),
+    )
+
+    position_work = models.CharField(
+        max_length=150, null=False, default=None, choices=country_CHOICES, verbose_name=_('الدولة'))
+    city_work = models.CharField(max_length=255, null=False,
+                                 verbose_name=_('اسم المحافظة'))
+
+    created_at = models.DateTimeField(auto_now_add=True, null=True)
+    updated_at = models.DateTimeField(blank=True, null=True, default=None)
+
+    def __str__(self):
+        if self.city_work:
+            return self.city_work
+
+
 # :::::::::::: ORGS PROFILE ::::::::::::::::::::::
 class OrgProfile(models.Model):
 
@@ -262,8 +286,10 @@ class OrgProfile(models.Model):
         max_length=150, null=False, choices=type_CHOICES, verbose_name=_("نوع المنظمة"))
     position_work = CountryField(
         max_length=255, null=False, verbose_name=_("مكان العمل"))
-    city_work = models.CharField(
-        max_length=150, choices=syr_city_CHOICES, null=True, blank=True, verbose_name=_("المحافظة"))
+    city_work = models.ForeignKey(
+        City, on_delete=models.SET_NULL, null=True, blank=True, verbose_name=_("المحافظة"))
+    # city_work = models.CharField(
+    #     max_length=150, choices=syr_city_CHOICES, null=True, blank=True, verbose_name=_("المحافظة"))
     logo = models.ImageField(upload_to="org_logos",
                              null=False, default='org_logos/default_logo.jpg', verbose_name=_("شعار المنظمة"))
     message = models.TextField(
