@@ -26773,8 +26773,10 @@ $('form#fill_form').find('#id_message').blur(function () {
 $("form.form-signin").find('label[for="id_username"]').addClass("d-none");
 $("form.form-signin").find("#id_username").attr("placeholder", "اسم المستخدم");
 $("form.form-signin").find('label[for="id_password"]').addClass("d-none");
-$("form.form-signin").find("#id_password").attr("placeholder", "كلمة المرور"); // ORG PROFILE
-// $("#div_id_city_work").hide();
+$("form.form-signin").find("#id_password").attr("placeholder", "كلمة المرور"); // ORG PROFILE 
+// CITY CHOISES
+
+$("#div_id_city_work").hide();
 
 if ($("#id_position_work").val() == "SY" || $("#id_position_work").val() == "TR" || $("#id_position_work").val() == "JO" || $("#id_position_work").val() == "LB" || $("#id_position_work").val() == "IQ") {
   $("#div_id_city_work").show();
@@ -26808,7 +26810,8 @@ $("#id_position_work").change(function () {
       $("#div_id_city_work").hide();
       break;
   }
-});
+}); // CITY AJAX
+
 $("#id_position_work").change(function () {
   const url = $("#fill_form").attr("data-cities-url"); // get the url of the `load_cities` view
 
@@ -26836,7 +26839,8 @@ $("#id_position_work").change(function () {
        */
     }
   });
-});
+}); // REGISTERED COUNTRY
+
 $("#div_id_org_registered_country").hide();
 
 if ($("#id_is_org_registered").val() == "1") {
@@ -26873,7 +26877,7 @@ $("#id_phone").attr({
 
 $("#id_name, #id_name_en_ku, #id_short_cut, #id_message, #id_name_managing_director, #id_name_ceo, #id_name_person_contact, #id_org_adress, #id_coalition_name").attr({
   minlength: "3",
-  oninput: "this.value = this.value.replace(/[^a-zA-Z0-9 ]/gi, '');"
+  oninput: "this.value = this.value.replace(/[^ا-يa-zA-Z0-9 ]/gi, '');"
 }); // MEMBERS COUNT
 
 $("#id_org_members_count, #id_org_members_womans_count").attr({
@@ -26953,11 +26957,33 @@ $("#chnage-lange").change(function () {
   if (lan_sel == "ar") {
     document.location.href = origin + removeCharacter(pathname);
   } else if (lan_sel == "en") {
-    document.location.href = origin + "/en" + pathname;
+    document.location.href = origin + "/en" + removeCharacter(pathname);
+  } else if (lan_sel == "km") {
+    document.location.href = origin + "/km" + removeCharacter(pathname);
   }
 }); // RAPPORT
 
-$('form#form_rapport').find('#id_media').attr('accept', 'application/pdf,image/*');
+$('form#form_rapport').find('#id_media').attr('accept', 'application/pdf,image/*'); // NEWSLETTER FORM AJAX
+
+var form = $(".form-news-latter");
+form.on('submit', function submitForm(e) {
+  e.preventDefault();
+  $.ajax({
+    type: 'POST',
+    // url: '{% url "home" %}',
+    // url: '',
+    data: $(".form-news-latter").serialize(),
+    dataType: 'json',
+    success: function (data) {
+      // form[0].reset();
+      // $(".form-news-latter").reset();
+      form.find("input").each(function (i, v) {
+        $(this).val("");
+      });
+      alert('You have been Successfully subscribed');
+    }
+  });
+});
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js")))
 
 /***/ }),
@@ -26997,9 +27023,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
- // import AOS from 'aos';
-// import 'aos/dist/aos.css';
-// import "skitter-slider";
+ // import "skitter-slider";
 
 /***/ }),
 

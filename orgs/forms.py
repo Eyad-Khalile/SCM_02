@@ -199,6 +199,7 @@ class RapportForm(forms.ModelForm):
         fields = [
             'org_name',
             'title',
+            'domain',
             'media',
         ]
 
@@ -273,3 +274,45 @@ class ResearchConfirmForm(forms.ModelForm):
         fields = [
             'publish',
         ]
+
+
+# ::::::::::::::::::: NEWS LETTER :::::::::::::::::::::
+class NewsLetterForm(forms.ModelForm):
+    name = forms.CharField(max_length=255, min_length=3, label='',
+                           help_text=_(
+                               ''),
+                           widget=forms.TextInput(
+                               attrs={'placeholder': _('الاسم و الكنية')}))
+    work = forms.CharField(max_length=255, min_length=3, label='',
+                           help_text=_(
+                               ''),
+                           widget=forms.TextInput(
+                               attrs={'placeholder': _('العمل')}))
+
+    org_name = forms.CharField(max_length=255, min_length=3, label='',
+                               help_text=_(
+                                   ''),
+                               widget=forms.TextInput(
+                                   attrs={'placeholder': _('اسم المنظمة')}))
+
+    email = forms.EmailField(max_length=255, min_length=3, label='',
+                             help_text=_(
+                                 ''),
+                             widget=forms.EmailInput(
+                                 attrs={'placeholder': _('البريد الاكتروني')}))
+
+    class Meta:
+        model = NewsLetter
+        fields = [
+            'name',
+            'work',
+            'org_name',
+            'email',
+        ]
+
+    def clean_email(self, *args, **kwargs):
+        email = self.cleaned_data.get('email')
+        qs = NewsLetter.objects.filter(email__iexact=email)
+        if qs.exists():
+            raise forms.ValidationError(_('This email already exists'))
+        return email

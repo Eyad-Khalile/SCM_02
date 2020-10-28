@@ -36,11 +36,14 @@
 
                 <form action="" method="get"
                     class="row register justify-content-center align-items-center flex-wrap form my-2 my-lg-0">
-                    <div class="col-sm-12 col-md-6  mt-3">
+                    <div class="col-sm-12 col-md-4  mt-3">
                         {{ myFilter.form.org_name|as_crispy_field }}
                     </div>
-                    <div class="col-sm-12 col-md-6 mt-3">
+                    <div class="col-sm-12 col-md-4 mt-3">
                         {{ myFilter.form.title|as_crispy_field }}
+                    </div>
+                    <div class="col-sm-12 col-md-4 mt-3">
+                        {{ myFilter.form.domain|as_crispy_field }}
                     </div>
                     <div class="row">
                         <div class="col-xs-6 col-sm-6 col-md-4 mt-3">

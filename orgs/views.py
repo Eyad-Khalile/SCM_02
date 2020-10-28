@@ -381,6 +381,30 @@ def page_not_found_view(request, exception):
     return render(request, 'errors/404.html')
 
 
+# NEWS LETTER
+# def NewsLetter(request):
+#     if request.is_ajax():
+#         formNews = NewsLetterForm(request.POST or None)
+#         if formNews.is_valid():
+#             formNews.save()
+#             # formNews = NewsLetterForm()
+#             return JsonResponse({
+#                 'msg': 'Success',
+#             }, status=200)
+
+#             messages.success(request, _(
+#                 'لقد تم طلب الاشتراك بآخر اﻷخبار بنجاح'))
+
+#     else:
+#         formNews = NewsLetterForm()
+#     context = {
+#         'formNews': formNews,
+#     }
+
+#     return render(request, 'combonents/footer.html', context)
+
+
+# HOME PAGE
 def home(request):
     orgs = OrgProfile.objects.filter(publish=True).order_by('published_at')
     news = OrgNews.objects.filter(publish=True).order_by('-published_at')
@@ -398,6 +422,20 @@ def home(request):
     av_av_last_news = av_last_news - 1
     # print(last_news, av_last_news, av_av_last_news)
 
+    if request.is_ajax():
+        formNews = NewsLetterForm(request.POST or None)
+        if formNews.is_valid():
+            formNews.save()
+            # formNews = NewsLetterForm()
+            return JsonResponse({
+                'msg': 'Success',
+            }, status=200)
+
+            # messages.success(request, _(
+            #     'لقد تم طلب الاشتراك بآخر اﻷخبار بنجاح'))
+    else:
+        formNews = NewsLetterForm()
+
     context = {
         'orgs': orgs,
         'last_org': last_org,
@@ -407,6 +445,8 @@ def home(request):
         'last_news': last_news,
         'av_last_news': av_last_news,
         'av_av_last_news': av_av_last_news,
+
+        'formNews': formNews,
     }
     return render(request, 'orgs/home.html', context)
 

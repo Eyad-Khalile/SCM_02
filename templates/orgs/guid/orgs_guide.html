@@ -12,9 +12,9 @@
     <!-- SECTION 1 -->
     <div class="">
         <article>
-            <h1 class="text-center mb-4"> {% trans 'دليل المجتمع المدني' %} </h1>
+            <h1 class="text-center mb-4" data-aos="fade-left"> {% trans 'دليل المجتمع المدني' %} </h1>
             <!-- Text Descriptions -->
-            <p class="text-right text-al-just p-color h4">
+            <p class="text-right text-al-just p-color h4" data-aos="fade-right">
                 "لوريم ايبسوم دولار سيت أميت ,كونسيكتيتور أدايبا يسكينج أليايت,سيت دو أيوسمود تيمبور
 
                 أنكايديديونتيوت لابوري ات دولار ماجنا أليكيوا . يوت انيم أد مينيم فينايم,كيواس نوستريد
@@ -58,21 +58,21 @@
 
         <div class="row mt-4">
             {% if orgs %}
-            <h2> {% trans 'قائمة منظمات المجتمع المدني' %} </h2>
+            <h2 data-aos="fade-left"> {% trans 'قائمة منظمات المجتمع المدني' %} </h2>
 
-            <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
+            <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12" data-aos="fade-right">
                 <a class="btn btn-block mt-4" data-toggle="collapse" href="#collapseFiltre" aria-expanded="false"
                     aria-controls="collapseFiltre">{% trans 'فرز' %}</a>
             </div>
 
-            <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
+            <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12" data-aos="fade-right">
                 {% if request.user.is_authenticated %}
                 {% if not request.user.orgprofile_set.all or request.user.is_staff %}
                 <a href="{% url 'org_profile' %}" class="btn btn-block mt-4">تقديم طلب اشتراك</a>
                 {% endif %}
                 {% endif %}
             </div>
-            <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
+            <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12" data-aos="fade-right">
                 {% if request.user.is_authenticated and request.user.is_superuser %}
                 <a href="{% url 'guide_conf' %}" class="btn btn-block mt-4">
                     {% trans 'طلبات اشتراك المنظمات قيد الدراسة' %} </a>
@@ -123,7 +123,7 @@
                 <br>
                 {% for org in orgs %}
 
-                <div class="span3 well">
+                <div class="span3 well" data-aos="fade-left">
                     <center>
                         <a href="{% url 'particip_detail' org.id %}">
                             <img src="{{ org.logo.url }}" name="{{ org.name_en_ku }}" title="{{ org.name_en_ku }}"
@@ -164,7 +164,7 @@
                         {% endif %}
                         {% endfor %}
 
-
+                        <span> {% trans "إجمالي عدد المنظمات" %} ( {{ orgs.paginator.count }} ) </span>  
                         {% if orgs.has_next %}
                         <a href="?page={{ orgs.next_page_number }}" class="btn"><i class="fa fa-angle-right"></i></a>
                         <a href="?page={{ orgs.paginator.num_pages }}" class="btn"><i
@@ -185,8 +185,8 @@
             {% endif %}
 
             <!-- <p>{{ orgs.has_previous }}</p>
-            <p>{{ orgs.number }}</p> -->
-            <!-- <p>{{ orgs.paginator.count }}</p>
+            <p>{{ orgs.number }}</p>
+            <p>{{ orgs.paginator.count }}</p>
             <p>{{ orgs.paginator.num_pages }}</p>
             <p>{{ orgs.paginator.page_range }}</p>
             <p>{{ orgs.has_next }}</p> -->

@@ -21,7 +21,7 @@ form {
     color: #fff !important;
     padding: 0.5em 2em !important;
     padding-right: 1em !important;
-    border-radius: 10px;
+    border-radius: 5px;
 
     margin-top: 30px;
 
@@ -32,7 +32,7 @@ form {
 
   #div_id_logo + svg {
     top: -55px;
-    left: -114px;
+    left: -100px;
   }
 
 
@@ -235,3 +235,6 @@ div.emp-profile {
 }
 
 
+.form-news-latter {
+  background-color: $color-1;
+}

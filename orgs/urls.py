@@ -20,7 +20,6 @@ urlpatterns = [
          name='ajax_load_cities'),  # AJAX
 
 
-
     # ORGS GUIDE
     path('guide/', views.guide, name="guide"),
     path('guide_conf/', views.guide_not_pub, name="guide_conf"),

@@ -11,32 +11,8 @@ from PIL import Image
 
 # https://github.com/akjasim/cb_dj_dependent_dropdown
 
-class Profile(models.Model):
-    user = models.OneToOneField(
-        User, on_delete=models.CASCADE)
-    email_confirmed = models.BooleanField(default=False)
-    created_at = models.DateTimeField(auto_now_add=True)
 
-    def __str__(self):
-        if self.user:
-            return self.user.username
-
-
-@receiver(post_save, sender=User)
-def update_user_profile(sender, instance, created, **kwargs):
-    if created:
-        Profile.objects.create(user=instance)
-    instance.profile.save()
-
-
-@receiver(post_save, sender=User)
-def save_user_profile(sender, instance, **kwargs):
-    instance.profile.save()
-
-
-# :::::::::::: CITYES ::::::::::::::::::::::
-class City(models.Model):
-
+class MyChoices(models.Model):
     country_CHOICES = (
         ('IQ', _('العراق')),
         ('LB', _('لبنان')),
@@ -44,22 +20,6 @@ class City(models.Model):
         ('SY', _('سوريا')),
         ('TR', _('تركيا')),
     )
-
-    position_work = models.CharField(
-        max_length=150, null=False, default=None, choices=country_CHOICES, verbose_name=_('الدولة'))
-    city_work = models.CharField(max_length=255, null=False,
-                                 verbose_name=_('اسم المحافظة'))
-
-    created_at = models.DateTimeField(auto_now_add=True, null=True)
-    updated_at = models.DateTimeField(blank=True, null=True, default=None)
-
-    def __str__(self):
-        if self.city_work:
-            return self.city_work
-
-
-# :::::::::::: ORGS PROFILE ::::::::::::::::::::::
-class OrgProfile(models.Model):
 
     type_CHOICES = (
         ('establishment', _('مؤسسة')),
@@ -273,6 +233,50 @@ class OrgProfile(models.Model):
         ('Other', _('أخرى')),
     )
 
+
+# PROFILE / AUTO CREATE
+class Profile(models.Model):
+    user = models.OneToOneField(
+        User, on_delete=models.CASCADE)
+    email_confirmed = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        if self.user:
+            return self.user.username
+
+
+@receiver(post_save, sender=User)
+def update_user_profile(sender, instance, created, **kwargs):
+    if created:
+        Profile.objects.create(user=instance)
+    instance.profile.save()
+
+
+@receiver(post_save, sender=User)
+def save_user_profile(sender, instance, **kwargs):
+    instance.profile.save()
+
+
+# :::::::::::: CITYES ::::::::::::::::::::::
+class City(models.Model):
+
+    position_work = models.CharField(
+        max_length=150, null=False, default=None, choices=MyChoices.country_CHOICES, verbose_name=_('الدولة'))
+    city_work = models.CharField(max_length=255, null=False,
+                                 verbose_name=_('اسم المحافظة'))
+
+    created_at = models.DateTimeField(auto_now_add=True, null=True)
+    updated_at = models.DateTimeField(blank=True, null=True, default=None)
+
+    def __str__(self):
+        if self.city_work:
+            return self.city_work
+
+
+# :::::::::::: ORGS PROFILE ::::::::::::::::::::::
+class OrgProfile(models.Model):
+
     user = models.ForeignKey(
         User, on_delete=models.CASCADE)
 
@@ -283,7 +287,7 @@ class OrgProfile(models.Model):
     short_cut = models.CharField(
         max_length=255, null=True, blank=True, verbose_name=_("الاسم المختصر"))
     org_type = models.CharField(
-        max_length=150, null=False, choices=type_CHOICES, verbose_name=_("نوع المنظمة"))
+        max_length=150, null=False, choices=MyChoices.type_CHOICES, verbose_name=_("نوع المنظمة"))
     position_work = CountryField(
         max_length=255, null=False, verbose_name=_("مكان العمل"))
     city_work = models.ForeignKey(
@@ -320,13 +324,13 @@ class OrgProfile(models.Model):
 
     # ORG INFO
     work_domain = models.CharField(
-        max_length=255, choices=domain_CHOICES, null=False, verbose_name=_('مجال العمل'))
+        max_length=255, choices=MyChoices.domain_CHOICES, null=False, verbose_name=_('مجال العمل'))
     target_cat = models.CharField(
-        max_length=255, null=False, choices=target_CHOICES, verbose_name=_('الفئات المستهدفة'))
+        max_length=255, null=False, choices=MyChoices.target_CHOICES, verbose_name=_('الفئات المستهدفة'))
     date_of_establishment = models.CharField(
         max_length=150, null=True, blank=True, verbose_name=_('تاريخ سنة التأسيس'))
     is_org_registered = models.CharField(
-        max_length=100, null=False, choices=bool_CHOICES, verbose_name=_('هل المنظمة مسجلة ؟'))
+        max_length=100, null=False, choices=MyChoices.bool_CHOICES, verbose_name=_('هل المنظمة مسجلة ؟'))
     org_registered_country = CountryField(
         max_length=255, null=True, blank=True, verbose_name=_("بلد التسجيل"))
 
@@ -335,8 +339,8 @@ class OrgProfile(models.Model):
     org_members_womans_count = models.PositiveIntegerField(
         validators=[MinValueValidator(1)], null=True, blank=True, verbose_name=_('عدد النساء من اﻷعضاء'))
     w_polic_regulations = models.CharField(
-        max_length=200, null=False, choices=polic_CHOICES, verbose_name=_('السياسات واللوائح المكتوبة'))
-    org_member_with = models.CharField(max_length=100, null=True, blank=True, choices=bool_CHOICES, verbose_name=_(
+        max_length=200, null=False, choices=MyChoices.polic_CHOICES, verbose_name=_('السياسات واللوائح المكتوبة'))
+    org_member_with = models.CharField(max_length=100, null=True, blank=True, choices=MyChoices.bool_CHOICES, verbose_name=_(
         'ھل المؤسسة عضو في اي شبكة او تحالف او جسم تنسیقي؟'))
     coalition_name = models.CharField(
         max_length=255, null=True, blank=True, verbose_name=_('اسم الشبكة / التحالف'))
@@ -414,6 +418,8 @@ class OrgRapport(models.Model):
 
     title = models.CharField(max_length=255, null=False,
                              verbose_name=_('عنوان التقرير'))
+    domain = models.CharField(
+        max_length=150, null=False, blank=False, default='Other', choices=MyChoices.domain_CHOICES, verbose_name=_('مجال التقرير'))
     media = models.FileField(upload_to="rapport_files",
                              verbose_name=_('صورة او ملف التقرير'))
 
@@ -426,7 +432,7 @@ class OrgRapport(models.Model):
     def __str__(self):
         return self.title
 
-
+# :::::::::: ORGS DATA :::::::::::::::::
 class OrgData(models.Model):
     user = models.ForeignKey(
         User, on_delete=models.CASCADE)
@@ -447,7 +453,7 @@ class OrgData(models.Model):
     def __str__(self):
         return self.title
 
-
+# :::::::::: ORGS MEDIA :::::::::::::::::
 class OrgMedia(models.Model):
     user = models.ForeignKey(
         User, on_delete=models.CASCADE)
@@ -471,24 +477,8 @@ class OrgMedia(models.Model):
         return self.title
 
 
+# :::::::::: ORGS RESEARCH :::::::::::::::::
 class OrgResearch(models.Model):
-
-    domain_CHOICES = (
-        ('Media', _('إعلام')),
-        ('Education', _('تعليم')),
-        ('Protection', _('حماية')),
-        ('Livelihoods and food security', _('سبل العيش واﻷمن الغذائي')),
-        ('Project of clean ,water, sanitation ', _(
-            'مشاريع النظافة والمياه والصرف الصحي')),
-        ('Development', _('تنمية')),
-        ('Law, suport, policy', _('قانون و مناصرة و سیاسة')),
-        ('Donors and support volunteering', _('مانحین و دعم العمل التطوعي')),
-        ('Religious org', _('منظمات دینیة')),
-        ('Prof association and assembles', _('تجمعات و اتحادات مھنیة')),
-        ('Health', _('صحة')),
-        ('Studies and research', _('دراسات وأبحاث')),
-        ('Other', _('أخرى')),
-    )
 
     user = models.ForeignKey(
         User, on_delete=models.CASCADE)
@@ -501,7 +491,7 @@ class OrgResearch(models.Model):
     title = models.CharField(max_length=255, null=False,
                              verbose_name=_('عنوان البحث'))
     domaine = models.CharField(max_length=150, null=False, blank=False,
-                               choices=domain_CHOICES, verbose_name=_('مجال البحث'))
+                               choices=MyChoices.domain_CHOICES, verbose_name=_('مجال البحث'))
     media = models.FileField(upload_to="rapport_files",
                              verbose_name=_('ملف البحث'))
     url = models.URLField(blank=True, max_length=255,
@@ -515,3 +505,16 @@ class OrgResearch(models.Model):
 
     def __str__(self):
         return self.title
+
+
+# ::::::::::::::::: NEWS LETTER ::::::::::::::::::
+class NewsLetter(models.Model):
+    name = models.CharField(max_length=255, null=False, verbose_name=_('الاسم و الكنية'))
+    work = models.CharField(max_length=255, null=False, verbose_name=_('العمل'))
+    org_name = models.CharField(max_length=255, null=True, blank=True, verbose_name=_('اسم المنظمة'))
+    email = models.EmailField(max_length=255, null=False, verbose_name=_('البريد الاكتروني'))
+
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.name

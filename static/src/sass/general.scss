@@ -185,6 +185,14 @@ body {
   background-color: rgba($color-1, 0.1);
   position: relative;
 
+  .messages-container {
+    &.position-home {
+      position: absolute;
+      top: 0;
+      z-index: 100;
+    }
+  }
+
 
   .main-container {
     padding-left: 0;
