@@ -427,12 +427,12 @@ def home(request):
         if formNews.is_valid():
             formNews.save()
             # formNews = NewsLetterForm()
+            messages.success(request, _(
+                'لقد تم طلب الاشتراك بآخر اﻷخبار بنجاح'))
             return JsonResponse({
                 'msg': 'Success',
             }, status=200)
 
-            # messages.success(request, _(
-            #     'لقد تم طلب الاشتراك بآخر اﻷخبار بنجاح'))
     else:
         formNews = NewsLetterForm()
 

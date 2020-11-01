@@ -11787,6 +11787,9 @@ body {
     position: absolute;
     top: 0;
     z-index: 100; }
+  body .messagesModale {
+    display: block !important;
+    opacity: 1 !important; }
   body .main-container {
     padding-left: 0;
     padding-right: 0; }

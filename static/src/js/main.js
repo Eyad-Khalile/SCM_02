@@ -7,9 +7,15 @@ $('#navbarSupportedContent').find('.nav-link').css('height', $('.navbar').outerH
 // $('#sidebar-wrapper').css('height', $('#sidebar-wrapper').parent().parent('div.col-2').outerHeight() + 'px');
 // $('#sidebar-wrapper').css('height', $('div.min-vh-100').outerHeight() + 'px');
 
-$(".alert").delay(6000).slideUp(1000, function () {
+$(".alert").delay(4000).slideUp(1000, function () {
     $(this).alert('close');
+    $(this).removeClass('messagesModale');
 });
+
+// setTimeout(function () {
+//     $('#messagesModale').modal().hide();
+// }, 3000);
+
 
 // NAVBAR ANIMATIONS
 if ($('nav').length > 0) { // check if element exists

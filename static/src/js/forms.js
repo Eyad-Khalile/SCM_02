@@ -228,7 +228,10 @@ form.on('submit', function submitForm(e) {
             form.find("input").each(function(i, v) {
                 $(this).val("");
             });
-            alert('You have been Successfully subscribed');
+            // $('#messagesModale').modal('show');
+            // alert('You have been Successfully subscribed');
+            window.location.reload();
+            
         }
     
     });

@@ -26979,8 +26979,10 @@ form.on('submit', function submitForm(e) {
       // $(".form-news-latter").reset();
       form.find("input").each(function (i, v) {
         $(this).val("");
-      });
-      alert('You have been Successfully subscribed');
+      }); // $('#messagesModale').modal('show');
+      // alert('You have been Successfully subscribed');
+
+      window.location.reload();
     }
   });
 });
@@ -27039,9 +27041,13 @@ $('#navbarSupportedContent').find('.nav-link').css('height', $('.navbar').outerH
 // $('#sidebar-wrapper').css('height', $('#sidebar-wrapper').parent().parent('div.col-2').outerHeight() + 'px');
 // $('#sidebar-wrapper').css('height', $('div.min-vh-100').outerHeight() + 'px');
 
-$(".alert").delay(6000).slideUp(1000, function () {
+$(".alert").delay(4000).slideUp(1000, function () {
   $(this).alert('close');
-}); // NAVBAR ANIMATIONS
+  $(this).removeClass('messagesModale');
+}); // setTimeout(function () {
+//     $('#messagesModale').modal().hide();
+// }, 3000);
+// NAVBAR ANIMATIONS
 
 if ($('nav').length > 0) {
   // check if element exists
