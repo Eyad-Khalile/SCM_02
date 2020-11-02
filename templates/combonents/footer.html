@@ -1,36 +1,37 @@
-{% load static i18n %}
+{% load static i18n crispy_forms_tags %}
 {% get_current_language as LANGUAGE_CODE %}
 
 <!-- Footer -->
 
 <!-- Footer Links -->
-<div class="container text-md-right">
+<div class="container {% if LANGUAGE_CODE == 'ar'%} text-md-right {% endif %}">
 
-    
+
     <!-- Grid row -->
     <div class="row">
         <!-- Grid column -->
         <div class="col-md-6 col-lg-3 mr-auto my-md-4 my-0 mt-4 mb-1">
             <!-- Content -->
 
-            <a href="https://scm.bz/" target="_blank" class="logo mb-5 d-block" title="{% trans 'المركز السوري للإعلام و حرية التعبير' %}">
+            <a href="https://scm.bz/" target="_blank" class="logo mb-5 d-block"
+                title="{% trans 'المركز السوري للإعلام و حرية التعبير' %}">
                 <img src="{% static 'media/scroll-logo.png' %}" width="90" alt="Logo" loading="lazy" />
             </a>
             <h5 class="font-weight-bold text-uppercase mb-4">
                 <a href="{% url 'home' %}" class="text-white"> {% trans "بوابة المجتمع المدني" %} </a>
             </h5>
-            
+
 
             <h5 class="font-weight-bold text-uppercase">
                 <a href="{% url 'site_politic' %}" class="text-white">
-                {% trans "سياسة الخصوصية" %}
-            </a>
+                    {% trans "سياسة الخصوصية" %}
+                </a>
             </h5>
             <h5 class="font-weight-bold text-uppercase mt-4 pt-4 d-none " id="f-5-top">
                 <a href="" id="scroll_top" class="btn-scroll-top" title="Top"><i class="fas fa-angle-double-up"></i></a>
             </h5>
-            
-            
+
+
         </div>
         <!-- Grid column -->
 
@@ -60,20 +61,20 @@
                     </li>
                     <li>
                         <p>
-                            <i class="fa fa-phone" aria-hidden="true"></i> + 01 234 567
-                            88
+                            <i class="fa fa-phone" aria-hidden="true"></i> <span dir="ltr">+ 01 234 567
+                                88</span>
                         </p>
                     </li>
                     <li>
                         <p>
-                            <i class="fa fa-print" aria-hidden="true"></i> + 01 234 567
-                            89
+                            <i class="fa fa-print" aria-hidden="true"></i> <span dir="ltr">+ 01 234 567
+                                89</span>
                         </p>
                     </li>
                 </ul>
             </div>
 
-            
+
         </div>
         <!-- Grid column -->
 
@@ -86,18 +87,18 @@
 
             <div class="social-icon">
                 <!-- Facebook -->
-            <a  role="button" class="btn btn-floating btn-fb">
-                <i class="fab fa-facebook-f" aria-hidden="true"></i>
-            </a>
-            <!-- Twitter -->
-            <a  role="button" class="btn btn-floating btn-tw">
-                <i class="fab fa-twitter" aria-hidden="true"></i>
-            </a>
+                <a role="button" class="btn btn-floating btn-fb">
+                    <i class="fab fa-facebook-f" aria-hidden="true"></i>
+                </a>
+                <!-- Twitter -->
+                <a role="button" class="btn btn-floating btn-tw">
+                    <i class="fab fa-twitter" aria-hidden="true"></i>
+                </a>
 
-            <!-- Dribbble -->
-            <a  role="button" class="btn btn-floating btn-dribbble">
-                <i class="fab fa-dribbble" aria-hidden="true"></i>
-            </a>
+                <!-- Dribbble -->
+                <a role="button" class="btn btn-floating btn-dribbble">
+                    <i class="fab fa-dribbble" aria-hidden="true"></i>
+                </a>
             </div>
             <!-- Contact details -->
 
@@ -118,27 +119,7 @@
                 اشترك معنا
             </a> -->
             <div class="" id="collapseForm">
-                <form action="" method="POST" class="form-news-latter">
-                    <div class="form-group">
-                        <input type="text" class="form-control" placeholder="الاسم و الكنية" required />
-                    </div>
-                    <div class="form-group">
-                        <input type="text" class="form-control" required placeholder="العمل" />
-                    </div>
-                    <div class="form-group">
-                        <input type="text" class="form-control" placeholder="اسم المنظمة" />
-                    </div>
-                    <div class="form-group">
-                        <!-- <label for="email">عنوان البريد الألكتروني</label> -->
-                        <input type="email" class="form-control" name="email" id="email" placeholder="البريد الالكتروني"
-                            required />
-                    </div>
-                    <div class="form-group">
-                        <!-- <input type="button" value="اشترك" class="btn btn-success btn-block" /> -->
-                        <a href="" type="submit" class="btn btn-block"><i class="fa fa-paper-plane" aria-hidden="true"></i>
-</a>
-                    </div>
-                </form>
+                <a href="{% url 'home' %}#newsletter" class="btn btn-block">{% trans 'إملأ الفورم التالي' %}</a>
             </div>
 
             <br />

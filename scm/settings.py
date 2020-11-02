@@ -10,8 +10,11 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
+from django.conf import global_settings
+import django.conf.locale
 from django.conf.locale import LANG_INFO
 import os
+from django.utils.translation import gettext_lazy as _
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -25,6 +28,7 @@ SECRET_KEY = 'l=2j+l)(khert5i(rrgqqst66gr5y&8t3byb&zj+16)(8bg^cd'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+# DEBUG = int(os.environ.get('DEBUG', default=1))
 
 ALLOWED_HOSTS = ['*']
 
@@ -87,6 +91,14 @@ DATABASES = {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.mysql',
+    #     'NAME': 'djangodatabase',
+    #     'USER': 'dbadmin',
+    #     'PASSWORD': '12345',
+    #     'HOST': 'localhost',
+    #     'PORT': '3306',
+    # }
 }
 
 
@@ -112,13 +124,13 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
 
-if 'ku' not in LANG_INFO:
-    LANG_INFO['ku'] = {
-        'bidi': False,
-        'code': 'ku',
-        'name': 'Kurdish',
-        'name_local': 'Kurdi',
-    }
+# if 'ku' not in LANG_INFO:
+#     LANG_INFO['ku'] = {
+#         'bidi': False,
+#         'code': 'ku',
+#         'name': 'Kurdish',
+#         'name_local': 'Kurdi',
+#     }
 
 
 # LANGUAGE_CODE = 'en-us'
@@ -139,10 +151,22 @@ LOCALE_PATHS = [
 
 
 LANGUAGES = [
-    ('ar', 'عربي'),
-    ('en', 'English'),
-    # ('ku', 'Kurdish'),
+    ('ar', _('عربي')),
+    ('en', _('English')),
+    ('km', _('Kurdish')),
 ]
+
+# EXTRA_LANG_INFO = {
+#     'ku': {
+#         'bidi': False,
+#         'code': 'ku',
+#         'name': 'Kurdish',
+#         'name_local': 'Kurdî‎',
+#     },
+# }
+# LANG_INFO = dict(django.conf.locale.LANG_INFO, **EXTRA_LANG_INFO)
+# django.conf.locale.LANG_INFO = LANG_INFO
+# global_settings.LANGUAGES = global_settings.LANGUAGES + [("ku", 'Kurdi')]
 
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'

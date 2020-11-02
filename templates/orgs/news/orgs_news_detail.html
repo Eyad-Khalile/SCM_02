@@ -3,6 +3,8 @@
 {% block title %} {% trans 'تفاصيل الخبر' %} {% endblock %}
 
 {% block content %}
+
+
 <div class="row justify-content-center mt-4 pt-4">
   <h1> {% trans 'تفاصيل الخبر' %} </h1>
 
@@ -12,10 +14,10 @@
       <img src="{{ new.image.url }}" name="{{ new.title }}" title="{{ new.title }}" alt="{{ new.title }}"></a>
 
     {% if request.user.is_authenticated and request.user.is_superuser %}
-    <h3 class="mt-4"> {% trans "اسم اللذي أضاف الخبر" %} : {{ new.user }}</h3>
+    <h3 class="mt-4"> {% trans "اسم اللذي أضاف الخبر" %} : {{ new.user }}  </h3>
     {% endif %}
 
-    <h3 class="mt-4"> {% trans "اسم المنظمة" %} : {{ new.org_name }}</h3>
+    <h3 class="mt-4"> {% trans "اسم المنظمة" %} : <a href="{% url 'particip_detail' new.org_name.id %}" class="nav-link">{{ new.org_name }}</a> </h3>
     <span class="text-muted">{% trans "تاريخ إضافة الخبر" %} : {{ new.date_published }} </span>
 
     <p class="mt-3"> {% trans "عنوان الخبر" %} : {{ new.title }}</p>

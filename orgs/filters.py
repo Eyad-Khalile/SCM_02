@@ -72,6 +72,7 @@ class OrgsRapportFilter(django_filters.FilterSet):
         fields = [
             'org_name',
             'title',
+            'domain',
             'start_date_pub',
             'end_date_pub',
         ]

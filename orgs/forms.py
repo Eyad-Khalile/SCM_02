@@ -22,6 +22,18 @@ class LoginForm(forms.Form):
     password = forms.CharField(widget=forms.PasswordInput)
 
 
+# CITYES
+class CityForm(forms.ModelForm):
+
+    class Meta:
+        model = City
+        fields = [
+            'position_work',
+            'city_work',
+        ]
+
+
+# ORG PROFILE
 class OrgProfileForm(forms.ModelForm):
     name = forms.CharField(max_length=255, min_length=3, label=_('اسم المنظمة'),
                            help_text=_(
@@ -110,6 +122,44 @@ class OrgProfileForm(forms.ModelForm):
             'coalition_name',
         ]
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['city_work'].queryset = City.objects.none()
+
+        if 'position_work' in self.data:
+            try:
+                position_work = self.data.get('position_work')
+                self.fields['city_work'].queryset = City.objects.filter(
+                    position_work=position_work)
+            except (ValueError, TypeError):
+                pass  # invalid input from the client; ignore and fallback to empty City queryset
+        # elif 'city_work' in self.data:
+        #     self.fields['city_work'].queryset = self.instance.position_work.city_work_set.all()
+        # else:
+        #     self.fields['city_work'].queryset = City.objects.all()
+        elif self.instance.pk and self.instance.city_work:
+            print(self.instance.city_work)
+            position_work = self.instance.position_work
+            self.fields['city_work'].queryset = City.objects.filter(
+                position_work=position_work)
+        # else:
+        #     self.fields['city_work'].queryset = City.objects.all()
+
+        elif self.instance.pk and not self.instance.city_work:
+            self.fields['city_work'].queryset = City.objects.all()
+            # if 'position_work' in self.data:
+            #     print(self.data)
+        #         try:
+        #             position_work = self.data.get('position_work')
+        #             self.fields['city_work'].queryset = City.objects.filter(
+        #                 position_work=position_work)
+        #         except (ValueError, TypeError):
+        #             pass  # invalid input from the client; ignore and fallback to empty City queryset
+
+            # self.fields['city_work'].queryset = self.instance.position_work.city_work_set.order_by(
+            #     'city_work')
+            # self.fields['city_work'].queryset = self.instance.position_work.city_work_set.all()
+
 
 class OrgConfirmForm(forms.ModelForm):
     class Meta:
@@ -149,6 +199,7 @@ class RapportForm(forms.ModelForm):
         fields = [
             'org_name',
             'title',
+            'domain',
             'media',
         ]
 
@@ -223,6 +274,7 @@ class ResearchConfirmForm(forms.ModelForm):
         fields = [
             'publish',
         ]
+<<<<<<< HEAD
 #:::::::::::::::::org job::::::::::::::::::::::::::::
 class JobsForm(forms.ModelForm):
 
@@ -341,3 +393,47 @@ class DevConfirmForm(forms.ModelForm):
         fields = [
             'publish',
         ]
+=======
+
+
+# ::::::::::::::::::: NEWS LETTER :::::::::::::::::::::
+class NewsLetterForm(forms.ModelForm):
+    name = forms.CharField(max_length=255, min_length=3, label='',
+                           help_text=_(
+                               ''),
+                           widget=forms.TextInput(
+                               attrs={'placeholder': _('الاسم و الكنية')}))
+    work = forms.CharField(max_length=255, min_length=3, label='',
+                           help_text=_(
+                               ''),
+                           widget=forms.TextInput(
+                               attrs={'placeholder': _('العمل')}))
+
+    org_name = forms.CharField(max_length=255, min_length=3, label='',
+                               help_text=_(
+                                   ''),
+                               widget=forms.TextInput(
+                                   attrs={'placeholder': _('اسم المنظمة')}))
+
+    email = forms.EmailField(max_length=255, min_length=3, label='',
+                             help_text=_(
+                                 ''),
+                             widget=forms.EmailInput(
+                                 attrs={'placeholder': _('البريد الاكتروني')}))
+
+    class Meta:
+        model = NewsLetter
+        fields = [
+            'name',
+            'work',
+            'org_name',
+            'email',
+        ]
+
+    def clean_email(self, *args, **kwargs):
+        email = self.cleaned_data.get('email')
+        qs = NewsLetter.objects.filter(email__iexact=email)
+        if qs.exists():
+            raise forms.ValidationError(_('This email already exists'))
+        return email
+>>>>>>> 54fba1c521cb0a9c55b1227c8bb606d4949c26e3

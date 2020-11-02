@@ -1,4 +1,4 @@
-{% extends 'base.html' %} {% load static i18n %} {% block title %}
+{% extends 'base.html' %} {% load static i18n crispy_forms_tags%} {% block title %}
 {% trans 'بوابة المجتمع المدني' %} {% endblock %} {% block content-home %}
 
 {% get_current_language as LANGUAGE_CODE %}
@@ -49,7 +49,7 @@
     <span class="carousel-control-next-icon" aria-hidden="true"></span>
     <!-- <span class="visually-hidden">Next</span> -->
   </a>
-  <span class="sym-mouse"><i class="fas fa-angle-double-down"></i></span>  
+  <span class="sym-mouse"><i class="fas fa-angle-double-down"></i></span>
 </div>
 
 
@@ -93,12 +93,12 @@
 
 <div class="container">
   <div class="row">
-    <h1 class="text-center mt-5 pt-5">
-          {% trans 'بوابة المجتمع المدني' %}
-        </h1>
-    <div class="col-lg-6 col-xs-12">
+    <h1 class="text-center mt-5 pt-5" data-aos="fade-down">
+      {% trans 'بوابة المجتمع المدني' %}
+    </h1>
+    <div class="col-lg-6 col-xs-12" data-aos="fade-left">
       <article>
-        
+
         {% if LANGUAGE_CODE == 'ar' %}
         <p class="text-right p-color text-al-just h4 pt-5 mt-5">"بوابة المجتمع المدني" هي منصة مخصصة لمنظمات المجتمع
           المدني
@@ -159,8 +159,10 @@
 
       </article>
     </div>
-    <div class="col-lg-6 col-xs-12 d-flex {% if LANGUAGE_CODE == 'ar'%} align-items-end {% else  %} align-items-center {% endif %} justify-content-center">
-      <video width="100%"  controls>
+    <div
+      class="col-lg-6 col-xs-12 d-flex {% if LANGUAGE_CODE == 'ar'%} align-items-end {% else  %} align-items-center {% endif %} justify-content-center"
+      data-aos="fade-right">
+      <video width="100%" controls>
         <source src="{% static 'video/hiba.mp4'%}" type="video/mp4">
       </video>
     </div>
@@ -172,13 +174,13 @@
 
   <!-- ORGS SLIDER -->
   {% if orgs|length > 2 %}
-  <div class="orgs_slide mt-4 pt-4">
+  <div class="orgs_slide mt-4 pt-4" data-aos="fade-left">
     <h2 class="text-center mb-4"> {% trans "المنظمات المضافة حديثاً" %} </h2>
     <div id="carouselOrgs" class="carouselOrgs carousel slide carousel-fade" data-ride="carousel">
       <div class="carousel-inner">
 
         {% for org in orgs %}
-        
+
         {% if org.id == last_org %}
         <div class="carousel-item slide-item-1 active">
           <div class=" well" id="org_{{org.id}}">
@@ -256,19 +258,19 @@
 
   <!-- NEWS SLIDER -->
   {% if news|length > 2 %}
-  <div class="news_slide mt-4 pt-4">
+  <div class="news_slide mt-4 pt-4" data-aos="fade-right">
     <h2 class="text-center mb-4"> {% trans " أخبار المنظمات المضافة حديثاً" %} </h2>
     <div id="carouselNews" class="carouselNews carousel slide carousel-fade" data-ride="carousel">
       <div class="carousel-inner">
 
-        {% for new in news %}        
+        {% for new in news %}
         {% if new.id == last_news %}
         <div class="carousel-item slide-item-1 active">
           <div class=" well" id="news_{{new.id}}">
             <center>
               <a href="{% url 'news_detail' new.id %}">
-                <img src="{{ new.image.url }}" name="{{ new.title }}" title="{{ new.title }}" width="140"
-                  height="140" class="img-circle" /></a>
+                <img src="{{ new.image.url }}" name="{{ new.title }}" title="{{ new.title }}" width="140" height="140"
+                  class="img-circle" /></a>
               <h3 class="mt-4">{{ new.org_name }}</h3>
               <h3 class="mt-4">{{ new.title }}</h3>
               <p>{{ new.content|truncatechars:80 }}</p>
@@ -286,8 +288,8 @@
           <div class=" well" id="news_{{new.id}}">
             <center>
               <a href="{% url 'news_detail' new.id %}">
-                <img src="{{ new.image.url }}" name="{{ new.title }}" title="{{ new.title }}" width="140"
-                  height="140" class="img-circle" /></a>
+                <img src="{{ new.image.url }}" name="{{ new.title }}" title="{{ new.title }}" width="140" height="140"
+                  class="img-circle" /></a>
               <h3 class="mt-4">{{ new.org_name }}</h3>
               <h3 class="mt-4">{{ new.title }}</h3>
               <p>{{ new.content|truncatechars:80 }}</p>
@@ -305,8 +307,8 @@
           <div class=" well" id="news_{{new.id}}">
             <center>
               <a href="{% url 'news_detail' new.id %}">
-                <img src="{{ new.image.url }}" name="{{ new.title }}" title="{{ new.title }}" width="140"
-                  height="140" class="img-circle" /></a>
+                <img src="{{ new.image.url }}" name="{{ new.title }}" title="{{ new.title }}" width="140" height="140"
+                  class="img-circle" /></a>
               <h3 class="mt-4">{{ new.org_name }}</h3>
               <h3 class="mt-4">{{ new.title }}</h3>
               <p>{{ new.content|truncatechars:80 }}</p>
@@ -333,6 +335,33 @@
     </div>
   </div>
   {% endif %}
+
+
+
+  <div class="form-news-latter mt-4 p-5 rounded mb-4" id="newsletter" data-aos="fade-left">
+    <h1 class="text-center text-white border-bottom border-white pb-3"> {% trans "للاشتراك باخر الأخبار " %} </h1>
+    <form action="" method="POST" class="form-news-latter">
+      {% csrf_token %}
+      <div class="form-group">
+        {{ formNews.name|as_crispy_field }}
+      </div>
+      <div class="form-group">
+        {{ formNews.work|as_crispy_field }}
+      </div>
+      <div class="form-group">
+        {{ formNews.org_name|as_crispy_field }}
+      </div>
+      <div class="form-group">
+        {{ formNews.email|as_crispy_field }}
+      </div>
+      <div class="form-group">
+        <button type="submit" id="newsletter_btn" class="btn btn-block"><i class="fa fa-paper-plane"
+            aria-hidden="true"></i></button>
+        </a>
+      </div>
+    </form>
+
+  </div>
 
 
 

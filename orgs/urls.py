@@ -10,6 +10,16 @@ urlpatterns = [
     path('', views.home, name="home"),
     path('site_politic/', views.site_politic, name="site_politic"),
 
+    # CITYES
+    path('add_city/', views.add_city, name='add_city'),
+    path('edit_city/<str:city_id>', views.edit_city, name='edit_city'),
+    path('delete_city/<str:city_id>', views.delete_city, name='delete_city'),
+    path('city/', views.view_city, name='city'),
+
+    path('ajax/load-cities/', views.load_cities,
+         name='ajax_load_cities'),  # AJAX
+
+
     # ORGS GUIDE
     path('guide/', views.guide, name="guide"),
     path('guide_conf/', views.guide_not_pub, name="guide_conf"),

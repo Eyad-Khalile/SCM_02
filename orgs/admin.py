@@ -9,3 +9,4 @@ admin.site.site_title = _('إدارة موقع SCM ')
 
 
 admin.site.register(Profile)
+admin.site.register(NewsLetter)

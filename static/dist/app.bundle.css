@@ -11783,6 +11783,30 @@ body {
   font-family: "GretaArabic-Regular", "arabic typesetting", serif !important;
   /* About Me
 ---------------------*/ }
+  body .loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+    z-index: 100;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.5s linear; }
+    body .loader.hidden {
+      opacity: 0;
+      visibility: hidden; }
+  body .alert-success {
+    background-color: rgba(212, 237, 218, 0.6) !important; }
+  body .messages-container.position-home {
+    position: absolute;
+    top: 0;
+    z-index: 100; }
+  body .messagesModale {
+    display: block !important;
+    opacity: 1 !important; }
   body .main-container {
     padding-left: 0;
     padding-right: 0; }
@@ -12035,7 +12059,10 @@ ul.dropdown-menu {
   z-index: 2;
   position: fixed;
   width: 50px;
+  height: 550px;
+  overflow-y: hidden;
   opacity: 0.9;
+  top: 15%;
   -webkit-transition-property: all;
   -moz-transition-property: all;
   -ms-transition-property: all;
@@ -12051,6 +12078,15 @@ ul.dropdown-menu {
   -ms-transition-timing-function: ease;
   -o-transition-timing-function: ease;
   transition-timing-function: ease; }
+  #wrapper #sidebar-wrapper .btn-down {
+    position: absolute;
+    bottom: 0rem;
+    width: 100%; }
+  #wrapper #sidebar-wrapper .btn-up {
+    position: absolute;
+    top: 0rem;
+    width: 100%;
+    z-index: 5 !important; }
   #wrapper #sidebar-wrapper .sidebar-btn {
     background: rgba(255, 255, 255, 0.5);
     padding: 1em 1.3em;
@@ -12418,14 +12454,14 @@ form label[for=id_logo] {
   color: #fff !important;
   padding: 0.5em 2em !important;
   padding-right: 1em !important;
-  border-radius: 10px;
+  border-radius: 5px;
   margin-top: 30px; }
   form label[for=id_logo] .asteriskField {
     right: 50px !important; }
 
 form #div_id_logo + svg {
   top: -55px;
-  left: -114px; }
+  left: -100px; }
 
 form label.requiredField span.asteriskField {
   position: relative;
@@ -12557,6 +12593,9 @@ div.emp-profile img {
   margin-top: 8%;
   margin-bottom: -15%;
   color: #495057; }
+
+.form-news-latter {
+  background-color: #17678C; }
 
 /* Slider */
 .slick-slider {

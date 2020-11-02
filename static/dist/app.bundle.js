@@ -26773,11 +26773,12 @@ $('form#fill_form').find('#id_message').blur(function () {
 $("form.form-signin").find('label[for="id_username"]').addClass("d-none");
 $("form.form-signin").find("#id_username").attr("placeholder", "اسم المستخدم");
 $("form.form-signin").find('label[for="id_password"]').addClass("d-none");
-$("form.form-signin").find("#id_password").attr("placeholder", "كلمة المرور"); // ORG PROFILE
+$("form.form-signin").find("#id_password").attr("placeholder", "كلمة المرور"); // ORG PROFILE 
+// CITY CHOISES
 
 $("#div_id_city_work").hide();
 
-if ($("#id_position_work").val() == "SY") {
+if ($("#id_position_work").val() == "SY" || $("#id_position_work").val() == "TR" || $("#id_position_work").val() == "JO" || $("#id_position_work").val() == "LB" || $("#id_position_work").val() == "IQ") {
   $("#div_id_city_work").show();
 }
 
@@ -26789,11 +26790,57 @@ $("#id_position_work").change(function () {
       $("#div_id_city_work").show();
       break;
 
+    case "TR":
+      $("#div_id_city_work").show();
+      break;
+
+    case "JO":
+      $("#div_id_city_work").show();
+      break;
+
+    case "LB":
+      $("#div_id_city_work").show();
+      break;
+
+    case "IQ":
+      $("#div_id_city_work").show();
+      break;
+
     default:
       $("#div_id_city_work").hide();
       break;
   }
-});
+}); // CITY AJAX
+
+$("#id_position_work").change(function () {
+  const url = $("#fill_form").attr("data-cities-url"); // get the url of the `load_cities` view
+
+  const countryId = $(this).val(); // get the selected country ID from the HTML input
+
+  $.ajax({
+    // initialize an AJAX request
+    url: url,
+    // set the url of the request (= /persons/ajax/load-cities/ )
+    data: {
+      'position_work': countryId // add the country id to the GET parameters
+
+    },
+    success: function (data) {
+      // `data` is the return of the `load_cities` view function
+      $("#id_city_work").html(data); // replace the contents of the city input with the data that came from the server
+
+      /*
+       let html_data = '<option value="">---------</option>';
+      data.forEach(function (city) {
+          html_data += `<option value="${city.id}">${city.name}</option>`
+      });
+      console.log(html_data);
+      $("#id_city").html(html_data);
+       */
+    }
+  });
+}); // REGISTERED COUNTRY
+
 $("#div_id_org_registered_country").hide();
 
 if ($("#id_is_org_registered").val() == "1") {
@@ -26830,7 +26877,7 @@ $("#id_phone").attr({
 
 $("#id_name, #id_name_en_ku, #id_short_cut, #id_message, #id_name_managing_director, #id_name_ceo, #id_name_person_contact, #id_org_adress, #id_coalition_name").attr({
   minlength: "3",
-  oninput: "this.value = this.value.replace(/[^a-zA-Z0-9 ]/gi, '');"
+  oninput: "this.value = this.value.replace(/[^ا-يa-zA-Z0-9 ]/gi, '');"
 }); // MEMBERS COUNT
 
 $("#id_org_members_count, #id_org_members_womans_count").attr({
@@ -26910,11 +26957,35 @@ $("#chnage-lange").change(function () {
   if (lan_sel == "ar") {
     document.location.href = origin + removeCharacter(pathname);
   } else if (lan_sel == "en") {
-    document.location.href = origin + "/en" + pathname;
+    document.location.href = origin + "/en" + removeCharacter(pathname);
+  } else if (lan_sel == "km") {
+    document.location.href = origin + "/km" + removeCharacter(pathname);
   }
 }); // RAPPORT
 
-$('form#form_rapport').find('#id_media').attr('accept', 'application/pdf,image/*');
+$('form#form_rapport').find('#id_media').attr('accept', 'application/pdf,image/*'); // NEWSLETTER FORM AJAX
+
+var form = $(".form-news-latter");
+form.on('submit', function submitForm(e) {
+  e.preventDefault();
+  $.ajax({
+    type: 'POST',
+    // url: '{% url "home" %}',
+    // url: '',
+    data: $(".form-news-latter").serialize(),
+    dataType: 'json',
+    success: function (data) {
+      // form[0].reset();
+      // $(".form-news-latter").reset();
+      form.find("input").each(function (i, v) {
+        $(this).val("");
+      }); // $('#messagesModale').modal('show');
+      // alert('You have been Successfully subscribed');
+
+      window.location.reload();
+    }
+  });
+});
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js")))
 
 /***/ }),
@@ -26965,13 +27036,24 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function($) {$('body').css('padding-top', $('.navbar').outerHeight() + 'px');
-$('#navbarSupportedContent').find('.nav-link').css('height', $('.navbar').outerHeight() + 'px'); // $('#sidebar-wrapper').css('height', $('#sidebar-wrapper').parent().parent('div.col-2').outerHeight() + 'px');
+/* WEBPACK VAR INJECTION */(function($) {// pre loader
+$(window).on("load", function () {
+  setInterval(function () {
+    $('.loader').addClass('hidden');
+  });
+});
+$('body').css('padding-top', $('.navbar').outerHeight() + 'px');
+$('#navbarSupportedContent').find('.nav-link').css('height', $('.navbar').outerHeight() + 'px'); // AOS.init();
+// $('#sidebar-wrapper').css('height', $('#sidebar-wrapper').parent().parent('div.col-2').outerHeight() + 'px');
 // $('#sidebar-wrapper').css('height', $('div.min-vh-100').outerHeight() + 'px');
 
-$(".alert").delay(6000).slideUp(1000, function () {
+$(".alert").delay(4000).slideUp(1000, function () {
   $(this).alert('close');
-}); // NAVBAR ANIMATIONS
+  $(this).removeClass('messagesModale');
+}); // setTimeout(function () {
+//     $('#messagesModale').modal().hide();
+// }, 3000);
+// NAVBAR ANIMATIONS
 
 if ($('nav').length > 0) {
   // check if element exists
@@ -27078,6 +27160,41 @@ $("#scroll_top").click(function () {
     scrollTop: 0
   }, "slow");
   return false;
+}); // SIDE NAVBAR UP AND DOWN  
+
+$('#sidebar-wrapper').find('.btn-down').on('click', function () {
+  let m_t = $('#sidebar-wrapper').find('ul.sidebar-navbar').css('margin-top'); // Margin top
+
+  let li_height = $('#sidebar-wrapper').find('li.nav-item').css('height'); // Height of the Li
+
+  let li_count = $('ul.sidebar-navbar li').length - 9; // Number of li
+
+  let lemite = Math.abs(parseInt(li_height)) * li_count; // Lemite of animation 
+  // console.log(li_height + '-' + li_count + '-' + lemite);
+
+  if (parseInt(m_t) > -lemite) {
+    $('#sidebar-wrapper').find('ul.sidebar-navbar').animate({
+      'margin-top': '-=' + li_height
+    }, 500);
+  } else {
+    $('#sidebar-wrapper').find('ul.sidebar-navbar').animate({
+      'margin-top': '-288px'
+    }, 500);
+  }
+});
+$('#sidebar-wrapper').find('.btn-up').on('click', function () {
+  let m_t = $('#sidebar-wrapper').find('ul.sidebar-navbar').css('margin-top');
+  let li_height = $('#sidebar-wrapper').find('li.nav-item').css('height');
+
+  if (parseInt(m_t) < 0) {
+    $('#sidebar-wrapper').find('ul.sidebar-navbar').animate({
+      'margin-top': '+=' + li_height
+    }, 500);
+  } else {
+    $('#sidebar-wrapper').find('ul.sidebar-navbar').animate({
+      'margin-top': '0'
+    }, 500);
+  }
 });
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js")))
 
