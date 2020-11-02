@@ -274,7 +274,6 @@ class ResearchConfirmForm(forms.ModelForm):
         fields = [
             'publish',
         ]
-<<<<<<< HEAD
 #:::::::::::::::::org job::::::::::::::::::::::::::::
 class JobsForm(forms.ModelForm):
 
@@ -393,10 +392,6 @@ class DevConfirmForm(forms.ModelForm):
         fields = [
             'publish',
         ]
-=======
-
-
-# ::::::::::::::::::: NEWS LETTER :::::::::::::::::::::
 class NewsLetterForm(forms.ModelForm):
     name = forms.CharField(max_length=255, min_length=3, label='',
                            help_text=_(
@@ -430,10 +425,9 @@ class NewsLetterForm(forms.ModelForm):
             'email',
         ]
 
-    def clean_email(self, *args, **kwargs):
+    def clean_email(self, args, *kwargs):
         email = self.cleaned_data.get('email')
         qs = NewsLetter.objects.filter(email__iexact=email)
         if qs.exists():
             raise forms.ValidationError(_('This email already exists'))
         return email
->>>>>>> 54fba1c521cb0a9c55b1227c8bb606d4949c26e3

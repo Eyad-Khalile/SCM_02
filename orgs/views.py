@@ -411,16 +411,16 @@ def home(request):
     news = OrgNews.objects.filter(publish=True).order_by('-published_at')
 
     # the 3 last orgs
-    last_org = orgs.last().id
-    av_last_org = last_org - 1
-    av_av_last_org = av_last_org - 1
+    # last_org = orgs.last().id
+    # av_last_org = last_org - 1
+    # av_av_last_org = av_last_org - 1
 
     # print(last_org, av_last_org, av_av_last_org)
 
     # the 3 last news
-    last_news = news.last().id
-    av_last_news = last_news - 1
-    av_av_last_news = av_last_news - 1
+    # last_news = news.last().id
+    # av_last_news = last_news - 1
+    # av_av_last_news = av_last_news - 1
     # print(last_news, av_last_news, av_av_last_news)
 
     if request.is_ajax():
@@ -442,13 +442,13 @@ def home(request):
 
     context = {
         'orgs': orgs,
-        'last_org': last_org,
-        'av_last_org': av_last_org,
-        'av_av_last_org': av_av_last_org,
+        # 'last_org': last_org,
+        # 'av_last_org': av_last_org,
+        # 'av_av_last_org': av_av_last_org,
         'news': news,
-        'last_news': last_news,
-        'av_last_news': av_last_news,
-        'av_av_last_news': av_av_last_news,
+        # 'last_news': last_news,
+        # 'av_last_news': av_last_news,
+        # 'av_av_last_news': av_av_last_news,
 
         'formNews': formNews,
     }

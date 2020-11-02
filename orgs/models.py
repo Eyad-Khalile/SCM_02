@@ -505,7 +505,6 @@ class OrgResearch(models.Model):
 
     def __str__(self):
         return self.title
-<<<<<<< HEAD
 # here is the sources of civiltey gate
 #add post (job opri)
 class OrgJob(models.Model):
@@ -545,11 +544,11 @@ class OrgJob(models.Model):
     job_country= CountryField(
         max_length=255, null=False, verbose_name=_("مكان العمل"))
     job_city=models.CharField(
-        max_length=150, choices=OrgProfile.syr_city_CHOICES, null=True, blank=True, verbose_name=_("المحافظة"))
+        max_length=150, choices=MyChoices.syr_city_CHOICES, null=True, blank=True, verbose_name=_("المحافظة"))
     job_area=models.CharField(
         max_length=150, null=True, blank=True, verbose_name=_("المنطقة"))
     job_domain = models.CharField(
-        max_length=255, choices=OrgProfile.domain_CHOICES, null=False, verbose_name=_('مجال العمل'))
+        max_length=255, choices=MyChoices.domain_CHOICES, null=False, verbose_name=_('مجال العمل'))
     dead_date = models.DateTimeField(blank=True, null=True, default=None,verbose_name=_('تاريخ إغلاق الوظيفة'))
     job_aplay= models.TextField(
         max_length=5000, null=False, verbose_name=_('طريقة التقدم للوظيفة'))
@@ -596,11 +595,11 @@ class OrgFundingOpp(models.Model):
     funding_org_description= models.TextField(
         max_length=2000, null=False, verbose_name=_("لمحة عن الجهة المانحة"))
     work_domain = models.CharField(
-        max_length=255, choices=OrgProfile.domain_CHOICES, null=False, verbose_name=_('قطاع المنحة'))
+        max_length=255, choices=MyChoices.domain_CHOICES, null=False, verbose_name=_('قطاع المنحة'))
     funding_country = CountryField(
         max_length=255, null=False, verbose_name=_("دول المنحة"))
     funding_city = models.CharField(
-        max_length=150, choices=OrgProfile.syr_city_CHOICES, null=True, blank=True, verbose_name=_("المحافظة"))
+        max_length=150, choices=MyChoices.syr_city_CHOICES, null=True, blank=True, verbose_name=_("المحافظة"))
     funding_dead_date = models.DateTimeField(
         null=True, blank=True, verbose_name=_('تاريخ إغلاق المنحة'))
     funding_period=models.CharField( max_length=255,choices=period_CHOICES, null=True,blank=True,verbose_name=_('مدة المنحة'))
@@ -661,9 +660,9 @@ class OrgCapacityOpp(models.Model):
     capacity_country = CountryField(
         max_length=255, null=False, verbose_name=_("مكان الفرصة"))
     capacity_city = models.CharField(
-        max_length=150, choices=OrgProfile.syr_city_CHOICES, null=True, blank=True, verbose_name=_("المحافظة"))
+        max_length=150, choices=MyChoices.syr_city_CHOICES, null=True, blank=True, verbose_name=_("المحافظة"))
     capacity_domain = models.CharField(
-        max_length=255, choices=OrgProfile.domain_CHOICES, null=False, verbose_name=_('قطاع الفرصة'))
+        max_length=255, choices=MyChoices.domain_CHOICES, null=False, verbose_name=_('قطاع الفرصة'))
     capacity_dead_date = models.DateTimeField(
         null=True, blank=True, verbose_name=_('تاريخ إغلاق المنحة'))
     capacity_reqs= models.TextField(
@@ -719,11 +718,6 @@ class DevOrgOpp(models.Model):
     def __str__(self):
             return self.title_dev
 
-   
-=======
-
-
-# ::::::::::::::::: NEWS LETTER ::::::::::::::::::
 class NewsLetter(models.Model):
     name = models.CharField(max_length=255, null=False, verbose_name=_('الاسم و الكنية'))
     work = models.CharField(max_length=255, null=False, verbose_name=_('العمل'))
@@ -733,5 +727,4 @@ class NewsLetter(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.name
->>>>>>> 54fba1c521cb0a9c55b1227c8bb606d4949c26e3
+        return self.name  
