@@ -1,3 +1,10 @@
+// pre loader
+$(window).on("load", function () {
+    setInterval(function () {
+        $('.loader').addClass('hidden');
+    });
+});
+
 $('body').css('padding-top', $('.navbar').outerHeight() + 'px')
 
 $('#navbarSupportedContent').find('.nav-link').css('height', $('.navbar').outerHeight() + 'px');

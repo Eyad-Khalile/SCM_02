@@ -27036,7 +27036,13 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function($) {$('body').css('padding-top', $('.navbar').outerHeight() + 'px');
+/* WEBPACK VAR INJECTION */(function($) {// pre loader
+$(window).on("load", function () {
+  setInterval(function () {
+    $('.loader').addClass('hidden');
+  });
+});
+$('body').css('padding-top', $('.navbar').outerHeight() + 'px');
 $('#navbarSupportedContent').find('.nav-link').css('height', $('.navbar').outerHeight() + 'px'); // AOS.init();
 // $('#sidebar-wrapper').css('height', $('#sidebar-wrapper').parent().parent('div.col-2').outerHeight() + 'px');
 // $('#sidebar-wrapper').css('height', $('div.min-vh-100').outerHeight() + 'px');

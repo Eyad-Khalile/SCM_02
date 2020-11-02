@@ -11783,6 +11783,23 @@ body {
   font-family: "GretaArabic-Regular", "arabic typesetting", serif !important;
   /* About Me
 ---------------------*/ }
+  body .loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+    z-index: 100;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.5s linear; }
+    body .loader.hidden {
+      opacity: 0;
+      visibility: hidden; }
+  body .alert-success {
+    background-color: rgba(212, 237, 218, 0.6) !important; }
   body .messages-container.position-home {
     position: absolute;
     top: 0;

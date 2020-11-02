@@ -20,6 +20,7 @@ from django.utils.timezone import datetime
 from django.utils.translation import gettext as _
 from django.core.paginator import Paginator
 from .filters import *
+import traceback
 
 
 # ::::::::::::: SIGNE UP :::::::::::::::
@@ -423,12 +424,15 @@ def home(request):
     # print(last_news, av_last_news, av_av_last_news)
 
     if request.is_ajax():
+        # if request.method == 'POST':
         formNews = NewsLetterForm(request.POST or None)
         if formNews.is_valid():
             formNews.save()
             # formNews = NewsLetterForm()
+
             messages.success(request, _(
                 'لقد تم طلب الاشتراك بآخر اﻷخبار بنجاح'))
+
             return JsonResponse({
                 'msg': 'Success',
             }, status=200)

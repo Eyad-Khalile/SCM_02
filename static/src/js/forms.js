@@ -232,6 +232,7 @@ form.on('submit', function submitForm(e) {
             // alert('You have been Successfully subscribed');
             window.location.reload();
             
+            
         }
     
     });
