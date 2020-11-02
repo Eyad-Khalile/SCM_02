@@ -26964,28 +26964,30 @@ $("#chnage-lange").change(function () {
 }); // RAPPORT
 
 $('form#form_rapport').find('#id_media').attr('accept', 'application/pdf,image/*'); // NEWSLETTER FORM AJAX
-
-var form = $(".form-news-latter");
-form.on('submit', function submitForm(e) {
-  e.preventDefault();
-  $.ajax({
-    type: 'POST',
-    // url: '{% url "home" %}',
-    // url: '',
-    data: $(".form-news-latter").serialize(),
-    dataType: 'json',
-    success: function (data) {
-      // form[0].reset();
-      // $(".form-news-latter").reset();
-      form.find("input").each(function (i, v) {
-        $(this).val("");
-      }); // $('#messagesModale').modal('show');
-      // alert('You have been Successfully subscribed');
-
-      window.location.reload();
-    }
-  });
-});
+// var form = $(".form-news-latter")
+// form.on('submit', function submitForm(e) {
+//     form.find("input").each(function(i, v) {
+//         $(this).find('#id_name, #id_work, #id_org_name, #id_email').val("");
+//     });
+// e.preventDefault();
+// $.ajax({
+//     type: 'POST',
+//     // url: '{% url "home" %}',
+//     // url: '',
+//     data: $(".form-news-latter").serialize(),
+//     dataType: 'json',
+//     success: function (data) {
+//         // form[0].reset();
+//         // $(".form-news-latter").reset();
+//         form.find("input").each(function(i, v) {
+//             $(this).val("");
+//         });
+//         // $('#messagesModale').modal('show');
+//         // alert('You have been Successfully subscribed');
+//         window.location.reload();
+//     }
+// });
+// });
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js")))
 
 /***/ }),

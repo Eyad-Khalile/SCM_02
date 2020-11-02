@@ -433,6 +433,8 @@ class OrgRapport(models.Model):
         return self.title
 
 # :::::::::: ORGS DATA :::::::::::::::::
+
+
 class OrgData(models.Model):
     user = models.ForeignKey(
         User, on_delete=models.CASCADE)
@@ -454,6 +456,8 @@ class OrgData(models.Model):
         return self.title
 
 # :::::::::: ORGS MEDIA :::::::::::::::::
+
+
 class OrgMedia(models.Model):
     user = models.ForeignKey(
         User, on_delete=models.CASCADE)
@@ -506,7 +510,9 @@ class OrgResearch(models.Model):
     def __str__(self):
         return self.title
 # here is the sources of civiltey gate
-#add post (job opri)
+# add post (job opri)
+
+
 class OrgJob(models.Model):
     job_CHOICES = (
         ('Full time', _('دوام كامل')),
@@ -515,7 +521,7 @@ class OrgJob(models.Model):
         ('Traning', _('تدريب')),
         ('Volunteering', _('تطوع')),
         ('Fellowship', _('زمالة')),
-    
+
     )
     expereince_CHOICES = (
         ('Not necessary', _('الخبرة غير ضرورية')),
@@ -524,7 +530,7 @@ class OrgJob(models.Model):
         ('5-9 years', _('5-9 سنة')),
         ('up of 10 years', _('10 وفوق')),
         ('Othre', _('أخرى')),
-    
+
     )
 
     user = models.ForeignKey(
@@ -533,27 +539,28 @@ class OrgJob(models.Model):
         OrgProfile, on_delete=models.CASCADE, null=False, blank=True)
 
     job_title = models.CharField(max_length=255, null=False,
-                             verbose_name=_('عنوان الوظيفة'))
-    period_months=models.PositiveIntegerField(null=True,blank=True,verbose_name=_('مدة العقد بالأشهر'))
-    job_description= models.TextField(
+                                 verbose_name=_('عنوان الوظيفة'))
+    period_months = models.PositiveIntegerField(
+        null=True, blank=True, verbose_name=_('مدة العقد بالأشهر'))
+    job_description = models.TextField(
         max_length=5000, null=False, verbose_name=_('وصف الوضيفة'))
-    job_type=models.CharField(max_length=255 ,null=False,choices=job_CHOICES,
-                             verbose_name=_('نوع الوظيفة'))
-    experience=models.CharField(max_length=255 , null=False,choices=expereince_CHOICES,
-                             verbose_name=_('الخبرة'))
-    job_country= CountryField(
+    job_type = models.CharField(max_length=255, null=False, choices=job_CHOICES,
+                                verbose_name=_('نوع الوظيفة'))
+    experience = models.CharField(max_length=255, null=False, choices=expereince_CHOICES,
+                                  verbose_name=_('الخبرة'))
+    job_country = CountryField(
         max_length=255, null=False, verbose_name=_("مكان العمل"))
-    job_city=models.CharField(
+    job_city = models.CharField(
         max_length=150, choices=MyChoices.syr_city_CHOICES, null=True, blank=True, verbose_name=_("المحافظة"))
-    job_area=models.CharField(
+    job_area = models.CharField(
         max_length=150, null=True, blank=True, verbose_name=_("المنطقة"))
     job_domain = models.CharField(
         max_length=255, choices=MyChoices.domain_CHOICES, null=False, verbose_name=_('مجال العمل'))
-    dead_date = models.DateTimeField(blank=True, null=True, default=None,verbose_name=_('تاريخ إغلاق الوظيفة'))
-    job_aplay= models.TextField(
+    dead_date = models.DateTimeField(
+        blank=True, null=True, default=None, verbose_name=_('تاريخ إغلاق الوظيفة'))
+    job_aplay = models.TextField(
         max_length=5000, null=False, verbose_name=_('طريقة التقدم للوظيفة'))
     publish = models.BooleanField(default=False)
-
 
     created_at = models.DateTimeField(auto_now_add=True)
     published_at = models.DateTimeField(blank=True, null=True, default=None)
@@ -562,16 +569,18 @@ class OrgJob(models.Model):
     def __str__(self):
         return self.job_title
 # Organizations funding opportunities
+
+
 class OrgFundingOpp(models.Model):
-   
+
     period_CHOICES = (
         ('less of 6 months', _('أقل من 6 أشهر')),
         ('from 6 mths to one year', _('ستة أشهر لسنة')),
         ('from one to 2 years', _('سنة إلى سنتين')),
         ('more than 2 years', _('أكثر من سنتين')),
         ('other', _('أخرى')),
-    
-        )
+
+    )
     amount_CHOICES = (
         ('less than 5000 ', _('أقل من 5000 دولار')),
         ('from 5000 to 10000 dollar', _('بين 5000 و 10000 دولار')),
@@ -579,20 +588,19 @@ class OrgFundingOpp(models.Model):
         ('from 50000 to 100000', _('بين 50000 و100000 دولار')),
         ('more than  100000', _('بين 50000 و100000 دولار')),
         ('other', _('أخرى')),
-    
-        )
 
+    )
 
     user = models.ForeignKey(
         User, on_delete=models.CASCADE)
     org_name = models.ForeignKey(
         OrgProfile, on_delete=models.CASCADE, null=True, blank=True)
-    
+
     name_funding = models.CharField(max_length=255, null=False,
-                            verbose_name=_("الجهة المانحة"))
+                                    verbose_name=_("الجهة المانحة"))
 #    logo_funding= models.ImageField(upload_to="funding_logos",
-                             #null=False, default='org_logos/default_logo.jpg', verbose_name=_("لوغو الجهة المانحة"))
-    funding_org_description= models.TextField(
+    # null=False, default='org_logos/default_logo.jpg', verbose_name=_("لوغو الجهة المانحة"))
+    funding_org_description = models.TextField(
         max_length=2000, null=False, verbose_name=_("لمحة عن الجهة المانحة"))
     work_domain = models.CharField(
         max_length=255, choices=MyChoices.domain_CHOICES, null=False, verbose_name=_('قطاع المنحة'))
@@ -602,20 +610,21 @@ class OrgFundingOpp(models.Model):
         max_length=150, choices=MyChoices.syr_city_CHOICES, null=True, blank=True, verbose_name=_("المحافظة"))
     funding_dead_date = models.DateTimeField(
         null=True, blank=True, verbose_name=_('تاريخ إغلاق المنحة'))
-    funding_period=models.CharField( max_length=255,choices=period_CHOICES, null=True,blank=True,verbose_name=_('مدة المنحة'))
-    funding_amounte=models.CharField( max_length=255,choices=amount_CHOICES, null=True,blank=True,verbose_name=_(' حجم المنحة'))
-    funding_description= models.TextField(
+    funding_period = models.CharField(
+        max_length=255, choices=period_CHOICES, null=True, blank=True, verbose_name=_('مدة المنحة'))
+    funding_amounte = models.CharField(
+        max_length=255, choices=amount_CHOICES, null=True, blank=True, verbose_name=_(' حجم المنحة'))
+    funding_description = models.TextField(
         max_length=2000, null=False, verbose_name=_("صف المنحة"))
-    funding_conditions= models.TextField(
+    funding_conditions = models.TextField(
         max_length=2000, null=False, verbose_name=_("شروط المنحة"))
-    funding_reqs= models.TextField(
+    funding_reqs = models.TextField(
         max_length=2000, null=False, verbose_name=_("متطلبات التقديم"))
-    funding_guid= models.TextField(
+    funding_guid = models.TextField(
         max_length=2000, null=False, verbose_name=_("كيفية التقديم"))
-    
+
     funding_url = models.URLField(
         max_length=255, null=True, blank=True, verbose_name=_('الرابط الأصلي'))
-
 
     publish = models.BooleanField(default=False)
 
@@ -624,16 +633,18 @@ class OrgFundingOpp(models.Model):
     updated_at = models.DateTimeField(blank=True, null=True, default=None)
 
     def __str__(self):
-            return self.name_funding
+        return self.name_funding
 
-#capacity buildinng for opportunities
+# capacity buildinng for opportunities
+
+
 class OrgCapacityOpp(models.Model):
 
     type_CHOICES = (
         ('traning', _('تدريب')),
         ('college', _('زمالة')),
-        
-        )
+
+    )
     amount_CHOICES = (
         ('less than 5000 ', _('أقل من 5000 دولار')),
         ('from 5000 to 10000 dollar', _('بين 5000 و 10000 دولار')),
@@ -641,19 +652,19 @@ class OrgCapacityOpp(models.Model):
         ('from 50000 to 100000', _('بين 50000 و100000 دولار')),
         ('more than  100000', _('بين 50000 و100000 دولار')),
         ('other', _('أخرى')),
-    
-        )
 
+    )
 
     user = models.ForeignKey(
         User, on_delete=models.CASCADE)
     org_name = models.ForeignKey(
         OrgProfile, on_delete=models.CASCADE, null=True, blank=True)
-    
+
     name_capacity = models.CharField(max_length=255, null=False,
-                            verbose_name=_("اسم الجهة الممولة"))
-    title_capacity = models.CharField(max_length=255, null=False,verbose_name=_("عنوان الفرصة"))
-    capacity_description= models.TextField(
+                                     verbose_name=_("اسم الجهة الممولة"))
+    title_capacity = models.CharField(
+        max_length=255, null=False, verbose_name=_("عنوان الفرصة"))
+    capacity_description = models.TextField(
         max_length=2000, null=False, verbose_name=_("وصف الفرصة"))
     capacity_type = models.CharField(
         max_length=255, choices=type_CHOICES, null=False, verbose_name=_('نوع الفرصة'))
@@ -665,14 +676,13 @@ class OrgCapacityOpp(models.Model):
         max_length=255, choices=MyChoices.domain_CHOICES, null=False, verbose_name=_('قطاع الفرصة'))
     capacity_dead_date = models.DateTimeField(
         null=True, blank=True, verbose_name=_('تاريخ إغلاق المنحة'))
-    capacity_reqs= models.TextField(
+    capacity_reqs = models.TextField(
         max_length=2000, null=False, verbose_name=_("متطلبات التقديم"))
-    capacity_guid= models.TextField(
+    capacity_guid = models.TextField(
         max_length=2000, null=False, verbose_name=_("طريقة التقديم"))
-    
+
     capacity_url = models.URLField(
         max_length=255, null=True, blank=True, verbose_name=_('الرابط الأصلي'))
-
 
     publish = models.BooleanField(default=False)
 
@@ -681,8 +691,10 @@ class OrgCapacityOpp(models.Model):
     updated_at = models.DateTimeField(blank=True, null=True, default=None)
 
     def __str__(self):
-            return self.name_capacity
-#dev guid 
+        return self.name_capacity
+# dev guid
+
+
 class DevOrgOpp(models.Model):
 
     subject_CHOICES = (
@@ -691,23 +703,23 @@ class DevOrgOpp(models.Model):
         ('Advocacy and Campaigns', _('المناصرة والحملات')),
         ('Civil Society Library', _('مكتبة المجتمع المدني')),
         ('other', _('أخرى')),
-    
-        )
 
+    )
 
     user = models.ForeignKey(
         User, on_delete=models.CASCADE)
     org_name = models.ForeignKey(
         OrgProfile, on_delete=models.CASCADE, null=True, blank=True)
-    title_dev = models.CharField(max_length=255, null=False,verbose_name=_("عنوان المادة"))
+    title_dev = models.CharField(
+        max_length=255, null=False, verbose_name=_("عنوان المادة"))
     dev_date = models.DateTimeField(
         null=True, blank=True, verbose_name=_('تاريخ الإعداد/النشر/التأليف'))
     name_dev = models.CharField(max_length=255, null=False,
-                            verbose_name=_("اسم الجهة "))
-    dev_description= models.TextField(
+                                verbose_name=_("اسم الجهة "))
+    dev_description = models.TextField(
         max_length=2000, null=False, verbose_name=_("لمحة عن الجهة"))
-    #logo_funding= models.ImageField(upload_to="funding_logos",
-                             #null=False, default='org_logos/default_logo.jpg', verbose_name=_("المادة"))
+    # logo_funding= models.ImageField(upload_to="funding_logos",
+    # null=False, default='org_logos/default_logo.jpg', verbose_name=_("المادة"))
 
     publish = models.BooleanField(default=False)
 
@@ -716,15 +728,20 @@ class DevOrgOpp(models.Model):
     updated_at = models.DateTimeField(blank=True, null=True, default=None)
 
     def __str__(self):
-            return self.title_dev
+        return self.title_dev
+
 
 class NewsLetter(models.Model):
-    name = models.CharField(max_length=255, null=False, verbose_name=_('الاسم و الكنية'))
-    work = models.CharField(max_length=255, null=False, verbose_name=_('العمل'))
-    org_name = models.CharField(max_length=255, null=True, blank=True, verbose_name=_('اسم المنظمة'))
-    email = models.EmailField(max_length=255, null=False, verbose_name=_('البريد الاكتروني'))
+    name = models.CharField(max_length=255, null=False,
+                            verbose_name=_('الاسم و الكنية'))
+    work = models.CharField(max_length=255, null=False,
+                            verbose_name=_('العمل'))
+    org_name = models.CharField(
+        max_length=255, null=True, blank=True, verbose_name=_('اسم المنظمة'))
+    email = models.EmailField(
+        max_length=255, null=False, verbose_name=_('البريد الاكتروني'))
 
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.name  
+        return self.name

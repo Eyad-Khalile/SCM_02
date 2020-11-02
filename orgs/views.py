@@ -411,44 +411,45 @@ def home(request):
     news = OrgNews.objects.filter(publish=True).order_by('-published_at')
 
     # the 3 last orgs
-    # last_org = orgs.last().id
-    # av_last_org = last_org - 1
-    # av_av_last_org = av_last_org - 1
+    last_org = orgs.last().id
+    av_last_org = last_org - 1
+    av_av_last_org = av_last_org - 1
 
     # print(last_org, av_last_org, av_av_last_org)
 
     # the 3 last news
-    # last_news = news.last().id
-    # av_last_news = last_news - 1
-    # av_av_last_news = av_last_news - 1
-    # print(last_news, av_last_news, av_av_last_news)
+    last_news = news.last().id
+    av_last_news = last_news - 1
+    av_av_last_news = av_last_news - 1
+    print(last_news, av_last_news, av_av_last_news)
 
-    if request.is_ajax():
-        # if request.method == 'POST':
+    # if request.is_ajax():
+    if request.method == 'POST':
         formNews = NewsLetterForm(request.POST or None)
+        print(formNews)
         if formNews.is_valid():
             formNews.save()
-            # formNews = NewsLetterForm()
+            formNews = NewsLetterForm()
 
             messages.success(request, _(
                 'لقد تم طلب الاشتراك بآخر اﻷخبار بنجاح'))
 
-            return JsonResponse({
-                'msg': 'Success',
-            }, status=200)
+            # return JsonResponse({
+            #     'msg': 'Success',
+            # }, status=200)
 
     else:
         formNews = NewsLetterForm()
 
     context = {
         'orgs': orgs,
-        # 'last_org': last_org,
-        # 'av_last_org': av_last_org,
-        # 'av_av_last_org': av_av_last_org,
+        'last_org': last_org,
+        'av_last_org': av_last_org,
+        'av_av_last_org': av_av_last_org,
         'news': news,
-        # 'last_news': last_news,
-        # 'av_last_news': av_last_news,
-        # 'av_av_last_news': av_av_last_news,
+        'last_news': last_news,
+        'av_last_news': av_last_news,
+        'av_av_last_news': av_av_last_news,
 
         'formNews': formNews,
     }
@@ -1383,17 +1384,19 @@ def site_politic(request):
 # CONTACT-US
 # def contact(request):
 #     return render(request, 'contact/contact.html')
-# Recourses of civilty this is the befor last tab 
+# Recourses of civilty this is the befor last tab
 def resources(request):
     return render(request, 'orgs/resources/org_recources.html')
 
 ####################################################################
-#Org_jobs show all jobs with order by pub_at
+# Org_jobs show all jobs with order by pub_at
+
+
 def orgs_jobs(request):
     jobs = OrgJob.objects.filter(publish=True).order_by('-created_at')
 
     myFilter = OrgsJobsFilter(request.GET, queryset=jobs)
-    jobs= myFilter.qs
+    jobs = myFilter.qs
 
     # PAGINATEUR
     paginator = Paginator(jobs, 12)
@@ -1408,7 +1411,9 @@ def orgs_jobs(request):
         'myFilter': myFilter,
     }
     return render(request, 'orgs/resources/org_jobs.html', context)
-#add job to recourse
+# add job to recourse
+
+
 @login_required(login_url='signe_in')
 def orgs_add_job(request):
 
@@ -1435,7 +1440,9 @@ def orgs_add_job(request):
         'form': form,
     }
     return render(request, 'orgs/resources/org_add_job.html', context)
-# jobs list to confirme 
+# jobs list to confirme
+
+
 @login_required(login_url='signe_in')
 def org_jobs_not_pub(request):
     jobs = OrgJob.objects.filter(publish=False).order_by('-created_at')
@@ -1452,9 +1459,11 @@ def org_jobs_not_pub(request):
         'jobs': jobs,
     }
     return render(request, 'orgs/resources/jobs_not_pub.html    ', context)
-#job details 
+# job details
+
+
 def jobs_detail(request, job_id):
-    job= get_object_or_404(OrgJob, id=job_id)
+    job = get_object_or_404(OrgJob, id=job_id)
 
     if request.method == 'POST':
         form = NewsConfirmForm(request.POST or None, instance=job)
@@ -1474,7 +1483,9 @@ def jobs_detail(request, job_id):
         'form': form,
     }
     return render(request, 'orgs/resources/org_job_details.html', context)
-#job edit to modify job details
+# job edit to modify job details
+
+
 @login_required(login_url='signe_in')
 def jobs_edit(request, job_id):
     job = get_object_or_404(OrgJob, id=job_id)
@@ -1498,10 +1509,12 @@ def jobs_edit(request, job_id):
         'form': form,
     }
     return render(request, 'orgs/resources/org_edit_job.html', context)
-#delete job 
+# delete job
+
+
 @login_required(login_url='signe_in')
 def jobs_delete(request, job_id):
-    job= get_object_or_404(OrgJob, id=job_id)
+    job = get_object_or_404(OrgJob, id=job_id)
 
     if request.method == 'POST' and request.user.is_superuser:
         job.delete()
@@ -1515,12 +1528,15 @@ def jobs_delete(request, job_id):
     }
     return render(request, 'orgs/resources/org_job_delete.html', context)
 #############################################################################
-#funding org opp
+# funding org opp
+
+
 def orgs_funding(request):
-    fundings= OrgFundingOpp.objects.filter(publish=True).order_by('-created_at')
+    fundings = OrgFundingOpp.objects.filter(
+        publish=True).order_by('-created_at')
 
     myFilter = OrgsFundingFilter(request.GET, queryset=fundings)
-    fundings= myFilter.qs
+    fundings = myFilter.qs
 
     # PAGINATEUR
     paginator = Paginator(fundings, 12)
@@ -1535,7 +1551,9 @@ def orgs_funding(request):
         'myFilter': myFilter,
     }
     return render(request, 'orgs/funding_opport/org_funding.html', context)
-# add funding 
+# add funding
+
+
 @login_required(login_url='signe_in')
 def orgs_add_funding(request):
 
@@ -1562,10 +1580,13 @@ def orgs_add_funding(request):
         'form': form,
     }
     return render(request, 'orgs/funding_opport/org_add_funding.html', context)
-# funding list to confirme 
+# funding list to confirme
+
+
 @login_required(login_url='signe_in')
 def org_funding_not_pub(request):
-    fundings = OrgFundingOpp.objects.filter(publish=False).order_by('-created_at')
+    fundings = OrgFundingOpp.objects.filter(
+        publish=False).order_by('-created_at')
 
     # PAGINATEUR
     paginator = Paginator(fundings, 12)
@@ -1579,9 +1600,11 @@ def org_funding_not_pub(request):
         'fundings': fundings,
     }
     return render(request, 'orgs/funding_opport/fundings_not_pub.html', context)
-#funding details 
+# funding details
+
+
 def funding_detail(request, funding_id):
-    funding= get_object_or_404(OrgFundingOpp, id=funding_id)
+    funding = get_object_or_404(OrgFundingOpp, id=funding_id)
 
     if request.method == 'POST':
         form = FundingConfirmForm(request.POST or None, instance=funding)
@@ -1601,14 +1624,16 @@ def funding_detail(request, funding_id):
         'form': form,
     }
     return render(request, 'orgs/funding_opport/org_funding_details.html', context)
-#job edit to modify job details
+# job edit to modify job details
+
+
 @login_required(login_url='signe_in')
 def funding_edit(request, funding_id):
     funding = get_object_or_404(OrgFundingOpp, id=funding_id)
 
     if request.method == 'POST':
         form = FundingForm(request.POST or None,
-                        files=request.FILES, instance=funding)
+                           files=request.FILES, instance=funding)
         if form.is_valid():
             at = form.save(commit=False)
             at.updated_at = datetime.utcnow()
@@ -1625,10 +1650,12 @@ def funding_edit(request, funding_id):
         'form': form,
     }
     return render(request, 'orgs/funding_opport/org_edit_funding.html', context)
-#delete funding
+# delete funding
+
+
 @login_required(login_url='signe_in')
 def funding_delete(request, funding_id):
-    funding= get_object_or_404(OrgFundingOpp, id=funding_id)
+    funding = get_object_or_404(OrgFundingOpp, id=funding_id)
 
     if request.method == 'POST' and request.user.is_superuser:
         funding.delete()
@@ -1641,16 +1668,20 @@ def funding_delete(request, funding_id):
         'funding': funding,
     }
     return render(request, 'orgs/funding_opport/org_funding_delete.html', context)
-############ Capacity buildinng for opportunities
+
+
+# Capacity buildinng for opportunities
 def orgs_capacity(request):
-    Capacitys= OrgCapacityOpp.objects.filter(publish=True).order_by('-created_at')
+    Capacitys = OrgCapacityOpp.objects.filter(
+        publish=True).order_by('-created_at')
 
     myFilter = OrgsCapacityFilter(request.GET, queryset=Capacitys)
-    Capacitys= myFilter.qs
+    Capacitys = myFilter.qs
 
     # PAGINATEUR
     paginator = Paginator(Capacitys, 12)
     page = request.GET.get('page')
+
     try:
         Capacitys = paginator.get_page(page)
     except(EmptyPage, InvalidPage):
@@ -1661,7 +1692,9 @@ def orgs_capacity(request):
         'myFilter': myFilter,
     }
     return render(request, 'orgs/capacity/org_capacity.html', context)
-# add funding 
+# add funding
+
+
 @login_required(login_url='signe_in')
 def orgs_add_capacity(request):
 
@@ -1688,10 +1721,13 @@ def orgs_add_capacity(request):
         'form': form,
     }
     return render(request, 'orgs/capacity/org_add_capacity.html', context)
-# funding list to confirme 
+# funding list to confirme
+
+
 @login_required(login_url='signe_in')
 def org_capacity_not_pub(request):
-    Capacitys = OrgCapacityOpp.objects.filter(publish=False).order_by('-created_at')
+    Capacitys = OrgCapacityOpp.objects.filter(
+        publish=False).order_by('-created_at')
 
     # PAGINATEUR
     paginator = Paginator(Capacitys, 12)
@@ -1702,12 +1738,14 @@ def org_capacity_not_pub(request):
         Capacitys = paginator.page(paginator.num_pages)
 
     context = {
-        'Capacitys':Capacitys,
+        'Capacitys': Capacitys,
     }
     return render(request, 'orgs/capacity/capacity_not_pub.html', context)
-#capacity details 
+# capacity details
+
+
 def capacity_detail(request, capacity_id):
-    capacity= get_object_or_404(OrgCapacityOpp, id=capacity_id)
+    capacity = get_object_or_404(OrgCapacityOpp, id=capacity_id)
 
     if request.method == 'POST':
         form = CapacityConfirmForm(request.POST or None, instance=capacity)
@@ -1727,14 +1765,16 @@ def capacity_detail(request, capacity_id):
         'form': form,
     }
     return render(request, 'orgs/capacity/org_capacity_details.html', context)
-#capacity edit to modify capacity details
+# capacity edit to modify capacity details
+
+
 @login_required(login_url='signe_in')
 def capacity_edit(request, capacity_id):
     capacity = get_object_or_404(OrgCapacityOpp, id=capacity_id)
 
     if request.method == 'POST':
-        form =CapacityForm(request.POST or None,
-                        files=request.FILES, instance=capacity)
+        form = CapacityForm(request.POST or None,
+                            files=request.FILES, instance=capacity)
         if form.is_valid():
             at = form.save(commit=False)
             at.updated_at = datetime.utcnow()
@@ -1751,10 +1791,12 @@ def capacity_edit(request, capacity_id):
         'form': form,
     }
     return render(request, 'orgs/capacity/org_edit_capacity.html', context)
-#delete funding
+# delete funding
+
+
 @login_required(login_url='signe_in')
 def capacity_delete(request, capacity_id):
-    capacity= get_object_or_404(OrgCapacityOpp, id=capacity_id)
+    capacity = get_object_or_404(OrgCapacityOpp, id=capacity_id)
 
     if request.method == 'POST' and request.user.is_superuser:
         capacity.delete()
@@ -1764,15 +1806,17 @@ def capacity_delete(request, capacity_id):
         return redirect('orgs_capacity')
 
     context = {
-        'capacity':capacity,
+        'capacity': capacity,
     }
     return render(request, 'orgs/capacity/org_capacity_delete.html', context)
-##########dev orgs guide devs 
+# dev orgs guide devs
+
+
 def orgs_devs(request):
-    devs= DevOrgOpp.objects.filter(publish=True).order_by('-created_at')
+    devs = DevOrgOpp.objects.filter(publish=True).order_by('-created_at')
 
     myFilter = OrgsDevFilter(request.GET, queryset=devs)
-    devs= myFilter.qs
+    devs = myFilter.qs
 
     # PAGINATEUR
     paginator = Paginator(devs, 12)
@@ -1788,6 +1832,8 @@ def orgs_devs(request):
     }
     return render(request, 'orgs/devs/org_devs.html', context)
 # add devs
+
+
 @login_required(login_url='signe_in')
 def orgs_add_devs(request):
 
@@ -1815,9 +1861,11 @@ def orgs_add_devs(request):
     }
     return render(request, 'orgs/devs/org_add_dev.html', context)
 # devs list to confirme 0
+
+
 @login_required(login_url='signe_in')
 def org_devs_not_pub(request):
-    devs= DevOrgOpp.objects.filter(publish=False).order_by('-created_at')
+    devs = DevOrgOpp.objects.filter(publish=False).order_by('-created_at')
 
     # PAGINATEUR
     paginator = Paginator(devs, 12)
@@ -1825,15 +1873,17 @@ def org_devs_not_pub(request):
     try:
         devs = paginator.get_page(page)
     except(EmptyPage, InvalidPage):
-        devs= paginator.page(paginator.num_pages)
+        devs = paginator.page(paginator.num_pages)
 
     context = {
-        'devs':devs,
+        'devs': devs,
     }
     return render(request, 'orgs/devs/dev_not_pub.html', context)
-#devs details 
+# devs details
+
+
 def devs_detail(request, devs_id):
-    devs= get_object_or_404(DevOrgOpp, id=devs_id)
+    devs = get_object_or_404(DevOrgOpp, id=devs_id)
 
     if request.method == 'POST':
         form = DevConfirmForm(request.POST or None, instance=devs)
@@ -1853,14 +1903,16 @@ def devs_detail(request, devs_id):
         'form': form,
     }
     return render(request, 'orgs/devs/org_dev_details.html', context)
-#dev edit to modify dev details
+# dev edit to modify dev details
+
+
 @login_required(login_url='signe_in')
 def dev_edit(request, devs_id):
     devs = get_object_or_404(DevOrgOpp, id=devs_id)
 
     if request.method == 'POST':
-        form =DevForm(request.POST or None,
-                        files=request.FILES, instance=devs)
+        form = DevForm(request.POST or None,
+                       files=request.FILES, instance=devs)
         if form.is_valid():
             at = form.save(commit=False)
             at.updated_at = datetime.utcnow()
@@ -1877,10 +1929,12 @@ def dev_edit(request, devs_id):
         'form': form,
     }
     return render(request, 'orgs/devs/org_edit_dev.html', context)
-#delete devs
+# delete devs
+
+
 @login_required(login_url='signe_in')
 def dev_delete(request, devs_id):
-    devs= get_object_or_404(DevOrgOpp, id=devs_id)
+    devs = get_object_or_404(DevOrgOpp, id=devs_id)
 
     if request.method == 'POST' and request.user.is_superuser:
         devs.delete()
@@ -1890,9 +1944,6 @@ def dev_delete(request, devs_id):
         return redirect('orgs_devs')
 
     context = {
-        'devs':devs,
+        'devs': devs,
     }
     return render(request, 'orgs/devs/org_dev_delete.html', context)
-
-
-
