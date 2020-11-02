@@ -116,25 +116,25 @@
                 <!-- LG -->
                 <li class="nav-item dropdown li-resource-dropdown-menu d-none d-lg-block">
                     <a class="nav-link {% if request.resolver_match.url_name == 'resource' %} active {% endif %}"
-                        href="{% url 'resource' %}">
+                        href="{% url 'resources' %}">
                         {% trans 'موارد المجتمع المدني' %}
                     </a>
                     <ul class="dropdown-menu ul-resource-dropdown-menu {% if not request.resolver_match.url_name == 'home' %} bg-main-color {% endif %}" aria-labelledby="navbarDropdown">
                         <li>
-                            <a class="dropdown-item {% if request.resolver_match.url_name == 'resource_work' %} active {% endif %}"
-                                href="{% url 'resource_work' %}"> {% trans 'فرص العمل' %} </a>
+                            <a class="dropdown-item {% if request.resolver_match.url_name == 'orgs_jobs' %} active {% endif %}"
+                                href="{% url 'orgs_jobs' %}"> {% trans 'فرص العمل' %} </a>
                         </li>
                         <li>
                             <a class="dropdown-item {% if request.resolver_match.url_name == 'resource_finance' %} active {% endif %}"
-                                href="{% url 'resource_finance' %}"> {% trans 'فرص التمويل' %} </a>
+                                href="{% url 'orgs_funding' %}"> {% trans 'فرص التمويل' %} </a>
                         </li>
                         <li>
                             <a class="dropdown-item {% if request.resolver_match.url_name == 'resource_stectur' %} active {% endif %}"
-                                href="{% url 'resource_stectur' %}"> {% trans 'فرص بناء القدرات' %} </a>
+                                href="{% url 'orgs_capacity' %}"> {% trans 'فرص بناء القدرات' %} </a>
                         </li>
                         <li>
-                            <a class="dropdown-item {% if request.resolver_match.url_name == 'resource_upgrade' %} active {% endif %}"
-                                href="{% url 'resource_upgrade' %}"> {% trans 'دليل التطوير' %} </a>
+                            <a class="dropdown-item {% if request.resolver_match.url_name == 'orgs_devs' %} active {% endif %}"
+                                href="{% url 'orgs_devs' %}"> {% trans 'دليل التطوير' %} </a>
                         </li>
                     </ul>
                 </li>
@@ -148,7 +148,7 @@
                     <ul class="dropdown-menu bg-main-color border-0" aria-labelledby="navbarDropdown">
                         <li>
                             <a class="dropdown-item {% if request.resolver_match.url_name == 'resource' %} active {% endif %}"
-                                href="{% url 'resource' %}"> {% trans 'موارد المجتمع المدني' %} </a>
+                                href="{% url 'resources' %}"> {% trans 'موارد المجتمع المدني' %} </a>
                         </li>
 
                         <li>
@@ -162,8 +162,8 @@
                             <hr class="dropdown-divider" />
                         </li>
                         <li>
-                            <a class="dropdown-item {% if request.resolver_match.url_name == 'resource_work' %} active {% endif %}"
-                                href="{% url 'resource_work' %}"> {% trans 'فرص العمل' %} </a>
+                            <a class="dropdown-item {% if request.resolver_match.url_name == 'orgs_jobs' %} active {% endif %}"
+                                href="{% url 'orgs_jobs' %}"> {% trans 'فرص العمل' %} </a>
                         </li>
                         <li>
                             <a class="dropdown-item {% if request.resolver_match.url_name == 'resource_finance' %} active {% endif %}"
@@ -174,8 +174,8 @@
                                 href="{% url 'resource_stectur' %}"> {% trans 'فرص بناء القدرات' %} </a>
                         </li>
                         <li>
-                            <a class="dropdown-item {% if request.resolver_match.url_name == 'resource_upgrade' %} active {% endif %}"
-                                href="{% url 'resource_upgrade' %}"> {% trans 'دليل التطوير' %} </a>
+                            <a class="dropdown-item {% if request.resolver_match.url_name == 'orgs_devs' %} active {% endif %}"
+                                href="{% url 'orgs_devs' %}"> {% trans 'دليل التطوير' %} </a>
                         </li>
                     </ul>
                 </li>

@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% load static i18n %}
+{% block title %} {% trans ' تفاصيل فرصة بناء القدرات' %} {% endblock %}
+
+{% block content %}
+<div class="row justify-content-center mt-4 pt-4">
+  <h1> {% trans 'تفاصيل فرصة بناء القدرات' %} </h1>
+
+  <div class="span1 well">
+    <!-- <center>   -->
+    {% if request.user.is_authenticated and request.user.is_superuser %}
+    <h3 class="mt-4"> {% trans "اسم اللذي أضاف فرصة بناء القدرات" %} : {{ funding.user }}</h3>
+    {% endif %}
+
+    <h3 class="mt-4"> {% trans "اسم المنظمة" %} : {{ capacity.org_name }}</h3>
+    <span class="text-muted">{% trans "  تاريخ الإضافة " %} : {{ capacity.date_published }} </span>
+
+    <p class="mt-3"> {% trans "عنوان الفرصة" %} : {{ capacity.title_capacity }}</p>
+    <p> {% trans "وصف فرصة التمويل" %} : <br> {{ capacity.capacity_description }}</p>
+
+    <!-- </center> -->
+  </div>
+  <div class="row">
+
+      <div class="col">
+        {% if request.user.is_authenticated and request.user.is_superuser %}
+        
+        {% if capacity.publish == False %}
+        <form action="" class="confirm" method="post">
+          {% csrf_token %} {{form.publish}}
+          <div class="form-group">
+            <input type="submit" id="org_confirm_btn" class="btn btn-block"
+              value="{% trans 'الموافقة على نشر ' %}" />
+          </div>
+        </form>
+        {% elif capacity.publish == True %}
+        <form action="" class="deconfirm" method="post">
+          {% csrf_token %} {{form.publish}}
+          <div class="form-group">
+            <input type="submit" id="org_deconfirm_btn" class="btn btn-block" value="{% trans 'إلغاء نشر الخبر' %}" />
+          </div>
+        </form>
+        {% endif %}
+        {% endif %}
+      </div>
+      
+      
+        
+        {% if request.user == capacity.user  or request.user.is_superuser %}
+        <div class="col">
+          <a href="{% url 'capacity_edit' capacity.id %}" class="btn btn-block"> {% trans 'تعديل فرصة بناءالقدرات' %} </a>
+        </div>
+
+        <div class="col">
+          <a href="{% url 'capacity_delete' capacity.id %}" class="btn btn-block"> {% trans 'حذف ' %} </a>
+        </div>
+        
+      {% endif %}
+
+    </div>
+
+
+</div>
+{% endblock %}

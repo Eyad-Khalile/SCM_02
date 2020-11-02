@@ -1252,3 +1252,516 @@ def site_politic(request):
 # CONTACT-US
 # def contact(request):
 #     return render(request, 'contact/contact.html')
+# Recourses of civilty this is the befor last tab 
+def resources(request):
+    return render(request, 'orgs/resources/org_recources.html')
+
+####################################################################
+#Org_jobs show all jobs with order by pub_at
+def orgs_jobs(request):
+    jobs = OrgJob.objects.filter(publish=True).order_by('-created_at')
+
+    myFilter = OrgsJobsFilter(request.GET, queryset=jobs)
+    jobs= myFilter.qs
+
+    # PAGINATEUR
+    paginator = Paginator(jobs, 12)
+    page = request.GET.get('page')
+    try:
+        jobs = paginator.get_page(page)
+    except(EmptyPage, InvalidPage):
+        jobs = paginator.page(paginator.num_pages)
+
+    context = {
+        'jobs': jobs,
+        'myFilter': myFilter,
+    }
+    return render(request, 'orgs/resources/org_jobs.html', context)
+#add job to recourse
+@login_required(login_url='signe_in')
+def orgs_add_job(request):
+
+    if request.method == 'POST':
+        form = JobsForm(request.POST or None, files=request.FILES)
+        if form.is_valid():
+            user = form.save(commit=False)
+            user.user = request.user
+            org_name = form.cleaned_data.get('org_name')
+            if org_name:
+                user.org_name = org_name
+            else:
+                user.org_name = request.user
+            user.save()
+
+            messages.success(request, _(
+                'لقد تمت إضافة الخبر بنجاح و ستتم دراسته قريباً'))
+
+            return redirect('orgs_jobs')
+    else:
+        form = JobsForm()
+
+    context = {
+        'form': form,
+    }
+    return render(request, 'orgs/resources/org_add_job.html', context)
+# jobs list to confirme 
+@login_required(login_url='signe_in')
+def org_jobs_not_pub(request):
+    jobs = OrgJob.objects.filter(publish=False).order_by('-created_at')
+
+    # PAGINATEUR
+    paginator = Paginator(jobs, 12)
+    page = request.GET.get('page')
+    try:
+        jobs = paginator.get_page(page)
+    except(EmptyPage, InvalidPage):
+        news = paginator.page(paginator.num_pages)
+
+    context = {
+        'jobs': jobs,
+    }
+    return render(request, 'orgs/resources/jobs_not_pub.html    ', context)
+#job details 
+def jobs_detail(request, job_id):
+    job= get_object_or_404(OrgJob, id=job_id)
+
+    if request.method == 'POST':
+        form = NewsConfirmForm(request.POST or None, instance=job)
+        if form.is_valid():
+            at = form.save(commit=False)
+            at.published_at = datetime.utcnow()
+            at.save()
+
+            messages.success(request, _(
+                'لقد تم تغيير حالة الخبر بنجاح'))
+            return redirect('orgs_jobs')
+    else:
+        form = JobsConfirmForm(instance=job)
+
+    context = {
+        'job': job,
+        'form': form,
+    }
+    return render(request, 'orgs/resources/org_job_details.html', context)
+#job edit to modify job details
+@login_required(login_url='signe_in')
+def jobs_edit(request, job_id):
+    job = get_object_or_404(OrgJob, id=job_id)
+
+    if request.method == 'POST':
+        form = JobsForm(request.POST or None,
+                        files=request.FILES, instance=job)
+        if form.is_valid():
+            at = form.save(commit=False)
+            at.updated_at = datetime.utcnow()
+            at.save()
+
+            messages.success(request, _(
+                'لقد تم تعديل الخبر بنجاح'))
+            return redirect('orgs_jobs')
+    else:
+        form = JobsForm(instance=job)
+
+    context = {
+        'job': job,
+        'form': form,
+    }
+    return render(request, 'orgs/resources/org_edit_job.html', context)
+#delete job 
+@login_required(login_url='signe_in')
+def jobs_delete(request, job_id):
+    job= get_object_or_404(OrgJob, id=job_id)
+
+    if request.method == 'POST' and request.user.is_superuser:
+        job.delete()
+
+        messages.success(request, _(
+            'لقد تم حذف الخبر بنجاح'))
+        return redirect('orgs_jobs')
+
+    context = {
+        'job': job,
+    }
+    return render(request, 'orgs/resources/org_job_delete.html', context)
+#############################################################################
+#funding org opp
+def orgs_funding(request):
+    fundings= OrgFundingOpp.objects.filter(publish=True).order_by('-created_at')
+
+    myFilter = OrgsFundingFilter(request.GET, queryset=fundings)
+    fundings= myFilter.qs
+
+    # PAGINATEUR
+    paginator = Paginator(fundings, 12)
+    page = request.GET.get('page')
+    try:
+        fundings = paginator.get_page(page)
+    except(EmptyPage, InvalidPage):
+        fundings = paginator.page(paginator.num_pages)
+
+    context = {
+        'fundings': fundings,
+        'myFilter': myFilter,
+    }
+    return render(request, 'orgs/funding_opport/org_funding.html', context)
+# add funding 
+@login_required(login_url='signe_in')
+def orgs_add_funding(request):
+
+    if request.method == 'POST':
+        form = FundingForm(request.POST or None, files=request.FILES)
+        if form.is_valid():
+            user = form.save(commit=False)
+            user.user = request.user
+            org_name = form.cleaned_data.get('org_name')
+            if org_name:
+                user.org_name = org_name
+            else:
+                user.org_name = request.user
+            user.save()
+
+            messages.success(request, _(
+                'لقد تمت إضافة الخبر بنجاح و ستتم دراسته قريباً'))
+
+            return redirect('orgs_funding')
+    else:
+        form = FundingForm()
+
+    context = {
+        'form': form,
+    }
+    return render(request, 'orgs/funding_opport/org_add_funding.html', context)
+# funding list to confirme 
+@login_required(login_url='signe_in')
+def org_funding_not_pub(request):
+    fundings = OrgFundingOpp.objects.filter(publish=False).order_by('-created_at')
+
+    # PAGINATEUR
+    paginator = Paginator(fundings, 12)
+    page = request.GET.get('page')
+    try:
+        fundings = paginator.get_page(page)
+    except(EmptyPage, InvalidPage):
+        fundings = paginator.page(paginator.num_pages)
+
+    context = {
+        'fundings': fundings,
+    }
+    return render(request, 'orgs/funding_opport/fundings_not_pub.html', context)
+#funding details 
+def funding_detail(request, funding_id):
+    funding= get_object_or_404(OrgFundingOpp, id=funding_id)
+
+    if request.method == 'POST':
+        form = FundingConfirmForm(request.POST or None, instance=funding)
+        if form.is_valid():
+            at = form.save(commit=False)
+            at.published_at = datetime.utcnow()
+            at.save()
+
+            messages.success(request, _(
+                'لقد تم تغيير حالة المنحة  بنجاح'))
+            return redirect('orgs_funding')
+    else:
+        form = FundingConfirmForm(instance=funding)
+
+    context = {
+        'funding': funding,
+        'form': form,
+    }
+    return render(request, 'orgs/funding_opport/org_funding_details.html', context)
+#job edit to modify job details
+@login_required(login_url='signe_in')
+def funding_edit(request, funding_id):
+    funding = get_object_or_404(OrgFundingOpp, id=funding_id)
+
+    if request.method == 'POST':
+        form = FundingForm(request.POST or None,
+                        files=request.FILES, instance=funding)
+        if form.is_valid():
+            at = form.save(commit=False)
+            at.updated_at = datetime.utcnow()
+            at.save()
+
+            messages.success(request, _(
+                'لقد تم تعديل الخبر بنجاح'))
+            return redirect('orgs_funding')
+    else:
+        form = FundingForm(instance=funding)
+
+    context = {
+        'funding': funding,
+        'form': form,
+    }
+    return render(request, 'orgs/funding_opport/org_edit_funding.html', context)
+#delete funding
+@login_required(login_url='signe_in')
+def funding_delete(request, funding_id):
+    funding= get_object_or_404(OrgFundingOpp, id=funding_id)
+
+    if request.method == 'POST' and request.user.is_superuser:
+        funding.delete()
+
+        messages.success(request, _(
+            'لقد تم حذف الخبر بنجاح'))
+        return redirect('orgs_funding')
+
+    context = {
+        'funding': funding,
+    }
+    return render(request, 'orgs/funding_opport/org_funding_delete.html', context)
+############ Capacity buildinng for opportunities
+def orgs_capacity(request):
+    Capacitys= OrgCapacityOpp.objects.filter(publish=True).order_by('-created_at')
+
+    myFilter = OrgsCapacityFilter(request.GET, queryset=Capacitys)
+    Capacitys= myFilter.qs
+
+    # PAGINATEUR
+    paginator = Paginator(Capacitys, 12)
+    page = request.GET.get('page')
+    try:
+        Capacitys = paginator.get_page(page)
+    except(EmptyPage, InvalidPage):
+        Capacitys = paginator.page(paginator.num_pages)
+
+    context = {
+        'Capacitys': Capacitys,
+        'myFilter': myFilter,
+    }
+    return render(request, 'orgs/capacity/org_capacity.html', context)
+# add funding 
+@login_required(login_url='signe_in')
+def orgs_add_capacity(request):
+
+    if request.method == 'POST':
+        form = CapacityForm(request.POST or None, files=request.FILES)
+        if form.is_valid():
+            user = form.save(commit=False)
+            user.user = request.user
+            org_name = form.cleaned_data.get('org_name')
+            if org_name:
+                user.org_name = org_name
+            else:
+                user.org_name = request.user
+            user.save()
+
+            messages.success(request, _(
+                'لقد تمت إضافة الخبر بنجاح و ستتم دراسته قريباً'))
+
+            return redirect('orgs_capacity')
+    else:
+        form = CapacityForm()
+
+    context = {
+        'form': form,
+    }
+    return render(request, 'orgs/capacity/org_add_capacity.html', context)
+# funding list to confirme 
+@login_required(login_url='signe_in')
+def org_capacity_not_pub(request):
+    Capacitys = OrgCapacityOpp.objects.filter(publish=False).order_by('-created_at')
+
+    # PAGINATEUR
+    paginator = Paginator(Capacitys, 12)
+    page = request.GET.get('page')
+    try:
+        Capacitys = paginator.get_page(page)
+    except(EmptyPage, InvalidPage):
+        Capacitys = paginator.page(paginator.num_pages)
+
+    context = {
+        'Capacitys':Capacitys,
+    }
+    return render(request, 'orgs/capacity/capacity_not_pub.html', context)
+#capacity details 
+def capacity_detail(request, capacity_id):
+    capacity= get_object_or_404(OrgCapacityOpp, id=capacity_id)
+
+    if request.method == 'POST':
+        form = CapacityConfirmForm(request.POST or None, instance=capacity)
+        if form.is_valid():
+            at = form.save(commit=False)
+            at.published_at = datetime.utcnow()
+            at.save()
+
+            messages.success(request, _(
+                'لقد تم تغيير حالة المنحة  بنجاح'))
+            return redirect('orgs_capacity')
+    else:
+        form = CapacityConfirmForm(instance=capacity)
+
+    context = {
+        'capacity': capacity,
+        'form': form,
+    }
+    return render(request, 'orgs/capacity/org_capacity_details.html', context)
+#capacity edit to modify capacity details
+@login_required(login_url='signe_in')
+def capacity_edit(request, capacity_id):
+    capacity = get_object_or_404(OrgCapacityOpp, id=capacity_id)
+
+    if request.method == 'POST':
+        form =CapacityForm(request.POST or None,
+                        files=request.FILES, instance=capacity)
+        if form.is_valid():
+            at = form.save(commit=False)
+            at.updated_at = datetime.utcnow()
+            at.save()
+
+            messages.success(request, _(
+                'لقد تم تعديل الخبر بنجاح'))
+            return redirect('orgs_capacity')
+    else:
+        form = CapacityForm(instance=capacity)
+
+    context = {
+        'capacity': capacity,
+        'form': form,
+    }
+    return render(request, 'orgs/capacity/org_edit_capacity.html', context)
+#delete funding
+@login_required(login_url='signe_in')
+def capacity_delete(request, capacity_id):
+    capacity= get_object_or_404(OrgCapacityOpp, id=capacity_id)
+
+    if request.method == 'POST' and request.user.is_superuser:
+        capacity.delete()
+
+        messages.success(request, _(
+            'لقد تم حذف الخبر بنجاح'))
+        return redirect('orgs_capacity')
+
+    context = {
+        'capacity':capacity,
+    }
+    return render(request, 'orgs/capacity/org_capacity_delete.html', context)
+##########dev orgs guide devs 
+def orgs_devs(request):
+    devs= DevOrgOpp.objects.filter(publish=True).order_by('-created_at')
+
+    myFilter = OrgsDevFilter(request.GET, queryset=devs)
+    devs= myFilter.qs
+
+    # PAGINATEUR
+    paginator = Paginator(devs, 12)
+    page = request.GET.get('page')
+    try:
+        devs = paginator.get_page(page)
+    except(EmptyPage, InvalidPage):
+        devs = paginator.page(paginator.num_pages)
+
+    context = {
+        'devs': devs,
+        'myFilter': myFilter,
+    }
+    return render(request, 'orgs/devs/org_devs.html', context)
+# add devs
+@login_required(login_url='signe_in')
+def orgs_add_devs(request):
+
+    if request.method == 'POST':
+        form = DevForm(request.POST or None, files=request.FILES)
+        if form.is_valid():
+            user = form.save(commit=False)
+            user.user = request.user
+            org_name = form.cleaned_data.get('org_name')
+            if org_name:
+                user.org_name = org_name
+            else:
+                user.org_name = request.user
+            user.save()
+
+            messages.success(request, _(
+                'لقد تمت إضافة الخبر بنجاح و ستتم دراسته قريباً'))
+
+            return redirect('orgs_devs')
+    else:
+        form = DevForm()
+
+    context = {
+        'form': form,
+    }
+    return render(request, 'orgs/devs/org_add_dev.html', context)
+# devs list to confirme 0
+@login_required(login_url='signe_in')
+def org_devs_not_pub(request):
+    devs= DevOrgOpp.objects.filter(publish=False).order_by('-created_at')
+
+    # PAGINATEUR
+    paginator = Paginator(devs, 12)
+    page = request.GET.get('page')
+    try:
+        devs = paginator.get_page(page)
+    except(EmptyPage, InvalidPage):
+        devs= paginator.page(paginator.num_pages)
+
+    context = {
+        'devs':devs,
+    }
+    return render(request, 'orgs/devs/dev_not_pub.html', context)
+#devs details 
+def devs_detail(request, devs_id):
+    devs= get_object_or_404(DevOrgOpp, id=devs_id)
+
+    if request.method == 'POST':
+        form = DevConfirmForm(request.POST or None, instance=devs)
+        if form.is_valid():
+            at = form.save(commit=False)
+            at.published_at = datetime.utcnow()
+            at.save()
+
+            messages.success(request, _(
+                'لقد تم تغيير حالة المنحة  بنجاح'))
+            return redirect('orgs_devs')
+    else:
+        form = DevConfirmForm(instance=devs)
+
+    context = {
+        'devs': devs,
+        'form': form,
+    }
+    return render(request, 'orgs/devs/org_dev_details.html', context)
+#dev edit to modify dev details
+@login_required(login_url='signe_in')
+def dev_edit(request, devs_id):
+    devs = get_object_or_404(DevOrgOpp, id=devs_id)
+
+    if request.method == 'POST':
+        form =DevForm(request.POST or None,
+                        files=request.FILES, instance=devs)
+        if form.is_valid():
+            at = form.save(commit=False)
+            at.updated_at = datetime.utcnow()
+            at.save()
+
+            messages.success(request, _(
+                'لقد تم تعديل الخبر بنجاح'))
+            return redirect('orgs_devs')
+    else:
+        form = DevForm(instance=devs)
+
+    context = {
+        'devs': devs,
+        'form': form,
+    }
+    return render(request, 'orgs/devs/org_edit_dev.html', context)
+#delete devs
+@login_required(login_url='signe_in')
+def dev_delete(request, devs_id):
+    devs= get_object_or_404(DevOrgOpp, id=devs_id)
+
+    if request.method == 'POST' and request.user.is_superuser:
+        devs.delete()
+
+        messages.success(request, _(
+            'لقد تم حذف الخبر بنجاح'))
+        return redirect('orgs_devs')
+
+    context = {
+        'devs':devs,
+    }
+    return render(request, 'orgs/devs/org_dev_delete.html', context)
+
+
+

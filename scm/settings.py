@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'django_countries',
     'phonenumber_filter',
     'django_filters',
+     'django_social_share',
 
 ]
 

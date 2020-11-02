@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% load static i18n crispy_forms_tags %}
+
+{% block title %} {% trans "إضافة فرصة تمويل" %} {% endblock %}
+
+{% block content %}
+
+
+<div class="row mt-4 pt-4 mb-4">
+    <h1> {% trans "اضافة فرصة تمويل" %} </h1>
+
+
+    <form action="" method="post" class="register" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        {% if request.user.is_authenticated and request.user.is_staff %}
+        <div class="for-group">
+            {{ form.org_name|as_crispy_field }}
+        </div>
+        {% endif %}
+        <div class="for-group">
+            {{ form.name_funding|as_crispy_field }}
+        </div>
+        <div class="for-group">
+            {{ form.funding_org_description|as_crispy_field }}
+        </div>
+        <div class="for-group">
+            {{ form.work_domain|as_crispy_field }}
+        </div>
+        <div class="for-group">
+            {{ form.funding_country|as_crispy_field }}
+        </div>
+        <div class="for-group">
+            {{ form.funding_city|as_crispy_field }}
+        </div>
+        <div class="for-group">
+            {{ form.funding_dead_date|as_crispy_field }}
+        </div>
+        <div class="for-group">
+            {{ form.funding_period|as_crispy_field }}
+        </div>
+        <div class="for-group">
+            {{ form.funding_amounte|as_crispy_field }}
+        </div>
+        <div class="for-group">
+            {{ form.funding_description|as_crispy_field }}
+        </div>
+        <div class="for-group">
+            {{ form.funding_conditions|as_crispy_field }}
+        </div>
+        <div class="for-group">
+            {{ form.funding_reqs|as_crispy_field }}
+        </div>
+        <div class="for-group">
+            {{ form.funding_guid|as_crispy_field }}
+        </div>
+        <div class="for-group">
+            {{ form.funding_url|as_crispy_field }}
+        </div>
+     
+        
+       
+        <div class="form-group">
+            <input type="submit" class="btn btn-block mt-3" value='{% trans "انشر فرصة تمويل" %}'>
+        </div>
+
+    </form>
+
+
+</div>
+
+{% endblock %}

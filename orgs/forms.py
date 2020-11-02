@@ -223,3 +223,121 @@ class ResearchConfirmForm(forms.ModelForm):
         fields = [
             'publish',
         ]
+#:::::::::::::::::org job::::::::::::::::::::::::::::
+class JobsForm(forms.ModelForm):
+
+    class Meta:
+        model = OrgJob
+        fields = [
+             'org_name',
+             'job_title',
+             'job_description',
+             'period_months',
+             'job_type', 
+             'experience',
+             'job_country', 
+             'job_city',
+             'job_area', 
+             'job_domain',
+             'dead_date',
+            
+        ]
+
+
+class JobsConfirmForm(forms.ModelForm):
+
+    class Meta:
+        model = OrgJob
+        fields = [
+            'publish',
+        ]
+###################funding org opport###############
+class FundingForm(forms.ModelForm):
+
+    class Meta:
+        model = OrgFundingOpp
+        fields = [
+        'org_name',
+        'name_funding',
+          
+         'funding_org_description',
+          'work_domain', 
+          'funding_country', 
+          'funding_city', 
+          'funding_dead_date',
+          'funding_period',
+          'funding_amounte',
+         'funding_description',
+          'funding_conditions',
+         'funding_reqs', 
+         'funding_guid', 
+         'funding_url',
+        'publish',
+        'published_at',
+         'updated_at',
+ 
+            
+        ]
+
+class FundingConfirmForm(forms.ModelForm):
+
+    class Meta:
+        model = OrgFundingOpp
+        fields = [
+            'publish',
+        ]
+#######################capacity guid for orgs
+class CapacityForm(forms.ModelForm):
+
+    class Meta:
+        model = OrgCapacityOpp
+        fields = [
+         'org_name',
+         'name_capacity', 
+         'title_capacity', 
+         'capacity_description', 
+         'capacity_type', 
+         'capacity_country',
+          'capacity_city', 
+          'capacity_domain', 
+          'capacity_dead_date', 
+          'capacity_reqs', 
+          'capacity_guid', 
+          'capacity_url', 
+          'publish', 
+        
+ 
+            
+        ]
+
+class CapacityConfirmForm(forms.ModelForm):
+
+    class Meta:
+        model = OrgCapacityOpp
+        fields = [
+            'publish',
+        ]
+##########dev form 
+class DevForm(forms.ModelForm):
+
+    class Meta:
+        model = DevOrgOpp
+        fields = [
+          'org_name',   
+          'title_dev',   
+          'dev_date',   
+          'name_dev',  
+          'dev_description',
+          'publish',    
+          'published_at', 
+          'updated_at',
+           
+        ]
+
+class DevConfirmForm(forms.ModelForm):
+
+    class Meta:
+        model = DevOrgOpp
+        fields = [
+            'publish',
+        ]

@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load static i18n crispy_forms_tags %}
+
+{% block title %} {% trans "إضافة " %} {% endblock %}
+
+{% block content %}
+
+
+<div class="row mt-4 pt-4 mb-4">
+    <h1> {% trans "اضافة دليل تطوير" %} </h1>
+
+    <form action="" method="post" class="register" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        {% if request.user.is_authenticated and request.user.is_staff %}
+        <div class="for-group">
+            {{ form.org_name|as_crispy_field }}
+        </div>
+        {% endif %}
+        <div class="for-group">
+            {{ form.title_dev|as_crispy_field }}
+        </div>
+        <div class="for-group">
+            {{ form.dev_date|as_crispy_field }}
+        </div>
+        <div class="for-group">
+            {{ form.name_dev|as_crispy_field }}
+        </div>
+        <div class="for-group">
+            {{ form.dev_description|as_crispy_field }}
+        </div>
+               
+       
+        <div class="form-group">
+            <input type="submit" class="btn btn-block mt-3" value='{% trans "انشر دليل التطوير " %}'>
+        </div>
+
+    </form>
+
+
+</div>
+
+{% endblock %}

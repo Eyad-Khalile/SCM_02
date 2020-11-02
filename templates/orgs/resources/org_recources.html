@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+{% load static i18n %}
+
+{% block title %} {% trans "مصادر المجتمع المدني" %} {% endblock %}
+
+{% block content %}
+
+<div class="row mt-4 pt-4 orgs-news">
+    <div class="">
+        <article>
+            <h1 class="text-center mb-4"> {% trans "مصادر المجتمع المدني" %} </h1>
+            <!-- Text Descriptions -->
+            <p class="text-right text-al-just p-color h4">
+                "لوريم ايبسوم دولار سيت أميت ,كونسيكتيتور أدايبا يسكينج أليايت,سيت دو أيوسمود تيمبور
+
+                أنكايديديونتيوت لابوري ات دولار ماجنا أليكيوا . يوت انيم أد مينيم فينايم,كيواس نوستريد
+
+                أكسير سيتاشن يللأمكو لابورأس نيسي يت أليكيوب أكس <span id="collapseText" class="collapse">أيا كوممودو كونسيكيوات . ديواس
+
+                أيوتي أريري دولار إن ريبريهينديرأيت فوليوبتاتي فيلايت أيسسي كايلليوم دولار أيو فيجايت
+
+                نيولا باراياتيور. أيكسسيبتيور ساينت أوككايكات كيوبايداتات نون بروايدينت ,سيونت ان كيولبا
+
+                كيو أوفيسيا ديسيريونتموليت انيم أيدي ايست لابوريوم."
+
+                "سيت يتبيرسبايكياتيس يوندي أومنيس أستي ناتيس أيررور سيت فوليبتاتيم أكيسأنتييوم
+
+                دولاريمكيو لايودانتيوم,توتام ريم أبيرأم,أيكيو أبسا كيواي أب أللو أنفينتوري فيرأتاتيس ايت
+
+                كياسي أرشيتيكتو بيتاي فيتاي ديكاتا سيونت أكسبليكابو. نيمو أنيم أبسام فوليوباتاتيم كيواي
+
+                فوليوبتاس سايت أسبيرناتشر أيوت أودايت أيوت فيوجايت, سيد كيواي كونسيكيونتشر ماجناي
+
+                دولارس أيوس كيواي راتاشن فوليوبتاتيم سيكيواي نيسكايونت. نيكيو بوررو كيوايسكيوم
+
+                ايست,كيواي دولوريم ايبسيوم كيوا دولار سايت أميت, كونسيكتيتيور,أديبايسكاي فيلايت, سيد
+
+                كيواي نون نيومكيوام ايايوس موداي تيمبورا انكايديونت يوت لابوري أيت دولار ماجنام
+
+                ألايكيوام كيوايرات فوليوبتاتيم. يوت اينايم أد مينيما فينيام, كيواس نوستريوم أكسيركايتاشيم
+
+                يلامكوربوريس سيوسكايبيت لابورايوسام, نايساي يوت ألايكيوايد أكس أيا كوموداي
+
+                كونسيكيواتشر؟ كيوايس أيوتيم فيل أيوم أيوري ريبريهينديرايت كيواي ان إيا فوليوبتاتي
+
+                فيلايت ايسسي كيوم نايهايل موليستايا كونسيكيواتيو,فيلايليوم كيواي دولوريم أيوم فيوجايات كيو
+
+                فوليوبتاس نيولا باراياتيور؟"</span>
+            </p>
+            
+                <a href="#collapseText" class="nav-toggle text-decoration-none" data-toggle="collapse"> {% trans "إقراء المزيد" %} </a>
+        </article>
+
+
+        <hr>
+        <!-- Les Cercles -->
+        <div class="row org-work mb-2">
+            <h2 class="text-center mb-4">المصادر</h2>
+            
+            <div class="col-lg-1 col-md-4 col-sm-6"></div>
+
+            <div class="col-lg-2 col-md-4 col-sm-6">
+              <a href="{% url 'orgs_jobs' %}" class="btn btn-button d-flex justify-content-center align-items-center h-100 w-100 border-0" ></a>فرص العمل</a>
+            </div>
+            <div class="col-lg-2 col-md-4 col-sm-6">
+              <a href="{% url 'orgs_rapport' %}" class="btn btn-button d-flex justify-content-center align-items-center h-100 w-100 border-0">تقارير ودراسات</a>
+            </div>
+            <div class="col-lg-2 col-md-4 col-sm-6">
+              <a href="{% url 'data' %}" class="btn btn-button d-flex justify-content-center align-items-center h-100 w-100 border-0">بيانات</a>
+            </div>
+            <div class="col-lg-2 col-md-4 col-sm-6">
+              <a href="{% url 'media' %}" class="btn btn-button d-flex justify-content-center align-items-center h-100 w-100 border-0">سمعي وبصري</a>
+            </div>
+            <div class="col-lg-2 col-md-4 col-sm-6">
+              <a href="{% url 'research' %}" class="btn btn-button d-flex justify-content-center align-items-center h-100 w-100 border-0">أبحاث خارجية</a>
+            </div>
+
+            <div class="col-lg-1 col-md-4 col-sm-6"></div>
+        </div>
+      
+        
+
+
+
+    </div>
+</div>
+
+
+{% endblock %}

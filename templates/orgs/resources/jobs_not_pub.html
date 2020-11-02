@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% load static i18n crispy_forms_tags %}
+
+{% block title %} {% trans "فرص الغمل قيد الدراسة" %} {% endblock %}
+
+{% block content %}
+
+
+<div class="row mt-4 pt-4">
+    <h1> {% trans "فرص الغمل قيد الدراسة" %} </h1>
+
+    <div class="row justify-content-center pt-4">
+        {% if jobs %}
+        {% for job in jobs %}
+
+        <div class="span3 well">
+            <center>
+                <h3 class="mt-4">{{ job.org_name }}</h3>
+                <p>{{ job.job_title }}</p>
+                
+                <p>
+                    <a href="{% url 'jobs_detail' job.id %}" class="btn btn-block">
+                        {% trans 'لقراءة المزيد' %} </a>
+                </p>
+
+            </center>
+        </div>
+
+        {% endfor %}
+
+
+        <div class="pagination row border-top mt-4 pt-4" dir="ltr">
+            <center>
+                {% if jobs.paginator.num_pages > 1 %}
+                {% if jobs.has_previous %}
+
+                <a href="?page=1" class="btn">
+                    <i class="fa fa-angle-double-left"></i>
+                </a>
+                <a href="?page={{ news.previous_page_number }}" class="btn">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+
+                {% endif %}
+
+                {% for num in news.paginator.page_range %}
+                {% if news.number == num %}
+                <a href="?page={{ num }}" class="btn btn-current">{{ num }}</a>
+                {% elif num > news.number|add:'-3' and num < news.number|add:'3' %}
+                <a href="?page={{ num }}" class="btn">{{ num }}</a>
+                {% endif %}
+                {% endfor %}
+
+
+                {% if orgs.has_next %}
+                <a href="?page={{ news.next_page_number }}" class="btn"><i class="fa fa-angle-right"></i></a>
+                <a href="?page={{ news.paginator.num_pages }}" class="btn"><i class="fa fa-angle-double-right"></i></a>
+
+                {% endif %}
+                {% endif %}
+
+            </center>
+        </div>
+
+
+        {% else %}
+        <h3> {% trans "لا يوجد حالياً فرص عمل للموافقة على النشر" %} </h3>
+        {% endif %}
+
+    </div>
+</div>
+
+{% endblock %}

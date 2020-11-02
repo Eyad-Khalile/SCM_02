@@ -1,0 +1,139 @@
+{% extends 'base.html' %}
+{% load static i18n crispy_forms_tags %}
+
+{% block title %} {% trans "فرص التمويل " %} {% endblock %}
+
+{% block content %}
+
+
+<div class="mt-4 pt-4">
+    <h1> {% trans "فرص التمويل " %} </h1>
+
+    <!-- SECTION 1 -->
+    <div class="">
+
+
+        <div class="row mt-4">
+            
+            <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
+                {% if request.user.is_authenticated %}
+                <a href="{% url 'orgs_add_funding' %}" class="btn btn-block mt-4"> {% trans "اضافة فرصة تمويل" %} </a>
+                {% endif %}
+            </div>
+            {% if fundings %}
+            <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
+                <a class="btn btn-block mt-4" data-toggle="collapse" href="#collapseFiltre" aria-expanded="false"
+                    aria-controls="collapseFiltre">{% trans 'فرز' %}</a>
+            </div>
+            {% endif %}
+            <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
+                {% if request.user.is_authenticated and request.user.is_superuser %}
+                <a href="{% url 'org_funding_not_pub' %}" class="btn btn-block mt-4">
+                    {% trans 'فرص التمويل قيد الدراسة' %} </a>
+                {% endif %}
+            </div>
+
+            <!-- FILTERS -->
+            <div class="pt-3 px-4 pb-2 mt-4 collapse" id="collapseFiltre">
+
+                <form action="" method="get"
+                    class="row register justify-content-center align-items-center flex-wrap form my-2 my-lg-0">
+                    <div class="col-sm-12 col-md-4  mt-3">
+                        {{ myFilter.form.name_funding|as_crispy_field }}
+                    </div>
+                    <div class="col-sm-12 col-md-4 mt-3">
+                        {{ myFilter.form.job_country|as_crispy_field }}
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-6 col-sm-6 col-md-4 mt-3">
+                            {{ myFilter.form.start_date_pub|as_crispy_field }}
+                        </div>
+                        <div class="col-xs-6 col-sm-6 col-md-4 mt-3">
+                            {{ myFilter.form.end_date_pub|as_crispy_field }}
+                        </div>
+                    </div>
+
+                    <div class="form-group mt-3">
+                        <button class="btn btn-block mt-3">{% trans 'بحث' %}</button>
+                    </div>
+                </form>
+            </div>
+
+
+
+            <div class="row row-m-0 mt-4 pt-4">
+
+                <div class="row row-m-0 justify-content-center pt-4 pb-4 mb-4">
+                    {% if fundings %}
+                    {% for funding in fundings %}
+
+                    <div class="span3 well">
+                        <center>
+                            <a href="{% url 'news_detail' funding.id %}">
+                                <img src="{{ funding.logo_funding.url }}" name="{{ funding.name_funding }}" title="{{ funding.name_funding }}"
+                                    alt="{{ funding.name_funding }}" width="140" height="140" class="img-circle"></a>
+                            <h3 class="mt-4">{{ funding.name_funding }}</h3>
+                            <p>{{ funding.funding_org_description }}</p>
+                            <p>{{ funding.funding_description|truncatechars:80 }}</p>
+                            <p>
+                                <a href="{% url 'funding_detail' funding.id %}" class="btn btn-block">
+                                    {% trans 'لقراءة المزيد' %} </a>
+                            </p>
+
+                        </center>
+                    </div>
+
+                    {% endfor %}
+
+
+                    <div class="pagination row border-top mt-4 pt-4" dir="ltr">
+                        <center>
+                            {% if fundings.paginator.num_pages > 1 %}
+                            {% if fundings.has_previous %}
+
+                            <a href="?page=1" class="btn">
+                                <i class="fa fa-angle-double-left"></i>
+                            </a>
+                            <a href="?page={{ fundings.previous_page_number }}" class="btn">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            {% endif %}
+
+                            {% for num in fundings.paginator.page_range %}
+                            {% if fundings.number == num %}
+                            <a href="?page={{ num }}" class="btn btn-current">{{ num }}</a>
+                            {% elif num > fundings.number|add:'-3' and num < fundings.number|add:'3' %}
+                            <a href="?page={{ num }}" class="btn">{{ num }}</a>
+                            {% endif %}
+                            {% endfor %}
+
+
+                            {% if orgs.has_next %}
+                            <a href="?page={{ fundings.next_page_number }}" class="btn"><i
+                                    class="fa fa-angle-right"></i></a>
+                            <a href="?page={{ fundings.paginator.num_pages }}" class="btn"><i
+                                    class="fa fa-angle-double-right"></i></a>
+
+                            {% endif %}
+                            {% endif %}
+
+                        </center>
+                    </div>
+
+
+                    {% else %}
+                    <h3> {% trans " لا يوجد حالياً فرص التمويل " %} </h3>
+                    {% endif %}
+                    
+
+                </div>
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+    {% endblock %}

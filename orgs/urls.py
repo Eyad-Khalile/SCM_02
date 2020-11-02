@@ -64,8 +64,47 @@ urlpatterns = [
     path('research_not_pub/', views.research_not_pub, name="research_not_pub"),
 
     # RECOURCE
-    path('resource/', views.resource, name="resource"),
-    path('resource_work/', views.resource_work, name="resource_work"),
+    path('resources/', views.resources, name="resources"),
+    #jobs
+    path('orgs_jobs/', views.orgs_jobs, name="orgs_jobs"),
+    path('orgs_add_job/',views.orgs_add_job, name="orgs_add_job"),
+    path('org_jobs_not_pub/', views.org_jobs_not_pub, name="org_jobs_not_pub"),
+    path('jobs_detail/<str:job_id>', views.jobs_detail, name="jobs_detail"),
+    path('jobs_edit/<str:job_id>', views.jobs_edit, name="jobs_edit"),
+    path('jobs_delete/<str:job_id>', views.jobs_delete, name="jobs_delete"),
+    #funding orgs opportutiite
+    path('orgs_funding/', views.orgs_funding, name="orgs_funding"),
+    path('orgs_add_funding/',views.orgs_add_funding, name="orgs_add_funding"),
+    path('org_funding_not_pub/',views.org_funding_not_pub, name="org_funding_not_pub"),
+    path('funding_detail/<str:funding_id>', views.funding_detail, name="funding_detail"),
+    path('funding_edit/<str:funding_id>', views.funding_edit, name="funding_edit"),
+    path('funding_delete/<str:funding_id>', views.funding_delete, name="funding_delete"),
+    #Capacity orgs opportutiite
+    path('orgs_capacity/', views.orgs_capacity, name="orgs_capacity"),
+    path('orgs_add_capacity/', views.orgs_add_capacity, name="orgs_add_capacity"),
+    path('org_capacity_not_pub/', views.org_capacity_not_pub, name="org_capacity_not_pub"),
+    path('capacity_detail/<str:capacity_id>', views.capacity_detail, name="capacity_detail"),
+    path('capacity_edit/<str:capacity_id>', views.capacity_edit, name="capacity_edit"),
+    path('capacity_delete/<str:capacity_id>', views.capacity_delete, name="capacity_delete"),
+    #devs guide 
+    path('orgs_devs/', views.orgs_devs, name="orgs_devs"),
+    path('orgs_add_devs/', views.orgs_add_devs, name="orgs_add_devs"),
+    path('org_devs_not_pub/', views.org_devs_not_pub, name="org_devs_not_pub"),
+    path('devs_detail/<str:devs_id>', views.devs_detail, name="devs_detail"),
+    path('dev_edit/<str:devs_id>', views.dev_edit, name="dev_edit"),
+    path('dev_delete/<str:devs_id>', views.dev_delete, name="dev_delete"),
+
+
+
+
+    
+    
+
+
+
+
+
+
     path('resource_work_detail/<str:work_id>',
          views.resource_work_detail, name="resource_work_detail"),
     path('resource_finance/', views.resource_finance, name="resource_finance"),
