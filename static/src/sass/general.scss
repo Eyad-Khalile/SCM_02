@@ -201,7 +201,17 @@ body {
   .alert-success {
     background-color: rgba(#d4edda, 0.6) !important;
   }
+  .alert-danger {
+    background-color: rgba(#f8d7da, 0.6) !important;
+  }
+  .alert-warning {
+    background-color: rgba(#fff3cd, 0.6) !important;
+  }
 
+  .h4 {
+    line-height: 1.5 !important;
+    font-size: 1.3rem !important;
+  }
 
   // BODY GENERAL
   // padding-top: 80px;
@@ -238,10 +248,13 @@ body {
 
   // GENERAL
   a,
+  button,
   h1,
   h2 {
     font-family: $title-font;
   }
+
+  
 
   .sym-mouse {
     // background: red;
@@ -274,6 +287,17 @@ body {
   hr {
     background-color: $color-1;
     border: 1px;
+  }
+
+  .well {
+    overflow: hidden !important;
+    img {
+      transition: all 0.5s linear;
+      
+      // &:hover {
+      //   transform: scale(1.1);
+      // }
+    }
   }
 
 

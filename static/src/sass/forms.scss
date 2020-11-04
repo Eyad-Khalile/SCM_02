@@ -103,17 +103,24 @@ div.emp-profile {
 
 // FORM NEWS LATTER 
 .form-news-latter {
+  background-color: $color-1;
   input {
     border: none;
     border-bottom: 1px solid rgb(47, 154, 204);
     box-shadow: none;
-    background-color: $color-1 !important;
+    background-color: rgba($color-1, 0.7) !important;
     border-radius: 0 !important;
     padding: 0 !important;
     color: #fff !important;
   }
   ::placeholder {
     color: rgba(255, 255, 255, 0.5);
+  }
+  button {
+    margin-top: 2rem;
+    border: 1px solid rgb(47, 154, 204);
+    box-shadow: 1px 1px 5px #fff,
+    -1px -1px 5px #fff;
   }
 }
 
@@ -235,6 +242,3 @@ div.emp-profile {
 }
 
 
-.form-news-latter {
-  background-color: $color-1;
-}

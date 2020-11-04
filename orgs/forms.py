@@ -4,6 +4,8 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
 from django.utils.translation import gettext_lazy as _
+from django.contrib import messages
+from pymsgbox import *
 
 
 # ============ User =============================
@@ -443,6 +445,9 @@ class NewsLetterForm(forms.ModelForm):
         qs = NewsLetter.objects.filter(email__iexact=email)
         if qs.exists():
             raise forms.ValidationError(_('This email already exists'))
+            # raise alert(text=_('This email already exists'),
+            #             title='', button='OK')
+
         return email
 
     # def salut(self, *args, **kwargs):

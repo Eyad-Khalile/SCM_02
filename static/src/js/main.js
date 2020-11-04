@@ -9,6 +9,14 @@ $('body').css('padding-top', $('.navbar').outerHeight() + 'px')
 
 $('#navbarSupportedContent').find('.nav-link').css('height', $('.navbar').outerHeight() + 'px');
 
+
+$('#list-collapse').addClass('d-none');
+$('a.nav-toggle').on('click', function () {
+    $('#list-collapse').toggleClass('d-none');
+});
+
+
+
 // AOS.init();
 
 // $('#sidebar-wrapper').css('height', $('#sidebar-wrapper').parent().parent('div.col-2').outerHeight() + 'px');
@@ -109,6 +117,7 @@ $('#wrapper').css('height', nav_height + 'px');
 $('#id_logo').change(function (e) {
     var fileName = e.target.files[0].name;
     $('.logo_file_name').html('The logo "' + fileName + '" has been selected.');
+    $('input#logo').val(fileName);
 });
 
 

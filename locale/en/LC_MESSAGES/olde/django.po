@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-03 13:50+0000\n"
+"POT-Creation-Date: 2020-11-03 12:33+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,6 +18,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: orgs/admin.py:7 orgs/admin.py:8
 msgid "إدارة موقع SCM "
@@ -1433,12 +1434,12 @@ msgstr ""
 msgid "English"
 msgstr ""
 
-#: scm/settings.py:157
-msgid "Kurdî"
+#: scm/settings.py:156
+msgid "Kurdish"
 msgstr ""
 
 #: scm/urls.py:42
-msgid "admin"
+msgid "admin/"
 msgstr ""
 
 #: templates/city/add_city.html:4 templates/city/add_city.html:10
@@ -1509,7 +1510,7 @@ msgstr ""
 #: templates/orgs/home.html:2 templates/orgs/home.html:81
 #: templates/orgs/home.html:97
 msgid "بوابة المجتمع المدني"
-msgstr "Kurdî"
+msgstr ""
 
 #: templates/combonents/footer.html:46
 msgid "للتواصل معنا"
