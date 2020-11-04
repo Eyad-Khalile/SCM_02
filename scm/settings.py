@@ -153,20 +153,21 @@ LOCALE_PATHS = [
 LANGUAGES = [
     ('ar', _('عربي')),
     ('en', _('English')),
-    ('km', _('Kurdish')),
+    # ('km', _('Kurdish')),
+    ('ku', _('Kurdî')),
 ]
 
-# EXTRA_LANG_INFO = {
-#     'ku': {
-#         'bidi': False,
-#         'code': 'ku',
-#         'name': 'Kurdish',
-#         'name_local': 'Kurdî‎',
-#     },
-# }
-# LANG_INFO = dict(django.conf.locale.LANG_INFO, **EXTRA_LANG_INFO)
-# django.conf.locale.LANG_INFO = LANG_INFO
-# global_settings.LANGUAGES = global_settings.LANGUAGES + [("ku", 'Kurdi')]
+EXTRA_LANG_INFO = {
+    'ku': {
+        'bidi': False,
+        'code': 'ku',
+        'name': 'Kurdish',
+        'name_local': 'Kurdî‎',
+    },
+}
+LANG_INFO = dict(django.conf.locale.LANG_INFO, **EXTRA_LANG_INFO)
+django.conf.locale.LANG_INFO = LANG_INFO
+global_settings.LANGUAGES = global_settings.LANGUAGES + [("ku", 'Kurdi')]
 
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'

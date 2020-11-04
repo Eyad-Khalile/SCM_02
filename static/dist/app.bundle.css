@@ -11800,6 +11800,13 @@ body {
       visibility: hidden; }
   body .alert-success {
     background-color: rgba(212, 237, 218, 0.6) !important; }
+  body .alert-danger {
+    background-color: rgba(248, 215, 218, 0.6) !important; }
+  body .alert-warning {
+    background-color: rgba(255, 243, 205, 0.6) !important; }
+  body .h4 {
+    line-height: 1.5 !important;
+    font-size: 1.3rem !important; }
   body .messages-container.position-home {
     position: absolute;
     top: 0;
@@ -11813,6 +11820,7 @@ body {
   body .text-al-just {
     text-align: justify !important; }
   body a,
+  body button,
   body h1,
   body .h1,
   body h2,
@@ -11833,6 +11841,10 @@ body {
   body hr {
     background-color: #17678C;
     border: 1px; }
+  body .well {
+    overflow: hidden !important; }
+    body .well img {
+      transition: all 0.5s linear; }
   body .bg-trans {
     background-color: rgba(255, 255, 255, 0) !important; }
   body select.bg-trans {
@@ -12495,17 +12507,22 @@ div.emp-profile img {
 #f-chnage-lange .form-select {
   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='white' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e"); }
 
-.form-news-latter input {
-  border: none;
-  border-bottom: 1px solid #2f9acc;
-  box-shadow: none;
-  background-color: #17678C !important;
-  border-radius: 0 !important;
-  padding: 0 !important;
-  color: #fff !important; }
-
-.form-news-latter ::placeholder {
-  color: rgba(255, 255, 255, 0.5); }
+.form-news-latter {
+  background-color: #17678C; }
+  .form-news-latter input {
+    border: none;
+    border-bottom: 1px solid #2f9acc;
+    box-shadow: none;
+    background-color: rgba(23, 103, 140, 0.7) !important;
+    border-radius: 0 !important;
+    padding: 0 !important;
+    color: #fff !important; }
+  .form-news-latter ::placeholder {
+    color: rgba(255, 255, 255, 0.5); }
+  .form-news-latter button {
+    margin-top: 2rem;
+    border: 1px solid #2f9acc;
+    box-shadow: 1px 1px 5px #fff, -1px -1px 5px #fff; }
 
 /* ========== FORM SIGNE-UP ========== */
 .register {
@@ -12593,9 +12610,6 @@ div.emp-profile img {
   margin-top: 8%;
   margin-bottom: -15%;
   color: #495057; }
-
-.form-news-latter {
-  background-color: #17678C; }
 
 /* Slider */
 .slick-slider {

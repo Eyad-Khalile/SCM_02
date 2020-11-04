@@ -88,6 +88,8 @@ $("#id_is_org_registered").change(function () {
     }
 });
 
+$('#id_dead_date, #id_dev_date').attr('type', 'date');
+
 // INPUT ACCEPT YEAR ONLY
 $(
     "input#id_start_date,  input#id_end_date, input#id_date_of_establishment"
@@ -179,32 +181,33 @@ function removeCharacter(str) {
 // }
 
 // LANGE SWICHER
-// $("#chnage-lange").change(function () {
-//     let lan_sel = $("#chnage-lange").val();
-//     switch (lan_sel) {
-//         case "ar":
-//             document.location.href = origin + removeCharacter(pathname);
-//             console.log(pathname);
-//             break;
-//         case "en":
-//             document.location.href = origin + "/en" + pathname;
-//             console.log(pathname);
-//             break;
-//     }
-
-// });
-
 $("#chnage-lange").change(function () {
     let lan_sel = $("#chnage-lange").val();
-    if (lan_sel == "ar") {
-        document.location.href = origin + removeCharacter(pathname);
-    } else if (lan_sel == "en") {
-        document.location.href = origin + "/en" + removeCharacter(pathname);
-    } else if (lan_sel == "km") {
-        document.location.href = origin + "/km" + removeCharacter(pathname);
+    switch (lan_sel) {
+        case "ar":
+            document.location.href = origin + removeCharacter(pathname);
+            console.log('ar pathname', pathname)
+            break;
+        case "en":
+            if (pathname.includes('/ku')) {
+                document.location.href = origin + "/en" + removeCharacter(pathname);
+            } else {
+                document.location.href = origin + "/en" + pathname;
+            }
+            break;
+        
+        case "ku":
+            if (pathname.includes('/en')) {
+                document.location.href = origin + "/ku" + removeCharacter(pathname);
+            } else {
+                document.location.href = origin + "/ku" + pathname;
+            }
+            break;
     }
 
 });
+
+
 
 // RAPPORT
 $('form#form_rapport').find('#id_media').attr('accept', 'application/pdf,image/*');
@@ -241,3 +244,8 @@ $('form#form_rapport').find('#id_media').attr('accept', 'application/pdf,image/*
     
     // });
 // });
+
+
+// if ($('#error_1_id_email')) {
+//     alert('This email already exists');
+// }

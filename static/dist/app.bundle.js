@@ -26859,7 +26859,8 @@ $("#id_is_org_registered").change(function () {
       $("#div_id_org_registered_country").hide();
       break;
   }
-}); // INPUT ACCEPT YEAR ONLY
+});
+$('#id_dead_date, #id_dev_date').attr('type', 'date'); // INPUT ACCEPT YEAR ONLY
 
 $("input#id_start_date,  input#id_end_date, input#id_date_of_establishment").attr({
   maxlength: "4",
@@ -26936,30 +26937,34 @@ function removeCharacter(str) {
 //     console.log(`Output is ${output}`);
 // }
 // LANGE SWICHER
-// $("#chnage-lange").change(function () {
-//     let lan_sel = $("#chnage-lange").val();
-//     switch (lan_sel) {
-//         case "ar":
-//             document.location.href = origin + removeCharacter(pathname);
-//             console.log(pathname);
-//             break;
-//         case "en":
-//             document.location.href = origin + "/en" + pathname;
-//             console.log(pathname);
-//             break;
-//     }
-// });
 
 
 $("#chnage-lange").change(function () {
   let lan_sel = $("#chnage-lange").val();
 
-  if (lan_sel == "ar") {
-    document.location.href = origin + removeCharacter(pathname);
-  } else if (lan_sel == "en") {
-    document.location.href = origin + "/en" + removeCharacter(pathname);
-  } else if (lan_sel == "km") {
-    document.location.href = origin + "/km" + removeCharacter(pathname);
+  switch (lan_sel) {
+    case "ar":
+      document.location.href = origin + removeCharacter(pathname);
+      console.log('ar pathname', pathname);
+      break;
+
+    case "en":
+      if (pathname.includes('/ku')) {
+        document.location.href = origin + "/en" + removeCharacter(pathname);
+      } else {
+        document.location.href = origin + "/en" + pathname;
+      }
+
+      break;
+
+    case "ku":
+      if (pathname.includes('/en')) {
+        document.location.href = origin + "/ku" + removeCharacter(pathname);
+      } else {
+        document.location.href = origin + "/ku" + pathname;
+      }
+
+      break;
   }
 }); // RAPPORT
 
@@ -26988,6 +26993,9 @@ $('form#form_rapport').find('#id_media').attr('accept', 'application/pdf,image/*
 //     }
 // });
 // });
+// if ($('#error_1_id_email')) {
+//     alert('This email already exists');
+// }
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js")))
 
 /***/ }),
@@ -27045,7 +27053,11 @@ $(window).on("load", function () {
   });
 });
 $('body').css('padding-top', $('.navbar').outerHeight() + 'px');
-$('#navbarSupportedContent').find('.nav-link').css('height', $('.navbar').outerHeight() + 'px'); // AOS.init();
+$('#navbarSupportedContent').find('.nav-link').css('height', $('.navbar').outerHeight() + 'px');
+$('#list-collapse').addClass('d-none');
+$('a.nav-toggle').on('click', function () {
+  $('#list-collapse').toggleClass('d-none');
+}); // AOS.init();
 // $('#sidebar-wrapper').css('height', $('#sidebar-wrapper').parent().parent('div.col-2').outerHeight() + 'px');
 // $('#sidebar-wrapper').css('height', $('div.min-vh-100').outerHeight() + 'px');
 
@@ -27120,6 +27132,7 @@ $('#wrapper').css('height', nav_height + 'px'); // GET THE SELECTED FILE NAME
 $('#id_logo').change(function (e) {
   var fileName = e.target.files[0].name;
   $('.logo_file_name').html('The logo "' + fileName + '" has been selected.');
+  $('input#logo').val(fileName);
 }); // SLIDE HOME PAGE 
 
 $('#carouselHomePage').css('height', screen_height + 'px !important');
