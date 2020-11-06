@@ -5,7 +5,6 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
 from django.utils.translation import gettext_lazy as _
 from django.contrib import messages
-from pymsgbox import *
 
 
 # ============ User =============================

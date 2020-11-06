@@ -21,6 +21,7 @@ from django.utils.translation import gettext as _
 from django.core.paginator import Paginator
 from .filters import *
 import traceback
+from django.db.models import Q
 
 
 # ::::::::::::: SIGNE UP :::::::::::::::
@@ -204,7 +205,7 @@ def profile(request):
         if prof and prof.user_id == request.user.id:
             org_type = prof.get_org_type_display()
             position_work = prof.get_position_work_display()
-            city_work = prof.get_city_work_display()
+            #city_work = prof.get_city_work_display()
             work_domain = prof.get_work_domain_display()
             target_cat = prof.get_target_cat_display()
             org_registered_country = prof.get_org_registered_country_display()
@@ -214,7 +215,7 @@ def profile(request):
                 'profs': profs,
                 'org_type': org_type,
                 'position_work': position_work,
-                'city_work': city_work,
+                #'city_work': city_work,
                 'work_domain': work_domain,
                 'target_cat': target_cat,
                 'org_registered_country': org_registered_country,
@@ -233,6 +234,7 @@ def profile(request):
 def admin_dashboard(request):
 
     if request.user.is_superuser:
+        count_orgs= OrgProfile.objects.all().count()
         profs = OrgProfile.objects.all()
 
         for pro in profs:
@@ -253,6 +255,7 @@ def admin_dashboard(request):
             'target_cat': target_cat,
             'org_registered_country': org_registered_country,
             'w_polic_regulations': w_polic_regulations,
+            'count_orgs':count_orgs
         }
         return render(request, 'profiles/layout_profile.html', context)
 
@@ -309,7 +312,7 @@ def profile_staff(request):
         for pro in profs:
             org_type = pro.get_org_type_display()
             position_work = pro.get_position_work_display()
-            city_work = pro.get_city_work_display()
+            #city_work = pro.get_city_work_display()
             work_domain = pro.get_work_domain_display()
             target_cat = pro.get_target_cat_display()
             org_registered_country = pro.get_org_registered_country_display()
@@ -319,7 +322,7 @@ def profile_staff(request):
             'profs': profs,
             'org_type': org_type,
             'position_work': position_work,
-            'city_work': city_work,
+            #'city_work': city_work,
             'work_domain': work_domain,
             'target_cat': target_cat,
             'org_registered_country': org_registered_country,
@@ -457,6 +460,7 @@ def home(request):
     # if request.is_ajax():
     if request.method == 'POST':
         formNews = NewsLetterForm(request.POST or None)
+        print(formNews)
         if formNews.is_valid():
             formNews.save()
             formNews = NewsLetterForm()
@@ -467,9 +471,6 @@ def home(request):
             # return JsonResponse({
             #     'msg': 'Success',
             # }, status=200)
-        else:
-            messages.error(request, _(
-                'هذا البريد الالكتروني موجود مسبقاً يرجى التسجيل ببريد الكتروني أخر'))
 
     else:
         formNews = NewsLetterForm()
@@ -539,7 +540,7 @@ def particip_detail(request, par_id):
 
     org_type = org.get_org_type_display()
     position_work = org.get_position_work_display()
-    # city_work = org.get_city_work_display()
+    #city_work = org.()
     work_domain = org.get_work_domain_display()
     target_cat = org.get_target_cat_display()
     org_registered_country = org.get_org_registered_country_display()
@@ -573,7 +574,7 @@ def particip_detail(request, par_id):
         'form': form,
         'org_type': org_type,
         'position_work': position_work,
-        # 'city_work': city_work,
+        #'city_work': city_work,
         'work_domain': work_domain,
         'target_cat': target_cat,
         'org_registered_country': org_registered_country,
@@ -625,7 +626,7 @@ def news(request):
 
 # ORGS NEWS / NEWS PUBLISHED أخبار المنظمات
 def orgs_news(request):
-    news = OrgNews.objects.filter(publish=True).order_by('-created_at')
+    news = OrgNews.objects.filter(Q(publish=True)& ~Q(org_name__name='khalil')).order_by('-created_at')
 
     myFilter = OrgsNewsFilter(request.GET, queryset=news)
     news = myFilter.qs
@@ -1492,7 +1493,7 @@ def org_jobs_not_pub(request):
     context = {
         'jobs': jobs,
     }
-    return render(request, 'orgs/resources/jobs_not_pub.html', context)
+    return render(request, 'orgs/resources/jobs_not_pub.html    ', context)
 # job details
 
 
@@ -1963,21 +1964,47 @@ def dev_edit(request, devs_id):
         'form': form,
     }
     return render(request, 'orgs/devs/org_edit_dev.html', context)
-# delete devs
-
-
-@login_required(login_url='signe_in')
+# delete dev bulding
 def dev_delete(request, devs_id):
-    devs = get_object_or_404(DevOrgOpp, id=devs_id)
+    devs = DevOrgOpp.objects.filter(publish=True).order_by('-created_at')
 
-    if request.method == 'POST' and request.user.is_superuser:
-        devs.delete()
+    myFilter = OrgsDevFilter(request.GET, queryset=devs)
+    devs = myFilter.qs
 
-        messages.success(request, _(
-            'لقد تم حذف الخبر بنجاح'))
-        return redirect('orgs_devs')
+    # PAGINATEUR
+    paginator = Paginator(devs, 12)
+    page = request.GET.get('page')
+    try:
+        devs = paginator.get_page(page)
+    except(EmptyPage, InvalidPage):
+        devs = paginator.page(paginator.num_pages)
 
     context = {
         'devs': devs,
+        'myFilter': myFilter,
     }
-    return render(request, 'orgs/devs/org_dev_delete.html', context)
+    return render(request, 'orgs/devs/org_devs.html', context)
+
+# our news is filter of all the news that publiched by our site 
+def orgs_our_news(request):
+    news = OrgNews.objects.filter(Q(publish=True)& Q(org_name__name='khalil')).order_by('-created_at')
+
+    myFilter = OrgsNewsFilter(request.GET, queryset=news)
+    news = myFilter.qs
+
+    # PAGINATEUR
+    paginator = Paginator(news, 12)
+    page = request.GET.get('page')
+    try:
+        news = paginator.get_page(page)
+    except(EmptyPage, InvalidPage):
+        news = paginator.page(paginator.num_pages)
+
+    context = {
+        'news': news,
+        'myFilter': myFilter,
+    }
+    return render(request, 'orgs/our_news/our_news.html', context)
+
+
+

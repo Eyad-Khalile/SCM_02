@@ -6,10 +6,9 @@
 
 {% block content %}
 
-
 <!-- SIDEBAR -->
 
-
+{{ count_orgs }}
 
 
 <!-- PAGE CONTENT -->
@@ -18,7 +17,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-12">
-                <h1 class="text-center pt-4 mt-4">{% trans 'لوحة التحكم الخاصة باﻹدارة' %}</h1>
+                <h1 class="text-center pt-4 mt-4">{% trans 'لوحة التحكم الخاصة باﻹدارة' %} </h1>
                 <hr>
                 <!-- CONTANTS -->
                 <div class="contante">
@@ -27,6 +26,7 @@
                             {% trans 'تعديل ملفي الشخصي' %}
                         </a>
                     </div>
+
                 </div>
             </div>
         </div>

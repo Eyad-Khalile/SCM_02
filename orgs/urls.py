@@ -111,6 +111,8 @@ urlpatterns = [
     path('devs_detail/<str:devs_id>', views.devs_detail, name="devs_detail"),
     path('dev_edit/<str:devs_id>', views.dev_edit, name="dev_edit"),
     path('dev_delete/<str:devs_id>', views.dev_delete, name="dev_delete"),
+    #our news
+    path('orgs_our_news/', views.orgs_our_news, name="orgs_our_news"),
 
 
 

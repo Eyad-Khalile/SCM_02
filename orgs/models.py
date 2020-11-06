@@ -378,7 +378,7 @@ class OrgNews(models.Model):
     user = models.ForeignKey(
         User, on_delete=models.CASCADE)
     org_name = models.ForeignKey(
-        OrgProfile, on_delete=models.CASCADE, null=False, blank=True, verbose_name=_('اسم المنظمة'))
+        OrgProfile, on_delete=models.CASCADE, null=False, blank=True)
 
     title = models.CharField(max_length=255, null=False,
                              verbose_name=_('عنوان الخبر'))
@@ -732,7 +732,7 @@ class DevOrgOpp(models.Model):
     def __str__(self):
         return self.title_dev
 
-
+#News letter for members in our site 
 class NewsLetter(models.Model):
     name = models.CharField(max_length=255, null=False,
                             verbose_name=_('الاسم و الكنية'))
