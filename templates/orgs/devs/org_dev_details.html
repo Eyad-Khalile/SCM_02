@@ -1,10 +1,10 @@
 {% extends 'base.html' %}
 {% load static i18n %}
-{% block title %} {% trans ' تفاصيل دليل التطوير' %} {% endblock %}
+{% block title %} {% trans 'تفاصيل دليل التطوير' %} {% endblock %}
 
 {% block content %}
 <div class="row justify-content-center mt-4 pt-4">
-  <h1> {% trans ' تفاصيل دليل التطوير' %} </h1>
+  <h1> {% trans 'تفاصيل دليل التطوير' %} </h1>
 
   <div class="span1 well">
     <!-- <center>   -->
@@ -15,7 +15,7 @@
     <h3 class="mt-4"> {% trans "اسم المنظمة" %} : {{ devs.org_name }}</h3>
     <span class="text-muted">{% trans "  تاريخ الإضافة " %} : {{ devs.date_published }} </span>
 
-    <p class="mt-3"> {% trans "عنوان  " %} : {{ devs.title_dev }}</p>
+    <p class="mt-3"> {% trans "عنوان" %} : {{ devs.title_dev }}</p>
     <p> {% trans  "وصف الدليل" %} : <br> {{ devs.dev_description }}</p>
 
     <!-- </center> -->
@@ -32,14 +32,14 @@
           {% csrf_token %} {{form.publish}}
           <div class="form-group">
             <input type="submit" id="org_confirm_btn" class="btn btn-block"
-              value="{% trans 'الموافقة على نشر ' %}" />
+              value="{% trans 'الموافقة على النشر ' %}" />
           </div>
         </form>
         {% elif devs.publish == True %}
         <form action="" class="deconfirm" method="post">
           {% csrf_token %} {{form.publish}}
           <div class="form-group">
-            <input type="submit" id="org_deconfirm_btn" class="btn btn-block" value="{% trans 'إلغاء نشر الخبر' %}" />
+            <input type="submit" id="org_deconfirm_btn" class="btn btn-block" value="{% trans 'إلغاء نشر الدليل' %}" />
           </div>
         </form>
         {% endif %}
@@ -54,7 +54,7 @@
         </div>
 
         <div class="col">
-          <a href="{% url 'dev_delete' devs.id %}" class="btn btn-block"> {% trans 'حذف ' %} </a>
+          <a href="{% url 'dev_delete' devs.id %}" class="btn btn-block"> {% trans 'حذف' %} </a>
         </div>
         
       {% endif %}

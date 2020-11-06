@@ -1,13 +1,13 @@
 {% extends 'base.html' %}
 {% load static i18n crispy_forms_tags %}
 
-{% block title %} {% trans " تعديل دليل التطوير " %} {% endblock %}
+{% block title %} {% trans "تعديل دليل التطوير" %} {% endblock %}
 
 {% block content %}
 
 
 <div class="row mt-4 pt-4 mb-4">
-    <h1> {% trans "تعديل دليل التطوير " %} </h1>
+    <h1> {% trans "تعديل دليل التطوير" %} </h1>
 
     {% if request.user.is_authenticated %}
     {% if request.user == devs.user or request.user.is_staff %}

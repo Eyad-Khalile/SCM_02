@@ -1,5 +1,5 @@
 {% extends 'base.html' %} {% load static i18n crispy_forms_tags %}
-{% block title %} تسجيل الدخول {% endblock %}
+{% block title %} {% trans 'تسجيل الدخول' %} {% endblock %}
 
 
 {% block content %}
@@ -13,18 +13,18 @@
     <div class="form-group mb-2">{{ form.username|as_crispy_field }}</div>
     <div class="form-group mt-2">{{ form.password|as_crispy_field }}</div>
     <div class="form-group">
-      <button class="btn btn-lg btn-primary btn-block mb-4" type="submit">
+      <button class="btn btn-lg btn-block mb-4" type="submit">
         {% trans 'تسجيل الدخول' %}
       </button>
     </div>
 
     <hr />
     <p class="mt-4"> {% trans 'هل نسيت كلمة المرور' %} </p>
-    <a href="{% url 'password_reset' %}" class="btn btn-primary btn-block"> {% trans 'إعادة تعيين كلمة المرور' %} </a>
+    <a href="{% url 'password_reset' %}" class="btn btn-block"> {% trans 'إعادة تعيين كلمة المرور' %} </a>
 
     <hr />
-    <p class="mt-4">إذا لم يكن لديك حساب ! يمكنك</p>
-    <a href="{% url 'signe_up' %}" class="btn btn-primary btn-block"> {% trans 'إنشاء حساب' %} </a>
+    <p class="mt-4"> {% trans 'إذا لم يكن لديك حساب ! يمكنك' %} </p>
+    <a href="{% url 'signe_up' %}" class="btn btn-block"> {% trans 'إنشاء حساب' %} </a>
     <!-- <p class="mt-5 mb-3 text-muted">&copy; 2020</p> -->
   </form>
 </div>

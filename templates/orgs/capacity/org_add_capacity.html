@@ -1,13 +1,13 @@
 {% extends 'base.html' %}
 {% load static i18n crispy_forms_tags %}
 
-{% block title %} {% trans "إضافة " %} {% endblock %}
+{% block title %} {% trans "اضافة فرصة بناء القدرات" %} {% endblock %}
 
 {% block content %}
 
 
 <div class="row mt-4 pt-4 mb-4">
-    <h1> {% trans "اضافة فرصة  بناء القدرات" %} </h1>
+    <h1> {% trans "اضافة فرصة بناء القدرات" %} </h1>
 
     <form action="" method="post" class="register" enctype="multipart/form-data">
         {% csrf_token %}
@@ -54,7 +54,7 @@
         
        
         <div class="form-group">
-            <input type="submit" class="btn btn-block mt-3" value='{% trans "انشر فرصة بناء قدرات " %}'>
+            <input type="submit" class="btn btn-block mt-3" value='{% trans "انشر فرصة بناء قدرات" %}'>
         </div>
 
     </form>

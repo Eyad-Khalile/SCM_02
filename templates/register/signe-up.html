@@ -1,8 +1,8 @@
 {% extends 'base.html' %}
-{% load static crispy_forms_tags %}
+{% load static i18n crispy_forms_tags %}
 
 
-{% block title %} أنشاء حساب {% endblock %}
+{% block title %} {% trans 'أنشاء حساب' %} {% endblock %}
 
 {% block content %}
 
@@ -13,10 +13,10 @@
     <div class="row">
         <div class="col-md-3 register-left">
             <img src="https://image.ibb.co/n7oTvU/logo_white.png" alt="" />
-            <h2>تقديم طلب اشترك</h2>
+            <h2> {% trans "تقديم طلب اشترك" %} </h2>
             <hr>
-            <p> إذا كان لديك حساب يمكنك تسجيل الدخول من هنا </p>
-            <a href="{% url 'signe_in' %}" class="btn btn-primary">تسجيل الدخول</a>
+            <p> {% trans 'إذا كان لديك حساب يمكنك تسجيل الدخول من هنا' %} </p>
+            <a href="{% url 'signe_in' %}" class="btn">تسجيل الدخول</a>
             <br />
         </div>
         <!-- register-right -->
@@ -101,7 +101,7 @@
 
 
                 <div class="form-group">
-                    <input type="submit" class="btn btn-success btn-block mt-3" value="اشترك">
+                    <input type="submit" class="btn btn-block mt-3" value="{% trans 'اشترك' %}">
                 </div>
 
             </form>

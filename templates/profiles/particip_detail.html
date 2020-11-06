@@ -1,12 +1,12 @@
-{% extends 'base.html' %} {% load static i18n phonenumber_filters %} {% get_current_language as
-LANGUAGE_CODE %} {% block title %} {% trans 'تفاصيل المنظمة' %} {% endblock %}
+{% extends 'base.html' %} {% load static i18n phonenumber_filters %}
+{% get_current_language as LANGUAGE_CODE %} {% block title %} {% trans 'تفاصيل المنظمة' %} {% endblock %}
 {% block content %}
 
 <h1 class="mt-4 mb-4">{% trans 'تفاصيل المنظمة' %} </h1>
 
 <div class="container emp-profile mt-4">
-  <form method="post">
-    {% csrf_token %}
+  <form >
+    
     <div class="row">
       <div class="col-md-4 mb-4" data-aos="fade-left">
         <div class="profile-img">
@@ -544,13 +544,6 @@ LANGUAGE_CODE %} {% block title %} {% trans 'تفاصيل المنظمة' %} {% 
     </div>
 
 
-
-
-
-
-
-
-
   </div>
 
   <div class="col" data-aos="fade-left">
@@ -558,13 +551,6 @@ LANGUAGE_CODE %} {% block title %} {% trans 'تفاصيل المنظمة' %} {% 
       <i class="fas fa-backward"></i>
     </a>
   </div>
-
-
-
-
-
-
-
 
 </div>
 

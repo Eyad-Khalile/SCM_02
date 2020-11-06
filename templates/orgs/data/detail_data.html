@@ -60,11 +60,11 @@
         
         {% if request.user == data.user  or request.user.is_superuser %}
         <div class="col">
-          <a href="{% url 'edit_data' data.id %}" class="btn btn-block"> {% trans 'تعديل التقرير' %} </a>
+          <a href="{% url 'edit_data' data.id %}" class="btn btn-block"> {% trans 'تعديل البيان' %} </a>
         </div>
 
         <div class="col">
-          <a href="{% url 'delete_data' data.id %}" class="btn btn-block"> {% trans 'حذف التقرير' %} </a>
+          <a href="{% url 'delete_data' data.id %}" class="btn btn-block"> {% trans 'حذف البيان' %} </a>
         </div>
         
       {% endif %}

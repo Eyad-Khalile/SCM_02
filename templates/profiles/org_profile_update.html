@@ -8,7 +8,7 @@
     <form action="" id="fill_form" method="POST" data-cities-url="{% url 'ajax_load_cities' %}" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form|crispy }}
-        <input type="submit" value="{% trans 'احفظ' %}" class="btn btn-block">
+        <input type="submit" value="{% trans 'تعديل' %}" class="btn btn-block">
     </form>
 </div>
 

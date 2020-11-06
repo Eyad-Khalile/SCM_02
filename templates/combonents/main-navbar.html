@@ -190,7 +190,7 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link {% if request.resolver_match.url_name == 'centre_news' %} active {% endif %}"
-                        aria-current="page" href="{% url 'orgs_our_news²' %}"> {% trans 'أخبار البوابة' %} </a>
+                        aria-current="page" href="{% url 'centre_news' %}"> {% trans 'أخبار البوابة' %} </a>
 
                         <!-- <a class="nav-link {% if request.resolver_match.url_name == 'centre_news' %} active {% endif %}"
                         aria-current="page" href="{% url 'centre_news' %}"> {% trans 'أخبار البوابة' %} </a> -->
@@ -339,7 +339,7 @@
                                     </option>
                                     {% endfor %}
                                 </select>
-                                <!-- <button type="submit" class="btn btn-sm btn-success">
+                                <!-- <button type="submit" class="btn btn-sm">
                                     <i class="fa fa-paper-plane" aria-hidden="true"></i>
                                 </button> -->
                             </div>

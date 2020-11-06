@@ -9,7 +9,7 @@
   <div class="span1 well">
     <!-- <center>   -->
     {% if request.user.is_authenticated and request.user.is_superuser %}
-    <h3 class="mt-4"> {% trans "اسم اللذي أضاف الخبر" %} : {{ job.user }}</h3>
+    <h3 class="mt-4"> {% trans "اسم اللذي أضاف فرصة العمل" %} : {{ job.user }}</h3>
     {% endif %}
 
     <h3 class="mt-4"> {% trans "اسم المنظمة" %} : {{ job.org_name }}</h3>
@@ -29,14 +29,14 @@
           {% csrf_token %} {{form.publish}}
           <div class="form-group">
             <input type="submit" id="org_confirm_btn" class="btn btn-block"
-              value="{% trans 'الموافقة على نشر ' %}" />
+              value="{% trans 'الموافقة على النشر' %}" />
           </div>
         </form>
         {% elif job.publish == True %}
         <form action="" class="deconfirm" method="post">
           {% csrf_token %} {{form.publish}}
           <div class="form-group">
-            <input type="submit" id="org_deconfirm_btn" class="btn btn-block" value="{% trans 'إلغاء نشر الخبر' %}" />
+            <input type="submit" id="org_deconfirm_btn" class="btn btn-block" value="{% trans 'إلغاء نشر فرصة العمل' %}" />
           </div>
         </form>
         {% endif %}
@@ -51,7 +51,7 @@
         </div>
 
         <div class="col">
-          <a href="{% url 'jobs_delete' job.id %}" class="btn btn-block"> {% trans 'حذف ' %} </a>
+          <a href="{% url 'jobs_delete' job.id %}" class="btn btn-block"> {% trans 'حذف' %} </a>
         </div>
         
       {% endif %}

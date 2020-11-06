@@ -12322,6 +12322,11 @@ footer {
       font-size: 1.25em;
       font-weight: bold;
       color: tomato; }
+  footer #collapseForm a {
+    box-shadow: 1px 1px 6px rgba(255, 255, 255, 0.7), -1px -1px 6px rgba(255, 255, 255, 0.7);
+    transition: all 0.5s ease-in-out; }
+    footer #collapseForm a:hover {
+      box-shadow: 1px 1px 6px rgba(255, 99, 71, 0.7), -1px -1px 6px rgba(255, 99, 71, 0.7); }
 
 /* ::::::::::::::: - OLDE - ::::::::::::::: */
 .org-work div span {
@@ -12479,6 +12484,9 @@ form #div_id_logo div {
   color: #17678C; }
   form #div_id_logo div a {
     color: #fff; }
+
+.register-left {
+  color: #17678C !important; }
 
 div.emp-profile img {
   width: 70%; }

@@ -30,14 +30,14 @@
           {% csrf_token %} {{form.publish}}
           <div class="form-group">
             <input type="submit" id="org_confirm_btn" class="btn btn-block"
-              value="{% trans 'الموافقة على نشر ' %}" />
+              value="{% trans 'الموافقة على النشر' %}" />
           </div>
         </form>
         {% elif funding.publish == True %}
         <form action="" class="deconfirm" method="post">
           {% csrf_token %} {{form.publish}}
           <div class="form-group">
-            <input type="submit" id="org_deconfirm_btn" class="btn btn-block" value="{% trans 'إلغاء نشر الخبر' %}" />
+            <input type="submit" id="org_deconfirm_btn" class="btn btn-block" value="{% trans 'إلغاء نشر فرصة التمويل' %}" />
           </div>
         </form>
         {% endif %}
@@ -52,7 +52,7 @@
         </div>
 
         <div class="col">
-          <a href="{% url 'funding_delete' funding.id %}" class="btn btn-block"> {% trans 'حذف ' %} </a>
+          <a href="{% url 'funding_delete' funding.id %}" class="btn btn-block"> {% trans 'حذف' %} </a>
         </div>
         
       {% endif %}

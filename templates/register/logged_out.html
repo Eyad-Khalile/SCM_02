@@ -1,8 +1,10 @@
-{% extends 'base.html' %} {% load static %}
-{% block title %} تسجيل الخروج {% endblock %}
+{% extends 'base.html' %} {% load static i18n %}
+{% block title %} {% trans 'تسجيل الخروج' %} {% endblock %}
 
 {% block content %}
-<h1> لقد تم تسجيل الخروج بنجاح </h1>
-
+<h1> {% trans 'لقد تم تسجيل الخروج بنجاح' %} </h1>
+<p> {% trans 'يمكنك اﻵن' %} </p>
+<a href="{% url 'signe_in' %}" class="btn btn-block mt-3 p-3"> {% trans 'إعادة تسجيل الدخول' %} </a>
+<a href="{% url 'home' %}" class="btn btn-block mt-3 p-3"> {% trans 'الذهاب للصفحة الرئيسية' %} </a>
 
 {% endblock %}

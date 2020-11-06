@@ -468,7 +468,8 @@ class NewsLetterForm(forms.ModelForm):
         email = self.cleaned_data.get('email')
         qs = NewsLetter.objects.filter(email__iexact=email)
         if qs.exists():
-            raise forms.ValidationError(_('This email already exists'))
+            raise forms.ValidationError(
+                _('هذا البريد الالكتروني موجود مسبقاً'))
             # raise alert(text=_('This email already exists'),
             #             title='', button='OK')
 

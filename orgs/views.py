@@ -62,14 +62,18 @@ def signe_up(request):
 
                     username = form.cleaned_data.get('username')
 
+                    # messages.success(
+                    #     request, f'Your Account has been created Successful with username ( {username} ) !, Please confirm your email address to complete the registration ')
                     messages.success(
-                        request, f'Your Account has been created Successful with username ( {username} ) !, Please confirm your email address to complete the registration ')
+                        request, _(f'تم إنشاء حسابك بنجاح باسم المستخدم ( {username} ) !, يرجى تأكيد عنوان بريدك الإلكتروني لإكمال التسجيل '))
                     return redirect('home')
             else:
 
                 if user_email in emails:
+                    # messages.error(
+                    #     request, f'Please Sign-up with another email address, this email ( {user_email} ) is already in use')
                     messages.error(
-                        request, f'Please Sign-up with another email address, this email ( {user_email} ) is already in use')
+                        request, _(f'يرجى التسجيل باستخدام عنوان بريد إلكتروني آخر، هذا البريد الإلكتروني ( {user_email} ) مستخدم مسبقاً'))
                     return redirect('signe_up')
                 # else:
 

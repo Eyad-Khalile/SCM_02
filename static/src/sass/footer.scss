@@ -125,5 +125,18 @@ footer {
         }
     }
 
+    #collapseForm {
+
+        a {
+            box-shadow: 1px 1px 6px rgba(255, 255, 255, 0.7),
+            -1px -1px 6px rgba(255, 255, 255, 0.7);
+            transition: all 0.5s ease-in-out;
+            &:hover {
+                box-shadow: 1px 1px 6px rgba(tomato, 0.7),
+                -1px -1px 6px rgba(tomato, 0.7);
+            }
+        }
+    }
+
     
 }

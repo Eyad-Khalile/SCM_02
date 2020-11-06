@@ -1,13 +1,13 @@
 {% extends 'base.html' %}
 {% load static i18n crispy_forms_tags %}
 
-{% block title %} {% trans "أخبار المنظمات" %} {% endblock %}
+{% block title %} {% trans "اخبار البوابة" %} {% endblock %}
 
 {% block content %}
 
 
 <div class="mt-4 pt-4">
-    <h1> {% trans " اخبار البوابة " %} </h1>
+    <h1> {% trans "اخبار البوابة " %} </h1>
 
     <!-- SECTION 1 -->
     <div class="">
@@ -29,7 +29,7 @@
             <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
                 {% if request.user.is_authenticated and request.user.is_superuser %}
                 <a href="{% url 'org_news_not_pub' %}" class="btn btn-block mt-4">
-                    {% trans 'أخبار المنظمات قيد الدراسة' %} </a>
+                    {% trans 'أخبار البوابةقيد الدراسة' %} </a>
                 {% endif %}
             </div>
 
@@ -126,7 +126,7 @@
 
 
                     {% else %}
-                    <h3> {% trans " لا يوجد حالياً أخبار جديدة" %} </h3>
+                    <h3> {% trans "لا يوجد حالياً أخبار جديدة عن البوابة" %} </h3>
                     {% endif %}
                     
 
