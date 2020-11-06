@@ -215,7 +215,7 @@ def profile(request):
                 'profs': profs,
                 'org_type': org_type,
                 'position_work': position_work,
-                #'city_work': city_work,
+                # 'city_work': city_work,
                 'work_domain': work_domain,
                 'target_cat': target_cat,
                 'org_registered_country': org_registered_country,
@@ -234,7 +234,7 @@ def profile(request):
 def admin_dashboard(request):
 
     if request.user.is_superuser:
-        count_orgs= OrgProfile.objects.all().count()
+        count_orgs = OrgProfile.objects.all().count()
         profs = OrgProfile.objects.all()
 
         for pro in profs:
@@ -255,7 +255,7 @@ def admin_dashboard(request):
             'target_cat': target_cat,
             'org_registered_country': org_registered_country,
             'w_polic_regulations': w_polic_regulations,
-            'count_orgs':count_orgs
+            'count_orgs': count_orgs
         }
         return render(request, 'profiles/layout_profile.html', context)
 
@@ -322,7 +322,7 @@ def profile_staff(request):
             'profs': profs,
             'org_type': org_type,
             'position_work': position_work,
-            #'city_work': city_work,
+            # 'city_work': city_work,
             'work_domain': work_domain,
             'target_cat': target_cat,
             'org_registered_country': org_registered_country,
@@ -460,7 +460,6 @@ def home(request):
     # if request.is_ajax():
     if request.method == 'POST':
         formNews = NewsLetterForm(request.POST or None)
-        print(formNews)
         if formNews.is_valid():
             formNews.save()
             formNews = NewsLetterForm()
@@ -471,6 +470,10 @@ def home(request):
             # return JsonResponse({
             #     'msg': 'Success',
             # }, status=200)
+
+        else:
+            messages.error(request, _(
+                'هذا البريد الالكتروني موجود مسبقاً يرجى التسجيل ببريد الكتروني أخر'))
 
     else:
         formNews = NewsLetterForm()
@@ -540,7 +543,7 @@ def particip_detail(request, par_id):
 
     org_type = org.get_org_type_display()
     position_work = org.get_position_work_display()
-    #city_work = org.()
+    # city_work = org.()
     work_domain = org.get_work_domain_display()
     target_cat = org.get_target_cat_display()
     org_registered_country = org.get_org_registered_country_display()
@@ -574,7 +577,7 @@ def particip_detail(request, par_id):
         'form': form,
         'org_type': org_type,
         'position_work': position_work,
-        #'city_work': city_work,
+        # 'city_work': city_work,
         'work_domain': work_domain,
         'target_cat': target_cat,
         'org_registered_country': org_registered_country,
@@ -626,7 +629,8 @@ def news(request):
 
 # ORGS NEWS / NEWS PUBLISHED أخبار المنظمات
 def orgs_news(request):
-    news = OrgNews.objects.filter(Q(publish=True)& ~Q(org_name__name='khalil')).order_by('-created_at')
+    news = OrgNews.objects.filter(Q(publish=True) & ~Q(
+        org_name__name='khalil')).order_by('-created_at')
 
     myFilter = OrgsNewsFilter(request.GET, queryset=news)
     news = myFilter.qs
@@ -1493,7 +1497,7 @@ def org_jobs_not_pub(request):
     context = {
         'jobs': jobs,
     }
-    return render(request, 'orgs/resources/jobs_not_pub.html    ', context)
+    return render(request, 'orgs/resources/jobs_not_pub.html', context)
 # job details
 
 
@@ -1964,7 +1968,10 @@ def dev_edit(request, devs_id):
         'form': form,
     }
     return render(request, 'orgs/devs/org_edit_dev.html', context)
+
+
 # delete dev bulding
+@login_required(login_url='signe_in')
 def dev_delete(request, devs_id):
     devs = DevOrgOpp.objects.filter(publish=True).order_by('-created_at')
 
@@ -1985,9 +1992,25 @@ def dev_delete(request, devs_id):
     }
     return render(request, 'orgs/devs/org_devs.html', context)
 
-# our news is filter of all the news that publiched by our site 
+
+# @login_required(login_url='signe_in')
+# def dev_delete(request, devs_id):
+#     devs = get_object_or_404(DevOrgOpp, id=devs_id)
+
+#     if request.method == 'POST' and request.user.is_superuser:
+# 	devs.delete()
+
+# 	messages.success(request, _(
+#             'لقد تم حذف الخبر بنجاح'))
+# 	return redirect('orgs_devs')
+
+
+# our news is filter of all the news that publiched by our site
+
+
 def orgs_our_news(request):
-    news = OrgNews.objects.filter(Q(publish=True)& Q(org_name__name='khalil')).order_by('-created_at')
+    news = OrgNews.objects.filter(Q(publish=True) & Q(
+        org_name__name='khalil')).order_by('-created_at')
 
     myFilter = OrgsNewsFilter(request.GET, queryset=news)
     news = myFilter.qs
@@ -2005,6 +2028,3 @@ def orgs_our_news(request):
         'myFilter': myFilter,
     }
     return render(request, 'orgs/our_news/our_news.html', context)
-
-
-
