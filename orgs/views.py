@@ -377,6 +377,23 @@ def org_profile_edit(request, pk):
     return render(request, 'profiles/org_profile_update.html', context)
 
 
+@login_required(login_url='signe_in')
+def org_profile_delete(request, pk):
+    org_prof = OrgProfile.objects.get(id=pk)
+
+    if request.method == 'POST' and request.user.is_superuser:
+        org_prof.delete()
+
+        messages.success(request, _(
+            'لقد تم حذف الملف بنجاح'))
+        return redirect('home')
+
+    context = {
+        'org_prof': org_prof,
+    }
+    return render(request, 'profiles/org_profile_delete.html', context)
+
+
 # =========== Page 404 ==================
 def page_not_found_view(request, exception):
     return render(request, 'errors/404.html')
@@ -407,21 +424,35 @@ def page_not_found_view(request, exception):
 
 # HOME PAGE
 def home(request):
-    orgs = OrgProfile.objects.filter(publish=True).order_by('published_at')
+    orgs = OrgProfile.objects.filter(publish=True).order_by('-published_at')
     news = OrgNews.objects.filter(publish=True).order_by('-published_at')
+    jobs = OrgJob.objects.filter(publish=True).order_by('-published_at')
+    capacites = OrgCapacityOpp.objects.filter(
+        publish=True).order_by('-published_at')
 
-    # the 3 last orgs
-    last_org = orgs.last().id
-    av_last_org = last_org - 1
-    av_av_last_org = av_last_org - 1
+    # the Last orgs
+    if orgs.first():
+        first_org = orgs.first().id
+    else:
+        first_org = _('لا يوجد حاليا منظمات')
 
-    # print(last_org, av_last_org, av_av_last_org)
+    # the Last news
+    if news.first():
+        first_news = news.first().id
+    else:
+        first_news = _('لا يوجد حالي أخبار')
 
-    # the 3 last news
-    last_news = news.last().id
-    av_last_news = last_news - 1
-    av_av_last_news = av_last_news - 1
-    print(last_news, av_last_news, av_av_last_news)
+    # the Last job
+    if jobs.first():
+        first_job = jobs.first().id
+    else:
+        first_job = _('لا يوجد')
+
+    # the Last job
+    if capacites.first():
+        first_capacity = capacites.first().id
+    else:
+        first_capacity = _('لا يوجد حاليا فرص بناء')
 
     # if request.is_ajax():
     if request.method == 'POST':
@@ -445,14 +476,13 @@ def home(request):
 
     context = {
         'orgs': orgs,
-        'last_org': last_org,
-        'av_last_org': av_last_org,
-        'av_av_last_org': av_av_last_org,
+        'first_org': first_org,
         'news': news,
-        'last_news': last_news,
-        'av_last_news': av_last_news,
-        'av_av_last_news': av_av_last_news,
-
+        'first_news': first_news,
+        'jobs': jobs,
+        'first_job': first_job,
+        'capacites': capacites,
+        'first_capacity': first_capacity,
         'formNews': formNews,
     }
     return render(request, 'orgs/home.html', context)
@@ -666,6 +696,7 @@ def org_news_not_pub(request):
 # ORG NEWS DETAIL
 def news_detail(request, news_id):
     new = get_object_or_404(OrgNews, id=news_id)
+    news = OrgNews.objects.filter(publish=True).order_by('-created_at')
 
     if request.method == 'POST':
         form = NewsConfirmForm(request.POST or None, instance=new)
@@ -682,6 +713,7 @@ def news_detail(request, news_id):
 
     context = {
         'new': new,
+        'news': news,
         'form': form,
     }
     return render(request, 'orgs/news/orgs_news_detail.html', context)

@@ -1,6 +1,6 @@
 import django_filters
 from django_filters import DateFilter, CharFilter
-from .models import OrgProfile, OrgNews, OrgRapport, OrgData, OrgResearch,OrgJob,OrgFundingOpp,OrgCapacityOpp,DevOrgOpp
+from .models import OrgProfile, OrgNews, OrgRapport, OrgData, OrgResearch, OrgJob, OrgFundingOpp, OrgCapacityOpp, DevOrgOpp
 from django.utils.translation import gettext_lazy as _
 
 
@@ -138,22 +138,24 @@ class OrgsResearchFilter(django_filters.FilterSet):
             'start_date_pub',
             'end_date_pub',
         ]
-###############################resources filters
-#job filters 
+# resources filters
+# job filters
+
+
 class OrgsJobsFilter(django_filters.FilterSet):
 
     title = CharFilter(field_name="job_title",
                        lookup_expr='icontains', label=_('كلمات من فرصة العمل  '))
-    job_type=CharFilter(field_name="job_title",
-                       lookup_expr='icontains', label=_('نوع الوظيفة'))
-    experience=CharFilter(field_name="experience",
-                       lookup_expr='icontains', label=_('الخبرة'))
-    job_country=CharFilter(field_name="job_country",
-                       lookup_expr='icontains', label=_('مكان العمل'))
-    job_city=CharFilter(field_name="job_country",
-                       lookup_expr='icontains', label=_('المحافظة'))
-    job_domain=CharFilter(field_name="job_domain",
-                       lookup_expr='icontains', label=_('مجال العمل'))
+    job_type = CharFilter(field_name="job_title",
+                          lookup_expr='icontains', label=_('نوع الوظيفة'))
+    experience = CharFilter(field_name="experience",
+                            lookup_expr='icontains', label=_('الخبرة'))
+    position_work = CharFilter(field_name="job_country",
+                               lookup_expr='icontains', label=_('مكان العمل'))
+    city_work = CharFilter(field_name="job_country",
+                           lookup_expr='icontains', label=_('المحافظة'))
+    job_domain = CharFilter(field_name="job_domain",
+                            lookup_expr='icontains', label=_('مجال العمل'))
     start_date_pub = DateFilter(field_name="created_at",
                                 lookup_expr='gte', label=_('تاريخ نشر فرصة العمل / من :'))
     end_date_pub = DateFilter(field_name="created_at",
@@ -166,25 +168,27 @@ class OrgsJobsFilter(django_filters.FilterSet):
             'job_title',
             'job_type',
             'experience',
-            'job_country',
-            'job_city',
+            'position_work',
+            'city_work',
             'job_domain',
             'start_date_pub',
             'end_date_pub',
         ]
-#org funding filters 
+# org funding filters
+
+
 class OrgsFundingFilter(django_filters.FilterSet):
 
     name_funding = CharFilter(field_name="name_funding",
-                       lookup_expr='icontains', label=_('الجهة المانحة'))
-    job_country=CharFilter(field_name="funding_country",
-                       lookup_expr='icontains', label=_('مكان العمل'))
-    job_city=CharFilter(field_name="funding_city",
-                       lookup_expr='icontains', label=_('المحافظة'))
-    work_domain=CharFilter(field_name="work_domain",
-                       lookup_expr='icontains', label=_('مجال العمل'))
-    funding_amounte=CharFilter(field_name="funding_amounte",
-                       lookup_expr='icontains', label=_('حسب المبلغ المالي'))
+                              lookup_expr='icontains', label=_('الجهة المانحة'))
+    job_country = CharFilter(field_name="funding_country",
+                             lookup_expr='icontains', label=_('مكان العمل'))
+    job_city = CharFilter(field_name="funding_city",
+                          lookup_expr='icontains', label=_('المحافظة'))
+    work_domain = CharFilter(field_name="work_domain",
+                             lookup_expr='icontains', label=_('مجال العمل'))
+    funding_amounte = CharFilter(field_name="funding_amounte",
+                                 lookup_expr='icontains', label=_('حسب المبلغ المالي'))
     start_date_pub = DateFilter(field_name="created_at",
                                 lookup_expr='gte', label=_('تاريخ نشر المنحة  / من :'))
     end_date_pub = DateFilter(field_name="created_at",
@@ -193,27 +197,29 @@ class OrgsFundingFilter(django_filters.FilterSet):
     class Meta:
         model = OrgFundingOpp
         fields = [
-         'user', 
-         'name_funding',
-         'funding_org_description',
-         'work_domain', 
-         'funding_country', 
-         'funding_city', 
-         'funding_dead_date',
-          'funding_period',
-          'funding_amounte',
-         'funding_description',
-          'funding_conditions',
-         'publish',
-        'created_at', 
-        'published_at',
-         'updated_at'
+            'user',
+            'name_funding',
+            'funding_org_description',
+            'work_domain',
+            'funding_country',
+            'funding_city',
+            'funding_dead_date',
+            'funding_period',
+            'funding_amounte',
+            'funding_description',
+            'funding_conditions',
+            'publish',
+            'created_at',
+            'published_at',
+            'updated_at'
         ]
-#org capacity filters 
+# org capacity filters
+
+
 class OrgsCapacityFilter(django_filters.FilterSet):
 
     name_capacity = CharFilter(field_name="name_capacity",
-                       lookup_expr='icontains', label=_('عنوان المادة'))
+                               lookup_expr='icontains', label=_('عنوان المادة'))
     start_date_pub = DateFilter(field_name="created_at",
                                 lookup_expr='gte', label=_('تاريخ نشر المنحة  / من :'))
     end_date_pub = DateFilter(field_name="created_at",
@@ -222,28 +228,30 @@ class OrgsCapacityFilter(django_filters.FilterSet):
     class Meta:
         model = OrgCapacityOpp
         fields = [
-        'org_name',
-         'name_capacity', 
-         'title_capacity', 
-         'capacity_description', 
-         'capacity_type', 
-         'capacity_country',
-          'capacity_city', 
-          'capacity_domain', 
-          'capacity_dead_date', 
-          'capacity_reqs', 
-          'capacity_guid', 
-          'capacity_url', 
-          'publish', 
-          'created_at',
-           'published_at', 
-           'updated_at'
+            'org_name',
+            'name_capacity',
+            'title_capacity',
+            'capacity_description',
+            'capacity_type',
+            'capacity_country',
+            'capacity_city',
+            'capacity_domain',
+            'capacity_dead_date',
+            'capacity_reqs',
+            'capacity_guid',
+            'capacity_url',
+            'publish',
+            'created_at',
+            'published_at',
+            'updated_at'
         ]
-#org devs filters 
+# org devs filters
+
+
 class OrgsDevFilter(django_filters.FilterSet):
 
     name_capacity = CharFilter(field_name="title_dev",
-                       lookup_expr='icontains', label=_('عنوان المادة'))
+                               lookup_expr='icontains', label=_('عنوان المادة'))
     start_date_pub = DateFilter(field_name="created_at",
                                 lookup_expr='gte', label=_('تاريخ نشر المنحة  / من :'))
     end_date_pub = DateFilter(field_name="created_at",
@@ -252,12 +260,12 @@ class OrgsDevFilter(django_filters.FilterSet):
     class Meta:
         model = DevOrgOpp
         fields = [
-         'org_name',   
-          'title_dev',   
-          'dev_date',   
-          'name_dev',  
-          'dev_description',
-          'publish',    
-          'published_at', 
-          'updated_at',
+            'org_name',
+            'title_dev',
+            'dev_date',
+            'name_dev',
+            'dev_description',
+            'publish',
+            'published_at',
+            'updated_at',
         ]

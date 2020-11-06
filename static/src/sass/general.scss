@@ -466,6 +466,7 @@ body {
           width: 100px*$i;
           // background-image: url('../../../media/img_0'+$i+'.jpg');
           background-image: url('../../../media/img_0#{$i}.jpg');
+          // background-image: url('../../../media/slide_01.png');
         }
       }
 
@@ -752,6 +753,18 @@ body {
         margin-left: 0 !important;
         margin-right: 0 !important;
       }
+  }
+
+  // NEWS 
+  .news-card-link {
+    text-decoration: none !important;
+    background-color: #fff;
+    .news-card {
+
+      p {
+        
+      }
+    }
   }
 
   

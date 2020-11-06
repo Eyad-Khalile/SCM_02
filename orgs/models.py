@@ -548,10 +548,12 @@ class OrgJob(models.Model):
                                 verbose_name=_('نوع الوظيفة'))
     experience = models.CharField(max_length=255, null=False, choices=expereince_CHOICES,
                                   verbose_name=_('الخبرة'))
-    job_country = CountryField(
+    position_work = CountryField(
         max_length=255, null=False, verbose_name=_("مكان العمل"))
-    job_city = models.CharField(
-        max_length=150, choices=MyChoices.syr_city_CHOICES, null=True, blank=True, verbose_name=_("المحافظة"))
+    city_work = models.ForeignKey(
+        City, on_delete=models.SET_NULL, null=True, blank=True, verbose_name=_("المحافظة"))
+    # job_city = models.CharField(
+    #     max_length=150, choices=MyChoices.syr_city_CHOICES, null=True, blank=True, verbose_name=_("المحافظة"))
     job_area = models.CharField(
         max_length=150, null=True, blank=True, verbose_name=_("المنطقة"))
     job_domain = models.CharField(

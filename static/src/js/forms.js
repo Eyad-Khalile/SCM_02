@@ -41,7 +41,7 @@ $("#id_position_work").change(function () {
 
 
 // CITY AJAX
-$("#id_position_work").change(function () {
+$("#fill_form #id_position_work").change(function () {
 
     const url = $("#fill_form").attr("data-cities-url"); // get the url of the `load_cities` view
     const countryId = $(this).val(); // get the selected country ID from the HTML input
@@ -65,6 +65,27 @@ $("#id_position_work").change(function () {
             $("#id_city").html(html_data);
 
             */
+        }
+    });
+
+});
+
+
+
+// // JOBS CITY AJAX
+$("#add_job #id_position_work").change(function () {
+
+    const url = $("#add_job").attr("data-cities-url"); // get the url of the `load_cities` view
+    const countryId = $(this).val(); // get the selected country ID from the HTML input
+
+    $.ajax({ // initialize an AJAX request
+        url: url, // set the url of the request (= /persons/ajax/load-cities/ )
+        data: {
+            'position_work': countryId // add the country id to the GET parameters
+        },
+
+        success: function (data) { // `data` is the return of the `load_cities` view function
+            $("#id_city_work").html(data); // replace the contents of the city input with the data that came from the server
         }
     });
 
@@ -114,14 +135,14 @@ $(
     "#id_name, #id_name_en_ku, #id_short_cut, #id_message, #id_name_managing_director, #id_name_ceo, #id_name_person_contact, #id_org_adress, #id_coalition_name"
 ).attr({
     minlength: "3",
-    oninput: "this.value = this.value.replace(/[^ا-يa-zA-Z0-9 ]/gi, '');",
+    oninput: "this.value = this.value.replace(/[^ا-يa-zA-Z0-9\nçêîşûłňřüḧẍ' ]/gi, '');",
 });
 
 // MEMBERS COUNT
 $("#id_org_members_count, #id_org_members_womans_count").attr({
-    maxlength: "3",
+    maxlength: "4",
     oninput: "this.value = this.value.replace(/[^0-9.]/g, '');",
-    placeholder: "Ex : 1 - 900",
+    placeholder: "Ex : 1 - 9999",
 });
 
 $("#div_id_coalition_name").hide();

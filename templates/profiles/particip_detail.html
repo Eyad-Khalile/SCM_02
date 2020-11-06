@@ -10,7 +10,8 @@ LANGUAGE_CODE %} {% block title %} {% trans 'تفاصيل المنظمة' %} {% 
     <div class="row">
       <div class="col-md-4 mb-4" data-aos="fade-left">
         <div class="profile-img">
-          <img src="{{ org.logo.url }}" alt="{{ org.name }}" title="{{ org.name }}" />
+          <img src="{{ org.logo.url }}" class="w-100 img-thumbnail rounded" alt="{{ org.name }}"
+            title="{{ org.name }}" />
           <!-- <div class="file">
                         Change Photo
                         <input type="file" name="file" />
@@ -18,10 +19,60 @@ LANGUAGE_CODE %} {% block title %} {% trans 'تفاصيل المنظمة' %} {% 
         </div>
       </div>
       <div class="col-md-6" data-aos="fade-right">
-        <div class="profile-head">
-          <h5>{{ org.name }}</h5>
-          <h6>{{ org.name_en_ku }}</h6>
-          <h6>{{ org.short_cut }}</h6>
+        <div class="profile-head ">
+          <!-- اسم المنظمة -->
+          <h5 class="row">
+            <div class="col-6">
+              <strong> {% trans "اسم المنظمة" %} : </strong>
+            </div>
+            <div class="col-6">
+              {{ org.name }}
+            </div>
+          </h5>
+
+
+          <h6 class="row">
+            <div class="col-6">
+              <strong> {% trans "اسم المنظمة باللغة الانكليزية أو الكردية" %} : </strong>
+            </div>
+            <div class="col-6">
+              {% if org.name_en_ku %}
+              {{ org.name_en_ku }}
+              {% else %}
+              <span class="text-muted">
+                {% trans "لم يذكر" %}
+              </span>
+              {% endif %}
+            </div>
+          </h6>
+
+
+          <h6 class=" row">
+            <div class="col-6">
+              <strong> {% trans "الاسم المختصر" %} : </strong>
+            </div>
+            <div class="col-6">
+              {% if org.short_cut %}
+              {{ org.short_cut }}
+              {% else %}
+              <span class="text-muted">
+                {% trans "لم يذكر" %}
+              </span>
+              {% endif %}
+            </div>
+          </h6>
+
+          {% if request.user.is_superuser %}
+          <h6 class="mb-4 pb-4 row border-top pt-2">
+            <div class="col-6">
+              <strong>{% trans "اسم الذي أضاف المنظمة" %} :</strong>
+            </div>
+            <div class="col-6">
+              {{ org.user }}
+            </div>
+          </h6>
+          {% endif %}
+
           <!-- <p class="proile-rating">RANKINGS : <span>8/10</span></p> -->
           <ul class="nav nav-tabs" id="myTab" role="tablist">
             <li class="nav-item">
@@ -29,12 +80,12 @@ LANGUAGE_CODE %} {% block title %} {% trans 'تفاصيل المنظمة' %} {% 
                 aria-selected="true">{% trans "عن المنظمة" %}</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab"
-                aria-controls="contact" aria-selected="false">{% trans 'معلومات الاتصال بالمنظمة' %}</a>
+              <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact"
+                aria-selected="false">{% trans 'معلومات الاتصال بالمنظمة' %}</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" id="news-tab" data-toggle="tab" href="#news" role="tab"
-                aria-controls="news" aria-selected="false">{% trans 'جديد المنظمة'%}</a>
+              <a class="nav-link" id="news-tab" data-toggle="tab" href="#news" role="tab" aria-controls="news"
+                aria-selected="false">{% trans 'جديد المنظمة'%}</a>
             </li>
           </ul>
         </div>
@@ -46,14 +97,50 @@ LANGUAGE_CODE %} {% block title %} {% trans 'تفاصيل المنظمة' %} {% 
     <div class="row">
       <div class="col-md-4" data-aos="fade-right">
         <div class="profile-work">
-          <p>{% trans 'معلومات عن المنظمة' %}</p>
-          <p>{% trans 'نوع المنظمة' %} : {{ org_type }}</p>
-          <p>{% trans 'مكان العمل' %} : {{ position_work }}</p>
-          <p>{% trans 'المحافظة' %} : {% if city_work %} {{ city_work }} {% else %} <span class="text-muted">
-              {% trans 'لم يذكر' %} </span> {% endif %} </p>
+          <p class="h4 border-bottom">{% trans 'معلومات عن المنظمة' %} : </p>
+
+          <p class="row">
+            <div class="col-6">
+              <strong>{% trans 'نوع المنظمة' %} :</strong>
+            </div>
+            <div class="col-6">
+              {{ org_type }}
+            </div>
+          </p>
+
+          <p class="row">
+            <div class="col-6">
+              <strong>{% trans 'مكان العمل' %} :</strong>
+            </div>
+            <div class="col-6">
+              {{ position_work }}
+            </div>
+          </p>
+
+          <p class="row">
+            <div class="col-6">
+              <strong>{% trans 'المحافظة' %} :</strong>
+            </div>
+            <div class="col-6">
+              {% if org.city_work %}
+              {{ org.city_work }}
+              {% else %}
+              <span class="text-muted">
+                {% trans 'لم يذكر' %} </span>
+              {% endif %}
+            </div>
+          </p>
 
           <p>{% trans 'الرؤية و الرسالة' %}</p>
-          <p>{{ org.message }}</p>
+          <p class="text-al-just">
+            {% if org.message %}
+            {{ org.message }}
+            {% else %}
+            <span class="text-muted">
+              {% trans "لم يذكر" %}
+            </span>
+            {% endif %}
+          </p>
         </div>
       </div>
       <div class="col-md-8" data-aos="fade-left">
@@ -91,9 +178,7 @@ LANGUAGE_CODE %} {% block title %} {% trans 'تفاصيل المنظمة' %} {% 
               </div>
               <div class="col-md-6">
                 <p>
-                  {% if org.work_domain %} {{ work_domain }} {% else %}
-                  <span class="text-muted"> {% trans 'لم يذكر' %} </span>
-                  {% endif %}
+                  {{ work_domain }}
                 </p>
               </div>
             </div>
@@ -102,11 +187,7 @@ LANGUAGE_CODE %} {% block title %} {% trans 'تفاصيل المنظمة' %} {% 
                 <label> {% trans 'الفئات المستهدفة' %} </label>
               </div>
               <div class="col-md-6">
-                <p>
-                  {% if org.target_cat %} {{ target_cat }} {% else %}
-                  <span class="text-muted"> {% trans 'لم يذكر' %} </span>
-                  {% endif %}
-                </p>
+                <p>{{ target_cat }}</p>
               </div>
             </div>
             <div class="row">
@@ -129,7 +210,8 @@ LANGUAGE_CODE %} {% block title %} {% trans 'تفاصيل المنظمة' %} {% 
               </div>
               <div class="col-md-6">
                 <p>
-                  {% if org.is_org_registered == '1' %} {% trans 'نعم مسجلة' %}
+                  {% if org.is_org_registered == '1' %}
+                  {% trans 'نعم مسجلة' %}
                   {% elif org.is_org_registered == '0' %}
                   <span class="text-muted"> {% trans 'غير مسجلة' %} </span>
                   {% endif %}
@@ -184,11 +266,7 @@ LANGUAGE_CODE %} {% block title %} {% trans 'تفاصيل المنظمة' %} {% 
               </div>
               <div class="col-md-6">
                 <p>
-                  {% if org.w_polic_regulations %}
                   {{ w_polic_regulations }}
-                  {% else %}
-                  <span class="text-muted"> {% trans 'لم يذكر' %} </span>
-                  {% endif %}
                 </p>
               </div>
             </div>
@@ -226,15 +304,15 @@ LANGUAGE_CODE %} {% block title %} {% trans 'تفاصيل المنظمة' %} {% 
             {% endif %}
             <div class="row">
               <div class="col-md-6">
-                <label> {% trans 'التأكيد من اﻹدارة على أنها منظمة' %} </label>
+                <label> {% trans 'هل تم التحقق من قبل اﻹدارة على أنها منظمة؟' %} </label>
               </div>
               <div class="col-md-6">
                 <p>
                   {% if org.publish and org.publish == True %}
-                  {% trans 'تمت الموافقة عليها' %}
+                  {% trans 'تم التحقق و الموافقة' %}
                   {% else %}
                   <span class="text-muted">
-                    {% trans 'لم يتم التأكيد بعد' %}
+                    {% trans 'لم يتم التحقق بعد' %}
                   </span>
                   {% endif %}
                 </p>
@@ -370,35 +448,39 @@ LANGUAGE_CODE %} {% block title %} {% trans 'تفاصيل المنظمة' %} {% 
             <div class="row">
               <div class="col-md-6">
                 <p>
-                <a href="{% url 'orgs_news' %}?org_name={{org.id}}" class="btn nav-link">{% trans "أخبار المنظمة" %}</a></p>
+                  <a href="{% url 'orgs_news' %}?org_name={{org.id}}"
+                    class="btn nav-link">{% trans "أخبار المنظمة" %}</a></p>
               </div>
             </div>
             <div class="row">
               <div class="col-md-6">
                 <p>
-                <a href="{% url 'orgs_rapport' %}?org_name={{org.id}}" class="btn nav-link">{% trans "التقارير و الدراسات للمنظمة" %}</a>
-              </p>
+                  <a href="{% url 'orgs_rapport' %}?org_name={{org.id}}"
+                    class="btn nav-link">{% trans "التقارير و الدراسات للمنظمة" %}</a>
+                </p>
               </div>
             </div>
             <div class="row">
               <div class="col-md-6">
                 <p>
-                <a href="{% url 'data' %}?org_name={{org.id}}" class="btn nav-link">{% trans "البيانات للمنظمة" %}</a>
-              </p>
+                  <a href="{% url 'data' %}?org_name={{org.id}}" class="btn nav-link">{% trans "البيانات للمنظمة" %}</a>
+                </p>
               </div>
             </div>
             <div class="row">
               <div class="col-md-6">
                 <p>
-                <a href="{% url 'media' %}?org_name={{org.id}}" class="btn nav-link">{% trans "المحتوى السمعي و البصري للمنظمة" %}</a>
-              </p>
+                  <a href="{% url 'media' %}?org_name={{org.id}}"
+                    class="btn nav-link">{% trans "المحتوى السمعي و البصري للمنظمة" %}</a>
+                </p>
               </div>
             </div>
             <div class="row">
               <div class="col-md-6">
                 <p>
-                <a href="{% url 'research' %}?org_name={{org.id}}" class="btn nav-link">{% trans "البيانات للمنظمة" %}</a>
-              </p>
+                  <a href="{% url 'research' %}?org_name={{org.id}}"
+                    class="btn nav-link">{% trans "البيانات للمنظمة" %}</a>
+                </p>
               </div>
             </div>
           </div>
@@ -416,14 +498,17 @@ LANGUAGE_CODE %} {% block title %} {% trans 'تفاصيل المنظمة' %} {% 
     <form action="" class="confirm" method="post">
       {% csrf_token %} {{form.publish}}
       <div class="form-group">
-        <input type="submit" id="org_confirm_btn" class="btn btn-block" value="{% trans 'قبول الطلب' %}" />
+        <button type="submit" id="org_confirm_btn" class="btn btn-block" title="{% trans 'قبول الطلب' %}"><i
+            class="fas fa-check"></i></button>
       </div>
     </form>
     {% elif org.publish == True %}
     <form action="" class="deconfirm" method="post">
       {% csrf_token %} {{form.publish}}
       <div class="form-group">
-        <input type="submit" id="org_deconfirm_btn" class="btn btn-block" value="{% trans 'رفض الطلب' %}" />
+        <button type="submit" id="org_deconfirm_btn" class="btn btn-block" title="{% trans 'رفض الطلب' %}"><i
+            class="fa fa-ban" aria-hidden="true"></i>
+        </button>
       </div>
     </form>
 
@@ -433,18 +518,44 @@ LANGUAGE_CODE %} {% block title %} {% trans 'تفاصيل المنظمة' %} {% 
             <a href="" class="btn btn-block"> {% trans 'حذف الطلب' %} </a>
         </div> -->
   </div>
-  <div class="col" data-aos="fade-right">
-    {% if request.user.is_authenticated and request.user == org.user %}
 
-    <a href="{% url 'org_profile_edit' org.id %}" class="btn btn-block">
-      {% trans 'تعديل ملفي الشخصي' %}
-    </a>
-
-    {% endif %}
-  </div>
   <div class="col" data-aos="fade-left">
-        <a href="{% url 'guide' %}" class="btn btn-block">
-      {% trans 'عودة إلى صفحة دليل المجتمع المدني' %}
+    <div class="row">
+      {% if request.user.is_authenticated and request.user == org.user and org.publish == 'false' %}
+      <div class="col">
+        <a href="{% url 'org_profile_edit' org.id %}" class="btn btn-block" title="{% trans 'تعديل الملف الشخصي' %}">
+          <i class="fas fa-edit"></i>
+        </a>
+      </div>
+      {% endif %}
+
+      {% if request.user.is_authenticated and request.user.is_superuser %}
+      <div class="col">
+        <a href="{% url 'org_profile_delete' org.id %}" class="btn btn-block" title="{% trans 'حذف الملف الشخصي' %}">
+          <i class="fas fa-trash-alt"></i>
+        </a>
+      </div>
+      <div class="col">
+        <a href="{% url 'org_profile_edit' org.id %}" class="btn btn-block" title="{% trans 'تعديل الملف الشخصي' %}">
+          <i class="fas fa-edit"></i>
+        </a>
+      </div>
+      {% endif %}
+    </div>
+
+
+
+
+
+
+
+
+
+  </div>
+
+  <div class="col" data-aos="fade-left">
+    <a href="{% url 'guide' %}" class="btn btn-block" title="{% trans 'عودة إلى صفحة دليل المجتمع المدني' %}">
+      <i class="fas fa-backward"></i>
     </a>
   </div>
 
@@ -454,7 +565,7 @@ LANGUAGE_CODE %} {% block title %} {% trans 'تفاصيل المنظمة' %} {% 
 
 
 
- 
+
 </div>
 
 {% endblock %}

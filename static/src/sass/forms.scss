@@ -6,34 +6,42 @@ form {
     border-radius: 8px !important;
   }
 
-  #id_logo {
-    width: 0.1px;
-    height: 0.1px;
-    opacity: 0;
+  .div-logo {
     overflow: hidden;
-    position: absolute;
-    z-index: -1;
-  }
-  label[for=id_logo] {
-    cursor: pointer;
 
-    background-color: $color-1;
-    color: #fff !important;
-    padding: 0.5em 2em !important;
-    padding-right: 1em !important;
-    border-radius: 5px;
-
-    margin-top: 30px;
-
-    .asteriskField {
-      right:50px !important;
+    input {
+      width: 100%;
     }
   }
 
-  #div_id_logo + svg {
-    top: -55px;
-    left: -100px;
-  }
+  // #id_logo {
+  //   width: 0.1px;
+  //   height: 0.1px;
+  //   opacity: 0;
+  //   overflow: hidden;
+  //   position: absolute;
+  //   z-index: -1;
+  // }
+  // label[for=id_logo] {
+  //   cursor: pointer;
+
+  //   background-color: $color-1;
+  //   color: #fff !important;
+  //   padding: 0.5em 2em !important;
+  //   padding-right: 1em !important;
+  //   border-radius: 5px;
+
+  //   margin-top: 30px;
+
+  //   .asteriskField {
+  //     right:50px !important;
+  //   }
+  // }
+
+  // #div_id_logo + svg {
+  //   top: -55px;
+  //   left: -100px;
+  // }
 
 
 
