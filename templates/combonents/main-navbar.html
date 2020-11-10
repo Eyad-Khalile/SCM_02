@@ -131,7 +131,7 @@
                         </li>
                         <li>
                             <a class="dropdown-item {% if request.resolver_match.url_name == 'resource_finance' %} active {% endif %}"
-                                href="{% url 'orgs_funding' %}"> {% trans 'فرص التمويل' %} </a>
+                                href="{% url 'funding' %}"> {% trans 'فرص التمويل' %} </a>
                         </li>
                         <li>
                             <a class="dropdown-item {% if request.resolver_match.url_name == 'resource_stectur' %} active {% endif %}"
@@ -172,7 +172,7 @@
                         </li>
                         <li>
                             <a class="dropdown-item {% if request.resolver_match.url_name == 'resource_finance' %} active {% endif %}"
-                                href="{% url 'resource_finance' %}"> {% trans 'فرص التمويل' %} </a>
+                                href="{% url 'funding' %}"> {% trans 'فرص التمويل' %} </a>
                         </li>
                         <li>
                             <a class="dropdown-item {% if request.resolver_match.url_name == 'resource_stectur' %} active {% endif %}"

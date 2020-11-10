@@ -46,6 +46,7 @@ serif !important;
   border-radius: 50%;
   color: #fff;
   height: 200px !important;
+  width: 200px !important;
   font-size: 1.5rem;
   overflow: hidden;
   margin: 5px;
@@ -507,8 +508,7 @@ body {
     
   // }
   .span3.well {
-    // height: 100% !important;
-    height: 450px !important;
+    height: 450px ;
   }
 
 
@@ -764,6 +764,23 @@ body {
       p {
         
       }
+    }
+  }
+
+  // JOBS 
+  .jobs-cards {
+    height: 475px !important;
+    figure {
+      overflow: hidden;
+      max-width: 140px !important;
+      max-height: 140px !important;
+    }
+  }
+  .job-card {
+    figure {
+      overflow: hidden;
+      max-width: 300px !important;
+      max-height: 300px !important;
     }
   }
 

@@ -1,6 +1,6 @@
 import django_filters
 from django_filters import DateFilter, CharFilter
-from .models import OrgProfile, OrgNews, OrgRapport, OrgData, OrgResearch, OrgJob, OrgFundingOpp, OrgCapacityOpp, DevOrgOpp
+from .models import OrgProfile, OrgNews, OrgRapport, OrgData, OrgResearch, OrgJob, OrgFundingOpp, OrgCapacityOpp, DevOrgOpp, PersFundingOpp
 from django.utils.translation import gettext_lazy as _
 
 
@@ -181,9 +181,9 @@ class OrgsFundingFilter(django_filters.FilterSet):
 
     name_funding = CharFilter(field_name="name_funding",
                               lookup_expr='icontains', label=_('الجهة المانحة'))
-    job_country = CharFilter(field_name="funding_country",
+    job_country = CharFilter(field_name="position_work",
                              lookup_expr='icontains', label=_('مكان العمل'))
-    job_city = CharFilter(field_name="funding_city",
+    job_city = CharFilter(field_name="city_work",
                           lookup_expr='icontains', label=_('المحافظة'))
     work_domain = CharFilter(field_name="work_domain",
                              lookup_expr='icontains', label=_('مجال العمل'))
@@ -201,8 +201,8 @@ class OrgsFundingFilter(django_filters.FilterSet):
             'name_funding',
             'funding_org_description',
             'work_domain',
-            'funding_country',
-            'funding_city',
+            'position_work',
+            'city_work',
             'funding_dead_date',
             'funding_period',
             'funding_amounte',
@@ -233,25 +233,24 @@ class OrgsCapacityFilter(django_filters.FilterSet):
             'title_capacity',
             'capacity_description',
             'capacity_type',
-            'capacity_country',
-            'capacity_city',
+            'position_work',
+            'city_work',
             'capacity_domain',
             'capacity_dead_date',
             'capacity_reqs',
             'capacity_guid',
             'capacity_url',
-            'publish',
-            'created_at',
-            'published_at',
-            'updated_at'
         ]
 # org devs filters
 
 
 class OrgsDevFilter(django_filters.FilterSet):
 
-    name_capacity = CharFilter(field_name="title_dev",
-                               lookup_expr='icontains', label=_('عنوان المادة'))
+    title_dev = CharFilter(field_name="title_dev",
+                           lookup_expr='icontains', label=_('عنوان المادة'))
+    dev_description = CharFilter(field_name="dev_description",
+                                 lookup_expr='icontains', label=_('الجهة المانحة'))
+
     start_date_pub = DateFilter(field_name="created_at",
                                 lookup_expr='gte', label=_('تاريخ نشر المنحة  / من :'))
     end_date_pub = DateFilter(field_name="created_at",
@@ -261,11 +260,28 @@ class OrgsDevFilter(django_filters.FilterSet):
         model = DevOrgOpp
         fields = [
             'org_name',
+            'name_dev',
             'title_dev',
             'dev_date',
-            'name_dev',
             'dev_description',
-            'publish',
-            'published_at',
-            'updated_at',
+            'start_date_pub',
+            'end_date_pub',
+        ]
+
+
+class PersoFundFilter(django_filters.FilterSet):
+
+    start_date_pub = DateFilter(field_name="created_at",
+                                lookup_expr='gte', label=_('تاريخ نشر المنحة  / من :'))
+    end_date_pub = DateFilter(field_name="created_at",
+                              lookup_expr='lte', label=_('إلى :'))
+
+    class Meta:
+        model = PersFundingOpp
+        fields = [
+            'category',
+            'fund_type',
+            'domain',
+            'start_date_pub',
+            'end_date_pub',
         ]

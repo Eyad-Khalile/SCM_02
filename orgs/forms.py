@@ -93,6 +93,7 @@ class OrgProfileForm(forms.ModelForm):
     class Meta:
         model = OrgProfile
         fields = [
+            'user',
             'name',
             'name_en_ku',
             'short_cut',
@@ -278,12 +279,22 @@ class ResearchConfirmForm(forms.ModelForm):
 #:::::::::::::::::org job::::::::::::::::::::::::::::
 
 
+class OtherOrgsForm(forms.ModelForm):
+    class Meta:
+        model = OtherOrgs
+        fields = [
+            'name',
+            'logo',
+        ]
+
+
 class JobsForm(forms.ModelForm):
 
     class Meta:
         model = OrgJob
         fields = [
             'org_name',
+            'other_org_name',
             'job_title',
             'job_description',
             'period_months',
@@ -293,6 +304,7 @@ class JobsForm(forms.ModelForm):
             'city_work',
             'job_area',
             'job_domain',
+            'job_aplay',
             'dead_date',
         ]
 
@@ -307,17 +319,11 @@ class JobsForm(forms.ModelForm):
                         position_work=position_work)
                 except (ValueError, TypeError):
                     pass  # invalid input from the client; ignore and fallback to empty City queryset
-            # elif 'city_work' in self.data:
-            #     self.fields['city_work'].queryset = self.instance.position_work.city_work_set.all()
-            # else:
-            #     self.fields['city_work'].queryset = City.objects.all()
+
             elif self.instance.pk and self.instance.city_work:
-                print(self.instance.city_work)
                 position_work = self.instance.position_work
                 self.fields['city_work'].queryset = City.objects.filter(
                     position_work=position_work)
-            # else:
-            #     self.fields['city_work'].queryset = City.objects.all()
 
             elif self.instance.pk and not self.instance.city_work:
                 self.fields['city_work'].queryset = City.objects.all()
@@ -330,9 +336,9 @@ class JobsConfirmForm(forms.ModelForm):
         fields = [
             'publish',
         ]
+
+
 ###################funding org opport###############
-
-
 class FundingForm(forms.ModelForm):
 
     class Meta:
@@ -340,11 +346,11 @@ class FundingForm(forms.ModelForm):
         fields = [
             'org_name',
             'name_funding',
-
+            'logo',
             'funding_org_description',
             'work_domain',
-            'funding_country',
-            'funding_city',
+            'position_work',
+            'city_work',
             'funding_dead_date',
             'funding_period',
             'funding_amounte',
@@ -353,12 +359,27 @@ class FundingForm(forms.ModelForm):
             'funding_reqs',
             'funding_guid',
             'funding_url',
-            'publish',
-            'published_at',
-            'updated_at',
-
-
         ]
+
+        def __init__(self, *args, **kwargs):
+            super().__init__(*args, **kwargs)
+            self.fields['city_work'].queryset = City.objects.none()
+
+            if 'position_work' in self.data:
+                try:
+                    position_work = self.data.get('position_work')
+                    self.fields['city_work'].queryset = City.objects.filter(
+                        position_work=position_work)
+                except (ValueError, TypeError):
+                    pass  # invalid input from the client; ignore and fallback to empty City queryset
+
+            elif self.instance.pk and self.instance.city_work:
+                position_work = self.instance.position_work
+                self.fields['city_work'].queryset = City.objects.filter(
+                    position_work=position_work)
+
+            elif self.instance.pk and not self.instance.city_work:
+                self.fields['city_work'].queryset = City.objects.all()
 
 
 class FundingConfirmForm(forms.ModelForm):
@@ -368,9 +389,9 @@ class FundingConfirmForm(forms.ModelForm):
         fields = [
             'publish',
         ]
+
+
 # capacity guid for orgs
-
-
 class CapacityForm(forms.ModelForm):
 
     class Meta:
@@ -381,18 +402,35 @@ class CapacityForm(forms.ModelForm):
             'title_capacity',
             'capacity_description',
             'capacity_type',
-            'capacity_country',
-            'capacity_city',
+            'position_work',
+            'city_work',
             'capacity_domain',
             'capacity_dead_date',
             'capacity_reqs',
             'capacity_guid',
             'capacity_url',
             'publish',
-
-
-
         ]
+
+        def __init__(self, *args, **kwargs):
+            super().__init__(*args, **kwargs)
+            self.fields['city_work'].queryset = City.objects.none()
+
+            if 'position_work' in self.data:
+                try:
+                    position_work = self.data.get('position_work')
+                    self.fields['city_work'].queryset = City.objects.filter(
+                        position_work=position_work)
+                except (ValueError, TypeError):
+                    pass  # invalid input from the client; ignore and fallback to empty City queryset
+
+            elif self.instance.pk and self.instance.city_work:
+                position_work = self.instance.position_work
+                self.fields['city_work'].queryset = City.objects.filter(
+                    position_work=position_work)
+
+            elif self.instance.pk and not self.instance.city_work:
+                self.fields['city_work'].queryset = City.objects.all()
 
 
 class CapacityConfirmForm(forms.ModelForm):
@@ -411,14 +449,12 @@ class DevForm(forms.ModelForm):
         model = DevOrgOpp
         fields = [
             'org_name',
+            'name_dev',
             'title_dev',
             'dev_date',
-            'name_dev',
             'dev_description',
-            'publish',
-            'published_at',
-            'updated_at',
-
+            'subject',
+            'content',
         ]
 
 
@@ -479,3 +515,57 @@ class NewsLetterForm(forms.ModelForm):
     #     salut = self.cleaned_data.get('name')
     #     print(salut)
     #     return salut
+
+
+class PersoFunForm(forms.ModelForm):
+    class Meta:
+        model = PersFundingOpp
+        fields = [
+            'org_name',
+            'name_funding',
+            'logo',
+            'category',
+            'fund_type',
+            'study_level',
+            'comp_study',
+            'domain',
+            'position_work',
+            'city_work',
+            'fund_org_description',
+            'funding_dead_date',
+            'funding_period',
+            'funding_amounte',
+            'funding_description',
+            'funding_conditions',
+            'funding_reqs',
+            'funding_guid',
+            'funding_url',
+        ]
+
+        def __init__(self, *args, **kwargs):
+            super().__init__(*args, **kwargs)
+            self.fields['city_work'].queryset = City.objects.none()
+
+            if 'position_work' in self.data:
+                try:
+                    position_work = self.data.get('position_work')
+                    self.fields['city_work'].queryset = City.objects.filter(
+                        position_work=position_work)
+                except (ValueError, TypeError):
+                    pass  # invalid input from the client; ignore and fallback to empty City queryset
+
+            elif self.instance.pk and self.instance.city_work:
+                position_work = self.instance.position_work
+                self.fields['city_work'].queryset = City.objects.filter(
+                    position_work=position_work)
+
+            elif self.instance.pk and not self.instance.city_work:
+                self.fields['city_work'].queryset = City.objects.all()
+
+
+class PersoFundConfirmForm(forms.ModelForm):
+    class Meta:
+        model = PersFundingOpp
+        fields = [
+            'publish',
+        ]

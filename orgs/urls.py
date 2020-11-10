@@ -83,6 +83,7 @@ urlpatterns = [
     path('jobs_edit/<str:job_id>', views.jobs_edit, name="jobs_edit"),
     path('jobs_delete/<str:job_id>', views.jobs_delete, name="jobs_delete"),
     # funding orgs opportutiite
+    path('funding', views.funding, name="funding"),
     path('orgs_funding/', views.orgs_funding, name="orgs_funding"),
     path('orgs_add_funding/', views.orgs_add_funding, name="orgs_add_funding"),
     path('org_funding_not_pub/', views.org_funding_not_pub,
@@ -111,7 +112,7 @@ urlpatterns = [
     path('devs_detail/<str:devs_id>', views.devs_detail, name="devs_detail"),
     path('dev_edit/<str:devs_id>', views.dev_edit, name="dev_edit"),
     path('dev_delete/<str:devs_id>', views.dev_delete, name="dev_delete"),
-    #our news
+    # our news
     path('orgs_our_news/', views.orgs_our_news, name="orgs_our_news"),
 
 
@@ -128,10 +129,22 @@ urlpatterns = [
     path('resource_work_detail/<str:work_id>',
          views.resource_work_detail, name="resource_work_detail"),
     path('resource_finance/', views.resource_finance, name="resource_finance"),
-    path('resource_finance_perso/', views.resource_finance_perso,
-         name="resource_finance_perso"),
-    path('resource_finance_perso_detail/<str:id>',
-         views.resource_finance_perso_detail, name="resource_finance_perso_detail"),
+
+    # FINANCE PERSO
+    path('finance_perso/', views.finance_perso,
+         name="finance_perso"),
+    path('add_finance_perso/', views.add_finance_perso,
+         name="add_finance_perso"),
+    path('finance_perso_not_pub/', views.finance_perso_not_pub,
+         name="finance_perso_not_pub"),
+    path('finance_perso_detail/<str:pk>',
+         views.finance_perso_detail, name="finance_perso_detail"),
+    path('finance_perso_edit/<str:pk>',
+         views.finance_perso_edit, name="finance_perso_edit"),
+    path('finance_perso_delete/<str:pk>',
+         views.finance_perso_delete, name="finance_perso_delete"),
+
+
     path('resource_finance_orgs/', views.resource_finance_orgs,
          name="resource_finance_orgs"),
     path('resource_finance_orgs_detail/<str:id>',

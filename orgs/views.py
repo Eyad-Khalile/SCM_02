@@ -85,8 +85,8 @@ def signe_up(request):
         }
         return render(request, 'register/signe-up.html', context)
 
-# def signe_in(request):
-#     return render(request, 'register/signe-in.html')
+
+# ACTIVATION ACCOUNT
 
 
 def activate(request, uidb64, token):
@@ -342,9 +342,13 @@ def org_profile(request):
     if request.method == 'POST':
         form = OrgProfileForm(request.POST or None, files=request.FILES)
         if form.is_valid():
-            user = form.save(commit=False)
-            user.user = request.user
-            user.save()
+            prof = form.save(commit=False)
+            user = form.cleaned_data.get('user')
+            if user:
+                prof.user = user
+            else:
+                prof.user = request.user
+            prof.save()
 
             messages.success(
                 request, 'لقد تم تسحيل بياناتكم بنجاح و ستتم دراستها باقرب وقت')
@@ -554,7 +558,6 @@ def particip_detail(request, par_id):
     w_polic_regulations = org.get_w_polic_regulations_display()
 
     if request.method == 'POST':
-        print('request ======', request)
         form = OrgConfirmForm(request.POST or None, instance=org)
         if form.is_valid():
             pub = form.save(commit=False)
@@ -859,7 +862,7 @@ def orgs_rapport_detail(request, rapport_id):
             at.save()
 
             messages.success(request, _(
-                'لقد تم تعديل التقرير بنجاح'))
+                'لقد تم تعديل حالة التقرير بنجاح'))
             return redirect('orgs_rapport')
     else:
         form = RapportConfirmForm(instance=rapport)
@@ -880,7 +883,7 @@ def orgs_rapport_delete(request, rapport_id):
         rapport.delete()
 
         messages.success(request, _(
-            'لقد تم حذف التقرري بنجاح'))
+            'لقد تم حذف التقرير بنجاح'))
         return redirect('orgs_rapport')
 
     context = {
@@ -954,7 +957,7 @@ def add_data(request):
             user.save()
 
             messages.success(request, _(
-                'لقد تمت إضافة التقرير بنجاح و ستتم دراسته قريباً'))
+                'لقد تمت إضافة البيان بنجاح و ستتم دراسته قريباً'))
 
             return redirect('data')
     else:
@@ -1353,19 +1356,6 @@ def resource_finance(request):
     return render(request, 'orgs/resource/resource_finance.html')
 
 
-def resource_finance_perso(request):
-    return render(request, 'orgs/resource/resource_finance_perso.html')
-
-
-def resource_finance_perso_detail(request, id):
-    id = id
-    context = {
-        'id': id,
-    }
-    # 6
-    return render(request, 'orgs/resource/resource_finance_perso_detail.html', context)
-
-
 def resource_finance_orgs(request):
     return render(request, 'orgs/resource/resource_finance_orgs.html')
 
@@ -1437,6 +1427,7 @@ def resources(request):
 
 def orgs_jobs(request):
     jobs = OrgJob.objects.filter(publish=True).order_by('-created_at')
+    print(jobs)
 
     myFilter = OrgsJobsFilter(request.GET, queryset=jobs)
     jobs = myFilter.qs
@@ -1460,27 +1451,47 @@ def orgs_jobs(request):
 @login_required(login_url='signe_in')
 def orgs_add_job(request):
 
+    other = OtherOrgs.objects.all().count()
+
     if request.method == 'POST':
         form = JobsForm(request.POST or None, files=request.FILES)
-        if form.is_valid():
+        form_other = OtherOrgsForm(request.POST or None, files=request.FILES)
+        if form.is_valid() and form_other.is_valid():
             user = form.save(commit=False)
             user.user = request.user
+
             org_name = form.cleaned_data.get('org_name')
-            if org_name:
+            other_org_name = form.cleaned_data.get('other_org_name')
+            other_name = form_other.cleaned_data.get('name')
+
+            if org_name or other_org_name or other_name:
                 user.org_name = org_name
+            # else:
+            #     user.org_name = request.user
+                user.save()
+
+                if other_name:
+                    creater = form_other.save(commit=False)
+                    creater.created_by = request.user
+                    creater.job = form.instance.id
+                    creater.save()
+
+                messages.success(request, _(
+                    'لقد تمت إضافة فرصة العمل بنجاح و ستتم دراستها قريباً'))
+
+                return redirect('orgs_jobs')
+
             else:
-                user.org_name = request.user
-            user.save()
-
-            messages.success(request, _(
-                'لقد تمت إضافة الخبر بنجاح و ستتم دراسته قريباً'))
-
-            return redirect('orgs_jobs')
+                messages.error(request, _(
+                    'يجب إدخال اسم منظمة لتتم معالجة و نشر فرصة العمل'))
     else:
         form = JobsForm()
+        form_other = OtherOrgsForm()
 
     context = {
         'form': form,
+        'other': other,
+        'form_other': form_other,
     }
     return render(request, 'orgs/resources/org_add_job.html', context)
 # jobs list to confirme
@@ -1489,6 +1500,7 @@ def orgs_add_job(request):
 @login_required(login_url='signe_in')
 def org_jobs_not_pub(request):
     jobs = OrgJob.objects.filter(publish=False).order_by('-created_at')
+    others = OtherOrgs.objects.all()
 
     # PAGINATEUR
     paginator = Paginator(jobs, 12)
@@ -1500,13 +1512,21 @@ def org_jobs_not_pub(request):
 
     context = {
         'jobs': jobs,
+        'others': others,
     }
+
     return render(request, 'orgs/resources/jobs_not_pub.html', context)
+
+
 # job details
-
-
 def jobs_detail(request, job_id):
     job = get_object_or_404(OrgJob, id=job_id)
+    other = OtherOrgs.objects.filter(job=job_id).first()
+
+    job_type = job.get_job_type_display()
+    experience = job.get_experience_display()
+    position_work = job.get_position_work_display()
+    job_domain = job.get_job_domain_display()
 
     if request.method == 'POST':
         form = NewsConfirmForm(request.POST or None, instance=job)
@@ -1516,7 +1536,7 @@ def jobs_detail(request, job_id):
             at.save()
 
             messages.success(request, _(
-                'لقد تم تغيير حالة الخبر بنجاح'))
+                'لقد تم تغيير حالة فرصة العمل بنجاح'))
             return redirect('orgs_jobs')
     else:
         form = JobsConfirmForm(instance=job)
@@ -1524,6 +1544,11 @@ def jobs_detail(request, job_id):
     context = {
         'job': job,
         'form': form,
+        'other': other,
+        'job_type': job_type,
+        'experience': experience,
+        'position_work': position_work,
+        'job_domain': job_domain,
     }
     return render(request, 'orgs/resources/org_job_details.html', context)
 # job edit to modify job details
@@ -1532,24 +1557,30 @@ def jobs_detail(request, job_id):
 @login_required(login_url='signe_in')
 def jobs_edit(request, job_id):
     job = get_object_or_404(OrgJob, id=job_id)
+    other = OtherOrgs.objects.filter(job=job_id).first()
+    # other = get_object_or_404(OtherOrgs, job=job_id)
 
     if request.method == 'POST':
         form = JobsForm(request.POST or None,
                         files=request.FILES, instance=job)
-        if form.is_valid():
+        form_other = OtherOrgsForm(
+            request.POST or None, files=request.FILES, instance=other)
+        if form.is_valid() and form_other.is_valid():
             at = form.save(commit=False)
             at.updated_at = datetime.utcnow()
             at.save()
 
             messages.success(request, _(
-                'لقد تم تعديل الخبر بنجاح'))
+                'لقد تم تعديل فرصة العمل بنجاح'))
             return redirect('orgs_jobs')
     else:
         form = JobsForm(instance=job)
+        form_other = OtherOrgsForm(instance=other)
 
     context = {
         'job': job,
         'form': form,
+        'form_other': form_other,
     }
     return render(request, 'orgs/resources/org_edit_job.html', context)
 # delete job
@@ -1563,7 +1594,7 @@ def jobs_delete(request, job_id):
         job.delete()
 
         messages.success(request, _(
-            'لقد تم حذف الخبر بنجاح'))
+            'لقد تم حذف فرصة العمل بنجاح'))
         return redirect('orgs_jobs')
 
     context = {
@@ -1571,9 +1602,163 @@ def jobs_delete(request, job_id):
     }
     return render(request, 'orgs/resources/org_job_delete.html', context)
 #############################################################################
+# FUNDING GENERAL
+
+
+def funding(request):
+    context = {
+
+    }
+    return render(request, 'orgs/funding_opport/funding.html', context)
+
+# FINANCE PERSO PUB
+
+
+def finance_perso(request):
+    fundings = PersFundingOpp.objects.filter(
+        publish=True).order_by('-created_at')
+
+    myFilter = PersoFundFilter(request.GET, queryset=fundings)
+    fundings = myFilter.qs
+
+    # PAGINATEUR
+    paginator = Paginator(fundings, 12)
+    page = request.GET.get('page')
+    try:
+        fundings = paginator.get_page(page)
+    except(EmptyPage, InvalidPage):
+        fundings = paginator.page(paginator.num_pages)
+
+    context = {
+        'fundings': fundings,
+        'myFilter': myFilter,
+    }
+    return render(request, 'orgs/funding_opport/pers/pub.html', context)
+
+
+@login_required(login_url='signe_in')
+def add_finance_perso(request):
+    if request.method == 'POST':
+        form = PersoFunForm(request.POST or None, request.FILES or None)
+        if form.is_valid():
+            org_name = form.cleaned_data.get('org_name')
+            name_funding = form.cleaned_data.get('name_funding')
+
+            if org_name or name_funding:
+                user = form.save(commit=False)
+                user.user = request.user
+                user.save()
+
+                messages.success(request, _(
+                    'لقد تم تسجيل طلب فرصة التمويل بنجاح و ستتم دراسته قريباً'))
+                return redirect('finance_perso')
+            else:
+                messages.error(request, _(
+                    'رجاءً أدخل اسم المنظمة أو الجهة المانحة لتتم دراسة فرصة التمويل'))
+    else:
+        form = PersoFunForm()
+
+    context = {
+        'form': form,
+    }
+    return render(request, 'orgs/funding_opport/pers/add.html', context)
+
+
+# FINANCE PERSO DETAILS
+
+
+def finance_perso_detail(request, pk):
+    perso = get_object_or_404(PersFundingOpp, id=pk)
+    persos = PersFundingOpp.objects.filter(
+        publish=True).order_by('-created_at')
+
+    if request.method == 'POST':
+        form = PersoFundConfirmForm(request.POST or None, instance=perso)
+        if form.is_valid():
+            at = form.save(commit=False)
+            at.published_at = datetime.utcnow()
+            at.save()
+
+            messages.success(request, _(
+                'لقد تم تغيير حالة فرصة التمويل بنجاح'))
+            return redirect('finance_perso')
+    else:
+        form = PersoFundConfirmForm(instance=perso)
+
+    context = {
+        'perso': perso,
+        'persos': persos,
+        'form': form,
+    }
+    return render(request, 'orgs/funding_opport/pers/detail.html', context)
+
+
+@login_required(login_url='signe_in')
+def finance_perso_edit(request, pk):
+    perso = get_object_or_404(PersFundingOpp, id=pk)
+
+    if request.method == 'POST':
+        form = PersoFunForm(request.POST or None,
+                            files=request.FILES, instance=perso)
+        if form.is_valid():
+            at = form.save(commit=False)
+            at.updated_at = datetime.utcnow()
+            at.save()
+
+            messages.success(request, _(
+                'لقد تم تعديل فرصة التمويل بنجاح'))
+            return redirect('finance_perso')
+    else:
+        form = PersoFunForm(instance=perso)
+
+    context = {
+        'perso': perso,
+        'form': form,
+    }
+
+    return render(request, 'orgs/funding_opport/pers/edit.html', context)
+
+
+@login_required(login_url='signe_in')
+def finance_perso_delete(request, pk):
+    funding = get_object_or_404(PersFundingOpp, id=pk)
+
+    if request.method == 'POST' and request.user.is_superuser:
+        funding.delete()
+
+        messages.success(request, _(
+            'لقد تم حذف فرصة التمويل بنجاح'))
+        return redirect('orgs_jobs')
+
+    context = {
+        'funding': funding,
+    }
+    return render(request, 'orgs/funding_opport/pers/delete.html', context)
+
+
+@login_required(login_url='signe_in')
+def finance_perso_not_pub(request):
+    fundings = PersFundingOpp.objects.filter(
+        publish=False).order_by('-created_at')
+    myFilter = PersoFundFilter(request.GET, queryset=fundings)
+    fundings = myFilter.qs
+
+    # PAGINATEUR
+    paginator = Paginator(fundings, 12)
+    page = request.GET.get('page')
+    try:
+        fundings = paginator.get_page(page)
+    except(EmptyPage, InvalidPage):
+        fundings = paginator.page(paginator.num_pages)
+
+    context = {
+        'fundings': fundings,
+        'myFilter': myFilter,
+    }
+    return render(request, 'orgs/funding_opport/pers/not_pub.html', context)
+
+
 # funding org opp
-
-
 def orgs_funding(request):
     fundings = OrgFundingOpp.objects.filter(
         publish=True).order_by('-created_at')
@@ -1593,7 +1778,7 @@ def orgs_funding(request):
         'fundings': fundings,
         'myFilter': myFilter,
     }
-    return render(request, 'orgs/funding_opport/org_funding.html', context)
+    return render(request, 'orgs/funding_opport/orgs/org_funding.html', context)
 # add funding
 
 
@@ -1603,26 +1788,34 @@ def orgs_add_funding(request):
     if request.method == 'POST':
         form = FundingForm(request.POST or None, files=request.FILES)
         if form.is_valid():
-            user = form.save(commit=False)
-            user.user = request.user
+
             org_name = form.cleaned_data.get('org_name')
-            if org_name:
-                user.org_name = org_name
+            name_funding = form.cleaned_data.get('name_funding')
+
+            if org_name or name_funding:
+                user = form.save(commit=False)
+                user.user = request.user
+                org_name = form.cleaned_data.get('org_name')
+                if org_name:
+                    user.org_name = org_name
+                else:
+                    user.org_name = request.user
+                user.save()
+
+                messages.success(request, _(
+                    'لقد تمت إضافة فرصة التمويل بنجاح و ستتم دراسته قريباً'))
+
+                return redirect('orgs_funding')
             else:
-                user.org_name = request.user
-            user.save()
-
-            messages.success(request, _(
-                'لقد تمت إضافة الخبر بنجاح و ستتم دراسته قريباً'))
-
-            return redirect('orgs_funding')
+                messages.error(request, _(
+                    'يحب إدخال اسم منظمة أو اسم الجهة المانحة لنتمكن من دراسة فرصة التمويل'))
     else:
         form = FundingForm()
 
     context = {
         'form': form,
     }
-    return render(request, 'orgs/funding_opport/org_add_funding.html', context)
+    return render(request, 'orgs/funding_opport/orgs/org_add_funding.html', context)
 # funding list to confirme
 
 
@@ -1642,12 +1835,14 @@ def org_funding_not_pub(request):
     context = {
         'fundings': fundings,
     }
-    return render(request, 'orgs/funding_opport/fundings_not_pub.html', context)
+    return render(request, 'orgs/funding_opport/orgs/fundings_not_pub.html', context)
 # funding details
 
 
 def funding_detail(request, funding_id):
     funding = get_object_or_404(OrgFundingOpp, id=funding_id)
+    fundings = OrgFundingOpp.objects.filter(
+        publish=True).order_by('-created_at')
 
     if request.method == 'POST':
         form = FundingConfirmForm(request.POST or None, instance=funding)
@@ -1665,8 +1860,9 @@ def funding_detail(request, funding_id):
     context = {
         'funding': funding,
         'form': form,
+        'fundings': fundings,
     }
-    return render(request, 'orgs/funding_opport/org_funding_details.html', context)
+    return render(request, 'orgs/funding_opport/orgs/org_funding_details.html', context)
 # job edit to modify job details
 
 
@@ -1683,7 +1879,7 @@ def funding_edit(request, funding_id):
             at.save()
 
             messages.success(request, _(
-                'لقد تم تعديل الخبر بنجاح'))
+                'لقد تم تعديل فرصة التمويل بنجاح'))
             return redirect('orgs_funding')
     else:
         form = FundingForm(instance=funding)
@@ -1692,7 +1888,7 @@ def funding_edit(request, funding_id):
         'funding': funding,
         'form': form,
     }
-    return render(request, 'orgs/funding_opport/org_edit_funding.html', context)
+    return render(request, 'orgs/funding_opport/orgs/org_edit_funding.html', context)
 # delete funding
 
 
@@ -1704,13 +1900,13 @@ def funding_delete(request, funding_id):
         funding.delete()
 
         messages.success(request, _(
-            'لقد تم حذف الخبر بنجاح'))
+            'لقد تم حذف فرصة التمويل بنجاح'))
         return redirect('orgs_funding')
 
     context = {
         'funding': funding,
     }
-    return render(request, 'orgs/funding_opport/org_funding_delete.html', context)
+    return render(request, 'orgs/funding_opport/orgs/org_funding_delete.html', context)
 
 
 # Capacity buildinng for opportunities
@@ -1744,19 +1940,25 @@ def orgs_add_capacity(request):
     if request.method == 'POST':
         form = CapacityForm(request.POST or None, files=request.FILES)
         if form.is_valid():
-            user = form.save(commit=False)
-            user.user = request.user
             org_name = form.cleaned_data.get('org_name')
-            if org_name:
-                user.org_name = org_name
+            name_capacity = form.cleaned_data.get('name_capacity')
+            if org_name or name_capacity:
+                user = form.save(commit=False)
+                user.user = request.user
+                org_name = form.cleaned_data.get('org_name')
+                if org_name:
+                    user.org_name = org_name
+                else:
+                    user.org_name = request.user
+                user.save()
+
+                messages.success(request, _(
+                    'لقد تمت إضافة فرصة بناء القدرات بنجاح و ستتم دراسته قريباً'))
+
+                return redirect('orgs_capacity')
             else:
-                user.org_name = request.user
-            user.save()
-
-            messages.success(request, _(
-                'لقد تمت إضافة الخبر بنجاح و ستتم دراسته قريباً'))
-
-            return redirect('orgs_capacity')
+                messages.error(request, _(
+                    'يجب إدخال اسم الجهة المانحة لنتمكن من دراسة الفرصة'))
     else:
         form = CapacityForm()
 
@@ -1798,7 +2000,7 @@ def capacity_detail(request, capacity_id):
             at.save()
 
             messages.success(request, _(
-                'لقد تم تغيير حالة المنحة  بنجاح'))
+                'لقد تم تغيير حالة فرصة بناء القدرات  بنجاح'))
             return redirect('orgs_capacity')
     else:
         form = CapacityConfirmForm(instance=capacity)
@@ -1819,13 +2021,17 @@ def capacity_edit(request, capacity_id):
         form = CapacityForm(request.POST or None,
                             files=request.FILES, instance=capacity)
         if form.is_valid():
+            print('salut')
             at = form.save(commit=False)
             at.updated_at = datetime.utcnow()
             at.save()
 
             messages.success(request, _(
-                'لقد تم تعديل الخبر بنجاح'))
+                'لقد تم تعديل فرصة بناء القدرات بنجاح'))
+
             return redirect('orgs_capacity')
+        else: 
+            messages.error(request, 'the form is not valide')
     else:
         form = CapacityForm(instance=capacity)
 
@@ -1845,7 +2051,7 @@ def capacity_delete(request, capacity_id):
         capacity.delete()
 
         messages.success(request, _(
-            'لقد تم حذف الخبر بنجاح'))
+            'لقد تم حذف فرصة بناء القدرات بنجاح'))
         return redirect('orgs_capacity')
 
     context = {
@@ -1893,7 +2099,7 @@ def orgs_add_devs(request):
             user.save()
 
             messages.success(request, _(
-                'لقد تمت إضافة الخبر بنجاح و ستتم دراسته قريباً'))
+                'لقد تمت إضافة دليل تطوير بنجاح و ستتم دراسته قريباً'))
 
             return redirect('orgs_devs')
     else:
@@ -1936,7 +2142,7 @@ def devs_detail(request, devs_id):
             at.save()
 
             messages.success(request, _(
-                'لقد تم تغيير حالة المنحة  بنجاح'))
+                'لقد تم تغيير حالة دليل تطوير بنجاح'))
             return redirect('orgs_devs')
     else:
         form = DevConfirmForm(instance=devs)
@@ -1962,7 +2168,7 @@ def dev_edit(request, devs_id):
             at.save()
 
             messages.success(request, _(
-                'لقد تم تعديل الخبر بنجاح'))
+                'لقد تم تعديل دليل التطوير بنجاح'))
             return redirect('orgs_devs')
     else:
         form = DevForm(instance=devs)
@@ -2005,7 +2211,7 @@ def dev_delete(request, devs_id):
 # 	devs.delete()
 
 # 	messages.success(request, _(
-#             'لقد تم حذف الخبر بنجاح'))
+#             'لقد تم حذف دليل التطوير بنجاح'))
 # 	return redirect('orgs_devs')
 
 

@@ -74,21 +74,63 @@ $("#fill_form #id_position_work").change(function () {
 
 // // JOBS CITY AJAX
 $("#add_job #id_position_work").change(function () {
-
     const url = $("#add_job").attr("data-cities-url"); // get the url of the `load_cities` view
     const countryId = $(this).val(); // get the selected country ID from the HTML input
-
     $.ajax({ // initialize an AJAX request
         url: url, // set the url of the request (= /persons/ajax/load-cities/ )
         data: {
             'position_work': countryId // add the country id to the GET parameters
         },
-
         success: function (data) { // `data` is the return of the `load_cities` view function
             $("#id_city_work").html(data); // replace the contents of the city input with the data that came from the server
         }
     });
+});
 
+// FINANCE ORGS CITY AJAX
+$("#finance_orgs #id_position_work").change(function () {
+    const url = $("#finance_orgs").attr("data-cities-url"); 
+    const countryId = $(this).val(); 
+    $.ajax({ 
+        url: url, 
+        data: {
+            'position_work': countryId 
+        },
+        success: function (data) {
+            $("#id_city_work").html(data); 
+        }
+    });
+});
+
+// FINANCE PERSO CITY AJAX
+$("#add_perso_finance #id_position_work").change(function () {
+    const url = $("#add_perso_finance").attr("data-cities-url"); 
+    const countryId = $(this).val(); 
+    $.ajax({ 
+        url: url, 
+        data: {
+            'position_work': countryId 
+        },
+        success: function (data) { 
+            $("#id_city_work").html(data); 
+        }
+    });
+});
+
+
+// CAPACITY CITY AJAX
+$("#add_capacity #id_position_work").change(function () {
+    const url = $("#add_capacity").attr("data-cities-url"); 
+    const countryId = $(this).val(); 
+    $.ajax({ 
+        url: url, 
+        data: {
+            'position_work': countryId 
+        },
+        success: function (data) { 
+            $("#id_city_work").html(data); 
+        }
+    });
 });
 
 
@@ -109,7 +151,7 @@ $("#id_is_org_registered").change(function () {
     }
 });
 
-$('#id_dead_date, #id_dev_date').attr('type', 'date');
+$('#id_dead_date, #id_dev_date, #id_funding_dead_date, #id_capacity_dead_date').attr('type', 'date');
 
 // INPUT ACCEPT YEAR ONLY
 $(
@@ -270,3 +312,91 @@ $('form#form_rapport').find('#id_media').attr('accept', 'application/pdf,image/*
 // if ($('#error_1_id_email')) {
 //     alert('This email already exists');
 // }
+
+
+
+// RESOURCES
+// FORM ADD JOB 
+let other = '<option value="other">Other</option>';
+$('#add_job #id_org_name').append(other);
+$('#add_job #id_other_org_name').append(other);
+$('#edit_job #id_org_name').append(other);
+$('#edit_job #id_other_org_name').append(other);
+
+$('#add_job, #edit_job').find('#div_id_other_org_name, #div_id_name, #div_id_logo').hide();
+// $('#edit_job').find('#div_id_other_org_name, #div_id_name, #div_id_logo').hide();
+
+if ($('#edit_job #id_org_name').val() == '') {
+    $('#id_org_name').val('other');
+    $('#div_id_other_org_name').show();
+}
+
+if ($('#edit_job #id_other_org_name').val() == '') {
+    $('#id_other_org_name').val('other');
+    $('#div_id_name, #div_id_logo').show();
+}
+
+$('#id_org_name').change(function () {
+    let value = $(this).val();
+    switch (value) {
+        case 'other':
+            if (!$('#div_id_other_org_name').parent().hasClass('list-org-0')) {
+                $('#div_id_other_org_name').show();
+                $('#add_job').submit(function () {
+                    $('#id_org_name').val('');
+                });
+            } else {
+                $('#div_id_name, #div_id_logo').show();
+            }            
+            break;
+        default:
+            $('#div_id_other_org_name').hide();
+            break;
+    }
+        
+});
+
+$('#id_other_org_name').change(function () {
+    let value = $(this).val();
+    switch (value) {
+        case 'other':
+            $('#div_id_name, #div_id_logo').show();
+            $('#add_job, #edit_job').submit(function () {
+                $('#id_other_org_name').val('');
+            });
+            break;
+        default:
+            $('#div_id_name, #div_id_logo').hide();
+            break;
+    }
+});
+
+// PERIOD MONTHS
+$('#id_period_months').attr({
+    maxlength: "3",
+    oninput: "this.value = this.value.replace(/[^0-9+]/g, '');",
+    placeholder: "Ex : 6",
+});
+
+
+// PERSO FINANCE
+$('#div_id_study_level, #div_id_comp_study, #div_id_domain').hide();
+$('#add_perso_finance').find('#id_fund_type').change(function () {
+    let value = $(this).val();
+    switch (value) {
+        case "study":
+            $('#div_id_study_level, #div_id_comp_study').show();
+            $('#add_perso_finance').find('#div_id_domain').hide();
+            break;
+        case "prod":
+            $('#add_perso_finance').find('#div_id_domain').show();
+            $('#div_id_study_level, #div_id_comp_study').hide();
+            break;
+        case "study & reserch":
+            $('#add_perso_finance').find('#div_id_domain').show();
+            $('#div_id_study_level, #div_id_comp_study').hide();
+            break;
+    }
+});
+
+$('#dev_form').find('#id_content').attr('accept', 'application/pdf, image/*, video/*');

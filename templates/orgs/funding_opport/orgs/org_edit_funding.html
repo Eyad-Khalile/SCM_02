@@ -12,7 +12,7 @@
     {% if request.user.is_authenticated %}
     {% if request.user == funding.user or request.user.is_staff %}
 
-    <form action="" method="post" class="register" enctype="multipart/form-data">
+    <form action="" method="post" id="finance_orgs" data-cities-url="{% url 'ajax_load_cities' %}" class="register" enctype="multipart/form-data">
         {% csrf_token %}
 
         {% if request.user.is_authenticated and request.user.is_staff %}
@@ -24,16 +24,19 @@
             {{ form.name_funding|as_crispy_field }}
         </div>
         <div class="for-group">
+            {{ form.logo|as_crispy_field }}
+        </div>
+        <div class="for-group">
             {{ form.funding_org_description|as_crispy_field }}
         </div>
         <div class="for-group">
             {{ form.work_domain|as_crispy_field }}
         </div>
         <div class="for-group">
-            {{ form.funding_country|as_crispy_field }}
+            {{ form.position_work|as_crispy_field }}
         </div>
         <div class="for-group">
-            {{ form.funding_city|as_crispy_field }}
+            {{ form.city_work|as_crispy_field }}
         </div>
         <div class="for-group">
             {{ form.funding_dead_date|as_crispy_field }}

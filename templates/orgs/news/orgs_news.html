@@ -23,14 +23,17 @@
           . <br><br> كما تم إلحاق قسم خاص بالأبحاث الصادرة عن المنظمات غير المسجلة في
           الموقع وبخاصة المنظمات الدولية وأجهزتها و وكالاتها.<br>
           ويضم هذا القسم خمس صفحات فرعية:
-          <ul  id="list-collapse">
-            <li ><strong>اخبار المنظمات :</strong> يتضمن اخر اخبار المنظمات المسجلة وأنشطتها ومشاريعها.</li>
-            <li ><strong>تقارير ودراسات :</strong> يتضمن التقارير والدراسات التي تصدرها منظمات المجتمع المدني المسجلة والتي تعتبر ركيزة
+          <ul id="list-collapse">
+            <li><strong>اخبار المنظمات :</strong> يتضمن اخر اخبار المنظمات المسجلة وأنشطتها ومشاريعها.</li>
+            <li><strong>تقارير ودراسات :</strong> يتضمن التقارير والدراسات التي تصدرها منظمات المجتمع المدني المسجلة
+              والتي تعتبر ركيزة
               مهمة
               للمنظمات الأخرى في فهم سياق العمل وخاصة أثناء مرحلة التخطيط للمشاريع القادمة</li>
-            <li ><strong>البيانات :</strong> يتضمن جميع البيانات الصادرة عن المنظمات المسجلة.</li>
-            <li ><strong>محتوى سمعي وبصري :</strong> وفيه تجدون الفيديوهات والسمعيات المنتجة والمصممة من قبل المنظمات المسجلة.</li>
-            <li ><strong>أبحاث خارجية :</strong> يتضمن التقارير والدراسات والمحتويات السمعية والبصرية والبيانات الصادرة عن المنظمات غير
+            <li><strong>البيانات :</strong> يتضمن جميع البيانات الصادرة عن المنظمات المسجلة.</li>
+            <li><strong>محتوى سمعي وبصري :</strong> وفيه تجدون الفيديوهات والسمعيات المنتجة والمصممة من قبل المنظمات
+              المسجلة.</li>
+            <li><strong>أبحاث خارجية :</strong> يتضمن التقارير والدراسات والمحتويات السمعية والبصرية والبيانات الصادرة
+              عن المنظمات غير
               المسجلة
               في المنصة بما في ذلك المنظمات الدولية وأجهزتها ووكالاتها</li>
           </ul>
@@ -38,7 +41,8 @@
       </p>
       {% endif %}
 
-      <a href="#collapseText"  id="collapsRead" class="nav-toggle text-decoration-none" data-toggle="collapse"> {% trans "إقراء المزيد" %}
+      <a href="#collapseText" id="collapsRead" class="nav-toggle text-decoration-none" data-toggle="collapse">
+        {% trans "إقراء المزيد" %}
       </a>
     </article>
 
@@ -48,37 +52,34 @@
     <div class="row org-work mb-2">
       <h2 class="text-center mb-4"> {% trans "اﻷخبار" %} </h2>
 
-      <div class="col-lg-1 col-md-4 col-sm-6"></div>
 
-      <div class="col-lg-2 col-md-4 col-sm-6">
-        <a href="{% url 'orgs_news' %}"
-          class="btn btn-button d-flex justify-content-center align-items-center h-100 w-100 border-0"> {% trans "أخبار
-          المنظمات" %} </a>
-      </div>
-      <div class="col-lg-2 col-md-4 col-sm-6">
-        <a href="{% url 'orgs_rapport' %}"
-          class="btn btn-button d-flex justify-content-center align-items-center h-100 w-100 border-0"> {% trans "تقارير
-          ودراسات" %} </a>
-      </div>
-      <div class="col-lg-2 col-md-4 col-sm-6">
-        <a href="{% url 'data' %}"
-          class="btn btn-button d-flex justify-content-center align-items-center h-100 w-100 border-0"> {% trans "بيانات" %} </a>
-      </div>
-      <div class="col-lg-2 col-md-4 col-sm-6">
-        <a href="{% url 'media' %}"
-          class="btn btn-button d-flex justify-content-center align-items-center h-100 w-100 border-0"> {% trans "سمعي وبصري" %} </a>
-      </div>
-      <div class="col-lg-2 col-md-4 col-sm-6">
-        <a href="{% url 'research' %}"
-          class="btn btn-button d-flex justify-content-center align-items-center h-100 w-100 border-0"> {% trans "أبحاث خارجية" %} </a>
+      <div class="d-flex justify-content-center align-items-center flex-wrap">
+        <div class="">
+          <a href="{% url 'orgs_news' %}"
+            class="btn btn-button d-flex justify-content-center align-items-center border-0">
+            {% trans "أخبار المنظمات" %} </a>
+        </div>
+        <div class="">
+          <a href="{% url 'orgs_rapport' %}"
+            class="btn btn-button d-flex justify-content-center align-items-center border-0">
+            {% trans "تقارير ودراسات" %} </a>
+        </div>
+        <div class="">
+          <a href="{% url 'data' %}" class="btn btn-button d-flex justify-content-center align-items-center border-0">
+            {% trans "بيانات" %} </a>
+        </div>
+        <div class="">
+          <a href="{% url 'media' %}" class="btn btn-button d-flex justify-content-center align-items-center border-0">
+            {% trans "سمعي وبصري" %} </a>
+        </div>
+        <div class="">
+          <a href="{% url 'research' %}"
+            class="btn btn-button d-flex justify-content-center align-items-center border-0"> {% trans "أبحاث خارجية" %}
+          </a>
+        </div>
       </div>
 
-      <div class="col-lg-1 col-md-4 col-sm-6"></div>
     </div>
-
-
-
-
 
   </div>
 </div>

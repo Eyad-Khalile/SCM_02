@@ -14,16 +14,22 @@
         {% for funding in fundings %}
 
         <div class="span3 well">
+            <span class="text-muted">{{ funding.created_at|date:"Y-m-d" }}</span>
             <center>
-                <a href="{% url 'news_detail' funding.id %}">
-                    <img src="{{ funding.logo_funding.url }}" name="{{ funding.name_funding }}" title="{{ funding.name_funding }}"
-                        alt="{{ funding.name_funding }}" width="140" height="140" class="img-circle"></a>
-                <h3 class="mt-4">{{ funding.name_funding }}</h3>
-                <p>{{ funding.funding_org_description }}</p>
+                <a href="{% url 'funding_detail' funding.id %}">
+                    <img src="{{ funding.logo.url }}"
+                        name="{% if funding.org_name %} {{ funding.org_name }} {% else %} {{ funding.name_funding }} {% endif %}"
+                        title="{% if funding.org_name %} {{ funding.org_name }} {% else %} {{ funding.name_funding }} {% endif %}"
+                        alt="{% if funding.org_name %} {{ funding.org_name }} {% else %} {{ funding.name_funding }} {% endif %}"
+                        width="140" height="140" class="img-circle"></a>
+
+                <h3 class="mt-4">{% if funding.org_name %} {{ funding.org_name }} {% else %} {{ funding.name_funding }}
+                    {% endif %}</h3>
+
+                <p>{{ funding.funding_org_description|truncatechars:80 }}</p>
                 <p>{{ funding.funding_description|truncatechars:80 }}</p>
                 <p>
-                    <a href="{% url 'funding_detail' funding.id %}" class="btn btn-block">
-                        {% trans 'لقراءة المزيد' %} </a>
+                    <a href="{% url 'funding_detail' funding.id %}" class="btn btn-block" title="{% trans 'لقراءة المزيد' %}"><i class="fas fa-book-reader"></i></a>
                 </p>
 
             </center>
@@ -56,7 +62,8 @@
 
                 {% if orgs.has_next %}
                 <a href="?page={{ fundings.next_page_number }}" class="btn"><i class="fa fa-angle-right"></i></a>
-                <a href="?page={{ fundings.paginator.num_pages }}" class="btn"><i class="fa fa-angle-double-right"></i></a>
+                <a href="?page={{ fundings.paginator.num_pages }}" class="btn"><i
+                        class="fa fa-angle-double-right"></i></a>
 
                 {% endif %}
                 {% endif %}

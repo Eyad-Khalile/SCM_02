@@ -5,8 +5,8 @@
 <h1 class="mt-4 mb-4">{% trans 'تفاصيل المنظمة' %} </h1>
 
 <div class="container emp-profile mt-4">
-  <form >
-    
+  <form>
+
     <div class="row">
       <div class="col-md-4 mb-4" data-aos="fade-left">
         <div class="profile-img">
@@ -65,7 +65,7 @@
           {% if request.user.is_superuser %}
           <h6 class="mb-4 pb-4 row border-top pt-2">
             <div class="col-6">
-              <strong>{% trans "اسم الذي أضاف المنظمة" %} :</strong>
+              <strong>{% trans "اسم المستخدم" %} :</strong>
             </div>
             <div class="col-6">
               {{ org.user }}

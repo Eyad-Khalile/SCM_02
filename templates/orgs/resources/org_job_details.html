@@ -6,57 +6,157 @@
 <div class="row justify-content-center mt-4 pt-4">
   <h1> {% trans ' تفاصيل العمل' %} </h1>
 
-  <div class="span1 well">
-    <!-- <center>   -->
-    {% if request.user.is_authenticated and request.user.is_superuser %}
-    <h3 class="mt-4"> {% trans "اسم اللذي أضاف فرصة العمل" %} : {{ job.user }}</h3>
+  <div class="span1 well job-card" data-aos="fade-in">
+    <h2 class="text-center mt-3"> {% trans "اسم فرصة العمل" %} : {{ job.job_title }}</h2>
+
+    <!-- ORG LOGO -->
+    {% if job.org_name %}
+    <a href="{% url 'jobs_detail' job.id %}">
+      <figure>
+        <img src="{{ job.org_name.logo.url }}" name="{{ job.title }}" title="{{ job.title }}" alt="{{ job.title }}"
+          width="100%" class="img-thumbnail rounded"></figure>
+    </a>
+    {% elif job.other_org_name %}
+    <a href="{% url 'jobs_detail' job.id %}">
+      <figure>
+        <img src="{{ job.other_org_name.logo.url }}" name="{{ job.title }}" title="{{ job.title }}"
+          alt="{{ job.title }}" width="100%" class="img-thumbnail rounded"></figure>
+    </a>
+    {% else %}
+
+    {% if other.job|floatformat:"2" == job.id|floatformat:"2" %}
+    <a href="{% url 'jobs_detail' job.id %}">
+      <figure>
+        <img src="{{ other.logo.url }}" name="{{ other.name }}" title="{{ other.name }}" alt="{{ other.name }}"
+          width="100%" class="img-thumbnail rounded"></figure>
+    </a>
     {% endif %}
 
-    <h3 class="mt-4"> {% trans "اسم المنظمة" %} : {{ job.org_name }}</h3>
-    <span class="text-muted">{% trans "  تاريخ الإضافة " %} : {{ job.date_published }} </span>
+    {% endif %}
 
-    <p class="mt-3"> {% trans "عنوان فرصة العمل" %} : {{ job.job_title }}</p>
-    <p> {% trans "وصف فرصة العمل" %} : <br> {{ job.job_descrption }}</p>
-    <!-- </center> -->
+    <!-- ORG NAME -->
+    <h3 class="mt-4">
+      {% trans 'اسم المنظمة' %} :
+      {% if job.org_name %}
+      {{ job.org_name }}
+      {% elif job.other_org_name %}
+      {{ job.other_org_name }}
+      {% elif other.job|floatformat:"2" == job.id|floatformat:"2" %}
+      {{ other.name }}
+      {% else %}
+      {% trans 'لم يذكر' %}
+      {% endif %}
+    </h3>
+
+
+    {% if request.user.is_authenticated and request.user.is_superuser %}
+    <p class="mt-2"> {% trans "اسم اللذي أضاف فرصة العمل" %} : {{ job.user }}</p>
+    {% endif %}
+
+    <span class="text-muted">{% trans "تاريخ الإضافة" %} : {{ job.created_at }} </span>
+
+    <hr>
+
+    <p>
+      {% trans "نوع الوظيفة" %} :
+      {{ job_type }}
+    </p>
+    <p>
+      {% trans "مجال العمل" %} :
+      {{ job_domain }}
+    </p>
+    <p> {% trans "وصف فرصة العمل" %} : <br> {{ job.job_description }}</p>
+    <p>
+      {% trans "مكان العمل" %} :
+      {{ position_work }}
+    </p>
+    <p>
+      {% trans "المدينة" %} :
+      {% if job.city_work %}
+      {{ job.city_work }}
+      {% else %}
+      {% trans 'لم يذكر' %}
+      {% endif %}
+    </p>
+    <p>
+      {% trans "المنطقة" %} :
+      {% if job.job_area %}
+      {{ job.job_area }}
+      {% else %}
+      {% trans 'لم يذكر' %}
+      {% endif %}
+    </p>
+
+    <p>
+      {% trans "مدة العمل" %} :
+      {% if job.period_months %}
+      {{ job.period_months }}
+      {% else %}
+      {% trans 'لم يذكر' %}
+      {% endif %}
+    </p>
+
+    <p>
+      {% trans "الخبرة المطلوبة" %} :
+      {{ experience }}
+    </p>
+
+    <p>
+      {% trans "تاريخ إغلاق التقدم للوظيفة" %} :
+      {{ job.dead_date|date:"c" }}
+    </p>
+
+    <p>
+      {% trans "طريقة التقدم للوظيفة" %} : <br>
+      {{ job.job_aplay }}
+    </p>
+
+
+
   </div>
   <div class="row">
 
-      <div class="col">
-        {% if request.user.is_authenticated and request.user.is_superuser %}
-        
-        {% if job.publish == False %}
-        <form action="" class="confirm" method="post">
-          {% csrf_token %} {{form.publish}}
-          <div class="form-group">
-            <input type="submit" id="org_confirm_btn" class="btn btn-block"
-              value="{% trans 'الموافقة على النشر' %}" />
-          </div>
-        </form>
-        {% elif job.publish == True %}
-        <form action="" class="deconfirm" method="post">
-          {% csrf_token %} {{form.publish}}
-          <div class="form-group">
-            <input type="submit" id="org_deconfirm_btn" class="btn btn-block" value="{% trans 'إلغاء نشر فرصة العمل' %}" />
-          </div>
-        </form>
-        {% endif %}
-        {% endif %}
-      </div>
-      
-      
-        
-        {% if request.user == job.user  or request.user.is_superuser %}
-        <div class="col">
-          <a href="{% url 'jobs_edit' job.id %}" class="btn btn-block"> {% trans 'تعديل فرصة عمل' %} </a>
-        </div>
+    <div class="col">
+      {% if request.user.is_authenticated and request.user.is_superuser %}
 
-        <div class="col">
-          <a href="{% url 'jobs_delete' job.id %}" class="btn btn-block"> {% trans 'حذف' %} </a>
+      {% if job.publish == False %}
+      <form action="" class="confirm" method="post">
+        {% csrf_token %} {{form.publish}}
+        <div class="form-group">
+          <!-- <input type="submit" id="org_confirm_btn" class="btn btn-block" value="{% trans 'الموافقة على النشر' %}" /> -->
+          <button type="submit" id="org_confirm_btn" class="btn btn-block" title="{% trans 'الموافقة على النشر' %}"><i
+              class="fas fa-check"></i></button>
         </div>
-        
+      </form>
+      {% elif job.publish == True %}
+      <form action="" class="deconfirm" method="post">
+        {% csrf_token %} {{form.publish}}
+        <div class="form-group">
+          <!-- <input type="submit" id="org_deconfirm_btn" class="btn btn-block"
+            value="{% trans 'إلغاء نشر فرصة العمل' %}" /> -->
+          <button type="submit" id="org_deconfirm_btn" class="btn btn-block"
+            title="{% trans 'إلغاء نشر فرصة العمل' %}"><i class="fa fa-ban" aria-hidden="true"></i>
+          </button>
+        </div>
+      </form>
       {% endif %}
-
+      {% endif %}
     </div>
+
+
+
+    {% if request.user == job.user  or request.user.is_superuser %}
+    <div class="col">
+      <a href="{% url 'jobs_edit' job.id %}" class="btn btn-block" title="{% trans 'تعديل فرصة عمل' %}"><i class="fas fa-edit"></i></a>
+    </div>
+
+    <div class="col">
+      <a href="{% url 'jobs_delete' job.id %}" class="btn btn-block" title="{% trans 'حذف' %}"><i class="far fa-trash-alt"></i></a>
+    </div>
+
+    {% endif %}
+
+  </div>
 
 
 </div>

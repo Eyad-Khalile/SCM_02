@@ -17,7 +17,20 @@
         <div class="for-group">
             {{ form.org_name|as_crispy_field }}
         </div>
+        <!-- OTHER ORGS NAME CHOICES -->
+        <div class="for-group {% if other == 0 %} list-org-{{ other }} {% endif %}">
+            {{ form.other_org_name|as_crispy_field }}
+        </div>
+        <!-- OTHER ORGS NAME FORM -->
+        <div class="for-group">
+            {{ form_other.name|as_crispy_field }}
+        </div>
+        <div class="for-group">
+            {{ form_other.logo|as_crispy_field }}
+        </div>
         {% endif %}
+
+
         <div class="for-group">
             {{ form.job_title|as_crispy_field }}
         </div>
@@ -44,6 +57,9 @@
         </div>
         <div class="for-group">
             {{ form.job_domain|as_crispy_field }}
+        </div>
+        <div class="for-group">
+            {{ form.job_aplay|as_crispy_field }}
         </div>
         <div class="for-group">
             {{ form.dead_date|as_crispy_field }}
