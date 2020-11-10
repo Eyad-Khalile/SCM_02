@@ -17,6 +17,10 @@ class OrgsFilter(django_filters.FilterSet):
                           lookup_expr='lte', label=_('إلى :'))
     name = CharFilter(field_name="name",
                       lookup_expr='icontains', label=_('اسم المنظمة'))
+    start_date_pub = DateFilter(field_name="created_at",
+                                lookup_expr='gte', label=_('تاريخ نشر الخبر / من :'))
+    end_date_pub = DateFilter(field_name="created_at",
+                              lookup_expr='lte', label=_('إلى :'))
     # description = CharFilter(field_name="description",
     #                          lookup_expr='icontains', label='Description')
 
@@ -29,6 +33,7 @@ class OrgsFilter(django_filters.FilterSet):
             'start_date',
             'end_date',
             'target_cat',
+            'published_at',
         ]
 
         # exclude = ['date_published', 'date_updated', 'likes', 'is_published']

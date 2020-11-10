@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% load static i18n phonenumber_filters %}
+{% load static i18n phonenumber_filters crispy_forms_tags %}
 {% block title %} {% trans 'لوحة التحكم الخاصة باﻹدارة' %} {% endblock %}
 
 {% get_current_language as LANGUAGE_CODE %}
@@ -8,7 +8,7 @@
 
 <!-- SIDEBAR -->
 
-{{ count_orgs }}
+
 
 
 <!-- PAGE CONTENT -->
@@ -18,6 +18,7 @@
         <div class="row">
             <div class="col-12">
                 <h1 class="text-center pt-4 mt-4">{% trans 'لوحة التحكم الخاصة باﻹدارة' %} </h1>
+                
                 <hr>
                 <!-- CONTANTS -->
                 <div class="contante">
@@ -32,6 +33,132 @@
         </div>
     </div>
 </div>
+<div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
+    <a class="btn btn-block mt-4" data-toggle="collapse" href="#collapseFiltre" aria-expanded="false"
+        aria-controls="collapseFiltre">{% trans 'فرز' %}</a>
+</div>
+
+<div class="pt-3 px-4 pb-2 mt-4 collapse" id="collapseFiltre">
+
+    <form action="" method="get"
+        class="row register justify-content-start align-items-center flex-wrap form my-2 my-lg-0">
+        <div class="col-sm-12 col-md-4  mt-3">
+            {{ myFilter.form.org_name|as_crispy_field }}
+        </div>
+        <div class="row">
+            <div class="col-xs-6 col-sm-6 col-md-4 mt-3">
+                {{ myFilter.form.start_date_pub|as_crispy_field }}
+            </div>
+            <div class="col-xs-6 col-sm-6 col-md-4 mt-3">
+                {{ myFilter.form.end_date_pub|as_crispy_field }}
+            </div>
+        </div>
+        
+        <div class="form-group mt-3">
+            <button class="btn btn-block mt-3">{% trans 'بحث' %}</button>
+        </div>
+    </form>
+</div>
+
+<h1 class="text-center pt-4 mt-4">{% trans 'عدد الاخبار المنشورة' %} {{news_count}} </h1>
+<div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
+    <a class="btn btn-block mt-4" data-toggle="collapse" href="#collapseFiltre" aria-expanded="false"
+        aria-controls="collapseFiltre">{% trans 'فرز' %}</a>
+</div>
+<div class="pt-3 px-4 pb-2 mt-4 collapse" id="collapseFiltre">
+
+    <form action="" method="get"
+        class="row register justify-content-start align-items-center flex-wrap form my-2 my-lg-0">
+       
+        <div class="row">
+            <div class="col-xs-6 col-sm-6 col-md-4 mt-3">
+                {{ myFilter_orgs.form.start_date_pub|as_crispy_field }}
+            </div>
+            <div class="col-xs-6 col-sm-6 col-md-4 mt-3">
+                {{ myFilter_orgs.form.end_date_pub|as_crispy_field }}
+            </div>
+        </div>
+        
+        <div class="form-group mt-3">
+            <button class="btn btn-block mt-3">{% trans 'بحث' %}</button>
+        </div>
+    </form>
+</div>
+<h1 class="text-center pt-4 mt-4">{% trans 'عدد المنظمات' %} {{orgs_count}} </h1>
+<h1 class="text-center pt-4 mt-4">{% trans 'عدد الاخبار' %} {{news_count}} </h1>
+<h1 class="text-center pt-4 mt-4">{% trans ' عدد التقارير' %} {{rapports_count}} </h1>
+<h1 class="text-center pt-4 mt-4">{% trans ' عدد البيانات' %} {{datas_count}} </h1>
+<!-- <h1 class="text-center pt-4 mt-4">{% trans ' عدد سمعي بصري' %} {{medias_count}} </h1> -->
+<h1 class="text-center pt-4 mt-4">{% trans ' عدد الابحاث' %} {{researchs_count}} </h1>
+<h1 class="text-center pt-4 mt-4">{% trans ' عدد فرص العمل' %} {{jobs_count}} </h1>
+<h1 class="text-center pt-4 mt-4">{% trans ' عدد فرص التمويل' %} {{fundings_count}} </h1>
+<h1 class="text-center pt-4 mt-4">{% trans ' عدد فرص بناء القدرات' %} {{Capacitys_count}} </h1>
+<h1 class="text-center pt-4 mt-4">{% trans ' عدد فرص دليل التطوير' %} {{devs_count}} </h1>
+<h1 class="text-center pt-4 mt-4">{% trans ' عدد الاخبار المنشورة من البوابة' %} {{our_news_count}} </h1>
+<!-- <h1 class="text-center pt-4 mt-4">{% trans ' عدد الاخبار المنشورة من البوابة' %} {{edate}} </h1> -->
+<!-- news visual -->
+<div class="mb-5 pb-5">
+    <script src=”http://cdn.pydata.org/bokeh/release/bokeh-1.3.4.min.js"></script>
+    <script src=”http://cdn.pydata.org/bokeh/release/bokeh-widgets-1.3.4.min.js"></script>
+    {{div|safe}} 
+    <script src="https://cdn.bokeh.org/bokeh/release/bokeh-1.4.0.min.js"
+    crossorigin="anonymous"></script>
+    <script src="https://cdn.bokeh.org/bokeh/release/bokeh-widgets-1.4.0.min.js"
+    crossorigin="anonymous"></script>
+    <script src="https://cdn.bokeh.org/bokeh/release/bokeh-tables-1.4.0.min.js"
+    crossorigin="anonymous"></script>
+    {{ script | safe }}   
+   
+</div>
+<!-- orgs visual -->
+<div class="mb-5 pb-5">
+    <script src=”http://cdn.pydata.org/bokeh/release/bokeh-1.3.4.min.js"></script>
+    <script src=”http://cdn.pydata.org/bokeh/release/bokeh-widgets-1.3.4.min.js"></script>
+    {{div_org|safe}} 
+    <script src="https://cdn.bokeh.org/bokeh/release/bokeh-1.4.0.min.js"
+    crossorigin="anonymous"></script>
+    <script src="https://cdn.bokeh.org/bokeh/release/bokeh-widgets-1.4.0.min.js"
+    crossorigin="anonymous"></script>
+    <script src="https://cdn.bokeh.org/bokeh/release/bokeh-tables-1.4.0.min.js"
+    crossorigin="anonymous"></script>
+    {{ script_org | safe }}   
+   
+</div>
+<!-- org_reports -->
+<div class="mb-5 pb-5">
+    <script src=”http://cdn.pydata.org/bokeh/release/bokeh-1.3.4.min.js"></script>
+    <script src=”http://cdn.pydata.org/bokeh/release/bokeh-widgets-1.3.4.min.js"></script>
+    {{div_report|safe}} 
+    <script src="https://cdn.bokeh.org/bokeh/release/bokeh-1.4.0.min.js"
+    crossorigin="anonymous"></script>
+    <script src="https://cdn.bokeh.org/bokeh/release/bokeh-widgets-1.4.0.min.js"
+    crossorigin="anonymous"></script>
+    <script src="https://cdn.bokeh.org/bokeh/release/bokeh-tables-1.4.0.min.js"
+    crossorigin="anonymous"></script>
+    {{ script_report| safe }}   
+   
+</div>
+<!-- count jobs  -->
+<div class="mb-5 pb-5">
+    <script src=”http://cdn.pydata.org/bokeh/release/bokeh-1.3.4.min.js"></script>
+    <script src=”http://cdn.pydata.org/bokeh/release/bokeh-widgets-1.3.4.min.js"></script>
+    {{div_jobs|safe}} 
+    <script src="https://cdn.bokeh.org/bokeh/release/bokeh-1.4.0.min.js"
+    crossorigin="anonymous"></script>
+    <script src="https://cdn.bokeh.org/bokeh/release/bokeh-widgets-1.4.0.min.js"
+    crossorigin="anonymous"></script>
+    <script src="https://cdn.bokeh.org/bokeh/release/bokeh-tables-1.4.0.min.js"
+    crossorigin="anonymous"></script>
+    {{ script_jobs| safe }}   
+   
+</div>
+
+<a href="{% url 'friend_invite' %}" class="btn btn-block">
+    {% trans 'invite org' %}
+</a>
+
+
+
 
 
 

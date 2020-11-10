@@ -453,3 +453,11 @@ class NewsLetterForm(forms.ModelForm):
     #     salut = self.cleaned_data.get('name')
     #     print(salut)
     #     return salut
+class FriendInviteForm(forms.ModelForm): 
+      
+     class Meta:
+        model = Invitation
+        fields = [
+            'name',
+            'email',
+        ]

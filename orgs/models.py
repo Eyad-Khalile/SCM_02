@@ -7,6 +7,10 @@ from django_countries.fields import CountryField
 from django.utils.translation import gettext_lazy as _
 from django.core.validators import MaxValueValidator, MinValueValidator
 from PIL import Image
+from django.core.mail import send_mail
+from django.template.loader import get_template
+from django.template import Context
+from django.conf import settings
 
 
 # https://github.com/akjasim/cb_dj_dependent_dropdown
@@ -745,3 +749,17 @@ class NewsLetter(models.Model):
 
     def __str__(self):
         return self.name
+# Invitation Modle to invite orgs
+class Invitation(models.Model): 
+    sender = models.ForeignKey(User,on_delete=models.CASCADE)  
+    name = models.CharField(max_length=50,null=True, blank=True, verbose_name=_('اسم المنظمة') )
+    email = models.EmailField(max_length=255, null=False, verbose_name=_('البريد الاكتروني'))  
+  
+    def __unicode__(self):   
+         return u'%s, %s' % (self.sender.username, self.email)
+    def send(self):   
+           subject = u'Invitation to join Django Bookmarks'   
+           template = get_template('orgs/our_news/invitation_email.txt')    
+           context = Context({'name': self.name,'sender': self.sender.username,})    
+           message = template.render(context)    
+           send_mail( subject, message,settings.DEFAULT_FROM_EMAIL, [self.email] )
