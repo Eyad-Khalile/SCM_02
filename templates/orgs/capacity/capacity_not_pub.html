@@ -15,10 +15,21 @@
 
         <div class="span3 well">
             <center>
-                
-                <h3 class="mt-4">{{ capacity.name_capacity }}</h3>
-                <p>{{ capacity.capacity_description }}</p>
-                <p>{{ capacity.title_capacity|truncatechars:80 }}</p>
+
+                <h3 class="mt-4">
+                    {% if capacity.org_name %}
+                    {{ capacity.org_name }}
+                    {% else %}
+                    {{ capacity.name_capacity }}
+                    {% endif %}
+                </h3>
+
+                <p> <strong> {{ capacity.title_capacity }} </strong></p>
+
+                <p>{{ capacity.capacity_description|truncatechars:80 }}</p>
+
+                <p class="text-muted"> {{ capacity.created_at|date:'Y-m-d' }} </p>
+
                 <p>
                     <a href="{% url 'capacity_detail' capacity.id %}" class="btn btn-block">
                         {% trans 'لقراءة المزيد' %} </a>
@@ -54,7 +65,8 @@
 
                 {% if orgs.has_next %}
                 <a href="?page={{ Capacitys.next_page_number }}" class="btn"><i class="fa fa-angle-right"></i></a>
-                <a href="?page={{ Capacitys.paginator.num_pages }}" class="btn"><i class="fa fa-angle-double-right"></i></a>
+                <a href="?page={{ Capacitys.paginator.num_pages }}" class="btn"><i
+                        class="fa fa-angle-double-right"></i></a>
 
                 {% endif %}
                 {% endif %}

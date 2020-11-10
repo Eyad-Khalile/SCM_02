@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static i18n %}
+{% get_current_language as LANGUAGE_CODE %}
 
 {% block title %} {% trans "مصادر المجتمع المدني" %} {% endblock %}
 
@@ -10,6 +11,8 @@
     <article>
       <h1 class="text-center mb-4"> {% trans "مصادر المجتمع المدني" %} </h1>
       <!-- Text Descriptions -->
+
+      {% if LANGUAGE_CODE == 'ar' %}
       <p class="text-right text-al-just p-color h4">
 
         يعرض هذا القسم فرص العمل والتمويل والموارد المتاحة سواء لمنظمات المجتمع المدني السوري والعاملين فيها، وأيضا
@@ -20,7 +23,8 @@
 
           <ul id="list-collapse">
             <li>
-              <strong>فرص العمل :</strong> يتضمن أحدث فرص العمل والتطوع والتدريب التي تطرحها المنظمات المسجلة في المنصة وغير المسجلة بما
+              <strong>فرص العمل :</strong> يتضمن أحدث فرص العمل والتطوع والتدريب التي تطرحها المنظمات المسجلة في المنصة
+              وغير المسجلة بما
               في
               ذلك المنظمات الدولية.
             </li>
@@ -28,19 +32,23 @@
               <strong>فرص التمويل :</strong> يعرض المنح وفرص التمويل سواء الخاصة بالأفراد أو المنظمات.
             </li>
             <li>
-              <strong>فرص بناء القدرات :</strong> يعرض فرص وأجندة ورشات العمل والتدريب في مجالات مختلفة (مجالات التنمية، مجالات الإغاثة
+              <strong>فرص بناء القدرات :</strong> يعرض فرص وأجندة ورشات العمل والتدريب في مجالات مختلفة (مجالات التنمية،
+              مجالات الإغاثة
               الإنسانية، مجالات الحوكمة والإدارة... الخ).
             </li>
             <li>
-              <strong>دليل التطوير :</strong> وهو مكتبة الكترونية مليئة بالمراجع التي تهم العاملين في مجال المجتمع المدني وإدارة المشاريع،
+              <strong>دليل التطوير :</strong> وهو مكتبة الكترونية مليئة بالمراجع التي تهم العاملين في مجال المجتمع
+              المدني وإدارة المشاريع،
               الحوكمة التنظيمية، المناصرة والحملات... الخ
             </li>
           </ul>
 
         </span>
       </p>
+      {% endif %}
 
-      <a href="#collapseText" class="nav-toggle text-decoration-none" data-toggle="collapse"> {% trans "إقراء المزيد" %}
+      <a href="#collapseText" id="collapsRead" class="nav-toggle text-decoration-none" data-toggle="collapse">
+        {% trans "إقراء المزيد" %}
       </a>
     </article>
 
@@ -48,38 +56,33 @@
     <hr>
     <!-- Les Cercles -->
     <div class="row org-work mb-2">
-      <h2 class="text-center mb-4">المصادر</h2>
+      <h2 class="text-center mb-4"> {% trans "المصادر" %} </h2>
 
-      <div class="col-lg-1 col-md-4 col-sm-6"></div>
+      <div class="d-flex justify-content-center align-items-center flex-wrap">
+        <div class="">
+          <a href="{% url 'orgs_jobs' %}"
+            class="btn btn-button d-flex justify-content-center align-items-center border-0"> {% trans "فرص العمل" %}
+          </a>
+        </div>
+        <div class="">
+          <a href="{% url 'funding' %}"
+            class="btn btn-button d-flex justify-content-center align-items-center border-0"> {% trans "فرص التمويل" %}
+          </a>
+        </div>
 
-      <div class="col-lg-2 col-md-4 col-sm-6">
-        <a href="{% url 'orgs_jobs' %}"
-          class="btn btn-button d-flex justify-content-center align-items-center h-100 w-100 border-0">فرص العمل</a>
-      </div>
-      <div class="col-lg-2 col-md-4 col-sm-6">
-        <a href="{% url 'orgs_rapport' %}"
-          class="btn btn-button d-flex justify-content-center align-items-center h-100 w-100 border-0">تقارير
-          ودراسات</a>
-      </div>
-      <div class="col-lg-2 col-md-4 col-sm-6">
-        <a href="{% url 'data' %}"
-          class="btn btn-button d-flex justify-content-center align-items-center h-100 w-100 border-0">بيانات</a>
-      </div>
-      <div class="col-lg-2 col-md-4 col-sm-6">
-        <a href="{% url 'media' %}"
-          class="btn btn-button d-flex justify-content-center align-items-center h-100 w-100 border-0">سمعي وبصري</a>
-      </div>
-      <div class="col-lg-2 col-md-4 col-sm-6">
-        <a href="{% url 'research' %}"
-          class="btn btn-button d-flex justify-content-center align-items-center h-100 w-100 border-0">أبحاث خارجية</a>
+        <div class="">
+          <a href="{% url 'orgs_capacity' %}"
+            class="btn btn-button d-flex justify-content-center align-items-center border-0">
+            {% trans "فرص بناء القدرات" %} </a>
+        </div>
+        <div class="">
+          <a href="{% url 'orgs_devs' %}"
+            class="btn btn-button d-flex justify-content-center align-items-center border-0"> {% trans 'دليل التطوير' %}
+          </a>
+        </div>
       </div>
 
-      <div class="col-lg-1 col-md-4 col-sm-6"></div>
     </div>
-
-
-
-
 
   </div>
 </div>

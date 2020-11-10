@@ -8,8 +8,8 @@
 
 {% for prof in request.user.orgprofile_set.all %}
 <div class="container emp-profile mt-4">
-    <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
+    <form >
+        
         <div class="row">
             <div class="col-md-4 mb-4">
                 <div class="profile-img">
@@ -397,7 +397,7 @@
 
     <div class="col">
         <a href="{% url 'guide' %}" class="btn btn-block mt-2 mb-2">
-            عودة إلى صفحة دليل المجتمع المدني
+            {% trans 'عودة إلى صفحة دليل المجتمع المدني' %}
         </a>
     </div>
 

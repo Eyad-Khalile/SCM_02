@@ -4,14 +4,19 @@
 {% block title %} {% trans 'اتمام الملف الشخصي للمنظمة' %} {% endblock %}
 
 {% block content %}
+
 <h1 class="pt-4 mt-4"> {% trans 'تقديم طلب اشتراك' %} </h1>
 
 <div class="register mb-5">
-    <form action="" id="fill_form" method="POST" data-cities-url="{% url 'ajax_load_cities' %}" enctype="multipart/form-data">
+    <form action="" id="fill_form" method="POST" data-cities-url="{% url 'ajax_load_cities' %}"
+        enctype="multipart/form-data">
         {% csrf_token %}
 
-        
-
+        {% if request.user.is_staff %}
+        <div class="form-group">
+            {{ form.user|as_crispy_field }}
+        </div>
+        {% endif %}
         <div class="row">
             <div class="form-group col-xl-4">
                 {{ form.name|as_crispy_field }}
@@ -45,14 +50,14 @@
             <div class="form-group col-xl-3">
                 {{ form.city_work|as_crispy_field }}
             </div>
-            <div class="form-group col-xl-3">
+            <div class="form-group div-logo col-xl-3">
                 {{ form.logo|as_crispy_field }}
-                <i class="fas fa-upload position-relative text-white"></i>
-                <span class="logo_file_name text-muted"></span>
+                <!-- <i class="fas fa-upload position-relative text-white"></i>
+                <span class="logo_file_name text-muted"></span> -->
             </div>
         </div>
 
-        
+
 
         <div>
             {{ form.message|as_crispy_field }}
@@ -61,7 +66,7 @@
             </div>
         </div>
 
-      
+
 
         <div class="row">
             <div class="form-group col-xl-6">
@@ -87,7 +92,7 @@
         </div>
 
         <hr class="d-none d-xl-block">
-        
+
         <div class="row">
             <div class="form-group col-xl-6">
                 {{ form.email|as_crispy_field }}
@@ -98,7 +103,7 @@
         </div>
 
         <hr class="d-none d-xl-block">
-        
+
         <div class="row">
             <div class="form-group col-xl-6">
                 {{ form.name_person_contact|as_crispy_field }}
@@ -109,7 +114,7 @@
         </div>
 
         <hr class="d-none d-xl-block">
-        
+
         <div class="row">
             <div class="form-group col-xl-4">
                 {{ form.work_domain|as_crispy_field }}
@@ -123,8 +128,8 @@
         </div>
 
         <hr class="d-none d-xl-block">
-        
-        
+
+
         <div class="row">
             <div class="form-group col-xl-6">
                 {{ form.is_org_registered|as_crispy_field }}
@@ -135,7 +140,7 @@
         </div>
 
         <hr class="d-none d-xl-block">
-       
+
         <div>
             {{ form.org_adress|as_crispy_field }}
         </div>
@@ -155,7 +160,7 @@
         </div>
 
         <hr class="d-none d-xl-block">
-            
+
         <div class="row">
             <div class="form-group col-xl-6">
                 {{ form.org_member_with|as_crispy_field }}

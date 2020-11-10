@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% block title %} دليل المجتمع المدني بحسب مجال العمل {% endblock %}
+{% block title %} {% trans "دليل المجتمع المدني بحسب مجال العمل" %} {% endblock %}
 
 {% block content %}
 <!-- <h1>دليل المجتمع المدني بحسب مجال العمل</h1> -->
@@ -128,8 +128,8 @@
                 </tbody>
             </table>
         
-        <a href="{% url 'home' %}" class="btn btn-primary"> العودة إلى الصفحة الرئيسية </a>
-        <a href="{% url 'guide' %}" class="btn btn-primary"> الذهاب إلى دليل المجتمع المدني</a>
+        <a href="{% url 'home' %}" class="btn"> العودة إلى الصفحة الرئيسية </a>
+        <a href="{% url 'guide' %}" class="btn"> الذهاب إلى دليل المجتمع المدني</a>
 
 
 {% endblock %}

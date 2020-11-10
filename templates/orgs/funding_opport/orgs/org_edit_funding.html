@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static i18n crispy_forms_tags %}
 
-{% block title %} {% trans " تعديل فرصة التمويل " %} {% endblock %}
+{% block title %} {% trans "تعديل فرصة التمويل" %} {% endblock %}
 
 {% block content %}
 
@@ -12,7 +12,7 @@
     {% if request.user.is_authenticated %}
     {% if request.user == funding.user or request.user.is_staff %}
 
-    <form action="" method="post" class="register" enctype="multipart/form-data">
+    <form action="" method="post" id="finance_orgs" data-cities-url="{% url 'ajax_load_cities' %}" class="register" enctype="multipart/form-data">
         {% csrf_token %}
 
         {% if request.user.is_authenticated and request.user.is_staff %}
@@ -24,16 +24,19 @@
             {{ form.name_funding|as_crispy_field }}
         </div>
         <div class="for-group">
+            {{ form.logo|as_crispy_field }}
+        </div>
+        <div class="for-group">
             {{ form.funding_org_description|as_crispy_field }}
         </div>
         <div class="for-group">
             {{ form.work_domain|as_crispy_field }}
         </div>
         <div class="for-group">
-            {{ form.funding_country|as_crispy_field }}
+            {{ form.position_work|as_crispy_field }}
         </div>
         <div class="for-group">
-            {{ form.funding_city|as_crispy_field }}
+            {{ form.city_work|as_crispy_field }}
         </div>
         <div class="for-group">
             {{ form.funding_dead_date|as_crispy_field }}
@@ -63,7 +66,7 @@
         
 
         <div class="form-group">
-            <input type="submit" class="btn btn-block mt-3" value='{% trans "تعديل فرصة عمل" %}'>
+            <input type="submit" class="btn btn-block mt-3" value='{% trans "تعديل" %}'>
         </div>
 
         

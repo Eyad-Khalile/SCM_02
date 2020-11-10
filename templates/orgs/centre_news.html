@@ -1,9 +1,9 @@
 {% extends 'base.html' %}
-{% load static %}
-{% block title %} أخبار المركز {% endblock %}
+{% load static i18n %}
+{% block title %} {% trans "أخبار المركز" %} {% endblock %}
 
 {% block content %}
-<h1>أخبار المركز</h1>
+<h1>{% trans "أخبار المركز" %}</h1>
 <hr>
 
 
@@ -11,21 +11,21 @@
     
     <div class="col-9">
         <div class="collapse mt-4" id="collapseAddFinance">
-            <h2>إضافة خبر</h2>
+            <h2> {% trans "إضافة خبر" %} </h2>
             <form action="">
                 <div class="form-group">
-                    <input type="text" class="form-control" placeholder="عنوان الخبر">
+                    <input type="text" class="form-control" placeholder="{% trans 'عنوان الخبر' %}">
                 </div>
                 <div class="form-group">
-                    <textarea name="" id="" class="form-control" cols="33" rows="10" placeholder="نص الخبر"></textarea>
+                    <textarea name="" id="" class="form-control" cols="33" rows="10" placeholder="{% trans 'نص الخبر' %}"></textarea>
                 </div>
                 <div class="form-group">
-                    <label for="" class="form-control mt-3">أضف صورة الخبر</label>
+                    <label for="" class="form-control mt-3"> {% trans 'أضف صورة الخبر' %} </label>
                     <input type="file" class="form-control " accept="image/*">
                 </div>
                 
                 <div class="form-group">
-                    <input type="submit" class="btn btn-success btn-block mt-3" value="أضف ">
+                    <input type="submit" class="btn btn-block mt-3" value="{% trans 'أضف' %}">
                 </div>
 
             </form>
@@ -123,26 +123,26 @@
                     </div>
                 </div>
                 <div class="form-froup">
-                    <input type="text" name="" id="" class="btn btn-block btn-success mt-4" value="بحث">
+                    <input type="text" name="" id="" class="btn btn-block mt-4" value="بحث">
                 </div>
             </form>
 
             <!-- BUTTONS -->
             <hr>
 
-            <button class="btn btn-primary btn-block mt-4" type="button" data-toggle="collapse"
+            <button class="btn btn-block mt-4" type="button" data-toggle="collapse"
                 data-target="#collapseAddFinance" aria-expanded="false" aria-controls="collapseAddFinance">
                 إضافة خبر
             </button>
-            <!-- <button class="btn btn-primary btn-block mt-4" type="button" data-toggle="collapse"
+            <!-- <button class="btn btn-block mt-4" type="button" data-toggle="collapse"
                 data-target="#collapseListFinance" aria-expanded="false" aria-controls="collapcollapseListFinanceseListWork">
                 عرض فرص التمويل للموافقة على النشر
             </button> -->
-            <!-- <button class="btn btn-primary btn-block mt-4" type="button" data-toggle="collapse"
+            <!-- <button class="btn btn-block mt-4" type="button" data-toggle="collapse"
                 data-target="#collapseListAllOrgs" aria-expanded="false" aria-controls="collapseListAllOrgs">
                 قائمة منظمات المجتمع المدني
             </button> -->
-            <a href="{% url 'home' %}" class="btn btn-block btn-primary mt-4">عودة إلى الصفحة الرئيسية</a>
+            <a href="{% url 'home' %}" class="btn btn-block mt-4">عودة إلى الصفحة الرئيسية</a>
 
 
         </fieldset>

@@ -75,43 +75,52 @@ urlpatterns = [
 
     # RECOURCE
     path('resources/', views.resources, name="resources"),
-    #jobs
+    # jobs
     path('orgs_jobs/', views.orgs_jobs, name="orgs_jobs"),
-    path('orgs_add_job/',views.orgs_add_job, name="orgs_add_job"),
+    path('orgs_add_job/', views.orgs_add_job, name="orgs_add_job"),
     path('org_jobs_not_pub/', views.org_jobs_not_pub, name="org_jobs_not_pub"),
     path('jobs_detail/<str:job_id>', views.jobs_detail, name="jobs_detail"),
     path('jobs_edit/<str:job_id>', views.jobs_edit, name="jobs_edit"),
     path('jobs_delete/<str:job_id>', views.jobs_delete, name="jobs_delete"),
-    #funding orgs opportutiite
+    # funding orgs opportutiite
+    path('funding', views.funding, name="funding"),
     path('orgs_funding/', views.orgs_funding, name="orgs_funding"),
-    path('orgs_add_funding/',views.orgs_add_funding, name="orgs_add_funding"),
-    path('org_funding_not_pub/',views.org_funding_not_pub, name="org_funding_not_pub"),
-    path('funding_detail/<str:funding_id>', views.funding_detail, name="funding_detail"),
-    path('funding_edit/<str:funding_id>', views.funding_edit, name="funding_edit"),
-    path('funding_delete/<str:funding_id>', views.funding_delete, name="funding_delete"),
-    #Capacity orgs opportutiite
+    path('orgs_add_funding/', views.orgs_add_funding, name="orgs_add_funding"),
+    path('org_funding_not_pub/', views.org_funding_not_pub,
+         name="org_funding_not_pub"),
+    path('funding_detail/<str:funding_id>',
+         views.funding_detail, name="funding_detail"),
+    path('funding_edit/<str:funding_id>',
+         views.funding_edit, name="funding_edit"),
+    path('funding_delete/<str:funding_id>',
+         views.funding_delete, name="funding_delete"),
+    # Capacity orgs opportutiite
     path('orgs_capacity/', views.orgs_capacity, name="orgs_capacity"),
     path('orgs_add_capacity/', views.orgs_add_capacity, name="orgs_add_capacity"),
-    path('org_capacity_not_pub/', views.org_capacity_not_pub, name="org_capacity_not_pub"),
-    path('capacity_detail/<str:capacity_id>', views.capacity_detail, name="capacity_detail"),
-    path('capacity_edit/<str:capacity_id>', views.capacity_edit, name="capacity_edit"),
-    path('capacity_delete/<str:capacity_id>', views.capacity_delete, name="capacity_delete"),
-    #devs guide 
+    path('org_capacity_not_pub/', views.org_capacity_not_pub,
+         name="org_capacity_not_pub"),
+    path('capacity_detail/<str:capacity_id>',
+         views.capacity_detail, name="capacity_detail"),
+    path('capacity_edit/<str:capacity_id>',
+         views.capacity_edit, name="capacity_edit"),
+    path('capacity_delete/<str:capacity_id>',
+         views.capacity_delete, name="capacity_delete"),
+    # devs guide
     path('orgs_devs/', views.orgs_devs, name="orgs_devs"),
     path('orgs_add_devs/', views.orgs_add_devs, name="orgs_add_devs"),
     path('org_devs_not_pub/', views.org_devs_not_pub, name="org_devs_not_pub"),
     path('devs_detail/<str:devs_id>', views.devs_detail, name="devs_detail"),
     path('dev_edit/<str:devs_id>', views.dev_edit, name="dev_edit"),
     path('dev_delete/<str:devs_id>', views.dev_delete, name="dev_delete"),
-    #our news
+    # our news
     path('orgs_our_news/', views.orgs_our_news, name="orgs_our_news"),
     path('friend_invite/', views.friend_invite, name='friend_invite'),
 
 
 
 
-    
-    
+
+
 
 
 
@@ -121,10 +130,22 @@ urlpatterns = [
     path('resource_work_detail/<str:work_id>',
          views.resource_work_detail, name="resource_work_detail"),
     path('resource_finance/', views.resource_finance, name="resource_finance"),
-    path('resource_finance_perso/', views.resource_finance_perso,
-         name="resource_finance_perso"),
-    path('resource_finance_perso_detail/<str:id>',
-         views.resource_finance_perso_detail, name="resource_finance_perso_detail"),
+
+    # FINANCE PERSO
+    path('finance_perso/', views.finance_perso,
+         name="finance_perso"),
+    path('add_finance_perso/', views.add_finance_perso,
+         name="add_finance_perso"),
+    path('finance_perso_not_pub/', views.finance_perso_not_pub,
+         name="finance_perso_not_pub"),
+    path('finance_perso_detail/<str:pk>',
+         views.finance_perso_detail, name="finance_perso_detail"),
+    path('finance_perso_edit/<str:pk>',
+         views.finance_perso_edit, name="finance_perso_edit"),
+    path('finance_perso_delete/<str:pk>',
+         views.finance_perso_delete, name="finance_perso_delete"),
+
+
     path('resource_finance_orgs/', views.resource_finance_orgs,
          name="resource_finance_orgs"),
     path('resource_finance_orgs_detail/<str:id>',
@@ -161,6 +182,8 @@ urlpatterns = [
     # Org Edit the form
     path('org_profile_edit/<str:pk>',
          views.org_profile_edit, name='org_profile_edit'),
+    path('org_profile_delete/<str:pk>',
+         views.org_profile_delete, name='org_profile_delete'),
     path('orgs_orders_etude/', views.orgs_orders_etude, name='orgs_orders_etude'),
     path('orgs_orders_published/', views.orgs_orders_published,
          name='orgs_orders_published'),

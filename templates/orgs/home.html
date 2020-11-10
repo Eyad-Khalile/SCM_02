@@ -1,5 +1,7 @@
-{% extends 'base.html' %} {% load static i18n crispy_forms_tags%} {% block title %}
-{% trans 'بوابة المجتمع المدني' %} {% endblock %} {% block content-home %}
+{% extends 'base.html' %} {% load static i18n crispy_forms_tags %} 
+{% block title %} {% trans 'بوابة المجتمع المدني' %} {% endblock %} 
+
+{% block content-home %}
 
 {% get_current_language as LANGUAGE_CODE %}
 
@@ -178,11 +180,8 @@
     <h2 class="text-center mb-4"> {% trans "المنظمات المضافة حديثاً" %} </h2>
     <div id="carouselOrgs" class="carouselOrgs carousel slide carousel-fade" data-ride="carousel">
       <div class="carousel-inner">
-
-        {% for org in orgs %}
-
-        {% if org.id == last_org %}
-        <div class="carousel-item slide-item-1 active">
+        {% for org in orgs|slice:3 %}
+        <div class="carousel-item {% if org.id == first_org %} slide-item-1 active {% endif %} ">
           <div class=" well" id="org_{{org.id}}">
             <center>
               <a href="{% url 'particip_detail' org.id %}">
@@ -201,49 +200,7 @@
             </center>
           </div>
         </div>
-
-        {% elif org.id == av_last_org  %}
-        <div class="carousel-item slide-item-2">
-          <div class=" well" id="org_{{org.id}}">
-            <center>
-              <a href="{% url 'particip_detail' org.id %}">
-                <img src="{{ org.logo.url }}" name="{{ org.name_en_ku }}" title="{{ org.name_en_ku }}" width="140"
-                  height="140" class="img-circle" /></a>
-              <h3 class="mt-4">{{ org.name }}</h3>
-              <p>{{ org.short_cut }}</p>
-              <p>{{ org.message|truncatechars:80 }}</p>
-              <p>
-                <a href="{% url 'particip_detail' org.id %}" class="btn btn-block">
-                  {% trans 'للمزيد عن المنظمة' %}
-                </a>
-              </p>
-            </center>
-          </div>
-        </div>
-
-        {% elif org.id == av_av_last_org %}
-        <div class="carousel-item slide-item-3">
-          <div class=" well" id="org_{{org.id}}">
-            <center>
-              <a href="{% url 'particip_detail' org.id %}">
-                <img src="{{ org.logo.url }}" name="{{ org.name_en_ku }}" title="{{ org.name_en_ku }}" width="140"
-                  height="140" class="img-circle" /></a>
-              <h3 class="mt-4">{{ org.name }}</h3>
-              <p>{{ org.short_cut }}</p>
-              <p>{{ org.message|truncatechars:80 }}</p>
-              <p>
-                <a href="{% url 'particip_detail' org.id %}" class="btn btn-block">
-                  {% trans 'للمزيد عن المنظمة' %}
-                </a>
-              </p>
-            </center>
-          </div>
-        </div>
-
-        {% endif %}
-
         {% endfor %}
-
       </div>
       <a class="carousel-control-prev" href="#carouselOrgs" role="button" data-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -262,10 +219,8 @@
     <h2 class="text-center mb-4"> {% trans "أحدث اﻷخبار" %} </h2>
     <div id="carouselNews" class="carouselNews carousel slide carousel-fade" data-ride="carousel">
       <div class="carousel-inner">
-
-        {% for new in news %}
-        {% if new.id == last_news %}
-        <div class="carousel-item slide-item-1 active">
+        {% for new in news|slice:3 %}
+        <div class="carousel-item {% if new.id == first_news %} slide-item-1 active {% endif %}">
           <div class=" well" id="news_{{new.id}}">
             <center>
               <a href="{% url 'news_detail' new.id %}">
@@ -282,49 +237,7 @@
             </center>
           </div>
         </div>
-
-        {% elif new.id == av_last_news  %}
-        <div class="carousel-item slide-item-1">
-          <div class=" well" id="news_{{new.id}}">
-            <center>
-              <a href="{% url 'news_detail' new.id %}">
-                <img src="{{ new.image.url }}" name="{{ new.title }}" title="{{ new.title }}" width="140" height="140"
-                  class="img-circle" /></a>
-              <h3 class="mt-4">{{ new.org_name }}</h3>
-              <h3 class="mt-4">{{ new.title }}</h3>
-              <p>{{ new.content|truncatechars:80 }}</p>
-              <p>
-                <a href="{% url 'news_detail' new.id %}" class="btn btn-block">
-                  {% trans 'للمزيد عن الخبر' %}
-                </a>
-              </p>
-            </center>
-          </div>
-        </div>
-
-        {% elif new.id == av_av_last_news %}
-        <div class="carousel-item slide-item-1">
-          <div class=" well" id="news_{{new.id}}">
-            <center>
-              <a href="{% url 'news_detail' new.id %}">
-                <img src="{{ new.image.url }}" name="{{ new.title }}" title="{{ new.title }}" width="140" height="140"
-                  class="img-circle" /></a>
-              <h3 class="mt-4">{{ new.org_name }}</h3>
-              <h3 class="mt-4">{{ new.title }}</h3>
-              <p>{{ new.content|truncatechars:80 }}</p>
-              <p>
-                <a href="{% url 'news_detail' new.id %}" class="btn btn-block">
-                  {% trans 'للمزيد عن الخبر' %}
-                </a>
-              </p>
-            </center>
-          </div>
-        </div>
-
-        {% endif %}
-
         {% endfor %}
-
       </div>
       <a class="carousel-control-prev" href="#carouselNews" role="button" data-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -337,9 +250,80 @@
   {% endif %}
 
 
+  <!-- JOBS SLIDER -->
+  {% if jobs|length > 2 %}
+  <div class="jobs_slide mt-4 pt-4" data-aos="fade-left">
+    <h2 class="text-center mb-4"> {% trans "أحدث فرص العمل" %} </h2>
+    <div id="carouselJobs" class="carouselJobs carousel slide carousel-fade" data-ride="carousel">
+      <div class="carousel-inner">
+        {% for job in jobs|slice:3 %}
+        <div class="carousel-item {% if job.id == first_job %} slide-item-1 active {% endif %}">
+          <div class=" well" id="job_{{job.id}}">
+            <center>
+              <h3 class="mt-4">{{ job.org_name }}</h3>
+              <h3 class="mt-4">{{ job.job_title }}</h3>
+              <h3 class="mt-4">{{ job.job_type }}</h3>
+              <p>{{ job.job_description|truncatechars:80 }}</p>
+              <p>
+                <a href="{% url 'resource_work_detail' job.id %}" class="btn btn-block">
+                  {% trans 'للمزيد عن فرصة العمل' %}
+                </a>
+              </p>
+            </center>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      <a class="carousel-control-prev" href="#carouselJobs" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      </a>
+      <a class="carousel-control-next" href="#carouselJobs" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      </a>
+    </div>
+  </div>
+  {% endif %}
 
+
+  <!-- FINANCES SLIDER -->
+  {% if capacites|length > 2 %}
+  <div class="capacites_slide mt-4 pt-4" data-aos="fade-right">
+    <h2 class="text-center mb-4"> {% trans "أحدث فرص بناء القدرات" %} </h2>
+    <div id="carouselCapacites" class="carouselCapacites carousel slide carousel-fade" data-ride="carousel">
+      <div class="carousel-inner">
+        {% for capacity in capacites|slice:3 %}
+        <div class="carousel-item {% if capacity.id == first_capacity %} slide-item-1 active {% endif %}">
+          <div class=" well" id="capacity_{{capacity.id}}">
+            <center>
+              <h3 class="mt-4">{{ capacity.org_name }}</h3>
+              <h3 class="mt-4">{{ capacity.name_capacity }}</h3>
+              <h3 class="mt-4">{{ capacity.title_capacity }}</h3>
+              <p>{{ capacity.capacity_description|truncatechars:80 }}</p>
+              <p>
+                <a href="{% url 'capacity_detail' capacity.id %}" class="btn btn-block">
+                  {% trans 'للمزيد عن فرصة بناء القدرات' %}
+                </a>
+              </p>
+            </center>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      <a class="carousel-control-prev" href="#carouselCapacites" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      </a>
+      <a class="carousel-control-next" href="#carouselCapacites" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      </a>
+    </div>
+  </div>
+  {% endif %}
+
+
+
+  <!-- FORM NEWS LETTER -->
   <div class="form-news-latter mt-4 p-5 rounded mb-4" id="newsletter" data-aos="fade-left">
-    <h1 class="text-center text-white border-bottom border-white pb-3"> {% trans "للاشتراك بآخر الأخبار " %} </h1>
+    <h1 class="text-center text-white border-bottom border-white pb-3"> {% trans "للاشتراك بآخر الأخبار" %} </h1>
     <div class="row">
       <div class="col-md-6 col-sm-12">
         <form action="" method="POST" class="form-news-latter">

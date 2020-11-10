@@ -113,12 +113,35 @@ if (pathname == '/' || pathname == 'en') {
 $('#wrapper').css('height', nav_height + 'px');
 
 
-// GET THE SELECTED FILE NAME
-$('#id_logo').change(function (e) {
-    var fileName = e.target.files[0].name;
-    $('.logo_file_name').html('The logo "' + fileName + '" has been selected.');
-    $('input#logo').val(fileName);
+// READ MORE AND READ LESS
+$('#collapsRead').on('click', function () {
+    $(this).toggleClass('read-moin');
+    if ($('#collapsRead').hasClass('read-moin')) {
+
+        if (pathname.includes('/en')) {
+            $('.read-moin').html('Read Less');
+        } else if (pathname.includes('/ku')) {
+            $('.read-moin').html('Read Less');
+        } else {
+            $('.read-moin').html('إقراء أقل');
+        }        
+    } else if (!$('#collapsRead').hasClass('read-moin')) {
+        if (pathname.includes('/en')) {
+            $('#collapsRead').html('Read More');
+        } else if (pathname.includes('/ku')) {
+            $('#collapsRead').html('Read More');
+        } else {
+            $('#collapsRead').html('إقراء المزيد');
+        }        
+    }
 });
+
+// GET THE SELECTED FILE NAME
+// $('#id_logo').change(function (e) {
+//     var fileName = e.target.files[0].name;
+//     $('.logo_file_name').html('The logo "' + fileName + '" has been selected.');
+//     $('input#logo').val(fileName);
+// });
 
 
 // SLIDE HOME PAGE 
@@ -187,6 +210,7 @@ $('#sidebar-wrapper').find('.btn-down').on('click', function () {
     let li_count = $('ul.sidebar-navbar li').length - 9; // Number of li
     let lemite = Math.abs(parseInt(li_height)) * li_count; // Lemite of animation 
     // console.log(li_height + '-' + li_count + '-' + lemite);
+    // console.log(m_t);
 
     if (parseInt(m_t) > -(lemite)) {
         $('#sidebar-wrapper').find('ul.sidebar-navbar').animate({
@@ -194,7 +218,7 @@ $('#sidebar-wrapper').find('.btn-down').on('click', function () {
         }, 500);
     } else {
         $('#sidebar-wrapper').find('ul.sidebar-navbar').animate({
-            'margin-top': '-288px'
+            'margin-top': '-678px'
         }, 500);
     }
 

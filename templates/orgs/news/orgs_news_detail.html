@@ -5,10 +5,11 @@
 {% block content %}
 
 
-<div class="row justify-content-center mt-4 pt-4">
+<div class="row mt-4 pt-4">
   <h1> {% trans 'تفاصيل الخبر' %} </h1>
 
-  <div class="span1 well col-9">
+  <!-- NEWS DETAIL -->
+  <div class=" well col-lg-9 col-xs-12 ">
     <!-- <center>   -->
 
     <strong>
@@ -34,6 +35,25 @@
 
     <!-- </center> -->
   </div>
+
+  <!-- THE LATEST NEWS  -->
+  <div class="col-lg-3 d-none d-lg-block">
+    <h2 class="text-center mb-4 border-bottom"> {% trans 'أحدث ثلاثة أخبار' %} </h2>
+    {% for new in news|slice:3 %}
+    <a href="{% url 'news_detail' new.id%}" class='bg-light nav-link border-bottom pb-3 mb-2'>
+      <div class="news-card">
+        <p class="text-dark"> {{ new.title }} </p>
+
+        <figure>
+          <img src="{{ new.image.url }}" class="w-100" name="{{ new.title }}" title="{{ new.title }}"
+            alt="{{ new.title }}">
+          <figcaption class="text-muted"> <i class="far fa-clock"></i> {{ new.created_at|timesince }} </figcaption>
+        </figure>
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+
   <div class="row">
 
     <div class="col">
@@ -75,4 +95,5 @@
 
 
 </div>
+
 {% endblock %}

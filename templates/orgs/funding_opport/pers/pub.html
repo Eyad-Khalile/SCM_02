@@ -1,35 +1,34 @@
 {% extends 'base.html' %}
 {% load static i18n crispy_forms_tags %}
 
-{% block title %} {% trans "فرص التمويل " %} {% endblock %}
+{% block title %} {% trans "فرص التمويل للأفراد" %} {% endblock %}
 
 {% block content %}
 
 
 <div class="mt-4 pt-4">
-    <h1> {% trans "فرص التمويل " %} </h1>
+    <h1> {% trans "فرص التمويل للأفراد" %} </h1>
 
-    <!-- SECTION 1 -->
+
     <div class="">
-
-
         <div class="row mt-4">
-            
+
             <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
                 {% if request.user.is_authenticated %}
-                <a href="{% url 'orgs_add_funding' %}" class="btn btn-block mt-4"> {% trans "اضافة فرصة تمويل" %} </a>
+                <a href="{% url 'add_finance_perso' %}" class="btn btn-block mt-4"
+                    title="{% trans 'اضافة فرصة تمويل' %}"><i class="fas fa-plus"></i></a>
                 {% endif %}
             </div>
             {% if fundings %}
             <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
                 <a class="btn btn-block mt-4" data-toggle="collapse" href="#collapseFiltre" aria-expanded="false"
-                    aria-controls="collapseFiltre">{% trans 'فرز' %}</a>
+                    aria-controls="collapseFiltre" title="{% trans 'فرز' %}"><i class="fas fa-filter"></i></a>
             </div>
             {% endif %}
             <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
                 {% if request.user.is_authenticated and request.user.is_superuser %}
-                <a href="{% url 'org_funding_not_pub' %}" class="btn btn-block mt-4">
-                    {% trans 'فرص التمويل قيد الدراسة' %} </a>
+                <a href="{% url 'finance_perso_not_pub' %}" class="btn btn-block mt-4"
+                    title="{% trans 'فرص التمويل قيد الدراسة' %}"><i class="fas fa-chalkboard-teacher"></i></a>
                 {% endif %}
             </div>
 
@@ -39,10 +38,13 @@
                 <form action="" method="get"
                     class="row register justify-content-center align-items-center flex-wrap form my-2 my-lg-0">
                     <div class="col-sm-12 col-md-4  mt-3">
-                        {{ myFilter.form.name_funding|as_crispy_field }}
+                        {{ myFilter.form.category|as_crispy_field }}
                     </div>
                     <div class="col-sm-12 col-md-4 mt-3">
-                        {{ myFilter.form.job_country|as_crispy_field }}
+                        {{ myFilter.form.fund_type|as_crispy_field }}
+                    </div>
+                    <div class="col-sm-12 col-md-4 mt-3">
+                        {{ myFilter.form.domain|as_crispy_field }}
                     </div>
                     <div class="row">
                         <div class="col-xs-6 col-sm-6 col-md-4 mt-3">
@@ -64,20 +66,29 @@
             <div class="row row-m-0 mt-4 pt-4">
 
                 <div class="row row-m-0 justify-content-center pt-4 pb-4 mb-4">
+                    {{ fundings.count }}
                     {% if fundings %}
                     {% for funding in fundings %}
 
                     <div class="span3 well">
+                        <span class="text-muted">{{ funding.created_at|date:"Y-m-d" }}</span>
                         <center>
-                            <a href="{% url 'news_detail' funding.id %}">
-                                <img src="{{ funding.logo_funding.url }}" name="{{ funding.name_funding }}" title="{{ funding.name_funding }}"
-                                    alt="{{ funding.name_funding }}" width="140" height="140" class="img-circle"></a>
-                            <h3 class="mt-4">{{ funding.name_funding }}</h3>
-                            <p>{{ funding.funding_org_description }}</p>
-                            <p>{{ funding.funding_description|truncatechars:80 }}</p>
+                            <a href="{% url 'finance_perso_detail' funding.id %}">
+                                <img src="{{ funding.logo.url }}"
+                                    name="{% if funding.org_name %} {{ funding.org_name }} {% else %} {{ funding.name_funding }} {% endif %}"
+                                    title="{% if funding.org_name %} {{ funding.org_name }} {% else %} {{ funding.name_funding }} {% endif %}"
+                                    alt="{% if funding.org_name %} {{ funding.org_name }} {% else %} {{ funding.name_funding }} {% endif %}"
+                                    width="140" height="140" class="img-circle"></a>
+
+                            <h3 class="mt-4">{% if funding.org_name %} {{ funding.org_name }} {% else %}
+                                {{ funding.name_funding }}
+                                {% endif %}</h3>
+
+                            <p>{{ funding.fund_org_description|truncatechars:80 }}</p>
+                            <p>{{ funding.funding_dead_date|date:"Y-m-d" }}</p>
                             <p>
-                                <a href="{% url 'funding_detail' funding.id %}" class="btn btn-block">
-                                    {% trans 'لقراءة المزيد' %} </a>
+                                <a href="{% url 'finance_perso_detail' funding.id %}" class="btn btn-block"
+                                    title="{% trans 'لقراءة المزيد' %}"><i class="fas fa-book-reader"></i></a>
                             </p>
 
                         </center>
@@ -123,17 +134,16 @@
 
 
                     {% else %}
-                    <h3> {% trans " لا يوجد حالياً فرص التمويل " %} </h3>
+                    <h3> {% trans "لا يوجد حالياً فرص للأفراد تمويل منشورة من قبل المنظمات" %} </h3>
                     {% endif %}
-                    
+
 
                 </div>
             </div>
 
 
+
+
         </div>
-
-
     </div>
-
     {% endblock %}

@@ -4,7 +4,8 @@
 
 
 
-<nav class="navbar fixed-top navbar-expand-xl pt-lg-0 pb-lg-0    navbar-dark {% if not request.resolver_match.url_name == 'home' %} nav-bg {% endif %} ">
+<nav
+    class="navbar fixed-top navbar-expand-xl pt-lg-0 pb-lg-0    navbar-dark {% if not request.resolver_match.url_name == 'home' %} nav-bg {% endif %} ">
 
     <div class="container-fluid">
         <!-- BRAND -->
@@ -16,10 +17,12 @@
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
+        {# {{ request.resolver_match.url_name }} #}
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link {% if request.resolver_match.url_name == 'home' %} active {% endif %}"
+                    {# {% if request.resolver_match.url_name == 'home' %} active {% endif %} #}
+                    <a class="nav-link "
                         aria-current="page" href="{% url 'home' %}"> {% trans 'بوابة المجتمع المدني' %} </a>
                 </li>
                 <li class="nav-item d-none d-lg-block">
@@ -39,7 +42,8 @@
                         href="{% url 'news' %}">
                         {% trans 'أخبار المجتمع المدني' %}
                     </a>
-                    <ul class="dropdown-menu ul-news-dropdown-menu {% if not request.resolver_match.url_name == 'home' %} bg-main-color {% endif %}" aria-labelledby="navbarDropdown">
+                    <ul class="dropdown-menu ul-news-dropdown-menu {% if not request.resolver_match.url_name == 'home' %} bg-main-color {% endif %}"
+                        aria-labelledby="navbarDropdown">
                         <li>
                             <a class="dropdown-item {% if request.resolver_match.url_name == 'orgs_news' %} active {% endif %}"
                                 href="{% url 'orgs_news' %}"> {% trans 'أخبار المنظمات' %} </a>
@@ -78,8 +82,8 @@
                             <hr class="dropdown-divider" />
                         </li>
                         <li>
-                            <a class="dropdown-item disabled" href="#"> {% trans 'اﻷخبار' %} <i class="fas fa-angle-down"
-                                    aria-hidden="true"></i></a>
+                            <a class="dropdown-item disabled" href="#"> {% trans 'اﻷخبار' %} <i
+                                    class="fas fa-angle-down" aria-hidden="true"></i></a>
                         </li>
                         <li>
                             <hr class="dropdown-divider" />
@@ -115,18 +119,19 @@
                 <!-- :::::::::::::::: موارد المجتمع المدني :::::::::::::::: -->
                 <!-- LG -->
                 <li class="nav-item dropdown li-resource-dropdown-menu d-none d-lg-block">
-                    <a class="nav-link {% if request.resolver_match.url_name == 'resource' %} active {% endif %}"
+                    <a class="nav-link {% if request.resolver_match.url_name == 'resources' %} active {% endif %}"
                         href="{% url 'resources' %}">
                         {% trans 'موارد المجتمع المدني' %}
                     </a>
-                    <ul class="dropdown-menu ul-resource-dropdown-menu {% if not request.resolver_match.url_name == 'home' %} bg-main-color {% endif %}" aria-labelledby="navbarDropdown">
+                    <ul class="dropdown-menu ul-resource-dropdown-menu {% if not request.resolver_match.url_name == 'home' %} bg-main-color {% endif %}"
+                        aria-labelledby="navbarDropdown">
                         <li>
                             <a class="dropdown-item {% if request.resolver_match.url_name == 'orgs_jobs' %} active {% endif %}"
                                 href="{% url 'orgs_jobs' %}"> {% trans 'فرص العمل' %} </a>
                         </li>
                         <li>
                             <a class="dropdown-item {% if request.resolver_match.url_name == 'resource_finance' %} active {% endif %}"
-                                href="{% url 'orgs_funding' %}"> {% trans 'فرص التمويل' %} </a>
+                                href="{% url 'funding' %}"> {% trans 'فرص التمويل' %} </a>
                         </li>
                         <li>
                             <a class="dropdown-item {% if request.resolver_match.url_name == 'resource_stectur' %} active {% endif %}"
@@ -141,13 +146,13 @@
 
                 <!-- MD -->
                 <li class="nav-item dropdown d-block d-lg-none">
-                    <a class="nav-link dropdown-toggle {% if request.resolver_match.url_name == 'resource' %} active {% endif %}"
+                    <a class="nav-link dropdown-toggle {% if request.resolver_match.url_name == 'resources' %} active {% endif %}"
                         href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
                         {% trans 'موارد المجتمع المدني' %}
                     </a>
                     <ul class="dropdown-menu bg-main-color border-0" aria-labelledby="navbarDropdown">
                         <li>
-                            <a class="dropdown-item {% if request.resolver_match.url_name == 'resource' %} active {% endif %}"
+                            <a class="dropdown-item {% if request.resolver_match.url_name == 'resources' %} active {% endif %}"
                                 href="{% url 'resources' %}"> {% trans 'موارد المجتمع المدني' %} </a>
                         </li>
 
@@ -167,7 +172,7 @@
                         </li>
                         <li>
                             <a class="dropdown-item {% if request.resolver_match.url_name == 'resource_finance' %} active {% endif %}"
-                                href="{% url 'resource_finance' %}"> {% trans 'فرص التمويل' %} </a>
+                                href="{% url 'funding' %}"> {% trans 'فرص التمويل' %} </a>
                         </li>
                         <li>
                             <a class="dropdown-item {% if request.resolver_match.url_name == 'resource_stectur' %} active {% endif %}"
@@ -185,7 +190,14 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link {% if request.resolver_match.url_name == 'centre_news' %} active {% endif %}"
+<<<<<<< HEAD
                         aria-current="page" href="{% url 'orgs_our_news' %}"> {% trans 'أخبار البوابة' %} </a>
+=======
+                        aria-current="page" href="{% url 'centre_news' %}"> {% trans 'أخبار البوابة' %} </a>
+
+                        <!-- <a class="nav-link {% if request.resolver_match.url_name == 'centre_news' %} active {% endif %}"
+                        aria-current="page" href="{% url 'centre_news' %}"> {% trans 'أخبار البوابة' %} </a> -->
+>>>>>>> 62ce2c040d6c15199886ab7e9b4dff5ee9a71b70
                 </li>
             </ul>
 
@@ -202,16 +214,17 @@
                     <a class="nav-link" href="#" tabindex="-1" aria-disabled="true"> <i class="fa fa-ellipsis-v mx-2"
                             aria-hidden="false"></i> {% trans 'أهلاً' %} {{user}} </a>
 
-                    <ul class="dropdown-menu ul-user-dropdown-menu {% if not request.resolver_match.url_name == 'home' %} bg-main-color {% endif %}" aria-labelledby="navbarDropdown">
+                    <ul class="dropdown-menu ul-user-dropdown-menu {% if not request.resolver_match.url_name == 'home' %} bg-main-color {% endif %}"
+                        aria-labelledby="navbarDropdown">
                         <li>
 
                             <!-- <a class="dropdown-item {% if request.resolver_match.url_name == 'profile' %} active {% endif %}"
                                 href="{% url 'profile' %}"> {% trans 'لوحة التحكم الخاصة باﻹدارة' %} </a> -->
 
-                            
+
                             <a class="dropdown-item {% if request.resolver_match.url_name == 'profile' %} active {% endif %}"
                                 href="{% url 'profile' %}"> {% trans 'ملفي الشخصي' %} </a>
-                            
+
                         </li>
                         <li>
                             <a class="dropdown-item {% if request.resolver_match.url_name == 'password_change' %} active {% endif %}"
@@ -320,7 +333,7 @@
                                 <input type="hidden" name="next" value="{{ redirect_to }}">
                                 <select
                                     class="form-select w-auto {% if LANGUAGE_CODE == 'ar' %} float-right {% else %} float-left {% endif %} {% if request.resolver_match.url_name == 'home' %} bg-trans {% endif %} "
-                                    name="language" id="chnage-lange"   >
+                                    name="language" id="chnage-lange">
                                     {% get_available_languages as LANGUAGES %}
                                     {% get_language_info_list for LANGUAGES as languages %}
                                     {% for language in languages %}
@@ -330,7 +343,7 @@
                                     </option>
                                     {% endfor %}
                                 </select>
-                                <!-- <button type="submit" class="btn btn-sm btn-success">
+                                <!-- <button type="submit" class="btn btn-sm">
                                     <i class="fa fa-paper-plane" aria-hidden="true"></i>
                                 </button> -->
                             </div>
@@ -383,5 +396,5 @@
               </form> -->
         </div>
     </div>
-    
+
 </nav>

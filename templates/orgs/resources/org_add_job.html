@@ -10,14 +10,27 @@
     <h1> {% trans "إضافة فرصة عمل" %} </h1>
 
 
-    <form action="" method="post" class="register" enctype="multipart/form-data">
+    <form action="" method="post" id="add_job" data-cities-url="{% url 'ajax_load_cities' %}" class="register" enctype="multipart/form-data">
         {% csrf_token %}
 
         {% if request.user.is_authenticated and request.user.is_staff %}
         <div class="for-group">
             {{ form.org_name|as_crispy_field }}
         </div>
+        <!-- OTHER ORGS NAME CHOICES -->
+        <div class="for-group {% if other == 0 %} list-org-{{ other }} {% endif %}">
+            {{ form.other_org_name|as_crispy_field }}
+        </div>
+        <!-- OTHER ORGS NAME FORM -->
+        <div class="for-group">
+            {{ form_other.name|as_crispy_field }}
+        </div>
+        <div class="for-group">
+            {{ form_other.logo|as_crispy_field }}
+        </div>
         {% endif %}
+
+
         <div class="for-group">
             {{ form.job_title|as_crispy_field }}
         </div>
@@ -34,16 +47,19 @@
             {{ form.experience|as_crispy_field }}
         </div>
         <div class="for-group">
-            {{ form.job_country|as_crispy_field }}
+            {{ form.position_work|as_crispy_field }}
         </div>
         <div class="for-group">
-            {{ form.job_city|as_crispy_field }}
+            {{ form.city_work|as_crispy_field }}
         </div>
         <div class="for-group">
             {{ form.job_area|as_crispy_field }}
         </div>
         <div class="for-group">
             {{ form.job_domain|as_crispy_field }}
+        </div>
+        <div class="for-group">
+            {{ form.job_aplay|as_crispy_field }}
         </div>
         <div class="for-group">
             {{ form.dead_date|as_crispy_field }}

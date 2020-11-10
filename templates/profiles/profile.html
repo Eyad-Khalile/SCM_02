@@ -5,12 +5,6 @@
 {% block content %}
 
 
-<!-- {% for pr in profs %}
-<p>{{ pr.name }}</p>
-<p>{{ pr.user }}</p>
-<hr>
-{% endfor %} -->
-
 {% if request.user.is_authenticated %}
 
 {# {% for prof in request.user.orgprofile_set.all %} #}
@@ -21,8 +15,8 @@
 
 
 <div class="container emp-profile mt-4">
-    <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
+    <form >
+        
         <div class="row">
             <div class="col-md-4 mb-4">
                 <div class="profile-img">
@@ -386,7 +380,7 @@
     </div> -->
     <div class="col">
         <a href="{% url 'guide' %}" class="btn btn-block mt-2 mb-2">
-            عودة إلى صفحة دليل المجتمع المدني
+            {% trans 'عودة إلى صفحة دليل المجتمع المدني' %}
         </a>
     </div>
     <!-- {% endif %} -->
@@ -404,7 +398,7 @@
 
 {% if not request.user.orgprofile_set.all %}
 <h3 class="mt-4 mb-4 pt-4 pb-4">
-    {% trans 'رجاءً أتمم ملف المنظمة الشخصي لنتمكن من التحقق من معلوماتكم و يمكنكم استخدام الموقع' %}
+    {% trans 'رجاءً أتمم ملف المنظمة الشخصي لنتمكن من التحقق من معلوماتكم و تتمكنون من استخدام الموقع' %}
 </h3>
 
 
@@ -426,7 +420,7 @@
 
     <div class="col">
         <a href="{% url 'guide' %}" class="btn btn-block mt-2 mb-2">
-            عودة إلى صفحة دليل المجتمع المدني
+            {% trans 'عودة إلى صفحة دليل المجتمع المدني' %}
         </a>
     </div>
 

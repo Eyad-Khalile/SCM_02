@@ -1,10 +1,10 @@
 {% extends 'base.html' %}
 {% load static i18n %}
-{% block title %} {% trans ' تفاصيل دليل التطوير' %} {% endblock %}
+{% block title %} {% trans 'تفاصيل دليل التطوير' %} {% endblock %}
 
 {% block content %}
 <div class="row justify-content-center mt-4 pt-4">
-  <h1> {% trans ' تفاصيل دليل التطوير' %} </h1>
+  <h1> {% trans 'تفاصيل دليل التطوير' %} </h1>
 
   <div class="span1 well">
     <!-- <center>   -->
@@ -12,54 +12,86 @@
     <h3 class="mt-4"> {% trans "اسم اللذي أضاف  تفاصيل دليل التطوير" %} : {{ devs.user }}</h3>
     {% endif %}
 
-    <h3 class="mt-4"> {% trans "اسم المنظمة" %} : {{ devs.org_name }}</h3>
-    <span class="text-muted">{% trans "  تاريخ الإضافة " %} : {{ devs.date_published }} </span>
+    <h3 class="mt-4">
+      {% if devs.org_name %}
+      {% trans "اسم المنظمة" %} : {{ devs.org_name }}
+      {% else %}
+      {{ devs.name_dev }}
+      {% endif %}
+    </h3>
+    <span class="text-muted">{% trans "  تاريخ الإضافة " %} :
+      {% if devs.created_at %}
+      {{ devs.created_at|date:"Y-m-d" }}
+      {% else %}
+      {% trans 'لم يذكر'%}
+      {% endif %}
+    </span>
 
-    <p class="mt-3"> {% trans "عنوان  " %} : {{ devs.title_dev }}</p>
+    <h2 class="mt-3"> {% trans "عنوان" %} : {{ devs.title_dev }}</h2>
     <p> {% trans  "وصف الدليل" %} : <br> {{ devs.dev_description }}</p>
 
+    <p>
+      {% trans 'تاريخ الإعداد/النشر/التأليف' %}
+      {% if dev.dev_date %}
+      {{ dev.dev_date }}
+      {% else %}
+      {% trans 'لم يذكر' %}
+      {% endif %}
+    </p>
+
+    <p> {% trans  "موضوع المادة" %} : {{ devs.subject }}</p>
+
+    <p> {% trans  "المادة" %} :
+      {% if devs.content %}
+      {{ devs.content }}
+      {% else %}
+      {% trans 'لم يذكر' %}
+      {% endif %}
+    </p>
+
     <!-- </center> -->
-   <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v3.2"></script>
-   <div class="fb-like" data-href="http://127.0.0.1:8000/devs_detail/2" og:image data-layout="standard" data-action="like" data-size="large" data-show-faces="false" data-share="true"></div><br>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v3.2">
+    </script>
+    <div class="fb-like" data-href="http://127.0.0.1:8000/devs_detail/2" og:image data-layout="standard"
+      data-action="like" data-size="large" data-show-faces="false" data-share="true"></div><br>
   </div>
   <div class="row">
 
-      <div class="col">
-        {% if request.user.is_authenticated and request.user.is_superuser %}
-        
-        {% if devs.publish == False %}
-        <form action="" class="confirm" method="post">
-          {% csrf_token %} {{form.publish}}
-          <div class="form-group">
-            <input type="submit" id="org_confirm_btn" class="btn btn-block"
-              value="{% trans 'الموافقة على نشر ' %}" />
-          </div>
-        </form>
-        {% elif devs.publish == True %}
-        <form action="" class="deconfirm" method="post">
-          {% csrf_token %} {{form.publish}}
-          <div class="form-group">
-            <input type="submit" id="org_deconfirm_btn" class="btn btn-block" value="{% trans 'إلغاء نشر الخبر' %}" />
-          </div>
-        </form>
-        {% endif %}
-        {% endif %}
-      </div>
-      
-      
-        
-        {% if request.user == capacity.user  or request.user.is_superuser %}
-        <div class="col">
-          <a href="{% url 'dev_edit' devs.id %}" class="btn btn-block"> {% trans 'تعديل الدليل' %} </a>
-        </div>
+    <div class="col">
+      {% if request.user.is_authenticated and request.user.is_superuser %}
 
-        <div class="col">
-          <a href="{% url 'dev_delete' devs.id %}" class="btn btn-block"> {% trans 'حذف ' %} </a>
+      {% if devs.publish == False %}
+      <form action="" class="confirm" method="post">
+        {% csrf_token %} {{form.publish}}
+        <div class="form-group">
+          <input type="submit" id="org_confirm_btn" class="btn btn-block" value="{% trans 'الموافقة على النشر ' %}" />
         </div>
-        
+      </form>
+      {% elif devs.publish == True %}
+      <form action="" class="deconfirm" method="post">
+        {% csrf_token %} {{form.publish}}
+        <div class="form-group">
+          <input type="submit" id="org_deconfirm_btn" class="btn btn-block" value="{% trans 'إلغاء نشر الدليل' %}" />
+        </div>
+      </form>
       {% endif %}
-
+      {% endif %}
     </div>
+
+
+
+    {% if request.user == capacity.user  or request.user.is_superuser %}
+    <div class="col">
+      <a href="{% url 'dev_edit' devs.id %}" class="btn btn-block"> {% trans 'تعديل الدليل' %} </a>
+    </div>
+
+    <div class="col">
+      <a href="{% url 'dev_delete' devs.id %}" class="btn btn-block"> {% trans 'حذف' %} </a>
+    </div>
+
+    {% endif %}
+
+  </div>
 
 
 </div>

@@ -43,14 +43,15 @@
                 aria-expanded="false" aria-controls="collapseContact">
                 
             </a> -->
-            <h5 class="border-bottom pb-2 font-weight-bold text-uppercase mb-5"> {% trans "للتواصل معنا"%} </h5>
+            <h5 class="border-bottom pb-2 font-weight-bold text-uppercase mb-5"> {% trans "للتواصل معنا" %} </h5>
 
             <div class="{% if LANGUAGE_CODE == 'ar'%} icon-ml {% else %} icon-mr {% endif %}" id="collapseContact">
                 <ul class="list-unstyled pr-0">
                     <li>
                         <p>
-                            <i class="fa fa-home" aria-hidden="true"></i> New York, NY
-                            10012, US
+                            <i class="fa fa-home" aria-hidden="true"></i>
+                            <span dir="ltr">17 passage de la Main d’Or,</span> <br> 
+                            <span class="{% if LANGUAGE_CODE == 'ar'%} pr-4 {% else %} pl-4 {% endif %}">75011 Paris, France</span>
                         </p>
                     </li>
                     <li>
@@ -83,7 +84,7 @@
         <!-- Grid column -->
         <div class="col-md-6 social col-lg-3 mx-auto my-md-4 my-0 mt-4 mb-1">
             <!-- Social buttons -->
-            <h5 class="font-weight-bold text-uppercase mb-4 border-bottom pb-2"> {% trans "تابعونا على"%} </h5>
+            <h5 class="font-weight-bold text-uppercase mb-4 border-bottom pb-2"> {% trans "تابعونا على" %} </h5>
 
             <div class="social-icon">
                 <!-- Facebook -->
@@ -102,7 +103,7 @@
             </div>
             <!-- Contact details -->
 
-            <!-- <a href="{% url 'site_politic' %}" class="btn btn-primary"> سياسة الخصوصية </a> -->
+            <!-- <a href="{% url 'site_politic' %}" class="btn"> سياسة الخصوصية </a> -->
         </div>
         <!-- Grid column -->
 
@@ -119,7 +120,7 @@
                 اشترك معنا
             </a> -->
             <div class="" id="collapseForm">
-                <a href="{% url 'home' %}#newsletter" class="btn btn-block">{% trans 'إملأ الفورم التالي' %}</a>
+                <a href="{% url 'home' %}#newsletter" class="btn btn-block">{% trans 'إملأ النموذج التالي' %}</a>
             </div>
 
             <br />

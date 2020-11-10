@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% load static i18n %}
-{% block title %} {% trans ' تفاصيل فرصة بناء القدرات' %} {% endblock %}
+{% block title %} {% trans 'تفاصيل فرصة بناء القدرات' %} {% endblock %}
 
 {% block content %}
 <div class="row justify-content-center mt-4 pt-4">
@@ -9,55 +9,93 @@
   <div class="span1 well">
     <!-- <center>   -->
     {% if request.user.is_authenticated and request.user.is_superuser %}
-    <h3 class="mt-4"> {% trans "اسم اللذي أضاف فرصة بناء القدرات" %} : {{ funding.user }}</h3>
+    <h3 class="mt-4"> {% trans "اسم اللذي أضاف فرصة بناء القدرات" %} : {{ capacity.user }}</h3>
     {% endif %}
 
-    <h3 class="mt-4"> {% trans "اسم المنظمة" %} : {{ capacity.org_name }}</h3>
-    <span class="text-muted">{% trans "  تاريخ الإضافة " %} : {{ capacity.date_published }} </span>
+    <h3 class="mt-4">
+      {% if capacity.org_name %}
+      {% trans "اسم المنظمة" %} :
+      {{ capacity.org_name }}
+      {% else %}
+      {% trans "اسم الجهة المانحة" %}
+      {{ capacity.name_capacity }}
+      {% endif %}
+    </h3>
 
-    <p class="mt-3"> {% trans "عنوان الفرصة" %} : {{ capacity.title_capacity }}</p>
+    <span class="text-muted">{% trans "تاريخ الإضافة" %} : {{ capacity.created_at|date:"Y-m-d" }} </span>
+
+    <h3 class="mt-3"> {% trans "عنوان الفرصة" %} : {{ capacity.title_capacity }}</h3>
+
     <p> {% trans "وصف فرصة التمويل" %} : <br> {{ capacity.capacity_description }}</p>
+
+    <p> {% trans "نوع الفرصة" %} : {{ capacity.get_capacity_type_display }}</p>
+
+    <p> {% trans "مكان الفرصة" %} : {{ capacity.get_position_work_display }}</p>
+
+    <p> {% trans "مكان الفرصة" %} :
+      {% if capacity.city_work %}
+      {{ capacity.get_city_work_display }}
+      {% else %}
+      {% trans 'لم يذكر' %}
+      {% endif %}
+    </p>
+
+    <p> {% trans "قطاع الفرصة" %} : {{ capacity.get_capacity_domain_display }}</p>
+
+    <p> <strong>{% trans "تاريخ إغلاق المنحة" %} : {{ capacity.capacity_dead_date|date:"Y-m-d" }}</strong> </p>
+
+    <p> {% trans "طريقة التقديم" %} : {{ capacity.capacity_guid }}</p>
+
+    <p> {% trans "طريقة التقديم" %} :
+      {% if capacity.capacity_url %}
+      {{ capacity.capacity_url }}
+      {% else %}
+      {% trans 'لم يذكر' %}
+      {% endif %}
+    </p>
+
+
+
 
     <!-- </center> -->
   </div>
   <div class="row">
 
-      <div class="col">
-        {% if request.user.is_authenticated and request.user.is_superuser %}
-        
-        {% if capacity.publish == False %}
-        <form action="" class="confirm" method="post">
-          {% csrf_token %} {{form.publish}}
-          <div class="form-group">
-            <input type="submit" id="org_confirm_btn" class="btn btn-block"
-              value="{% trans 'الموافقة على نشر ' %}" />
-          </div>
-        </form>
-        {% elif capacity.publish == True %}
-        <form action="" class="deconfirm" method="post">
-          {% csrf_token %} {{form.publish}}
-          <div class="form-group">
-            <input type="submit" id="org_deconfirm_btn" class="btn btn-block" value="{% trans 'إلغاء نشر الخبر' %}" />
-          </div>
-        </form>
-        {% endif %}
-        {% endif %}
-      </div>
-      
-      
-        
-        {% if request.user == capacity.user  or request.user.is_superuser %}
-        <div class="col">
-          <a href="{% url 'capacity_edit' capacity.id %}" class="btn btn-block"> {% trans 'تعديل فرصة بناءالقدرات' %} </a>
-        </div>
+    <div class="col">
+      {% if request.user.is_authenticated and request.user.is_superuser %}
 
-        <div class="col">
-          <a href="{% url 'capacity_delete' capacity.id %}" class="btn btn-block"> {% trans 'حذف ' %} </a>
+      {% if capacity.publish == False %}
+      <form action="" class="confirm" method="post">
+        {% csrf_token %} {{form.publish}}
+        <div class="form-group">
+          <input type="submit" id="org_confirm_btn" class="btn btn-block" value="{% trans 'الموافقة على نشر ' %}" />
         </div>
-        
+      </form>
+      {% elif capacity.publish == True %}
+      <form action="" class="deconfirm" method="post">
+        {% csrf_token %} {{form.publish}}
+        <div class="form-group">
+          <input type="submit" id="org_deconfirm_btn" class="btn btn-block" value="{% trans 'إلغاء نشر الخبر' %}" />
+        </div>
+      </form>
       {% endif %}
-
+      {% endif %}
     </div>
+
+
+
+    {% if request.user == capacity.user  or request.user.is_superuser %}
+    <div class="col">
+      <a href="{% url 'capacity_edit' capacity.id %}" class="btn btn-block"> {% trans 'تعديل فرصة بناءالقدرات' %} </a>
+    </div>
+
+    <div class="col">
+      <a href="{% url 'capacity_delete' capacity.id %}" class="btn btn-block"> {% trans 'حذف ' %} </a>
+    </div>
+
+    {% endif %}
+
+  </div>
 
 
 </div>

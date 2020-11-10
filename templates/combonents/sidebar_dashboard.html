@@ -156,6 +156,70 @@
             </a>
         </li>
         <hr>
+        <li class="nav-item">
+            <a href="{% url 'orgs_add_job' %}" class="nav-link nav-link-icon d-flex justify-content-center"
+                title="{% trans 'إضافة فرصة عمل' %}">
+                <i class="fas fa-plus-square {% if LANGUAGE_CODE == 'ar' %} left {% else %} right {% endif %}"
+                    aria-hidden="true"></i>
+            </a>
+        </li>
+        <hr>
+        <li class="nav-item">
+            <a href="{% url 'org_jobs_not_pub' %}" class="nav-link nav-link-icon d-flex justify-content-center"
+                title="{% trans 'فرص العمل للمنظمات قيد الدراسة' %}">
+                <i class="fas fa-chalkboard-teacher {% if LANGUAGE_CODE == 'ar' %} left {% else %} right {% endif %}"
+                    aria-hidden="true"></i>
+            </a>
+        </li>
+        <hr>
+        <li class="nav-item">
+            <a href="{% url 'orgs_add_funding' %}" class="nav-link nav-link-icon d-flex justify-content-center"
+                title="{% trans 'إضافة فرصة تمويل' %}">
+                <i class="fas fa-plus-square {% if LANGUAGE_CODE == 'ar' %} left {% else %} right {% endif %}"
+                    aria-hidden="true"></i>
+            </a>
+        </li>
+        <hr>
+        <li class="nav-item">
+            <a href="{% url 'org_funding_not_pub' %}" class="nav-link nav-link-icon d-flex justify-content-center"
+                title="{% trans 'فرص التمويل للمنظمات قيد الدراسة' %}">
+                <i class="fas fa-chalkboard-teacher {% if LANGUAGE_CODE == 'ar' %} left {% else %} right {% endif %}"
+                    aria-hidden="true"></i>
+            </a>
+        </li>
+        <hr>
+        <li class="nav-item">
+            <a href="{% url 'orgs_add_capacity' %}" class="nav-link nav-link-icon d-flex justify-content-center"
+                title="{% trans 'إضافة فرصة بناء القدرات' %}">
+                <i class="fas fa-plus-square {% if LANGUAGE_CODE == 'ar' %} left {% else %} right {% endif %}"
+                    aria-hidden="true"></i>
+            </a>
+        </li>
+        <hr>
+        <li class="nav-item">
+            <a href="{% url 'org_capacity_not_pub' %}" class="nav-link nav-link-icon d-flex justify-content-center"
+                title="{% trans 'فرص بناء القدرات للمنظمات قيد الدراسة' %}">
+                <i class="fas fa-chalkboard-teacher {% if LANGUAGE_CODE == 'ar' %} left {% else %} right {% endif %}"
+                    aria-hidden="true"></i>
+            </a>
+        </li>
+        <hr>
+        <li class="nav-item">
+            <a href="{% url 'orgs_add_devs' %}" class="nav-link nav-link-icon d-flex justify-content-center"
+                title="{% trans 'إضافة دليل تطوير' %}">
+                <i class="fas fa-plus-square {% if LANGUAGE_CODE == 'ar' %} left {% else %} right {% endif %}"
+                    aria-hidden="true"></i>
+            </a>
+        </li>
+        <hr>
+        <li class="nav-item">
+            <a href="{% url 'org_devs_not_pub' %}" class="nav-link nav-link-icon d-flex justify-content-center"
+                title="{% trans 'دليل التطوير للمنظمات قيد الدراسة' %}">
+                <i class="fas fa-chalkboard-teacher {% if LANGUAGE_CODE == 'ar' %} left {% else %} right {% endif %}"
+                    aria-hidden="true"></i>
+            </a>
+        </li>
+        <hr>
 
         <!-- BACK -->
         <hr>

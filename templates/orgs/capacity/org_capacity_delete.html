@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static i18n crispy_forms_tags %}
 
-{% block title %} {% trans "حذف فرصةالتمويل " %} {% endblock %}
+{% block title %} {% trans "حذف فرصة بناء القدرات" %} {% endblock %}
 
 {% block content %}
 
@@ -9,13 +9,13 @@
 <div class="row mt-4 pt-4 mb-4">
     <h1 class="mt-4 mb-4 pb-4"> {% trans "حذف فرصة بناء القدرات" %} </h1>
 
-    <h2> {% trans "هل أنت متأكد من رغبتك في حذف فرصة بناء القدرات بعنوان " %} : {{ funding.name_funding}} </h2>
+    <h2> {% trans "هل أنت متأكد من رغبتك في حذف فرصة بناء القدرات بعنوان" %} : {{ funding.name_funding}} </h2>
 
     <form action="" method="post" class="register" enctype="multipart/form-data">
         {% csrf_token %}
 
         <div class="form-group">
-            <input type="submit" class="btn btn-block mt-3" value='{% trans "حذف " %}'>
+            <input type="submit" class="btn btn-block mt-3" value='{% trans "حذف" %}'>
         </div>
         <button type="button" class="btn btn-block nav-link active nav-link-icon d-flex justify-content-center" onclick="history.back();"
         title="{% trans 'عودة إلى الصفحة السابقة' %}">
