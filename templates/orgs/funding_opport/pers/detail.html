@@ -3,18 +3,87 @@
 
 {% block title %} {% trans "تفاصيل فرصة تمويل للأفراد" %} {% endblock %}
 
+{% get_current_language as LANGUAGE_CODE %}
+
 {% block content %}
 
 
 <div class="row mt-4 pt-4">
     <h1> {% trans "تفاصيل فرصة تمويل للأفراد" %} </h1>
 
-    <div class="well col-lg-9 col-xs-12 job-card" data-aos="fade-in">
-        <!-- <center>   -->
+    <div class="well col-lg-9 col-xs-12 job-card position-relative" data-aos="fade-in">
+
+        <!-- MINI MANU -->
+        <span id="span-menu" type="button"
+            class="span-menu {% if LANGUAGE_CODE == 'ar' %} float-right {% else %} float-left {% endif %}"><i
+                class="fa fa-ellipsis-v" aria-hidden="true"></i></span>
+
+        <div id="mini-menu"
+            class="list-group mini-menu d-none {% if LANGUAGE_CODE == 'ar' %} menu-right {% else %} menu-left {% endif %}">
+            <!-- <a href="#" class="list-group-item list-group-item-action active" aria-current="true">
+        Cras justo odio
+      </a> -->
+            {% if request.user.is_authenticated and request.user.is_superuser %}
+            {% if perso.publish == False %}
+            <form action="" class="confirm" method="post">
+                {% csrf_token %} {{ form.publish }}
+                <div class="form-group">
+                    <button type="submit" id="org_confirm_btn" class="list-group-item list-group-item-action"
+                        title="{% trans 'الموافقة على النشر' %}">{% trans 'الموافقة على النشر' %} <i
+                            class="fas fa-check mx-1"></i></button>
+                </div>
+            </form>
+            {% elif perso.publish == True %}
+            <form action="" class="deconfirm" method="post">
+                {% csrf_token %} {{ form.publish }}
+                <div class="form-group">
+                    <button type="submit" id="org_deconfirm_btn" class="list-group-item list-group-item-action"
+                        title="{% trans 'إلغاء نشر الدليل' %}">{% trans 'إلغاء نشر الدليل' %} <i class="fa fa-ban mx-1"
+                            aria-hidden="true"></i></button>
+                </div>
+            </form>
+            {% endif %}
+            {% endif %}
+
+            {% if request.user == perso.user and perso.publish == False %}
+
+            <a href="{% url 'finance_perso_edit' perso.id %}" class="list-group-item list-group-item-action"
+                title="{% trans 'تعديل فرصة التمويل' %}">{% trans 'تعديل فرصة التمويل' %} <i
+                    class="fas fa-edit mx-1"></i></a>
+
+            {% elif request.user.is_superuser %}
+            <a href="{% url 'finance_perso_edit' perso.id %}" class="list-group-item list-group-item-action"
+                title="{% trans 'تعديل فرصة التمويل' %}">{% trans 'تعديل فرصة التمويل' %} <i
+                    class="fas fa-edit mx-1"></i></a>
+
+            <a href="{% url 'finance_perso_delete' perso.id %}" class="list-group-item list-group-item-action"
+                title="{% trans 'حذف' %}">{% trans 'حذف' %} <i class="far fa-trash-alt mx-1"></i></a>
+            {% endif %}
+
+        </div>
+
+        <!-- START CART -->
+        <strong>
+            <h1 class="text-center mt-3"> {% trans 'نوع المنحة' %} : {{ perso.get_fund_type_display }}</h1>
+        </strong>
+
+        <hr>
+
+        <p class="text-muted">
+            <i class="far fa-clock ml-2 mr-2"></i>
+            {% trans "تاريخ الإضافة" %} :
+            {% if perso.date_published %}
+            {{ perso.date_published|date:"Y-m-d" }}
+            {% else %}
+            {{ perso.created_at|date:"Y-m-d" }}
+            {% endif %}
+        </p>
+
         <h2 class="text-center">
             {% trans 'الجهة المانحة' %} :
             {% if perso.org_name %}
-            {{ perso.org_name }}
+            <a href="{% url 'particip_detail' perso.org_name.id %}" class="nav-link text-dark pl-0 pr-0">
+                {{ perso.org_name }}</a>
             {% else %}
             {{ perso.name_funding }}
             {% endif %}
@@ -30,14 +99,7 @@
         </figure>
         {% endif %}
 
-        <span class="text-muted">
-            {% trans "تاريخ الإضافة" %} :
-            {% if perso.date_published %}
-            {{ perso.date_published|date:"Y-m-d" }}
-            {% else %}
-            {{ perso.created_at|date:"Y-m-d" }}
-            {% endif %}
-        </span>
+
 
         {% if request.user.is_authenticated and request.user.is_superuser %}
         <p class="mt-2"> {% trans "اسم اللذي أضاف فرصة التمويل" %} : {{ perso.user }}</p>
@@ -106,7 +168,34 @@
             <a href="{{ perso.funding_url }}" target="_blank">{{ perso.funding_url }}</a>
         </p>
 
-        <!-- </center> -->
+
+        <!-- flex-column align-items-end float-left  -->
+        <div class="social-share col-1 position-absolute d-flex {% if LANGUAGE_CODE == 'ar'%} flex-column align-items-end
+           right {% else %} flex-column align-items-start left {% endif %}">
+            <!-- FACEBOOK -->
+
+            <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}"
+                class="btn position-relative mb-2" title="{% trans 'مشاركة على فيسبوك' %}">
+                <i class="fab fa-facebook-f"></i>
+            </a>
+
+            <!-- TWITTER -->
+
+            <a target="_blank"
+                href="https://twitter.com/home?status={{ share_string }}%20{{ request.build_absolute_uri }}"
+                class="btn position-relative mt-2 mb-2 mt-0" title="{% trans 'مشاركة على تويتر' %}">
+                <i class="fab fa-twitter"></i>
+            </a>
+
+            <!-- LINKEDIN -->
+
+            <a target="_blank"
+                href="https://www.linkedin.com/shareArticle?mini=true&url={{ request.build_absolute_uri }}&title={{ perso.get_fund_type_display }}&summary={{ share_string }}&source={{ request.build_absolute_uri }}"
+                class="btn position-relative mt-2 mt-0" title="{% trans 'مشاركة على لينكدين' %}">
+                <i class="fab fa-linkedin-in"></i>
+            </a>
+
+        </div>
 
     </div>
 
@@ -136,47 +225,6 @@
 
 
 
-    <div class="row">
 
-        <div class="col">
-            {% if request.user.is_authenticated and request.user.is_superuser %}
-
-            {% if perso.publish == False %}
-            <form action="" class="confirm" method="post">
-                {% csrf_token %} {{form.publish}}
-                <div class="form-group">
-                    <button type="submit" id="org_confirm_btn" class="btn btn-block"
-                        title="{% trans 'الموافقة على النشر' %}"><i class="fas fa-check"></i></button>
-                </div>
-            </form>
-            {% elif perso.publish == True %}
-            <form action="" class="deconfirm" method="post">
-                {% csrf_token %} {{form.publish}}
-                <div class="form-group">
-                    <button type="submit" id="org_deconfirm_btn" class="btn btn-block"
-                        title="{% trans 'إلغاء نشر فرصة التمويل' %}"><i class="fa fa-ban"
-                            aria-hidden="true"></i></button>
-                </div>
-            </form>
-            {% endif %}
-            {% endif %}
-        </div>
-
-
-
-        {% if request.user == perso.user  or request.user.is_superuser %}
-        <div class="col">
-            <a href="{% url 'finance_perso_edit' perso.id %}" class="btn btn-block"
-                title="{% trans 'تعديل فرصة التمويل' %}"><i class="fas fa-edit"></i></a>
-        </div>
-
-        <div class="col">
-            <a href="{% url 'finance_perso_delete' perso.id %}" class="btn btn-block" title="{% trans 'حذف' %}"><i
-                    class="far fa-trash-alt"></i></a>
-        </div>
-
-        {% endif %}
-
-    </div>
 </div>
 {% endblock %}

@@ -104,7 +104,7 @@
               <strong>{% trans 'نوع المنظمة' %} :</strong>
             </div>
             <div class="col-6">
-              {{ org_type }}
+              {{ org.get_org_type_display }}
             </div>
           </p>
 
@@ -113,7 +113,7 @@
               <strong>{% trans 'مكان العمل' %} :</strong>
             </div>
             <div class="col-6">
-              {{ position_work }}
+              {{ org.get_position_work_display }}
             </div>
           </p>
 
@@ -178,7 +178,7 @@
               </div>
               <div class="col-md-6">
                 <p>
-                  {{ work_domain }}
+                  {{ org.get_work_domain_display }}
                 </p>
               </div>
             </div>
@@ -187,7 +187,7 @@
                 <label> {% trans 'الفئات المستهدفة' %} </label>
               </div>
               <div class="col-md-6">
-                <p>{{ target_cat }}</p>
+                <p>{{ org.get_target_cat_display }}</p>
               </div>
             </div>
             <div class="row">
@@ -225,7 +225,7 @@
               <div class="col-md-6">
                 <p>
                   {% if org.org_registered_country %}
-                  {{ org_registered_country }}
+                  {{ org.get_org_registered_country_display }}
                   {% else %}
                   <span class="text-muted"> {% trans 'لم يذكر' %} </span>
                   {% endif %}
@@ -266,7 +266,7 @@
               </div>
               <div class="col-md-6">
                 <p>
-                  {{ w_polic_regulations }}
+                  {{ org.get_w_polic_regulations_display }}
                 </p>
               </div>
             </div>
@@ -479,7 +479,7 @@
               <div class="col-md-6">
                 <p>
                   <a href="{% url 'research' %}?org_name={{org.id}}"
-                    class="btn nav-link">{% trans "البيانات للمنظمة" %}</a>
+                    class="btn nav-link">{% trans "اﻷبحاث الخارجية للمنظمة" %}</a>
                 </p>
               </div>
             </div>

@@ -3,6 +3,8 @@ form {
   input, select {
     border: none;
     box-shadow: inset 0px 0px 7px rgba($color-1, 0.7);
+  }
+  input:not(.btn) {
     border-radius: 8px !important;
   }
 
@@ -13,6 +15,7 @@ form {
       width: 100%;
     }
   }
+
 
   
 
@@ -54,7 +57,7 @@ form {
       position: relative;
       color: red;
       // font-size: 2em;
-      right: 10px;
+      right: -8px;
       top: 5px;
     }
   }
@@ -128,6 +131,7 @@ div.emp-profile {
     padding: 0 !important;
     color: #fff !important;
   }
+  
   ::placeholder {
     color: rgba(255, 255, 255, 0.5);
   }
@@ -214,6 +218,7 @@ div.emp-profile {
     margin-bottom: 3%;
     cursor: pointer;
   }
+  
 
   img {
     margin-top: 15%;

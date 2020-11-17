@@ -2,161 +2,253 @@
 {% load static i18n %}
 {% block title %} {% trans 'تفاصيل العمل' %} {% endblock %}
 
+{% get_current_language as LANGUAGE_CODE %}
+
 {% block content %}
-<div class="row justify-content-center mt-4 pt-4">
-  <h1> {% trans ' تفاصيل العمل' %} </h1>
-
-  <div class="span1 well job-card" data-aos="fade-in">
-    <h2 class="text-center mt-3"> {% trans "اسم فرصة العمل" %} : {{ job.job_title }}</h2>
-
-    <!-- ORG LOGO -->
-    {% if job.org_name %}
-    <a href="{% url 'jobs_detail' job.id %}">
-      <figure>
-        <img src="{{ job.org_name.logo.url }}" name="{{ job.title }}" title="{{ job.title }}" alt="{{ job.title }}"
-          width="100%" class="img-thumbnail rounded"></figure>
-    </a>
-    {% elif job.other_org_name %}
-    <a href="{% url 'jobs_detail' job.id %}">
-      <figure>
-        <img src="{{ job.other_org_name.logo.url }}" name="{{ job.title }}" title="{{ job.title }}"
-          alt="{{ job.title }}" width="100%" class="img-thumbnail rounded"></figure>
-    </a>
-    {% else %}
-
-    {% if other.job|floatformat:"2" == job.id|floatformat:"2" %}
-    <a href="{% url 'jobs_detail' job.id %}">
-      <figure>
-        <img src="{{ other.logo.url }}" name="{{ other.name }}" title="{{ other.name }}" alt="{{ other.name }}"
-          width="100%" class="img-thumbnail rounded"></figure>
-    </a>
-    {% endif %}
-
-    {% endif %}
-
-    <!-- ORG NAME -->
-    <h3 class="mt-4">
-      {% trans 'اسم المنظمة' %} :
-      {% if job.org_name %}
-      {{ job.org_name }}
-      {% elif job.other_org_name %}
-      {{ job.other_org_name }}
-      {% elif other.job|floatformat:"2" == job.id|floatformat:"2" %}
-      {{ other.name }}
-      {% else %}
-      {% trans 'لم يذكر' %}
-      {% endif %}
-    </h3>
 
 
-    {% if request.user.is_authenticated and request.user.is_superuser %}
-    <p class="mt-2"> {% trans "اسم اللذي أضاف فرصة العمل" %} : {{ job.user }}</p>
-    {% endif %}
+<div class="row mt-4 pt-4">
 
-    <span class="text-muted">{% trans "تاريخ الإضافة" %} : {{ job.created_at }} </span>
+    <h1> {% trans ' تفاصيل العمل' %} </h1>
 
-    <hr>
-
-    <p>
-      {% trans "نوع الوظيفة" %} :
-      {{ job_type }}
-    </p>
-    <p>
-      {% trans "مجال العمل" %} :
-      {{ job_domain }}
-    </p>
-    <p> {% trans "وصف فرصة العمل" %} : <br> {{ job.job_description }}</p>
-    <p>
-      {% trans "مكان العمل" %} :
-      {{ position_work }}
-    </p>
-    <p>
-      {% trans "المدينة" %} :
-      {% if job.city_work %}
-      {{ job.city_work }}
-      {% else %}
-      {% trans 'لم يذكر' %}
-      {% endif %}
-    </p>
-    <p>
-      {% trans "المنطقة" %} :
-      {% if job.job_area %}
-      {{ job.job_area }}
-      {% else %}
-      {% trans 'لم يذكر' %}
-      {% endif %}
-    </p>
-
-    <p>
-      {% trans "مدة العمل" %} :
-      {% if job.period_months %}
-      {{ job.period_months }}
-      {% else %}
-      {% trans 'لم يذكر' %}
-      {% endif %}
-    </p>
-
-    <p>
-      {% trans "الخبرة المطلوبة" %} :
-      {{ experience }}
-    </p>
-
-    <p>
-      {% trans "تاريخ إغلاق التقدم للوظيفة" %} :
-      {{ job.dead_date|date:"c" }}
-    </p>
-
-    <p>
-      {% trans "طريقة التقدم للوظيفة" %} : <br>
-      {{ job.job_aplay }}
-    </p>
+    <div class="well col-lg-9 col-xs-12 job-card position-relative" data-aos="fade-in">
 
 
+        <!-- MINI MANU -->
+        <span id="span-menu" type="button"
+            class="span-menu {% if LANGUAGE_CODE == 'ar' %} float-right {% else %} float-left {% endif %}"><i
+                class="fa fa-ellipsis-v" aria-hidden="true"></i></span>
 
-  </div>
-  <div class="row">
+        <div id="mini-menu"
+            class="list-group mini-menu d-none {% if LANGUAGE_CODE == 'ar' %} menu-right {% else %} menu-left {% endif %}">
+            <!-- <a href="#" class="list-group-item list-group-item-action active" aria-current="true">
+        Cras justo odio
+      </a> -->
+            {% if request.user.is_authenticated and request.user.is_superuser %}
+            {% if job.publish == False %}
+            <form action="" class="confirm" method="post">
+                {% csrf_token %} {{ form.publish }}
+                <div class="form-group">
+                    <button type="submit" id="org_confirm_btn" class="list-group-item list-group-item-action"
+                        title="{% trans 'الموافقة على النشر' %}">{% trans 'الموافقة على النشر' %} <i
+                            class="fas fa-check mx-1"></i></button>
+                </div>
+            </form>
+            {% elif job.publish == True %}
+            <form action="" class="deconfirm" method="post">
+                {% csrf_token %} {{ form.publish }}
+                <div class="form-group">
+                    <button type="submit" id="org_deconfirm_btn" class="list-group-item list-group-item-action"
+                        title="{% trans 'إلغاء نشر فرصة العمل' %}">{% trans 'إلغاء نشر فرصة العمل' %} <i
+                            class="fa fa-ban mx-1" aria-hidden="true"></i></button>
+                </div>
+            </form>
+            {% endif %}
+            {% endif %}
 
-    <div class="col">
-      {% if request.user.is_authenticated and request.user.is_superuser %}
+            {% if request.user == job.user and job.publish == False %}
 
-      {% if job.publish == False %}
-      <form action="" class="confirm" method="post">
-        {% csrf_token %} {{form.publish}}
-        <div class="form-group">
-          <!-- <input type="submit" id="org_confirm_btn" class="btn btn-block" value="{% trans 'الموافقة على النشر' %}" /> -->
-          <button type="submit" id="org_confirm_btn" class="btn btn-block" title="{% trans 'الموافقة على النشر' %}"><i
-              class="fas fa-check"></i></button>
+            <a href="{% url 'jobs_edit' job.id %}" class="list-group-item list-group-item-action"
+                title="{% trans 'تعديل فرصة عمل' %}">{% trans 'تعديل فرصة عمل' %} <i class="fas fa-edit mx-1"></i></a>
+
+            {% elif request.user.is_superuser %}
+            <a href="{% url 'jobs_edit' job.id %}" class="list-group-item list-group-item-action"
+                title="{% trans 'تعديل فرصة عمل' %}">{% trans 'تعديل فرصة عمل' %} <i class="fas fa-edit mx-1"></i></a>
+
+            <a href="{% url 'jobs_delete' job.id %}" class="list-group-item list-group-item-action"
+                title="{% trans 'حذف' %}">{% trans 'حذف' %} <i class="far fa-trash-alt mx-1"></i></a>
+            {% endif %}
+
         </div>
-      </form>
-      {% elif job.publish == True %}
-      <form action="" class="deconfirm" method="post">
-        {% csrf_token %} {{form.publish}}
-        <div class="form-group">
-          <!-- <input type="submit" id="org_deconfirm_btn" class="btn btn-block"
-            value="{% trans 'إلغاء نشر فرصة العمل' %}" /> -->
-          <button type="submit" id="org_deconfirm_btn" class="btn btn-block"
-            title="{% trans 'إلغاء نشر فرصة العمل' %}"><i class="fa fa-ban" aria-hidden="true"></i>
-          </button>
+
+        <!-- START CART -->
+        <strong>
+            <h2 class="text-center mt-3"> {% trans "اسم فرصة العمل" %} : {{ job.job_title }}</h2>
+        </strong>
+
+        <hr>
+
+        <p class="text-muted">
+            <i class="far fa-clock ml-2 mr-2"></i>
+            {% trans "تاريخ الإضافة" %} :
+            {{ job.created_at|date:"Y-m-d" }}
+        </p>
+
+        <div class="row">
+            <div class="col-md-6 col-sm-12">
+                <!-- ORG LOGO -->
+                {% if job.org_name %}
+                <figure>
+                    <img src="{{ job.org_name.logo.url }}" name="{{ job.title }}" title="{{ job.title }}"
+                        alt="{{ job.title }}" width="100%" class="img-thumbnail rounded">
+                </figure>
+                {% elif job.other_org_name %}
+                <figure>
+                    <img src="{{ job.other_org_name.logo.url }}" name="{{ job.title }}" title="{{ job.title }}"
+                        alt="{{ job.title }}" width="100%" class="img-thumbnail rounded">
+                </figure>
+                {% else %}
+
+                {% if other.job|floatformat:"2" == job.id|floatformat:"2" %}
+                <figure>
+                    <img src="{{ other.logo.url }}" name="{{ other.name }}" title="{{ other.name }}"
+                        alt="{{ other.name }}" width="100%" class="img-thumbnail rounded">
+                </figure>
+                {% endif %}
+
+                {% endif %}
+            </div>
+            <div class="col-md-6 col-sm-12">
+                <!-- ORG NAME -->
+                <h3 class="mt-4 text-center">
+                    {% trans 'اسم المنظمة' %}
+                    {% if job.org_name %}
+                    <a href="{% url 'particip_detail' job.org_name.id %}" class="nav-link text-dark pl-0 pr-0">
+                        {{ job.org_name }}</a>
+                    {% elif job.other_org_name %}
+                    {{ job.other_org_name }}
+                    {% elif other.job|floatformat:"2" == job.id|floatformat:"2" %}
+                    {{ other.name }}
+                    {% else %}
+                    {% trans 'لم يذكر' %}
+                    {% endif %}
+                </h3>
+
+            </div>
         </div>
-      </form>
-      {% endif %}
-      {% endif %}
+
+
+        {% if request.user.is_authenticated and request.user.is_superuser %}
+        <p class="mt-2 text-muted"> {% trans "اسم اللذي أضاف فرصة العمل" %} : {{ job.user }}</p>
+        {% endif %}
+
+
+        <p>
+            {% trans "نوع الوظيفة" %} :
+            {{ job.get_job_type_display }}
+        </p>
+        <p>
+            {% trans "مجال العمل" %} :
+            {{ job.get_job_domain_display }}
+        </p>
+        <p> {% trans "وصف فرصة العمل" %} : <br> {{ job.job_description }}</p>
+        <p>
+            {% trans "مكان العمل" %} :
+            {{ job.get_position_work_display }}
+        </p>
+        <p>
+            {% trans "المدينة" %} :
+            {% if job.city_work %}
+            {{ job.city_work }}
+            {% else %}
+            {% trans 'لم يذكر' %}
+            {% endif %}
+        </p>
+        <p>
+            {% trans "المنطقة" %} :
+            {% if job.job_area %}
+            {{ job.job_area }}
+            {% else %}
+            {% trans 'لم يذكر' %}
+            {% endif %}
+        </p>
+
+        <p>
+            {% trans "مدة العمل" %} :
+            {% if job.period_months %}
+            {{ job.period_months }}
+            {% else %}
+            {% trans 'لم يذكر' %}
+            {% endif %}
+        </p>
+
+        <p>
+            {% trans "الخبرة المطلوبة" %} :
+            {{ job.get_experience_display }}
+        </p>
+
+        <p>
+            {% trans "تاريخ إغلاق التقدم للوظيفة" %} :
+            {{ job.dead_date|date:"c" }}
+        </p>
+
+        <p>
+            {% trans "طريقة التقدم للوظيفة" %} : <br>
+            {{ job.job_aplay }}
+        </p>
+
+        <div class="social-share col-1 position-absolute d-flex {% if LANGUAGE_CODE == 'ar'%} flex-column align-items-end
+                   right {% else %} flex-column align-items-start left {% endif %}">
+            <!-- FACEBOOK -->
+
+            <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}"
+                class="btn position-relative mb-2" title="{% trans 'مشاركة على فيسبوك' %}">
+                <i class="fab fa-facebook-f"></i>
+            </a>
+
+            <!-- TWITTER -->
+
+            <a target="_blank"
+                href="https://twitter.com/home?status={{ share_string }}%20{{ request.build_absolute_uri }}"
+                class="btn position-relative mt-2 mb-2 mt-0" title="{% trans 'مشاركة على تويتر' %}">
+                <i class="fab fa-twitter"></i>
+            </a>
+
+            <!-- LINKEDIN -->
+
+            <a target="_blank"
+                href="https://www.linkedin.com/shareArticle?mini=true&url={{ request.build_absolute_uri }}&title={{ job.title }}&summary={{ share_string }}&source={{ request.build_absolute_uri }}"
+                class="btn position-relative mt-2 mt-0" title="{% trans 'مشاركة على لينكدين' %}">
+                <i class="fab fa-linkedin-in"></i>
+            </a>
+
+        </div>
+
+
     </div>
 
+    <!-- THE LATEST JOBS  -->
+    {% if jobs.count > 0 %}
+    <div class="col-lg-3 d-none d-lg-block">
+        <h2 class="text-center mb-4 border-bottom"> {% trans 'أحدث ثلاثة فرص عمل' %} </h2>
+        {% for job in jobs|slice:3 %}
+        <a href="{% url 'jobs_detail' job.id %}" class='bg-light nav-link border-bottom pb-3 mb-2'>
+            <div class="news-card">
+                <p class="text-dark"> {{ job.job_title }} </p>
 
+                <!-- ORG LOGO -->
 
-    {% if request.user == job.user  or request.user.is_superuser %}
-    <div class="col">
-      <a href="{% url 'jobs_edit' job.id %}" class="btn btn-block" title="{% trans 'تعديل فرصة عمل' %}"><i class="fas fa-edit"></i></a>
+                <figure>
+
+                    {% if job.org_name %}
+                    <img src="{{ job.org_name.logo.url }}" name="{{ job.title }}" title="{{ job.title }}"
+                        alt="{{ job.title }}" class="w-100">
+
+                    {% elif job.other_org_name %}
+
+                    <img src="{{ job.other_org_name.logo.url }}" name="{{ job.title }}" title="{{ job.title }}"
+                        alt="{{ job.title }}" class="w-100">
+
+                    {% else %}
+
+                    {% if other.job|floatformat:"2" == job.id|floatformat:"2" %}
+
+                    <img src="{{ other.logo.url }}" name="{{ other.name }}" title="{{ other.name }}"
+                        alt="{{ other.name }}" class="w-100">
+
+                    {% endif %}
+                    {% endif %}
+                    <figcaption class="text-muted"><i class="far fa-clock ml-2 mr-2"></i>{{ job.created_at|timesince }}
+                    </figcaption>
+                </figure>
+
+            </div>
+        </a>
+        {% endfor %}
     </div>
-
-    <div class="col">
-      <a href="{% url 'jobs_delete' job.id %}" class="btn btn-block" title="{% trans 'حذف' %}"><i class="far fa-trash-alt"></i></a>
-    </div>
-
     {% endif %}
 
-  </div>
+
 
 
 </div>

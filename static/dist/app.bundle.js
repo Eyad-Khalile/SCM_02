@@ -27122,7 +27122,7 @@ $('#id_period_months').attr({
   placeholder: "Ex : 6"
 }); // PERSO FINANCE
 
-$('#div_id_study_level, #div_id_comp_study, #div_id_domain').hide();
+$('#add_perso_finance').find('#div_id_study_level, #div_id_comp_study, #div_id_domain').hide();
 $('#add_perso_finance').find('#id_fund_type').change(function () {
   let value = $(this).val();
 
@@ -27143,7 +27143,9 @@ $('#add_perso_finance').find('#id_fund_type').change(function () {
       break;
   }
 });
-$('#dev_form').find('#id_content').attr('accept', 'application/pdf, image/*, video/*');
+$('#dev_form').find('#id_content').attr('accept', 'application/pdf, image/*'); // VIDEO PLACE HOLDER
+
+$('#id_video').attr('placeholder', 'Ex:  https://www.youtube.com');
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js")))
 
 /***/ }),
@@ -27225,8 +27227,12 @@ if ($('nav').length > 0) {
 
     if (scroll_top < last_scroll_top) {
       $('nav').removeClass('scrolled-down').addClass('scrolled-up');
+      $('#carouselHomePage').find('.carousel-control-prev, .carousel-control-next').show();
+      $('.sym-mouse').show();
     } else {
       $('nav').removeClass('scrolled-up').addClass('scrolled-down');
+      $('#carouselHomePage').find('.carousel-control-prev, .carousel-control-next').hide();
+      $('.sym-mouse').hide();
     }
 
     last_scroll_top = scroll_top;
@@ -27355,8 +27361,9 @@ $('#sidebar-wrapper').find('.btn-down').on('click', function () {
   let li_count = $('ul.sidebar-navbar li').length - 9; // Number of li
 
   let lemite = Math.abs(parseInt(li_height)) * li_count; // Lemite of animation 
-  // console.log(li_height + '-' + li_count + '-' + lemite);
-  // console.log(m_t);
+
+  console.log(li_height + '-' + li_count + '-' + lemite);
+  console.log(m_t);
 
   if (parseInt(m_t) > -lemite) {
     $('#sidebar-wrapper').find('ul.sidebar-navbar').animate({
@@ -27364,7 +27371,7 @@ $('#sidebar-wrapper').find('.btn-down').on('click', function () {
     }, 500);
   } else {
     $('#sidebar-wrapper').find('ul.sidebar-navbar').animate({
-      'margin-top': '-678px'
+      'margin-top': '-780px'
     }, 500);
   }
 });
@@ -27381,7 +27388,43 @@ $('#sidebar-wrapper').find('.btn-up').on('click', function () {
       'margin-top': '0'
     }, 500);
   }
-});
+}); // COUNT UP
+
+$(function () {
+  function count($this) {
+    var current = parseInt($this.html(), 10);
+    current = current + 1;
+    /* Where 50 is increment */
+
+    $this.html(++current);
+
+    if (current > $this.data('count')) {
+      $this.html($this.data('count'));
+    } else {
+      setTimeout(function () {
+        count($this);
+      }, 10);
+    }
+  }
+
+  $(".stat-count").each(function () {
+    $(this).data('count', parseInt($(this).html(), 10));
+    $(this).html('0');
+    count($(this));
+  });
+}); // MINI MENU
+
+$('#span-menu').on('click', function () {
+  $('#mini-menu').toggleClass('d-none', "slow", "easeOutSine");
+}); // escape menu
+
+document.onkeydown = function (evt) {
+  let key = evt.keyCode;
+
+  if (key === 27) {
+    $('#mini-menu').addClass('d-none');
+  }
+};
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js")))
 
 /***/ }),

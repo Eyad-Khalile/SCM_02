@@ -48,8 +48,22 @@ INSTALLED_APPS = [
     'phonenumber_filter',
     'django_filters',
     #  'django_social_share',
+    'ckeditor',
+    'django_template_maths',
 
 ]
+
+# CKEDITOR_UPLOAD_PATH = 'uploads/'
+# CKEDITOR_JQUERY_URL = '/static/js/jquery-2.1.1.min.js'
+# CKEDITOR_CONFIGS = {
+#     'default': {
+#         'toolbar': 'Full',
+#         'height': 400,
+#         'width': 900,
+#         'removePlugins': 'stylesheetparser',
+#         'extraPlugins': 'codesnippet',
+#     },
+# }
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -185,6 +199,7 @@ STATICFILES_DIRS = [
 
 MEDIA_ROOT = (os.path.join(BASE_DIR, 'media'))
 MEDIA_URL = '/media/'
+
 
 # EMAIL
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'

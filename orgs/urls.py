@@ -2,7 +2,7 @@ from django.urls import path, include
 from django.conf import settings
 from django.contrib.auth import views as auth_views
 from django.conf.urls.static import static
-from . import views
+from . import views, views_prof_dash
 from django.views.generic import TemplateView
 
 urlpatterns = [
@@ -22,7 +22,7 @@ urlpatterns = [
 
     # ORGS GUIDE
     path('guide/', views.guide, name="guide"),
-    path('guide_conf/', views.guide_not_pub, name="guide_conf"),
+    path('guide_conf/', views_prof_dash.guide_not_pub, name="guide_conf"),
     path('guide_filter/<str:work_id>', views.guide_filter, name="guide_filter"),
 
     # ORGS NEWS
@@ -173,22 +173,23 @@ urlpatterns = [
     path('activate/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
          views.activate, name='activate'),
     path('logout/', auth_views.LogoutView.as_view(template_name='register/logged_out.html'), name='logout'),
-    path('profile/', views.profile, name="profile"),
-    path('profile_supper/', views.admin_dashboard, name="profile_supper"),
-    path('profile_staff/', views.profile_staff, name="profile_staff"),
+    path('profile/', views_prof_dash.profile, name="profile"),
+    path('profile_supper/', views_prof_dash.admin_dashboard, name="profile_supper"),
+    path('profile_staff/', views_prof_dash.profile_staff, name="profile_staff"),
 
     # Org Fill the form
-    path('org_profile/', views.org_profile, name='org_profile'),
+    path('org_profile/', views_prof_dash.org_profile, name='org_profile'),
     # Org Edit the form
     path('org_profile_edit/<str:pk>',
-         views.org_profile_edit, name='org_profile_edit'),
+         views_prof_dash.org_profile_edit, name='org_profile_edit'),
     path('org_profile_delete/<str:pk>',
-         views.org_profile_delete, name='org_profile_delete'),
-    path('orgs_orders_etude/', views.orgs_orders_etude, name='orgs_orders_etude'),
-    path('orgs_orders_published/', views.orgs_orders_published,
+         views_prof_dash.org_profile_delete, name='org_profile_delete'),
+    path('orgs_orders_etude/', views_prof_dash.orgs_orders_etude,
+         name='orgs_orders_etude'),
+    path('orgs_orders_published/', views_prof_dash.orgs_orders_published,
          name='orgs_orders_published'),
     path('particip_detail/<str:par_id>',
-         views.particip_detail, name="particip_detail"),
+         views_prof_dash.particip_detail, name="particip_detail"),
 
     # Password Reset
     path('password-reset/', auth_views.PasswordResetView.as_view(

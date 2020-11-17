@@ -1,37 +1,114 @@
 {% extends 'base.html' %}
-{% load static i18n %}
+{% load static i18n django_template_maths %}
 {% block title %} {% trans 'تفاصيل دليل التطوير' %} {% endblock %}
 
+{% get_current_language as LANGUAGE_CODE %}
+
 {% block content %}
-<div class="row justify-content-center mt-4 pt-4">
+
+
+<div class="row mt-4 pt-4">
   <h1> {% trans 'تفاصيل دليل التطوير' %} </h1>
 
-  <div class="span1 well">
-    <!-- <center>   -->
-    {% if request.user.is_authenticated and request.user.is_superuser %}
-    <h3 class="mt-4"> {% trans "اسم اللذي أضاف  تفاصيل دليل التطوير" %} : {{ devs.user }}</h3>
-    {% endif %}
+  <div class="well col-lg-9 job-card col-xs-12 position-relative">
 
-    <h3 class="mt-4">
-      {% if devs.org_name %}
-      {% trans "اسم المنظمة" %} : {{ devs.org_name }}
-      {% else %}
-      {{ devs.name_dev }}
+    <!-- MINI MANU -->
+    <span id="span-menu" type="button"
+      class="span-menu {% if LANGUAGE_CODE == 'ar' %} float-right {% else %} float-left {% endif %}"><i
+        class="fa fa-ellipsis-v" aria-hidden="true"></i></span>
+
+    <div id="mini-menu"
+      class="list-group mini-menu d-none {% if LANGUAGE_CODE == 'ar' %} menu-right {% else %} menu-left {% endif %}">
+      <!-- <a href="#" class="list-group-item list-group-item-action active" aria-current="true">
+        Cras justo odio
+      </a> -->
+      {% if request.user.is_authenticated and request.user.is_superuser %}
+      {% if dev.publish == False %}
+      <form action="" class="confirm" method="post">
+        {% csrf_token %} {{ form.publish }}
+        <div class="form-group">
+          <button type="submit" id="org_confirm_btn" class="list-group-item list-group-item-action"
+            title="{% trans 'الموافقة على النشر' %}">{% trans 'الموافقة على النشر' %} <i
+              class="fas fa-check mx-1"></i></button>
+        </div>
+      </form>
+      {% elif dev.publish == True %}
+      <form action="" class="deconfirm" method="post">
+        {% csrf_token %} {{ form.publish }}
+        <div class="form-group">
+          <button type="submit" id="org_deconfirm_btn" class="list-group-item list-group-item-action"
+            title="{% trans 'إلغاء نشر الدليل' %}">{% trans 'إلغاء نشر الدليل' %} <i class="fa fa-ban mx-1"
+              aria-hidden="true"></i></button>
+        </div>
+      </form>
       {% endif %}
-    </h3>
-    <span class="text-muted">{% trans "  تاريخ الإضافة " %} :
-      {% if devs.created_at %}
-      {{ devs.created_at|date:"Y-m-d" }}
+      {% endif %}
+
+      {% if request.user == dev.user and dev.publish == False %}
+
+      <a href="{% url 'dev_edit' dev.id %}" class="list-group-item list-group-item-action"
+        title="{% trans 'تعديل الدليل' %}">{% trans 'تعديل الدليل' %} <i class="fas fa-edit mx-1"></i></a>
+
+      {% elif request.user.is_superuser %}
+      <a href="{% url 'dev_edit' dev.id %}" class="list-group-item list-group-item-action"
+        title="{% trans 'تعديل الدليل' %}">{% trans 'تعديل الدليل' %} <i class="fas fa-edit mx-1"></i></a>
+
+      <a href="{% url 'dev_delete' dev.id %}" class="list-group-item list-group-item-action"
+        title="{% trans 'حذف' %}">{% trans 'حذف' %} <i class="far fa-trash-alt mx-1"></i></a>
+      {% endif %}
+
+    </div>
+
+    <!-- START CART -->
+
+    <strong>
+      <h1 class="text-center mt-3"> {% trans "عنوان" %} : {{ dev.title_dev }}</h1>
+    </strong>
+
+    <hr>
+
+    <p class="text-muted">
+      <i class="far fa-clock ml-2 mr-2"></i>
+      {% trans "  تاريخ الإضافة " %} :
+      {% if dev.created_at %}
+      {{ dev.created_at|date:"Y-m-d" }}
       {% else %}
       {% trans 'لم يذكر'%}
       {% endif %}
-    </span>
+    </p>
 
-    <h2 class="mt-3"> {% trans "عنوان" %} : {{ devs.title_dev }}</h2>
-    <p> {% trans  "وصف الدليل" %} : <br> {{ devs.dev_description }}</p>
+    <h3 class="mt-4">
+      {% if dev.org_name %}
+      {% trans "اسم المنظمة" %} :
+      <a href="{% url 'particip_detail' dev.org_name.id %}" class="nav-link text-dark pl-0 pr-0">
+        {{ dev.org_name }}</a>
+      {% else %}
+      {{ dev.name_dev }}
+      {% endif %}
+    </h3>
+
+    {% if request.user.is_authenticated and request.user.is_superuser %}
+    <p class="text-muted mt-4"> {% trans "اسم اللذي أضاف  تفاصيل دليل التطوير" %} : {{ dev.user }}</p>
+    {% endif %}
+
+    <!-- CONTENT المادة -->
+
+    <!-- IF PDF -->
+    {% if dev.get_extension == ".pdf" %}
+    <object data="{{ dev.content.url }}" type="application/pdf" title="{{dev.title_dev}}" width="100%" height="885">
+    </object>
+    <!-- IF IMAGE -->
+    {% else %}
+    <figure>
+      <img src="{{ dev.content.url }}" class="w-100" name="{{ dev.title_dev }}" title="{{ dev.title_dev }}"
+        alt="{{ dev.title_dev }}">
+    </figure>
+    {% endif %}
+
+    <p> {% trans  "لمحة عن الجهة" %} : <br> {{ dev.dev_description }}</p>
 
     <p>
-      {% trans 'تاريخ الإعداد/النشر/التأليف' %}
+      {% trans 'تاريخ الإعداد أو النشر أو التأليف' %} :
       {% if dev.dev_date %}
       {{ dev.dev_date }}
       {% else %}
@@ -39,60 +116,88 @@
       {% endif %}
     </p>
 
-    <p> {% trans  "موضوع المادة" %} : {{ devs.subject }}</p>
+    <p> {% trans  "موضوع المادة" %} : {{ dev.get_subject_display }}</p>
 
-    <p> {% trans  "المادة" %} :
-      {% if devs.content %}
-      {{ devs.content }}
-      {% else %}
-      {% trans 'لم يذكر' %}
-      {% endif %}
-    </p>
 
-    <!-- </center> -->
-    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v3.2">
-    </script>
-    <div class="fb-like" data-href="http://127.0.0.1:8000/devs_detail/2" og:image data-layout="standard"
-      data-action="like" data-size="large" data-show-faces="false" data-share="true"></div><br>
-  </div>
-  <div class="row">
-
-    <div class="col">
-      {% if request.user.is_authenticated and request.user.is_superuser %}
-
-      {% if devs.publish == False %}
-      <form action="" class="confirm" method="post">
-        {% csrf_token %} {{form.publish}}
-        <div class="form-group">
-          <input type="submit" id="org_confirm_btn" class="btn btn-block" value="{% trans 'الموافقة على النشر ' %}" />
-        </div>
-      </form>
-      {% elif devs.publish == True %}
-      <form action="" class="deconfirm" method="post">
-        {% csrf_token %} {{form.publish}}
-        <div class="form-group">
-          <input type="submit" id="org_deconfirm_btn" class="btn btn-block" value="{% trans 'إلغاء نشر الدليل' %}" />
-        </div>
-      </form>
-      {% endif %}
-      {% endif %}
+    {% if dev.video %}
+    <div class="d-flex justify-content-center">
+      <!-- {{ article.youtube|truncatechars:9 }}  -->
+      <iframe width="560" height="315" src="https://www.youtube.com/embed/{{ dev.video|slice:'17:' }}?rel=0"
+        frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen></iframe>
     </div>
-
-
-
-    {% if request.user == capacity.user  or request.user.is_superuser %}
-    <div class="col">
-      <a href="{% url 'dev_edit' devs.id %}" class="btn btn-block"> {% trans 'تعديل الدليل' %} </a>
-    </div>
-
-    <div class="col">
-      <a href="{% url 'dev_delete' devs.id %}" class="btn btn-block"> {% trans 'حذف' %} </a>
-    </div>
-
     {% endif %}
 
+    <div
+      class="social-share col-1 position-absolute d-flex {% if LANGUAGE_CODE == 'ar'%} flex-column align-items-end right {% else %} flex-column align-items-start left {% endif %}">
+      <!-- FACEBOOK -->
+
+      <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}"
+        class="btn position-relative mb-2" title="{% trans 'مشاركة على فيسبوك' %}">
+        <i class="fab fa-facebook-f"></i>
+      </a>
+
+      <!-- TWITTER -->
+
+      <a target="_blank" href="https://twitter.com/home?status={{ share_string }}%20{{ request.build_absolute_uri }}"
+        class="btn position-relative mt-2 mb-2 mt-0" title="{% trans 'مشاركة على تويتر' %}">
+        <i class="fab fa-twitter"></i>
+      </a>
+
+      <!-- LINKEDIN -->
+
+      <a target="_blank"
+        href="https://www.linkedin.com/shareArticle?mini=true&url={{ request.build_absolute_uri }}&title={{ dev.title_dev }}&summary={{ share_string }}&source={{ request.build_absolute_uri }}"
+        class="btn position-relative mt-2 mt-0" title="{% trans 'مشاركة على لينكدين' %}">
+        <i class="fab fa-linkedin-in"></i>
+      </a>
+
+    </div>
+
+
+    <!-- PARTAGE RESEAUX SOCIAL -->
+    <!-- <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v3.2">
+    </script>
+    <div class="fb-like" data-href="http://127.0.0.1:8000/devs_detail/2" og:image data-layout="standard"
+      data-action="like" data-size="large" data-show-faces="false" data-share="true"></div><br> -->
+
+
+
   </div>
+
+
+
+  <!-- THE LATEST DEVS  -->
+  {% if devs.count > 0 %}
+  <div class="col-lg-3 d-none d-lg-block">
+    <h2 class="text-center mb-4 border-bottom"> {% trans 'أحدث ثلاثة دليل تطوير' %} </h2>
+    {% for dev in devs|slice:3 %}
+    <a href="{% url 'devs_detail' dev.id %}" class='bg-light nav-link border-bottom pb-3 mb-2'>
+      <div class="news-card">
+        <p class="text-dark"> {{ dev.title_dev }} </p>
+
+        {% if not dev.get_extension == ".pdf" %}
+        <figure>
+          <img src="{{ dev.content.url }}" class="w-100" name="{{ dev.title_dev }}" title="{{ dev.title_dev }}"
+            alt="{{ dev.title_dev }}">
+          <figcaption class="text-muted"><i class="far fa-clock ml-2 mr-2"></i>{{ dev.created_at|timesince }}
+          </figcaption>
+        </figure>
+        {% endif %}
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+
 
 
 </div>
+
+
+
+
+
+
 {% endblock %}

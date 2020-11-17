@@ -15,12 +15,12 @@
 
         <div class="row mt-4">
 
+            {% if request.user.is_authenticated and request.user.is_staff %}
             <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
-                {% if request.user.is_authenticated %}
                 <a href="{% url 'orgs_add_funding' %}" class="btn btn-block mt-4"
                     title="{% trans 'اضافة فرصة تمويل' %}"><i class="fas fa-plus"></i></a>
-                {% endif %}
             </div>
+            {% endif %}
             {% if fundings %}
             <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
                 <a class="btn btn-block mt-4" data-toggle="collapse" href="#collapseFiltre" aria-expanded="false"
@@ -43,7 +43,10 @@
                         {{ myFilter.form.name_funding|as_crispy_field }}
                     </div>
                     <div class="col-sm-12 col-md-4 mt-3">
-                        {{ myFilter.form.job_country|as_crispy_field }}
+                        {{ myFilter.form.position_work|as_crispy_field }}
+                    </div>
+                    <div class="col-sm-12 col-md-4 mt-3">
+                        {{ myFilter.form.work_domain|as_crispy_field }}
                     </div>
                     <div class="row">
                         <div class="col-xs-6 col-sm-6 col-md-4 mt-3">

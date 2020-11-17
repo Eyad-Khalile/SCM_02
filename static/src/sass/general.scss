@@ -113,6 +113,18 @@ serif !important;
   }
 }
 
+@keyframes socialBtn {
+  0% {
+    box-shadow: 0px 0px 0px tomato;
+  }
+  50% {
+    box-shadow: 0px 0px 10px tomato;
+  }
+  100% {
+    box-shadow: 0px 0px 0px tomato;
+  }
+}
+
 html {
   scroll-behavior: smooth;
 
@@ -199,6 +211,10 @@ body {
     }
   }
 
+  .alert {
+    font-size: 2rem !important;
+  }
+
   .alert-success {
     background-color: rgba(#d4edda, 0.6) !important;
   }
@@ -212,12 +228,16 @@ body {
   .h4 {
     line-height: 1.5 !important;
     font-size: 1.3rem !important;
+    &.text-arab {
+      font-size: 1.35rem !important;
+    }
   }
 
   // BODY GENERAL
   // padding-top: 80px;
 
   background-color: rgba($color-1, 0.1);
+  // background-color: #f5f5f5;
   position: relative;
 
   .messages-container {
@@ -250,6 +270,7 @@ body {
   // GENERAL
   a,
   button,
+  .btn,
   h1,
   h2 {
     font-family: $title-font;
@@ -291,7 +312,7 @@ body {
   }
 
   .well {
-    overflow: hidden !important;
+    // overflow: hidden !important;
     img {
       transition: all 0.5s linear;
       
@@ -336,6 +357,8 @@ body {
     // text-shadow: 0.5px 0.5px 6.5px rgba(255, 255, 255, 0.7);
     border: none;
     padding: 0.5em;
+    white-space: nowrap;
+    font-size: 1.2rem !important;
 
     // transition: all 0.5s ease-in-out !important;
 
@@ -456,17 +479,21 @@ body {
         display: block; 
         // background-color:red !important;
         min-height: 100vh !important;
+        min-width: 100% !important;
         width: 100% !important;
         background-position: center center;
         background-repeat: no-repeat;
-        background-size: cover;
+        background-size: contain;
+        background-attachment: fixed;
+        background-color: $color-1;
       }
 
       @for $i from 1 through 5 {
         .slide-item-#{$i} {
           width: 100px*$i;
           // background-image: url('../../../media/img_0'+$i+'.jpg');
-          background-image: url('../../../media/img_0#{$i}.jpg');
+          // background-image: url('../../../media/img_0#{$i}.jpg');
+          background-image: url('../../../media/0#{$i}.png');
           // background-image: url('../../../media/slide_01.png');
         }
       }
@@ -674,6 +701,15 @@ body {
     }
   }
 
+  .orgs_slide,
+  .news_slide, 
+  .jobs_slide, 
+  .capacites_slide {
+    .well {
+      min-height: 400px !important;
+    }
+  }
+
   // GUIDE
   .well {
     min-height: 20px;
@@ -777,11 +813,118 @@ body {
     }
   }
   .job-card {
+    p {
+      margin-top: 0 !important;
+      margin-bottom: 0 !important;
+      padding: 10px;
+      font-size: 1.35rem;
+
+      // &.text-muted {
+      //   display: inline;
+      // }
+    }
+    p:nth-child(even) {
+      background: rgba($color: $color-1, $alpha: 0.8); 
+      color: #fff;
+      &.text-muted {
+        color: #fff !important;
+      }
+    }
+
+    p:nth-child(odd) {
+      background: #FFF
+    }
     figure {
       overflow: hidden;
       max-width: 300px !important;
       max-height: 300px !important;
     }
+  }
+
+  .social-share {
+    bottom: 10px;
+    &.right {
+      right: -90px;
+    }
+    &.left {
+      left: -70px;
+    }
+
+        a {
+          padding: 0.375rem 0.75rem !important;
+          width: 60px !important;
+          box-shadow: 0px 0px 0px tomato;
+          animation: socialBtn 2s linear infinite;
+          animation-timing-function: ease-in-out;
+        }
+  }
+
+  .span-menu {
+    cursor: pointer;
+    padding-top: 30px;
+    padding-right: 10px;
+    padding-left: 10px;
+
+    svg {
+      path {
+        fill: $color-1;
+      }
+    }
+  }
+  .mini-menu {
+    position: absolute;
+    top: 48px;
+    z-index: 2;
+    
+    @include myTransition;
+
+    // &.menu-hide {
+    //   width: 0;
+    //   @include myTransition;
+    //   .list-group-item {
+    //     display: none;
+    //     @include myTransition;
+    //   }
+    // }
+
+    &.menu-right {
+      right: 40px;
+      a, button {
+        svg {
+          float: left;
+        }
+      }
+    }
+    &.menu-left {
+      left: 66px;
+      a,
+      button {
+        svg {
+          float: right;
+        }
+      }
+    }
+
+    .list-group-item {
+      color: $color-1 !important;
+      @include myTransition;
+
+
+      &:hover {
+        color: #fff !important;
+        background-color: $color-1 !important;
+      }
+    }
+
+
+    .list-group-item.active {
+      z-index: 2;
+      color: #fff;
+      background-color: $color-1;
+      border-color: $color-1;
+    }
+
+
   }
 
   

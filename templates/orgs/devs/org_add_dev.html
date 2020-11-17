@@ -13,29 +13,38 @@
         {% csrf_token %}
 
         {% if request.user.is_authenticated and request.user.is_staff %}
-        <div class="for-group">
-            {{ form.org_name|as_crispy_field }}
-            {{ form.name_dev|as_crispy_field }}
+        <div class="row">
+            <div class="col-md-6 col-sm-12">
+                {{ form.org_name|as_crispy_field }}
+            </div>
+            <div class="col-md-6 col-sm-12">
+                {{ form.name_dev|as_crispy_field }}
+            </div>
         </div>
         {% endif %}
-        <div class="for-group">
-            {{ form.title_dev|as_crispy_field }}
-        </div>
-        <div class="for-group">
-            {{ form.dev_date|as_crispy_field }}
-        </div>
+
         <div class="for-group">
             {{ form.dev_description|as_crispy_field }}
         </div>
-        <div class="for-group">
-            {{ form.name_dev|as_crispy_field }}
+
+        <div class="row">
+            <div class="col-md-6 col-sm-12">
+                {{ form.title_dev|as_crispy_field }}
+            </div>
+            <div class="col-md-6 col-sm-12">
+                {{ form.dev_date|as_crispy_field }}
+            </div>
         </div>
-        <div class="for-group">
-            {{ form.subject|as_crispy_field }}
+
+        <div class="row">
+            <div class="col-md-6 col-sm-12">
+                {{ form.subject|as_crispy_field }}
+            </div>
+            <div class="col-md-6 col-sm-12">
+                {{ form.content|as_crispy_field }}
+            </div>
         </div>
-        <div class="for-group">
-            {{ form.content|as_crispy_field }}
-        </div>
+        {{ form.video|as_crispy_field }}
 
 
         <div class="form-group">

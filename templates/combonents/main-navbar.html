@@ -22,8 +22,8 @@
             <ul class="navbar-nav mb-2 mb-lg-0">
                 <li class="nav-item">
                     {# {% if request.resolver_match.url_name == 'home' %} active {% endif %} #}
-                    <a class="nav-link "
-                        aria-current="page" href="{% url 'home' %}"> {% trans 'بوابة المجتمع المدني' %} </a>
+                    <a class="nav-link " aria-current="page" href="{% url 'home' %}"> {% trans 'بوابة المجتمع المدني' %}
+                    </a>
                 </li>
                 <li class="nav-item d-none d-lg-block">
                     <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">|</a>
@@ -190,14 +190,7 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link {% if request.resolver_match.url_name == 'centre_news' %} active {% endif %}"
-<<<<<<< HEAD
                         aria-current="page" href="{% url 'orgs_our_news' %}"> {% trans 'أخبار البوابة' %} </a>
-=======
-                        aria-current="page" href="{% url 'centre_news' %}"> {% trans 'أخبار البوابة' %} </a>
-
-                        <!-- <a class="nav-link {% if request.resolver_match.url_name == 'centre_news' %} active {% endif %}"
-                        aria-current="page" href="{% url 'centre_news' %}"> {% trans 'أخبار البوابة' %} </a> -->
->>>>>>> 62ce2c040d6c15199886ab7e9b4dff5ee9a71b70
                 </li>
             </ul>
 

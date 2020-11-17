@@ -12,7 +12,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <!-- Favicon -->
-  <link rel="apple-touch-icon" sizes="180x180" href="{% static 'media/favicon_io/' %}" />
+  <link rel="apple-touch-icon" sizes="180x180" href="{% static 'media/favicon_io/apple-touch-icon.png' %}" />
   <link rel="icon" type="image/png" sizes="32x32" href="{% static 'media/favicon_io/favicon-32x32.png' %}" />
   <link rel="icon" type="image/png" sizes="16x16" href="{% static 'media/favicon_io/favicon-16x16.png' %}" />
   <link rel="manifest" href="{% static 'media/favicon_io/site.webmanifest' %}" />
@@ -89,8 +89,8 @@
         {% for message in messages %}
 
         <div class="modal fade messagesModale alert zindex-modal {% if message.tags == 'error' %} alert-danger {% else %}
-          alert-{{message.tags}} {% endif %}" id="messagesModale" tabindex="-1"
-          aria-labelledby="messagesModale" aria-hidden="true">
+          alert-{{message.tags}} {% endif %}" id="messagesModale" tabindex="-1" aria-labelledby="messagesModale"
+          aria-hidden="true">
           <div class="modal-dialog modal-dialog-centered modal-lg ">
             <div class="modal-content ">
 
