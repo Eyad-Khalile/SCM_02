@@ -2,9 +2,12 @@
 {% block title %} {% trans 'تسجيل الخروج' %} {% endblock %}
 
 {% block content %}
-<h1> {% trans 'لقد تم تسجيل الخروج بنجاح' %} </h1>
-<p> {% trans 'يمكنك اﻵن' %} </p>
-<a href="{% url 'signe_in' %}" class="btn btn-block mt-3 p-3"> {% trans 'إعادة تسجيل الدخول' %} </a>
-<a href="{% url 'home' %}" class="btn btn-block mt-3 p-3"> {% trans 'الذهاب للصفحة الرئيسية' %} </a>
+<div class="mt-4">
+    <h1 class="text-center pt-5"> {% trans 'لقد تم تسجيل الخروج بنجاح' %} </h1>
+    <!-- <p> {% trans 'يمكنك اﻵن' %} </p> -->
+    <a href="{% url 'signe_in' %}" class="btn btn-block mt-3 p-3"> {% trans 'إعادة تسجيل الدخول' %} </a>
+    <a href="{% url 'home' %}" class="btn btn-block mt-3 p-3"> {% trans 'الذهاب للصفحة الرئيسية' %} </a>
+
+</div>
 
 {% endblock %}

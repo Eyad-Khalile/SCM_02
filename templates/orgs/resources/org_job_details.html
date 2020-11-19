@@ -68,10 +68,14 @@
 
         <hr>
 
-        <p class="text-muted">
-            <i class="far fa-clock ml-2 mr-2"></i>
-            {% trans "تاريخ الإضافة" %} :
-            {{ job.created_at|date:"Y-m-d" }}
+        <p class="text-muted row">
+            <span class="col-3">
+                <i class="far fa-clock ml-2 mr-2"></i>
+                {% trans "تاريخ الإضافة" %}
+            </span>
+            <span class="col-9">
+                : {{ job.created_at|date:"Y-m-d" }}
+            </span>
         </p>
 
         <div class="row">
@@ -98,9 +102,9 @@
 
                 {% endif %}
             </div>
-            <div class="col-md-6 col-sm-12">
+            <div class="col-md-6 col-sm-12 d-flex justify-content-start align-items-center">
                 <!-- ORG NAME -->
-                <h3 class="mt-4 text-center">
+                <h3 class="">
                     {% trans 'اسم المنظمة' %}
                     {% if job.org_name %}
                     <a href="{% url 'particip_detail' job.org_name.id %}" class="nav-link text-dark pl-0 pr-0">
@@ -119,62 +123,112 @@
 
 
         {% if request.user.is_authenticated and request.user.is_superuser %}
-        <p class="mt-2 text-muted"> {% trans "اسم اللذي أضاف فرصة العمل" %} : {{ job.user }}</p>
+        <p class="mt-2 text-muted row">
+            <span class="col-3">
+                {% trans "اسم اللذي أضاف فرصة العمل" %}
+            </span>
+            <span class="col-9">
+                : {{ job.user }}
+            </span>
+        </p>
         {% endif %}
 
 
-        <p>
-            {% trans "نوع الوظيفة" %} :
-            {{ job.get_job_type_display }}
+        <p class="row">
+            <span class="col-3">
+                {% trans "نوع الوظيفة" %}
+            </span>
+            <span class="col-9">
+                : {{ job.get_job_type_display }}
+            </span>
         </p>
-        <p>
-            {% trans "مجال العمل" %} :
-            {{ job.get_job_domain_display }}
+        <p class="row">
+            <span class="col-3">
+                {% trans "مجال العمل" %}
+            </span>
+            <span class="col-9">
+                : {{ job.get_job_domain_display }}
+            </span>
         </p>
-        <p> {% trans "وصف فرصة العمل" %} : <br> {{ job.job_description }}</p>
-        <p>
-            {% trans "مكان العمل" %} :
-            {{ job.get_position_work_display }}
+        <p class="row">
+            <span class="col-3">
+                {% trans "وصف فرصة العمل" %} <br>
+            </span>
+            <span class="col-9">
+                : {{ job.job_description }}
+            </span>
         </p>
-        <p>
-            {% trans "المدينة" %} :
-            {% if job.city_work %}
-            {{ job.city_work }}
-            {% else %}
-            {% trans 'لم يذكر' %}
-            {% endif %}
+        <p class="row">
+            <span class="col-3">
+                {% trans "مكان العمل" %}
+            </span>
+            <span class="col-9">
+                : {{ job.get_position_work_display }}
+            </span>
         </p>
-        <p>
-            {% trans "المنطقة" %} :
-            {% if job.job_area %}
-            {{ job.job_area }}
-            {% else %}
-            {% trans 'لم يذكر' %}
-            {% endif %}
+        <p class="row">
+            <span class="col-3">
+                {% trans "المدينة" %}
+            </span>
+            <span class="col-9">
+                {% if job.city_work %}
+                : {{ job.city_work }}
+                {% else %}
+                : {% trans 'لم يذكر' %}
+                {% endif %}
+            </span>
+        </p>
+        <p class="row">
+            <span class="col-3">
+                {% trans "المنطقة" %}
+            </span>
+            <span class="col-9">
+                {% if job.job_area %}
+                : {{ job.job_area }}
+                {% else %}
+                : {% trans 'لم يذكر' %}
+                {% endif %}
+            </span>
         </p>
 
-        <p>
-            {% trans "مدة العمل" %} :
-            {% if job.period_months %}
-            {{ job.period_months }}
-            {% else %}
-            {% trans 'لم يذكر' %}
-            {% endif %}
+        <p class="row">
+            <span class="col-3">
+                {% trans "مدة العمل" %}
+            </span>
+            <span class="col-9">
+                {% if job.period_months %}
+                : {{ job.period_months }}
+                {% else %}
+                : {% trans 'لم يذكر' %}
+                {% endif %}
+            </span>
         </p>
 
-        <p>
-            {% trans "الخبرة المطلوبة" %} :
-            {{ job.get_experience_display }}
+        <p class="row">
+            <span class="col-3">
+                {% trans "الخبرة المطلوبة" %}
+            </span>
+            <span class="col-9">
+                : {{ job.get_experience_display }}
+            </span>
         </p>
 
-        <p>
-            {% trans "تاريخ إغلاق التقدم للوظيفة" %} :
-            {{ job.dead_date|date:"c" }}
+        <p class="row">
+            <span class="col-3">
+                {% trans "تاريخ إغلاق التقدم للوظيفة" %}
+            </span>
+            <span class="col-9">
+                : {{ job.dead_date|date:"c" }}
+            </span>
         </p>
 
-        <p>
-            {% trans "طريقة التقدم للوظيفة" %} : <br>
-            {{ job.job_aplay }}
+        <p class="row">
+            <span class="col-3">
+                {% trans "طريقة التقدم للوظيفة" %} <br>
+            </span>
+            <span class="col-9">
+                : {{ job.job_aplay }}
+            </span>
         </p>
 
         <div class="social-share col-1 position-absolute d-flex {% if LANGUAGE_CODE == 'ar'%} flex-column align-items-end

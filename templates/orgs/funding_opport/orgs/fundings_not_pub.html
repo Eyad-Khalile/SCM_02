@@ -9,7 +9,7 @@
 <div class="row mt-4 pt-4">
     <h1> {% trans "فرص التمويل قيد الدراسة" %} </h1>
 
-    <div class="row justify-content-center pt-4">
+    <div class="row justify-content-start pt-4">
         {% if fundings %}
         {% for funding in fundings %}
 
@@ -29,7 +29,8 @@
                 <p>{{ funding.funding_org_description|truncatechars:80 }}</p>
                 <p>{{ funding.funding_description|truncatechars:80 }}</p>
                 <p>
-                    <a href="{% url 'funding_detail' funding.id %}" class="btn btn-block" title="{% trans 'لقراءة المزيد' %}"><i class="fas fa-book-reader"></i></a>
+                    <a href="{% url 'funding_detail' funding.id %}" class="btn btn-block"
+                        title="{% trans 'لقراءة المزيد' %}"><i class="fas fa-book-reader"></i></a>
                 </p>
 
             </center>

@@ -12035,16 +12035,18 @@ body {
       overflow: hidden;
       max-width: 140px !important;
       max-height: 140px !important; }
+  body .job-card .row {
+    --bs-gutter-x: 0 !important; }
   body .job-card p {
     margin-top: 0 !important;
     margin-bottom: 0 !important;
     padding: 10px;
     font-size: 1.35rem; }
   body .job-card p:nth-child(even) {
-    background: rgba(23, 103, 140, 0.8);
-    color: #fff; }
+    background: rgba(23, 103, 140, 0.1);
+    color: #17678C; }
     body .job-card p:nth-child(even).text-muted {
-      color: #fff !important; }
+      color: #17678C !important; }
   body .job-card p:nth-child(odd) {
     background: #FFF; }
   body .job-card figure {
@@ -12593,7 +12595,7 @@ form .div-logo {
 form label.requiredField span.asteriskField {
   position: relative;
   color: red;
-  right: -8px;
+  right: 8px;
   top: 5px; }
 
 form .form-select {

@@ -19,6 +19,7 @@ import "./forms.js";
 import "./form_validation";
 import "@fortawesome/fontawesome-free/js/all.js";
 import "slick-carousel";
+import "./social.js";
 
 
 // import "skitter-slider";

@@ -350,7 +350,7 @@ $('#id_org_name').change(function () {
             }            
             break;
         default:
-            $('#div_id_other_org_name').hide();
+            $('#div_id_other_org_name, #div_id_name, #div_id_logo').hide();
             break;
     }
         

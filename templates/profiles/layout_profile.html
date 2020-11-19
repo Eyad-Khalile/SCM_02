@@ -9,7 +9,7 @@
 <!-- SIDEBAR -->
 
 
-
+{% if request.user.is_authenticated and request.user.is_superuser %}
 
 <!-- PAGE CONTENT -->
 <div id="page-contant-wrapper min-vh-100"
@@ -350,7 +350,10 @@
 </div>
 
 
+{% else %}
 
+<p> {% trans 'ليس لديك الصلاحية لدخول هذه الصفحة' %} </p>
 
+{% endif %}
 
 {% endblock %}

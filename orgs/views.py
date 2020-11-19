@@ -71,6 +71,7 @@ def signe_up(request):
                     email = EmailMessage(
                         subject, message, to=[to_email]
                     )
+                    print(email)
                     email.send()
 
                     username = form.cleaned_data.get('username')
@@ -399,12 +400,13 @@ def orgs_add_news(request):
         form = NewsForm(request.POST or None, files=request.FILES)
         if form.is_valid():
             user = form.save(commit=False)
+            prof_user = OrgProfile.objects.get(user=request.user)
             user.user = request.user
             org_name = form.cleaned_data.get('org_name')
             if org_name:
                 user.org_name = org_name
             else:
-                user.org_name = request.user
+                user.org_name = prof_user
             user.save()
 
             messages.success(request, _(
@@ -526,11 +528,12 @@ def add_rapport(request):
         if form.is_valid():
             user = form.save(commit=False)
             user.user = request.user
+            prof_user = OrgProfile.objects.get(user=request.user)
             org_name = form.cleaned_data.get('org_name')
             if org_name:
                 user.org_name = org_name
             else:
-                user.org_name = request.user
+                user.org_name = prof_user
             user.save()
 
             messages.success(request, _(
@@ -695,11 +698,12 @@ def add_data(request):
         if form.is_valid():
             user = form.save(commit=False)
             user.user = request.user
+            prof_user = OrgProfile.objects.get(user=request.user)
             org_name = form.cleaned_data.get('org_name')
             if org_name:
                 user.org_name = org_name
             else:
-                user.org_name = request.user
+                user.org_name = prof_user
             user.save()
 
             messages.success(request, _(
@@ -835,11 +839,12 @@ def add_media(request):
         if form.is_valid():
             user = form.save(commit=False)
             user.user = request.user
+            prof_user = OrgProfile.objects.get(user=request.user)
             org_name = form.cleaned_data.get('org_name')
             if org_name:
                 user.org_name = org_name
             else:
-                user.org_name = request.user
+                user.org_name = prof_user
             user.save()
 
             messages.success(request, _(
@@ -1216,6 +1221,7 @@ def orgs_add_job(request):
         form = JobsForm(request.POST or None, files=request.FILES)
         form_other = OtherOrgsForm(request.POST or None, files=request.FILES)
         if form.is_valid() and form_other.is_valid():
+
             user = form.save(commit=False)
             user.user = request.user
 
@@ -1223,10 +1229,26 @@ def orgs_add_job(request):
             other_org_name = form.cleaned_data.get('other_org_name')
             other_name = form_other.cleaned_data.get('name')
 
-            if org_name or other_org_name or other_name:
+            prof_user = OrgProfile.objects.get(user=request.user)
+            # if (org_name and other_org_name) and other_name :
+
+            if org_name:
                 user.org_name = org_name
-            # else:
-            #     user.org_name = request.user
+                user.save()
+
+                if other_name:
+                    creater = form_other.save(commit=False)
+                    creater.created_by = request.user
+                    creater.job = form.instance.id
+                    creater.save()
+
+                    messages.success(request, _(
+                        'لقد تمت إضافة فرصة العمل بنجاح و ستتم دراستها قريباً'))
+
+                return redirect('orgs_jobs')
+            else:
+                print('salut')
+                user.org_name = prof_user
                 user.save()
 
                 if other_name:
@@ -1240,9 +1262,9 @@ def orgs_add_job(request):
 
                 return redirect('orgs_jobs')
 
-            else:
-                messages.error(request, _(
-                    'يجب إدخال اسم منظمة لتتم معالجة و نشر فرصة العمل'))
+            # else:
+            #     messages.error(request, _(
+            #         'يجب إدخال اسم منظمة لتتم معالجة و نشر فرصة العمل'))
     else:
         form = JobsForm()
         form_other = OtherOrgsForm()

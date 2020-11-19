@@ -67,28 +67,43 @@
 
     <hr>
 
-    <p class="text-muted">
-      <i class="far fa-clock ml-2 mr-2"></i>
-      {% trans "  تاريخ الإضافة " %} :
-      {% if dev.created_at %}
-      {{ dev.created_at|date:"Y-m-d" }}
-      {% else %}
-      {% trans 'لم يذكر'%}
-      {% endif %}
+    <p class="text-muted  row">
+      <span class="col-3">
+        <i class="far fa-clock ml-2 mr-2"></i>
+        {% trans "  تاريخ الإضافة " %}
+      </span>
+      <span class="col-9">
+        {{ dev.created_at|timesince }}
+      </span>
     </p>
 
-    <h3 class="mt-4">
-      {% if dev.org_name %}
-      {% trans "اسم المنظمة" %} :
-      <a href="{% url 'particip_detail' dev.org_name.id %}" class="nav-link text-dark pl-0 pr-0">
-        {{ dev.org_name }}</a>
-      {% else %}
-      {{ dev.name_dev }}
-      {% endif %}
+    <h3 class="mt-4  row">
+      <span class="col-3">
+        {% if dev.org_name %}
+        {% trans "اسم المنظمة" %}
+        {% else %}
+        {% trans 'اسم الجهة' %}
+        {% endif %}
+      </span>
+      <span class="col-9">
+        {% if dev.org_name %}
+        <a href="{% url 'particip_detail' dev.org_name.id %}" class="nav-link text-dark pl-0 pr-0">:
+          {{ dev.org_name }}</a>
+        {% else %}
+        : {{ dev.name_dev }}
+        {% endif %}
+      </span>
     </h3>
 
     {% if request.user.is_authenticated and request.user.is_superuser %}
-    <p class="text-muted mt-4"> {% trans "اسم اللذي أضاف  تفاصيل دليل التطوير" %} : {{ dev.user }}</p>
+    <p class="text-muted mt-4 row">
+      <span class="col-3">
+        {% trans "اسم اللذي أضاف  تفاصيل دليل التطوير" %}
+      </span>
+      <span class="col-9">
+        : {{ dev.user }}
+      </span>
+    </p>
     {% endif %}
 
     <!-- CONTENT المادة -->
@@ -105,18 +120,35 @@
     </figure>
     {% endif %}
 
-    <p> {% trans  "لمحة عن الجهة" %} : <br> {{ dev.dev_description }}</p>
+    <p class="row">
+      <span class="col-3">
+        {% trans  "لمحة عن الجهة" %} <br>
+      </span>
+      <span class="col-9">
+        : {{ dev.dev_description }}</p>
+    </span>
 
-    <p>
-      {% trans 'تاريخ الإعداد أو النشر أو التأليف' %} :
-      {% if dev.dev_date %}
-      {{ dev.dev_date }}
-      {% else %}
-      {% trans 'لم يذكر' %}
-      {% endif %}
+    <p class="row">
+      <span class="col-3">
+        {% trans 'تاريخ الإعداد أو النشر أو التأليف' %}
+      </span>
+      <span class="col-9">
+        {% if dev.dev_date %}
+        : {{ dev.dev_date }}
+        {% else %}
+        : {% trans 'لم يذكر' %}
+        {% endif %}
+      </span>
     </p>
 
-    <p> {% trans  "موضوع المادة" %} : {{ dev.get_subject_display }}</p>
+    <p class="row">
+      <span class="col-3">
+        {% trans  "موضوع المادة" %}
+      </span>
+      <span class="col-9">
+        : {{ dev.get_subject_display }}
+      </span>
+    </p>
 
 
     {% if dev.video %}

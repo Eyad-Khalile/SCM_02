@@ -65,14 +65,14 @@
 
     <hr>
 
-    <p class="text-muted">
-      <i class="far fa-clock ml-2 mr-2"></i>
-      {% trans "تاريخ الإضافة" %} :
-      {% if funding.date_published %}
-      {{ funding.date_published|date:"Y-m-d" }}
-      {% else %}
-      {{ funding.created_at|date:"Y-m-d" }}
-      {% endif %}
+    <p class="text-muted row">
+      <span class="col-3">
+        <i class="far fa-clock ml-2 mr-2"></i>
+        {% trans "تاريخ الإضافة" %}
+      </span>
+      <span class="col-9">
+        : {{ funding.created_at|timesince }}
+      </span>
     </p>
 
     <div class="row">
@@ -105,35 +105,121 @@
 
 
     {% if request.user.is_authenticated and request.user.is_superuser %}
-    <p class="mt-2"> {% trans "اسم اللذي أضاف فرصة التمويل" %} : {{ funding.user }}</p>
+    <p class="mt-2 row">
+      <span class="col-3">
+        {% trans "اسم اللذي أضاف فرصة التمويل" %}
+      </span>
+      <span class="col-9">
+        : {{ funding.user }}
+      </span>
+    </p>
     {% endif %}
 
-    <p> {% trans 'لمحة عن الجهة المانحة' %} : {{ funding.funding_org_description }} </p>
-
-
-    <p> {% trans 'دول المنحة' %} : {{ funding.position_work.name }} </p>
-    <p>
-      {% trans 'المحافظة' %} :
-      {% if funding.city_work %}
-      {{ funding.city_work }}
-      {% else %}
-      {% trans 'لم يذكر' %}
-      {% endif %}
+    <p class="row">
+      <span class="col-3">
+        {% trans 'لمحة عن الجهة المانحة' %}
+      </span>
+      <span class="col-9">
+        : {{ funding.funding_org_description }}
+      </span>
     </p>
 
-    <p> <strong>{% trans 'تاريخ إغلاق المنحة' %} : {{ funding.funding_dead_date|date:"c" }}</strong> </p>
-    <p> <strong>{% trans 'مدة المنحة' %} : {{ funding.funding_period }}</strong> </p>
-    <p> <strong>{% trans 'حجم المنحة' %} : {{ funding.funding_amounte }}</strong> </p>
-    <p> {% trans "وصف المنحة" %} : <br> {{ funding.funding_description }}</p>
-    <p> {% trans "شروط المنحة" %} : {{ funding.funding_conditions }}</p>
-    <p> {% trans "متطلبات التقديم" %} : {{ funding.funding_reqs }}</p>
-    <p> {% trans "كيفية التقديم" %} : {{ funding.funding_guid }}</p>
-    <p> {% trans "الرابط الأصلي" %} :
-      {% if funding.funding_url %}
-      <a href="{{ funding.funding_url }}" target="_blank">{{ funding.funding_url }}</a>
-      {% else %}
-      {% trans 'لم يذكر' %}
-      {% endif %}
+
+    <p class="row">
+      <span class="col-3">
+        {% trans 'دول المنحة' %}
+      </span>
+      <span class="col-9">
+        : {{ funding.position_work.name }}
+      </span>
+    </p>
+    <p class="row">
+      <span class="col-3">
+        {% trans 'المحافظة' %}
+      </span>
+      <span class="col-9">
+        {% if funding.city_work %}
+        : {{ funding.city_work }}
+        {% else %}
+        : {% trans 'لم يذكر' %}
+        {% endif %}
+      </span>
+    </p>
+
+    <p> <strong class="row">
+        <span class="col-3">
+          {% trans 'تاريخ إغلاق المنحة' %}
+        </span>
+        <span class="col-9">
+          : {{ funding.funding_dead_date|date:"c" }}
+        </span>
+      </strong> </p>
+
+    <p> <strong class="row">
+        <span class="col-3">
+          {% trans 'مدة المنحة' %}
+        </span>
+        <span class="col-9">
+          : {{ funding.funding_period }}
+        </span>
+      </strong> </p>
+
+    <p> <strong class="row">
+        <span class="col-3">
+          {% trans 'حجم المنحة' %}
+        </span>
+        <span class="col-9">
+          : {{ funding.funding_amounte }}
+        </span>
+      </strong> </p>
+
+    <p class="row">
+      <span class="col-3">
+        {% trans "وصف المنحة" %} <br>
+      </span>
+      <span class="col-9">
+        : {{ funding.funding_description }}
+      </span>
+    </p>
+
+    <p class="row">
+      <span class="col-3">
+        {% trans "شروط المنحة" %}
+      </span>
+      <span class="col-9">
+        : {{ funding.funding_conditions }}
+      </span>
+    </p>
+
+    <p class="row">
+      <span class="col-3">
+        {% trans "متطلبات التقديم" %}
+      </span>
+      <span class="col-9">
+        : {{ funding.funding_reqs }}
+      </span>
+    </p>
+
+    <p class="row">
+      <span class="col-3">
+        {% trans "كيفية التقديم" %}
+      </span>
+      <span class="col-9">
+        : {{ funding.funding_guid }}
+      </span>
+    </p>
+
+    <p class="row">
+      <span class="col-3">
+        {% trans "الرابط الأصلي" %}
+      </span>
+      <span class="col-9">
+        {% if funding.funding_url %}
+        <a href="{{ funding.funding_url }}" target="_blank">: {{ funding.funding_url }}</a>
+        {% else %}
+        : {% trans 'لم يذكر' %}
+        {% endif %}
+      </span>
     </p>
 
 

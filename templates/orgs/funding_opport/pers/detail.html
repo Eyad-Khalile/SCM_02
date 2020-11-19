@@ -69,103 +69,219 @@
 
         <hr>
 
-        <p class="text-muted">
-            <i class="far fa-clock ml-2 mr-2"></i>
-            {% trans "تاريخ الإضافة" %} :
-            {% if perso.date_published %}
-            {{ perso.date_published|date:"Y-m-d" }}
-            {% else %}
-            {{ perso.created_at|date:"Y-m-d" }}
-            {% endif %}
+        <p class="text-muted row">
+            <span class="col-3">
+                <i class="far fa-clock ml-2 mr-2"></i>
+                {% trans "تاريخ الإضافة" %}
+            </span>
+            <span class="col-9">
+                : {{ perso.created_at|timesince }}
+            </span>
         </p>
 
-        <h2 class="text-center">
-            {% trans 'الجهة المانحة' %} :
-            {% if perso.org_name %}
-            <a href="{% url 'particip_detail' perso.org_name.id %}" class="nav-link text-dark pl-0 pr-0">
-                {{ perso.org_name }}</a>
-            {% else %}
-            {{ perso.name_funding }}
-            {% endif %}
-        </h2>
 
-        {% if perso.logo %}
-        <figure>
-            <img src="{{ perso.logo.url }}"
-                name="{% if perso.org_name %} {{ perso.org_name }} {% else %} {{ perso.name_funding }} {% endif %}"
-                title="{% if perso.org_name %} {{ perso.org_name }} {% else %} {{ perso.name_funding }} {% endif %}"
-                alt="{% if perso.org_name %} {{ perso.org_name }} {% else %} {{ perso.name_funding }} {% endif %}"
-                width="100%" class="img-thumbnail rounded">
-        </figure>
-        {% endif %}
+        <div class="row">
+            <div class="col">
+                {% if perso.logo %}
+                <figure>
+                    <img src="{{ perso.logo.url }}"
+                        name="{% if perso.org_name %} {{ perso.org_name }} {% else %} {{ perso.name_funding }} {% endif %}"
+                        title="{% if perso.org_name %} {{ perso.org_name }} {% else %} {{ perso.name_funding }} {% endif %}"
+                        alt="{% if perso.org_name %} {{ perso.org_name }} {% else %} {{ perso.name_funding }} {% endif %}"
+                        width="100%" class="img-thumbnail rounded">
+                </figure>
+                {% endif %}
+            </div>
+            <div class="col d-flex justify-content-start align-items-center">
+                <h2 class="">
+                    {% if perso.org_name %}
+                    <a href="{% url 'particip_detail' perso.org_name.id %}" class="nav-link text-dark pl-0 pr-0">
+                        {% trans "اسم المنظمة" %} : {{ perso.org_name }}</a>
+                    {% else %}
+                    {% trans 'الجهة المانحة' %} :
+                    {{ perso.name_funding }}
+                    {% endif %}
+                </h2>
+            </div>
+        </div>
 
 
 
         {% if request.user.is_authenticated and request.user.is_superuser %}
-        <p class="mt-2"> {% trans "اسم اللذي أضاف فرصة التمويل" %} : {{ perso.user }}</p>
+        <p class="mt-2 row">
+            <span class="col-3">
+                {% trans "اسم اللذي أضاف فرصة التمويل" %}
+            </span>
+            <span class="col-9">
+                : {{ perso.user }}
+            </span>
+        </p>
         {% endif %}
 
-        <p> {% trans 'لمحة عن الجهة المانحة' %} :
-            {% if perso.fund_org_description %}
-            {{ perso.fund_org_description }}
-            {% else %}
-            {% trans 'لم يذكر' %}
-            {% endif %}
+        <p class="row">
+            <span class="col-3">
+                {% trans 'لمحة عن الجهة المانحة' %}
+            </span>
+            <span class="col-9">
+                {% if perso.fund_org_description %}
+                : {{ perso.fund_org_description }}
+                {% else %}
+                : {% trans 'لم يذكر' %}
+                {% endif %}
+            </span>
         </p>
 
-        <p> {% trans 'فئة المنحة' %} :
-            {% if perso.category %}
-            {{ perso.get_category_display }}
-            {% else %}
-            {% trans 'لم يذكر' %}
-            {% endif %}
+        <p class="row">
+            <span class="col-3">
+                {% trans 'فئة المنحة' %}
+            </span>
+            <span class="col-9">
+                {% if perso.category %}
+                : {{ perso.get_category_display }}
+                {% else %}
+                : {% trans 'لم يذكر' %}
+                {% endif %}
+            </span>
         </p>
 
-        <p> {% trans 'نوع المنحة' %} : {{ perso.get_fund_type_display }} </p>
-
-        <p> {% trans 'المستوى التعليمي' %} :
-            {% if perso.study_level %}
-            {{ perso.get_study_level_display }}
-            {% else %}
-            {% trans 'لم يذكر' %}
-            {% endif %}
+        <p class="row">
+            <span class="col-3">
+                {% trans 'نوع المنحة' %}
+            </span>
+            <span class="col-9">
+                : {{ perso.get_fund_type_display }}
+            </span>
         </p>
 
-        <p> {% trans 'الاختصاص التعليمي' %} :
-            {% if perso.comp_study %}
-            {{ perso.get_comp_study_display }}
-            {% else %}
-            {% trans 'لم يذكر' %}
-            {% endif %}
+        <p class="row">
+            <span class="col-3">
+                {% trans 'المستوى التعليمي' %}
+            </span>
+            <span class="col-9">
+                {% if perso.study_level %}
+                : {{ perso.get_study_level_display }}
+                {% else %}
+                : {% trans 'لم يذكر' %}
+                {% endif %}
+            </span>
         </p>
 
-        <p> {% trans 'قطاع المنحة' %} :
-            {% if perso.domain %}
-            {{ perso.get_domain_desplay }}
-            {% else %}
-            {% trans 'لم يذكر' %}
-            {% endif %}
+        <p class="row">
+            <span class="col-3">
+                {% trans 'الاختصاص التعليمي' %}
+            </span>
+            <span class="col-9">
+                {% if perso.comp_study %}
+                : {{ perso.get_comp_study_display }}
+                {% else %}
+                : {% trans 'لم يذكر' %}
+                {% endif %}
+            </span>
         </p>
 
-        <p> {% trans 'دول المنحة' %} : {{ perso.position_work.name }} </p>
-        <p>
-            {% trans 'المحافظة' %} :
-            {% if perso.city_work %}
-            {{ perso.city_work }}
-            {% else %}
-            {% trans 'لم يذكر' %}
-            {% endif %}
+        <p class="row">
+            <span class="col-3">
+                {% trans 'قطاع المنحة' %}
+            </span>
+            <span class="col-9">
+                {% if perso.domain %}
+                : {{ perso.get_domain_desplay }}
+                {% else %}
+                : {% trans 'لم يذكر' %}
+                {% endif %}
+            </span>
         </p>
 
-        <p> <strong>{% trans 'تاريخ إغلاق المنحة' %} : {{ perso.funding_dead_date|date:"c" }}</strong> </p>
-        <p> <strong>{% trans 'مدة المنحة' %} : {{ perso.funding_period }}</strong> </p>
-        <p> <strong>{% trans 'حجم المنحة' %} : {{ perso.funding_amounte }}</strong> </p>
-        <p> {% trans "وصف المنحة" %} : <br> {{ perso.funding_description }}</p>
-        <p> {% trans "شروط المنحة" %} : {{ perso.funding_conditions }}</p>
-        <p> {% trans "متطلبات التقديم" %} : {{ perso.funding_reqs }}</p>
-        <p> {% trans "كيفية التقديم" %} : {{ perso.funding_guid }}</p>
-        <p> {% trans "الرابط الأصلي" %} :
-            <a href="{{ perso.funding_url }}" target="_blank">{{ perso.funding_url }}</a>
+        <p class="row">
+            <span class="col-3">
+                {% trans 'دول المنحة' %}
+            </span>
+            <span class="col-9">
+                : {{ perso.position_work.name }} </p>
+        </span>
+        <p class="row">
+            <span class="col-3">
+                {% trans 'المحافظة' %}
+            </span>
+            <span class="col-9">
+                {% if perso.city_work %}
+                : {{ perso.city_work }}
+                {% else %}
+                : {% trans 'لم يذكر' %}
+                {% endif %}
+            </span>
+        </p>
+
+        <p> <strong class="row">
+                <span class="col-3">
+                    {% trans 'تاريخ إغلاق المنحة' %}
+                </span>
+                <span class="col-9">
+                    : {{ perso.funding_dead_date|date:"c" }}
+                </span>
+            </strong> </p>
+
+        <p> <strong class="row">
+                <span class="col-3">
+                    {% trans 'مدة المنحة' %}
+                </span>
+                <span class="col-9">
+                    : {{ perso.funding_period }}</strong>
+            </span>
+        </p>
+
+        <p> <strong class="row">
+                <span class="col-3">
+                    {% trans 'حجم المنحة' %}
+                </span>
+                <span class="col-9">
+                    : {{ perso.funding_amounte }}</strong>
+            </span>
+        </p>
+
+        <p class="row">
+            <span class="col-3">
+                {% trans "وصف المنحة" %} <br>
+            </span>
+            <span class="col-9">
+                : {{ perso.funding_description }}
+            </span>
+        </p>
+
+        <p class="row">
+            <span class="col-3">
+                {% trans "شروط المنحة" %}
+            </span>
+            <span class="col-9">
+                : {{ perso.funding_conditions }}
+            </span>
+        </p>
+
+        <p class="row">
+            <span class="col-3">
+                {% trans "متطلبات التقديم" %}
+            </span>
+            <span class="col-9">
+                : {{ perso.funding_reqs }}
+            </span>
+        </p>
+
+        <p class="row">
+            <span class="col-3">
+                {% trans "كيفية التقديم" %}
+            </span>
+            <span class="col-9">
+                : {{ perso.funding_guid }}
+            </span>
+        </p>
+
+        <p class="row">
+            <span class="col-3">
+                {% trans "الرابط الأصلي" %}
+            </span>
+            <span class="col-9">
+                <a href="{{ perso.funding_url }}" class="text-dark" target="_blank">: {{ perso.funding_url }}</a>
+            </span>
         </p>
 
 

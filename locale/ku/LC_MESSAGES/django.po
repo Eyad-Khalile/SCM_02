@@ -21,11 +21,11 @@ msgstr ""
 
 #: orgs/admin.py:7 orgs/admin.py:8
 msgid "إدارة موقع SCM "
-msgstr ""
+msgstr "SCM"
 
 #: orgs/filters.py:15
 msgid "تاريخ التأسيس / من :"
-msgstr ""
+msgstr "DATE"
 
 #: orgs/filters.py:17 orgs/filters.py:23 orgs/filters.py:52 orgs/filters.py:73
 #: orgs/filters.py:94 orgs/filters.py:114 orgs/filters.py:135
@@ -49,11 +49,11 @@ msgstr ""
 #: templates/profiles/particip_detail.html:26
 #: templates/profiles/profile.html:32 templates/profiles/staff_profile.html:25
 msgid "اسم المنظمة"
-msgstr ""
+msgstr "SCM"
 
 #: orgs/filters.py:21 orgs/filters.py:50
 msgid "تاريخ نشر الخبر / من :"
-msgstr ""
+msgstr "DATE"
 
 #: orgs/filters.py:45
 msgid "كلمات من عنوان الخبر"

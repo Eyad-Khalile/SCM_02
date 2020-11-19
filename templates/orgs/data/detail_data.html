@@ -67,27 +67,53 @@
       <h1 class="text-center mt-3"> {{ data.title }}</h1>
     </strong>
 
-    <p class="text-muted">
-      <i class="far fa-clock ml-2 mr-2"></i>
-      {% trans "تاريخ إضافة البيان" %} :
-      {% if data.created_at %}
-      {{ data.created_at|date:"Y-m-d" }}
-      {% else %}
-      {% trans 'لم يذكر'%}
-      {% endif %}
+    <p class="text-muted row">
+      <span class="col-3">
+        <i class="far fa-clock ml-2 mr-2"></i>
+        {% trans "تاريخ إضافة البيان" %}
+      </span>
+      <span class="col-9">
+        {% if data.created_at %}
+        : {{ data.created_at|date:"Y-m-d" }}
+        {% else %}
+        {% trans 'لم يذكر'%}
+        {% endif %}
+      </span>
     </p>
 
-    <h3 class="mt-4"><a href="{% url 'particip_detail' data.org_name.id %}" class="nav-link text-dark pl-0 pr-0">
-        {% trans "اسم المنظمة" %} : {{ data.org_name }}</a> </h3>
+    <h3 class="mt-4 row">
+      <span class="col-3">
+        {% trans "اسم المنظمة" %}
+      </span>
+      <span class="col-9">
+        <a href="{% url 'particip_detail' data.org_name.id %}" class="nav-link text-dark p-0">
+          : {{ data.org_name }}
+        </a>
+      </span>
+    </h3>
 
     {% if request.user.is_authenticated and request.user.is_superuser %}
-    <p class="text-muted mt-4"> {% trans "اسم اللذي أضاف البيان" %} : {{ data.user }}</p>
+    <p class="text-muted mt-4 row">
+      <span class="col-3">
+        {% trans "اسم اللذي أضاف البيان" %}
+      </span>
+      <span class="col-9">
+        : {{ data.user }}
+      </span>
+    </p>
     {% endif %}
 
 
 
 
-    <p> {% trans "محتوى البيان" %} : <br> </p>
+    <p class="row">
+      <span class="col-3">
+        {% trans "محتوى البيان" %} <br>
+      </span>
+      <span class="col-9">
+        :
+      </span>
+    </p>
     {% if '.pdf' in data.media.url %}
     <object data="{{ data.media.url }}" type="application/pdf" title="{{data.title}}" width="100%" height="885">
       <!-- <embed src="{{ data.media.url  }}" > -->
@@ -139,8 +165,6 @@
     <a href="{% url 'data_detail' data.id %}" class='bg-light nav-link border-bottom pb-3 mb-2'>
       <div class="news-card">
         <p class="text-dark"> {{ data.title }} </p>
-
-
 
         <figure>
           {% if not '.pdf' in data.media.url %}

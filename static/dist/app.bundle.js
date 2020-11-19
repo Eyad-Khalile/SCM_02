@@ -27095,7 +27095,7 @@ $('#id_org_name').change(function () {
       break;
 
     default:
-      $('#div_id_other_org_name').hide();
+      $('#div_id_other_org_name, #div_id_name, #div_id_logo').hide();
       break;
   }
 });
@@ -27174,10 +27174,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _fortawesome_fontawesome_free_js_all_js__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_fortawesome_fontawesome_free_js_all_js__WEBPACK_IMPORTED_MODULE_6__);
 /* harmony import */ var slick_carousel__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! slick-carousel */ "./node_modules/slick-carousel/slick/slick.js");
 /* harmony import */ var slick_carousel__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(slick_carousel__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var _social_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./social.js */ "./src/js/social.js");
+/* harmony import */ var _social_js__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_social_js__WEBPACK_IMPORTED_MODULE_8__);
 // const x = "this is a test";
 // alert(x);
 // You can specify which plugins you need
  // import 'bootstrap';
+
 
 
 
@@ -27426,6 +27429,19 @@ document.onkeydown = function (evt) {
   }
 };
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js")))
+
+/***/ }),
+
+/***/ "./src/js/social.js":
+/*!**************************!*\
+  !*** ./src/js/social.js ***!
+  \**************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// Whatsapp
+// https://api.whatsapp.com/send?text=[post-title] [post-url]
+//
 
 /***/ }),
 

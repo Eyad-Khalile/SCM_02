@@ -31,20 +31,24 @@ from django.template import Context
 
 @login_required(login_url='signe_in')
 def org_profile(request):
-    # users = User.objects.all()
+
     users = OrgProfile.objects.all()
     orgs = []
     for user in users:
         orgs += user.user.id,
-        # print('==========', orgs)
+    # print('==========', orgs)
 
     if request.method == 'POST':
         form = OrgProfileForm(request.POST or None, files=request.FILES)
-        userprof = request.POST.get('user')
+
+        if request.POST.get('user') != None:
+            userprof = request.POST.get('user')
+        else:
+            userprof = request.user.id
         # print('==========', userprof)
 
         if int(userprof) not in orgs:
-            # print('is not in')
+            print('is not in')
             if form.is_valid():
                 prof = form.save(commit=False)
                 user = form.cleaned_data.get('user')
@@ -59,7 +63,7 @@ def org_profile(request):
                 return redirect('home')
 
         else:
-            if int(userprof) in orgs:
+            if int(userprof) in orgs and not request.user.is_staff:
                 # print(orgs)
                 # print('is in')
                 messages.error(request, _('هذا المستخدم ليه طلب مسبقاً'))
@@ -217,8 +221,14 @@ def profile(request):
     # profs = OrgProfile.objects.filter(user=request.user)
     profs = OrgProfile.objects.all().filter(user=request.user)
 
+    user_prof = OrgProfile.objects.filter(user=request.user)
+    #     user_prof = ''
+    # else:
+    #     user_prof = OrgProfile.objects.get(user=request.user)
+
     context = {
         'profs': profs,
+        'user_prof': user_prof,
     }
     return render(request, 'profiles/profile.html', context)
 
@@ -514,7 +524,11 @@ def admin_dashboard(request):
             'div_jobs': div_jobs,
             #  'org_name':org_name
         }
-        return render(request, 'profiles/layout_profile.html', context)
+
+    else:
+        return HttpResponse('You dont have the permitions to entro this page :) ')
+
+    return render(request, 'profiles/layout_profile.html', context)
 # this is to export into excel for the next step
 # def export_data(request):
 #                   objs = OrgJob.objects.all()

@@ -35,19 +35,29 @@
             <!-- FILTERS -->
             <div class="pt-3 px-4 pb-2 mt-4 collapse" id="collapseFiltre">
 
+
                 <form action="" method="get"
-                    class="row register justify-content-center align-items-center flex-wrap form my-2 my-lg-0">
+                    class="row register justify-content-start align-items-center flex-wrap form my-2 my-lg-0">
+                    {% if request.user.is_superuser %}
+                    <div class="col-sm-12 col-md-4 mt-3">
+                        {{ myFilter.form.user|as_crispy_field }}
+                    </div>
+                    {% endif %}
                     <div class="col-sm-12 col-md-4  mt-3">
                         {{ myFilter.form.org_name|as_crispy_field }}
                     </div>
                     <div class="col-sm-12 col-md-4 mt-3">
                         {{ myFilter.form.job_title|as_crispy_field }}
                     </div>
+
                     <div class="row">
-                        <div class="col-xs-6 col-sm-6 col-md-4 mt-3">
+                        <div class="col-sm-12 col-md-4 mt-3">
+                            {{ myFilter.form.position_work|as_crispy_field }}
+                        </div>
+                        <div class="col-sm-12 col-md-4 mt-3">
                             {{ myFilter.form.start_date_pub|as_crispy_field }}
                         </div>
-                        <div class="col-xs-6 col-sm-6 col-md-4 mt-3">
+                        <div class="col-sm-12 col-md-4 mt-3">
                             {{ myFilter.form.end_date_pub|as_crispy_field }}
                         </div>
 
@@ -63,7 +73,7 @@
 
             <div class="m-0 mt-4 pt-4">
 
-                <div class="row row-m-0 justify-content-center pt-4 pb-4 mb-4">
+                <div class="row row-m-0 justify-content-start pt-4 pb-4 mb-4">
                     {% if jobs %}
                     {% for job in jobs %}
 

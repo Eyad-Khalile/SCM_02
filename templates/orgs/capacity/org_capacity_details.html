@@ -69,57 +69,128 @@
 
         <hr>
 
-        <p class="text-muted">
-            <i class="far fa-clock ml-2 mr-2"></i>
-            {% trans "تاريخ الإضافة" %} :
-            {{ capacity.created_at|date:"Y-m-d" }}
+        <p class="text-muted row">
+            <span class="col-3">
+                <i class="far fa-clock ml-2 mr-2"></i>
+                {% trans "تاريخ الإضافة" %}
+            </span>
+            <span class="col-9">
+                : {{ capacity.created_at|date:"Y-m-d" }}
+            </span>
         </p>
 
-        <h3 class="mt-4">
-            {% if capacity.org_name %}
-            {% trans "اسم المنظمة" %} :
-            <a href="{% url 'particip_detail' capacity.org_name.id %}" class="nav-link text-dark pl-0 pr-0">
-                {% trans "اسم المنظمة" %} : {{ capacity.org_name }}</a>
-            {% else %}
-            {% trans "اسم الجهة المانحة" %}
-            {{ capacity.name_capacity }}
-            {% endif %}
+        <h3 class="mt-4 row">
+            <span class="col-3">
+                {% if capacity.org_name %}
+                {% trans "اسم المنظمة" %}
+                {% else %}
+                {% trans "اسم الجهة المانحة" %}
+                {% endif %}
+            </span>
+            <span class="col-9">
+                {% if capacity.org_name %}
+                <a href="{% url 'particip_detail' capacity.org_name.id %}" class="nav-link text-dark pl-0 pr-0">:
+                    {{ capacity.org_name }}</a>
+                {% else %}
+                : {{ capacity.name_capacity }}
+                {% endif %}
+            </span>
         </h3>
 
 
         {% if request.user.is_authenticated and request.user.is_superuser %}
-        <p class="text-muted mt-4"> {% trans "اسم اللذي أضاف فرصة بناء القدرات" %} : {{ capacity.user }}</p>
+        <p class="text-muted mt-4 row">
+            <span class="col-3">
+                {% trans "اسم اللذي أضاف فرصة بناء القدرات" %}
+            </span>
+            <span class="col-9">
+                : {{ capacity.user }}
+            </span>
+        </p>
         {% endif %}
 
-        <p> {% trans "نوع الفرصة" %} : {{ capacity.get_capacity_type_display }}</p>
+        <p class="row">
+            <span class="col-3">
+                {% trans "نوع الفرصة" %}
+            </span>
+            <span class="col-9">
+                : {{ capacity.get_capacity_type_display }}
+            </span>
+        </p>
 
-        <p> {% trans "قطاع الفرصة" %} : {{ capacity.get_capacity_domain_display }}</p>
+        <p class="row">
+            <span class="col-3">
+                {% trans "قطاع الفرصة" %}
+            </span>
+            <span class="col-9">
+                : {{ capacity.get_capacity_domain_display }}
+            </span>
+        </p>
 
-        <p> {% trans "وصف فرصة التمويل" %} : <br> {{ capacity.capacity_description }}</p>
-
-
-
-        <p> {% trans "مكان الفرصة" %} : {{ capacity.get_position_work_display }}</p>
-
-        <p> {% trans "المدينة" %} :
-            {% if capacity.city_work %}
-            {{ capacity.get_city_work_display }}
-            {% else %}
-            {% trans 'لم يذكر' %}
-            {% endif %}
+        <p class="row">
+            <span class="col-3">
+                {% trans "وصف فرصة التمويل" %} <br>
+            </span>
+            <span class="col-9">
+                : {{ capacity.capacity_description }}
+            </span>
         </p>
 
 
-        <p> <strong>{% trans "تاريخ إغلاق المنحة" %} : {{ capacity.capacity_dead_date|date:"Y-m-d" }}</strong> </p>
 
-        <p> {% trans "طريقة التقديم" %} : {{ capacity.capacity_guid }}</p>
+        <p class="row">
+            <span class="col-3">
+                {% trans "مكان الفرصة" %}
+            </span>
+            <span class="col-9">
+                : {{ capacity.get_position_work_display }}
+            </span>
+        </p>
 
-        <p> {% trans "الرابط" %} :
-            {% if capacity.capacity_url %}
-            {{ capacity.capacity_url }}
-            {% else %}
-            {% trans 'لم يذكر' %}
-            {% endif %}
+        <p class="row">
+            <span class="col-3">
+                {% trans "المدينة" %}
+            </span>
+            <span class="col-9">
+                {% if capacity.city_work %}
+                : {{ capacity.get_city_work_display }}
+                {% else %}
+                : {% trans 'لم يذكر' %}
+                {% endif %}
+            </span>
+        </p>
+
+
+        <p> <strong class="row">
+                <span class="col-3">
+                    {% trans "تاريخ إغلاق المنحة" %}
+                </span>
+                <span class="col-9">
+                    : {{ capacity.capacity_dead_date|date:"Y-m-d" }}
+                </span>
+            </strong>
+        </p>
+
+        <p class="row">
+            <span class="col-3">
+                {% trans "طريقة التقديم" %}
+            </span>
+            <span class="col-9">
+                : {{ capacity.capacity_guid }}
+            </span>
+        </p>
+
+        <p class="row">
+            <span class="col-3">
+                {% trans "الرابط" %}
+            </span>
+            <span class="col-9">
+                {% if capacity.capacity_url %}
+                : {{ capacity.capacity_url }}
+                {% else %}
+                : {% trans 'لم يذكر' %}
+                {% endif %}
+            </span>
         </p>
 
         <div

@@ -67,21 +67,40 @@
       <h1 class="text-center mt-3"> {{ media.title }}</h1>
     </strong>
 
-    <p class="text-muted">
-      <i class="far fa-clock ml-2 mr-2"></i>
-      {% trans "تاريخ إضافة المحتوى" %} :
-      {% if media.created_at %}
-      {{ media.created_at|date:"Y-m-d" }}
-      {% else %}
-      {% trans 'لم يذكر'%}
-      {% endif %}
+    <p class="text-muted row">
+      <span class="col-3">
+        <i class="far fa-clock ml-2 mr-2"></i>
+        {% trans "تاريخ إضافة المحتوى" %}
+        {% if media.created_at %}
+      </span>
+      <span class="col-9">
+        : {{ media.created_at|date:"Y-m-d" }}
+        {% else %}
+        {% trans 'لم يذكر'%}
+        {% endif %}
+      </span>
     </p>
 
-    <h3 class="mt-4"><a href="{% url 'particip_detail' media.org_name.id %}" class="nav-link text-dark pl-0 pr-0">
-        {% trans "اسم المنظمة" %} : {{ media.org_name }}</a> </h3>
+    <h3 class="mt-4 row">
+      <span class="col-3">
+        {% trans "اسم المنظمة" %}
+      </span>
+      <span class="col-9">
+        <a href="{% url 'particip_detail' media.org_name.id %}" class="nav-link text-dark p-0">
+          : {{ media.org_name }}
+      </span>
+      </a>
+    </h3>
 
     {% if request.user.is_authenticated and request.user.is_superuser %}
-    <p class="text-muted mt-4"> {% trans "اسم اللذي أضاف المحتوى" %} : {{ media.user }}</p>
+    <p class="text-muted mt-4 row">
+      <span class="col-3">
+        {% trans "اسم اللذي أضاف المحتوى" %}
+      </span>
+      <span class="col-9">
+        : {{ media.user }}
+      </span>
+    </p>
     {% endif %}
 
     <p> {% trans "مضمون المحتوى السمعي و البصري" %} : <br> </p>
@@ -95,13 +114,17 @@
         width="100%"></a>
     {% endif %}
 
-    <p class="mt-3">
-      {% trans "رابط المحتوى" %} :
-      {% if media.url %}
-      <a href="{{ media.url }}" target="_blanck" class="text-dark text-decoration-none">{{ media.url }}</a>
-      {% else %}
-      {% trans 'لم يذكر' %}
-      {% endif %}
+    <p class="mt-3 row">
+      <span class="col-3">
+        {% trans "رابط المحتوى" %}
+      </span>
+      <span class="col-9">
+        {% if media.url %}
+        <a href="{{ media.url }}" target="_blanck" class="text-dark text-decoration-none">: {{ media.url }}</a>
+        {% else %}
+        {% trans 'لم يذكر' %}
+        {% endif %}
+      </span>
     </p>
 
     <!-- SOCIAL -->

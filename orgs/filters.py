@@ -169,6 +169,7 @@ class OrgsJobsFilter(django_filters.FilterSet):
     class Meta:
         model = OrgJob
         fields = [
+            'user',
             'org_name',
             'job_title',
             'job_type',

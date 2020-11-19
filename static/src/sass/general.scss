@@ -813,6 +813,10 @@ body {
     }
   }
   .job-card {
+    .row {
+      --bs-gutter-x: 0 !important;
+    }
+
     p {
       margin-top: 0 !important;
       margin-bottom: 0 !important;
@@ -824,10 +828,10 @@ body {
       // }
     }
     p:nth-child(even) {
-      background: rgba($color: $color-1, $alpha: 0.8); 
-      color: #fff;
+      background: rgba($color: $color-1, $alpha: 0.1); 
+      color: $color-1;
       &.text-muted {
-        color: #fff !important;
+        color: $color-1 !important;
       }
     }
 

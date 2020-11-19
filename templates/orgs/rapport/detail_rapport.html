@@ -67,31 +67,61 @@
       <h1 class="text-center mt-3"> {{ rapport.title }}</h1>
     </strong>
 
-    <p class="text-muted">
-      <i class="far fa-clock ml-2 mr-2"></i>
-      {% trans "تاريخ إضافة التقرير" %} :
-      {{ rapport.created_at|date:"Y-m-d" }}
+    <p class="text-muted row">
+      <span class="col-3">
+        <i class="far fa-clock ml-2 mr-2"></i>
+        {% trans "تاريخ إضافة التقرير" %}
+      </span>
+      <span class="col-9">
+        : {{ rapport.created_at|date:"Y-m-d" }}
+      </span>
     </p>
 
-    <h3 class="mt-4"><a href="{% url 'particip_detail' rapport.org_name.id %}" class="nav-link text-dark pl-0 pr-0">
-        {% trans "اسم المنظمة" %} : {{ rapport.org_name }}</a> </h3>
+    <h3 class="mt-4 row">
+      <span class="col-3">
+        {% trans "اسم المنظمة" %}
+      </span>
+      <span class="col-9">
+        <a href="{% url 'particip_detail' rapport.org_name.id %}" class="nav-link text-dark p-0">
+          : {{ rapport.org_name }}
+        </a>
+      </span>
+    </h3>
 
     {% if request.user.is_authenticated and request.user.is_superuser %}
-    <p class="text-muted mt-4"> {% trans "اسم اللذي أضاف التقرير" %} : {{ rapport.user }}</p>
+    <p class="text-muted mt-4 row">
+      <span class="col-3">
+        {% trans "اسم اللذي أضاف التقرير" %}
+      </span>
+      <span class="col-9">
+        : {{ rapport.user }}
+      </span>
+    </p>
     {% endif %}
 
 
-    <p class="mt-3">
-      {% trans "مجال التقرير" %} :
-      {% if rapport.demain %}
-      {{ rapport.get_demain_display }}
-      {% else %}
-      <span class="text-muted">{% trans 'لم يذكر'%}</span>
-      {% endif %}
+    <p class="mt-3 row">
+      <span class="col-3">
+        {% trans "مجال التقرير" %}
+      </span>
+      <span class="col-9">
+        {% if rapport.demain %}
+        {{ rapport.get_demain_display }}
+        {% else %}
+        <span class="text-muted">: {% trans 'لم يذكر'%}</span>
+        {% endif %}
+      </span>
     </p>
 
 
-    <p> {% trans "محتوى التقرير" %} : <br> </p>
+    <p class="row">
+      <span class="col-3">
+        {% trans "محتوى التقرير" %} <br>
+      </span>
+      <span class="col-9">
+        :
+      </span>
+    </p>
 
     {% if '.pdf' in rapport.media.url %}
     <object data="{{ rapport.media.url }}" type="application/pdf" title="{{rapport.title}}" width="100%" height="885">

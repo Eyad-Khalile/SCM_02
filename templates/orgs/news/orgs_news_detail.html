@@ -64,18 +64,42 @@
       <h1 class="text-center mt-3"> {{ new.title }}</h1>
     </strong>
 
-    <p class="text-muted">
-      <i class="far fa-clock ml-2 mr-2"></i>
-      {% trans "تاريخ إضافة التقرير" %} :
-      {{ new.created_at|date:"Y-m-d" }}
+    <p class="text-muted row">
+      <span class="col-3">
+        <i class="far fa-clock ml-2 mr-2"></i>
+        {% trans "تاريخ إضافة التقرير" %}
+      </span>
+      <span class="col-9">
+        : {{ new.created_at|date:"Y-m-d" }}
+      </span>
     </p>
 
 
-    <h3 class="mt-4"><a href="{% url 'particip_detail' new.org_name.id %}" class="nav-link text-dark pl-0 pr-0">
-        {% trans "اسم المنظمة" %} : {{ new.org_name }}</a> </h3>
+    <h3 class="mt-4 row">
+      <span class="col-3">
+        {% trans "اسم المنظمة" %}
+      </span>
+      <span class="col-9">
+        <a href="{% url 'particip_detail' new.org_name.id %}" class="nav-link text-dark pl-0 pr-0">
+          : {{ new.org_name }}
+        </a>
+      </span>
+
+
+    </h3>
 
     {% if request.user.is_authenticated and request.user.is_superuser %}
-    <p class="text-muted mt-4"> {% trans "اسم اللذي أضاف الخبر" %} : {{ new.user }} </p>
+    <p class="text-muted mt-4 row">
+      <span class="col-3">
+        {% trans "اسم اللذي أضاف الخبر" %}
+      </span>
+      <span class="col-9">
+        {% if new.user.is_staff %}
+        <i class="fas fa-star"></i>
+        : {{ new.user }}
+        {% endif %}
+      </span>
+    </p>
     {% endif %}
 
     <a href="">
@@ -87,15 +111,21 @@
 
 
     <!-- SOCIAL -->
+
     <div
       class="social-share col-1 position-absolute d-flex {% if LANGUAGE_CODE == 'ar'%} flex-column align-items-end right {% else %} flex-column align-items-start left {% endif %}">
       <!-- FACEBOOK -->
 
-      <a target="_blank"
+      <iframe
+        src="https://www.facebook.com/plugins/share_button.php?href=http%3A%2F%2Fkhalilescm02.pythonanywhere.com%2Fnews_detail%2F3&layout=button_count&size=small&width=91&height=20&appId"
+        width="91" height="20" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true"
+        allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
+
+      <!-- <a target="_blank"
         href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}&image={{ new.image.url }}"
         class="btn position-relative mb-2" title="{% trans 'مشاركة على فيسبوك' %}">
         <i class="fab fa-facebook-f"></i>
-      </a>
+      </a> -->
 
       <!-- TWITTER -->
 
@@ -111,6 +141,10 @@
         class="btn position-relative mt-2 mt-0" title="{% trans 'مشاركة على لينكدين' %}">
         <i class="fab fa-linkedin-in"></i>
       </a>
+
+
+
+
 
     </div>
 
@@ -140,5 +174,7 @@
 
 
 </div>
+
+
 
 {% endblock %}
