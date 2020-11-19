@@ -847,6 +847,10 @@ body {
 
   .social-share {
     bottom: 10px;
+    background-color: #f5f5f5;
+    padding-top: 15px;
+    padding-bottom: 15px;
+
     &.right {
       right: -90px;
     }
@@ -857,9 +861,23 @@ body {
         a {
           padding: 0.375rem 0.75rem !important;
           width: 60px !important;
-          box-shadow: 0px 0px 0px tomato;
-          animation: socialBtn 2s linear infinite;
-          animation-timing-function: ease-in-out;
+          // box-shadow: 0px 0px 0px tomato;
+          // animation: socialBtn 2s linear infinite;
+          // animation-timing-function: ease-in-out;
+          font-size: 2rem;
+
+          &.facebook-btn {
+            color: #4267B2;
+          }
+          &.twitter-btn {
+            color: #1da1f2;
+          }
+          &.linkedin-btn {
+            color: #2867b2;
+          }
+          &.whatsapp-btn {
+            color: #4ac959;
+          }
         }
   }
 

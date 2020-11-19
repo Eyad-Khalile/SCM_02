@@ -61,7 +61,7 @@
     <!-- START CART -->
 
     <strong>
-      <h1 class="text-center mt-3"> {{ new.title }}</h1>
+      <h1 class="text-center mt-3" id="post_title"> {{ new.title }}</h1>
     </strong>
 
     <p class="text-muted row">
@@ -94,32 +94,32 @@
         {% trans "اسم اللذي أضاف الخبر" %}
       </span>
       <span class="col-9">
+        : {{ new.user }}
         {% if new.user.is_staff %}
         <i class="fas fa-star"></i>
-        : {{ new.user }}
         {% endif %}
       </span>
     </p>
     {% endif %}
 
     <a href="">
-      <img src="{{ new.image.url }}" class="w-100" name="{{ new.title }}" title="{{ new.title }}"
+      <img src="{{ new.image.url }}" id="post_img" class="w-100" name="{{ new.title }}" title="{{ new.title }}"
         alt="{{ new.title }}"></a>
 
 
-    <p class="h4 mt-3 text-al-just p-1"> {{ new.content }}</p>
+    <p class="h4 mt-3 text-al-just p-1" id="post_content"> {{ new.content }}</p>
 
 
     <!-- SOCIAL -->
 
-    <div
-      class="social-share col-1 position-absolute d-flex {% if LANGUAGE_CODE == 'ar'%} flex-column align-items-end right {% else %} flex-column align-items-start left {% endif %}">
+    <div class="social-share col-1 position-absolute d-flex flex-column align-items-center {% if LANGUAGE_CODE == 'ar'%}
+      right {% else %} left {% endif %}">
       <!-- FACEBOOK -->
-
+      <!-- 
       <iframe
         src="https://www.facebook.com/plugins/share_button.php?href=http%3A%2F%2Fkhalilescm02.pythonanywhere.com%2Fnews_detail%2F3&layout=button_count&size=small&width=91&height=20&appId"
         width="91" height="20" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true"
-        allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
+        allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe> -->
 
       <!-- <a target="_blank"
         href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}&image={{ new.image.url }}"
@@ -129,19 +129,31 @@
 
       <!-- TWITTER -->
 
-      <a target="_blank" href="https://twitter.com/home?status={{ share_string }}%20{{ request.build_absolute_uri }}"
+      <!-- <a target="_blank" href="https://twitter.com/home?status={{ share_string }}%20{{ request.build_absolute_uri }}"
         class="btn position-relative mt-2 mb-2 mt-0" title="{% trans 'مشاركة على تويتر' %}">
         <i class="fab fa-twitter"></i>
-      </a>
+      </a> -->
 
       <!-- LINKEDIN -->
 
-      <a target="_blank"
+      <!-- <a target="_blank"
         href="https://www.linkedin.com/shareArticle?mini=true&url={{ request.build_absolute_uri }}&title={{ new.title }}&summary={{ share_string }}&source={{ request.build_absolute_uri }}"
         class="btn position-relative mt-2 mt-0" title="{% trans 'مشاركة على لينكدين' %}">
         <i class="fab fa-linkedin-in"></i>
-      </a>
+      </a> -->
 
+      <a href="#" class="facebook-btn" target="_blank" title="{% trans 'مشاركة على فيسبوك' %}">
+        <i class="fab fa-facebook"></i>
+      </a>
+      <a href="#" class="twitter-btn" target="_blank" title="{% trans 'مشاركة على تويتر' %}">
+        <i class="fab fa-twitter"></i>
+      </a>
+      <a href="#" class="linkedin-btn" target="_blank" title="{% trans 'مشاركة على لينكدين' %}">
+        <i class="fab fa-linkedin"></i>
+      </a>
+      <a href="#" class="whatsapp-btn" target="_blank" title="{% trans 'مشاركة على واتس اب' %}">
+        <i class="fab fa-whatsapp"></i>
+      </a>
 
 
 

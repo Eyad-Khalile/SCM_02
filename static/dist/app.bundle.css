@@ -12054,7 +12054,10 @@ body {
     max-width: 300px !important;
     max-height: 300px !important; }
   body .social-share {
-    bottom: 10px; }
+    bottom: 10px;
+    background-color: #f5f5f5;
+    padding-top: 15px;
+    padding-bottom: 15px; }
     body .social-share.right {
       right: -90px; }
     body .social-share.left {
@@ -12062,9 +12065,15 @@ body {
     body .social-share a {
       padding: 0.375rem 0.75rem !important;
       width: 60px !important;
-      box-shadow: 0px 0px 0px tomato;
-      animation: socialBtn 2s linear infinite;
-      animation-timing-function: ease-in-out; }
+      font-size: 2rem; }
+      body .social-share a.facebook-btn {
+        color: #4267B2; }
+      body .social-share a.twitter-btn {
+        color: #1da1f2; }
+      body .social-share a.linkedin-btn {
+        color: #2867b2; }
+      body .social-share a.whatsapp-btn {
+        color: #4ac959; }
   body .span-menu {
     cursor: pointer;
     padding-top: 30px;
@@ -12700,7 +12709,7 @@ div.emp-profile img {
   .register-left img {
     margin-top: 15%;
     margin-bottom: 5%;
-    width: 25%;
+    width: 60%;
     -webkit-animation: mover 2s infinite alternate;
     animation: mover 1s infinite alternate; }
   .register-left p {
