@@ -11,9 +11,9 @@ class OrgsFilter(django_filters.FilterSet):
     # category = CharFilter(field_name="category", label='Catégorie')
     # sub_category = CharFilter(label='Sous-Catégorie')
 
-    start_date = DateFilter(field_name="date_of_establishment",
+    start_date = CharFilter(field_name="date_of_establishment",
                             lookup_expr='gte', label=_('تاريخ التأسيس / من :'))
-    end_date = DateFilter(field_name="date_of_establishment",
+    end_date = CharFilter(field_name="date_of_establishment",
                           lookup_expr='lte', label=_('إلى :'))
     name = CharFilter(field_name="name",
                       lookup_expr='icontains', label=_('اسم المنظمة'))
@@ -155,8 +155,8 @@ class OrgsJobsFilter(django_filters.FilterSet):
                           lookup_expr='icontains', label=_('نوع الوظيفة'))
     experience = CharFilter(field_name="experience",
                             lookup_expr='icontains', label=_('الخبرة'))
-    position_work = CharFilter(field_name="job_country",
-                               lookup_expr='icontains', label=_('مكان العمل'))
+    # position_work = CharFilter(field_name="job_country",
+    #                            lookup_expr='icontains', label=_('مكان العمل'))
     city_work = CharFilter(field_name="job_country",
                            lookup_expr='icontains', label=_('المحافظة'))
     job_domain = CharFilter(field_name="job_domain",
@@ -169,6 +169,7 @@ class OrgsJobsFilter(django_filters.FilterSet):
     class Meta:
         model = OrgJob
         fields = [
+            'user',
             'org_name',
             'job_title',
             'job_type',
@@ -186,12 +187,12 @@ class OrgsFundingFilter(django_filters.FilterSet):
 
     name_funding = CharFilter(field_name="name_funding",
                               lookup_expr='icontains', label=_('الجهة المانحة'))
-    job_country = CharFilter(field_name="position_work",
-                             lookup_expr='icontains', label=_('مكان العمل'))
-    job_city = CharFilter(field_name="city_work",
-                          lookup_expr='icontains', label=_('المحافظة'))
-    work_domain = CharFilter(field_name="work_domain",
-                             lookup_expr='icontains', label=_('مجال العمل'))
+    # job_country = CharFilter(field_name="position_work",
+    #                          lookup_expr='icontains', label=_('مكان العمل'))
+    # job_city = CharFilter(field_name="city_work",
+    #                       lookup_expr='icontains', label=_('المحافظة'))
+    # work_domain = CharFilter(field_name="work_domain",
+    #                          lookup_expr='icontains', label=_('مجال العمل'))
     funding_amounte = CharFilter(field_name="funding_amounte",
                                  lookup_expr='icontains', label=_('حسب المبلغ المالي'))
     start_date_pub = DateFilter(field_name="created_at",
@@ -223,8 +224,8 @@ class OrgsFundingFilter(django_filters.FilterSet):
 
 class OrgsCapacityFilter(django_filters.FilterSet):
 
-    name_capacity = CharFilter(field_name="name_capacity",
-                               lookup_expr='icontains', label=_('عنوان المادة'))
+    title_capacity = CharFilter(field_name="title_capacity",
+                                lookup_expr='icontains', label=_('عنوان الفرصة '))
     start_date_pub = DateFilter(field_name="created_at",
                                 lookup_expr='gte', label=_('تاريخ نشر المنحة  / من :'))
     end_date_pub = DateFilter(field_name="created_at",
@@ -254,7 +255,7 @@ class OrgsDevFilter(django_filters.FilterSet):
     title_dev = CharFilter(field_name="title_dev",
                            lookup_expr='icontains', label=_('عنوان المادة'))
     dev_description = CharFilter(field_name="dev_description",
-                                 lookup_expr='icontains', label=_('الجهة المانحة'))
+                                 lookup_expr='icontains', label=_('لمحة عن الجهة'))
 
     start_date_pub = DateFilter(field_name="created_at",
                                 lookup_expr='gte', label=_('تاريخ نشر المنحة  / من :'))
@@ -268,6 +269,7 @@ class OrgsDevFilter(django_filters.FilterSet):
             'name_dev',
             'title_dev',
             'dev_date',
+            'subject',
             'dev_description',
             'start_date_pub',
             'end_date_pub',

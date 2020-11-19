@@ -7,40 +7,64 @@
 
 {% if request.user.is_authenticated %}
 
+
 {# {% for prof in request.user.orgprofile_set.all %} #}
+
+
 {% for prof in profs %}
 
-{% if not prof.publish %}
 
-
+{% if prof.name %}
 
 <div class="container emp-profile mt-4">
-    <form >
-        
+    <form>
+
         <div class="row">
             <div class="col-md-4 mb-4">
                 <div class="profile-img">
                     <img src="{{ prof.logo.url }}" class="rounded" alt="{{ profs.name }}" title="{{ profs.name }}" />
-                    <!-- <div class="file">
-                        Change Photo
-                        <input type="file" name="file" />
-                    </div> -->
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="profile-head">
-                    <h5> {% trans 'اسم المنظمة' %} : {{ prof.name }}</h5>
-                    <h6> {% trans 'اسم المنظمة باللغة الانكليزية أو الكردية' %} : {{ prof.name_en_ku }}</h6>
-                    <h6> {% trans 'اسم المنظمة المختصر' %} : {{ prof.short_cut }}</h6>
+                    <h5 class="row border-bottom">
+                        <p class="col">{% trans 'اسم المنظمة' %} : </p>
+                        <p class="col">{{ prof.name }}</p>
+                    </h5>
+
+                    <h6 class="row border-bottom">
+                        <p class="col">{% trans 'اسم المنظمة باللغة الانكليزية أو الكردية' %} :</p>
+                        <p class="col">
+                            {% if prof.name_en_ku %}
+                            {{ prof.name_en_ku }}
+                            {% else %}
+                            <span class="text-muted"> {% trans 'لم يذكر' %} </span>
+                            {% endif %}
+                        </p>
+                    </h6>
+
+                    <h6 class="row border-bottom">
+                        <p class="col">{% trans 'اسم المنظمة المختصر' %} :</p>
+                        <p class="col">
+                            {% if prof.short_cut %}
+                            {{ prof.short_cut }}
+                            {% else %}
+                            <span class="text-muted"> {% trans 'لم يذكر' %} </span>
+                            {% endif %}
+                        </p>
+
+                    </h6>
                     <!-- <p class="proile-rating">RANKINGS : <span>8/10</span></p> -->
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
                         <li class="nav-item">
                             <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home-{{prof.id}}"
-                                role="tab" aria-controls="home-{{prof.id}}" aria-selected="true">About</a>
+                                role="tab" aria-controls="home-{{prof.id}}"
+                                aria-selected="true">{% trans "عن المنظمة" %}</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" id="profile-tab-1" data-toggle="tab" href="#profile-{{prof.id}}"
-                                role="tab" aria-controls="profile-{{prof.id}}" aria-selected="false">Contact</a>
+                                role="tab" aria-controls="profile-{{prof.id}}"
+                                aria-selected="false">{% trans 'معلومات الاتصال بالمنظمة' %}</a>
                         </li>
                     </ul>
                 </div>
@@ -52,14 +76,19 @@
         <div class="row">
             <div class="col-md-4">
                 <div class="profile-work">
-                    <p>{% trans 'معلومات عن المنظمة' %}</p>
-                    <p>{% trans 'نوع المنظمة' %} : {{ org_type }}</p>
-                    <p>{% trans 'مكان العمل' %} : {{ position_work }}</p>
-                    <p>{% trans 'المحافظة' %} : {% if work_domain %} {{ city_work }} {% else %} {% trans 'لم يذكر' %}
+                    <h3 class="border-bottom pb-2">{% trans 'معلومات عن المنظمة' %}</h3>
+                    <p>{% trans 'نوع المنظمة' %} : {{ prof.get_org_type_display }}</p>
+                    <p>{% trans 'مكان العمل' %} : {{ prof.get_position_work_display }}</p>
+                    <p>{% trans 'المحافظة' %} : {% if prof.city_work %} {{ prof.city_work }} {% else %}
+                        <span class="text-muted"> {% trans 'لم يذكر' %} </span>
                         {% endif %} </p>
 
-                    <p>{% trans 'الرؤية و الرسالة' %}</p>
-                    <p>{{ prof.message }}</p>
+                    <p>{% trans 'الرؤية و الرسالة' %} : </p>
+                    {% if prof.message %}
+                    <p class="text-al-just">{{ prof.message }}</p>
+                    {% else %}
+                    <span class="text-muted"> {% trans 'لم يذكر' %} </span>
+                    {% endif %}
                 </div>
             </div>
             <div class="col-md-8">
@@ -98,7 +127,7 @@
                             </div>
                             <div class="col-md-6">
                                 <p>
-                                    {% if prof.work_domain %} {{ work_domain }} {% else %}
+                                    {% if prof.work_domain %} {{ prof.get_work_domain_display }} {% else %}
                                     <span class="text-muted"> {% trans 'لم يذكر' %} </span>
                                     {% endif %}
                                 </p>
@@ -110,7 +139,7 @@
                             </div>
                             <div class="col-md-6">
                                 <p>
-                                    {% if prof.target_cat %} {{ target_cat }} {% else %}
+                                    {% if prof.target_cat %} {{ prof.get_target_cat_display }} {% else %}
                                     <span class="text-muted"> {% trans 'لم يذكر' %} </span>
                                     {% endif %}
                                 </p>
@@ -150,7 +179,7 @@
                             <div class="col-md-6">
                                 <p>
                                     {% if prof.org_registered_country %}
-                                    {{ org_registered_country }}
+                                    {{ prof.get_org_registered_country_display }}
                                     {% else %}
                                     <span class="text-muted"> {% trans 'لم يذكر' %} </span>
                                     {% endif %}
@@ -192,7 +221,7 @@
                             <div class="col-md-6">
                                 <p>
                                     {% if prof.w_polic_regulations %}
-                                    {{ w_polic_regulations }}
+                                    {{ prof.get_w_polic_regulations_display }}
                                     {% else %}
                                     <span class="text-muted"> {% trans 'لم يذكر' %} </span>
                                     {% endif %}
@@ -370,61 +399,56 @@
 
     <!-- {% if request.user.is_authenticated and request.user == prof.user %} -->
 
+    {% if not prof.publish %}
     <div class="col">
-        <a href="{% url 'org_profile_edit' prof.id %}" class="btn btn-block  mt-2 mb-2">
-            {% trans 'تعديل الطلب' %}
+        <a href="{% url 'org_profile_edit' prof.id %}" class="btn btn-block  mt-2 mb-2"
+            title="{% trans 'تعديل الطلب' %}"><i class="fas fa-edit"></i></a>
+    </div>
+    {% endif %}
+    <div class="col">
+        <a href="{% url 'password_change' %}" class="btn btn-block mt-2 mb-2" title="{% trans 'تغيير كلمة المرور' %}"><i
+                class="fas fa-key"></i>
         </a>
     </div>
-    <!-- <div class="col">
-        <a href="{% url 'password_change' %}" class="btn btn-block mt-2 mb-2"> {% trans 'تغيير كلمة المرور' %} </a>
-    </div> -->
     <div class="col">
-        <a href="{% url 'guide' %}" class="btn btn-block mt-2 mb-2">
-            {% trans 'عودة إلى صفحة دليل المجتمع المدني' %}
+        <a href="{% url 'guide' %}" class="btn btn-block mt-2 mb-2"
+            title="{% trans 'عودة إلى صفحة دليل المجتمع المدني' %}"><i class="fas fa-backward"></i>
         </a>
     </div>
     <!-- {% endif %} -->
 
 
 </div>
-
 {% endif %}
+
 {% endfor %}
 
-
-
-
-
-
-{% if not request.user.orgprofile_set.all %}
-<h3 class="mt-4 mb-4 pt-4 pb-4">
-    {% trans 'رجاءً أتمم ملف المنظمة الشخصي لنتمكن من التحقق من معلوماتكم و تتمكنون من استخدام الموقع' %}
-</h3>
-
-
+{% if not user_prof %}
 <div class="row pt-4">
+    <h3 class="mt-4 mb-4 pt-4 pb-4">
+        {% trans 'رجاءً أتمم ملف المنظمة الشخصي لنتمكن من التحقق من معلوماتكم و تتمكنون من استخدام الموقع' %}
+    </h3>
 
     <div class="col">
         <a href="{% url 'org_profile' %}" class="btn btn-block"> {% trans 'ملف المنظمة الشخصي' %} </a>
     </div>
 
-    {% endif %}
-
     {% if request.user.is_authenticated %}
     <div class="row border-top mt-4 pt-2"></div>
-    <!-- CHNAGE PASSWORD -->
     <div class="col">
-        <a href="{% url 'password_change' %}" class="btn btn-block mt-2 mb-2"> {% trans 'تغيير كلمة المرور' %} </a>
+        <a href="{% url 'password_change' %}" class="btn btn-block mt-2 mb-2" title="{% trans 'تغيير كلمة المرور' %}"><i
+                class="fas fa-key"></i>
+        </a>
     </div>
     {% endif %}
-
     <div class="col">
         <a href="{% url 'guide' %}" class="btn btn-block mt-2 mb-2">
             {% trans 'عودة إلى صفحة دليل المجتمع المدني' %}
         </a>
     </div>
-
 </div>
+{% endif %}
+
 
 {% endif %}
 

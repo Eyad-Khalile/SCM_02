@@ -11,10 +11,15 @@ from django.core.mail import send_mail
 from django.template.loader import get_template
 from django.template import Context
 from django.conf import settings
+<<<<<<< HEAD
 from django.core.mail import EmailMessage
 from django.template.loader import render_to_string
 from django.contrib.sites.shortcuts import get_current_site
 
+=======
+from ckeditor.fields import RichTextField
+import os
+>>>>>>> 24a292bdb814300c03643c6878af6fc1fd4882a1
 
 
 # https://github.com/akjasim/cb_dj_dependent_dropdown
@@ -188,17 +193,17 @@ class MyChoices(models.Model):
     )
 
     domain_CHOICES = (
-        ('Media', _('إعلام')),
+        ('Media', _('اﻹعلام و المناصرة')),
         ('Education', _('تعليم')),
-        ('Protection', _('حماية')),
+        ('Protection', _('حماية و الصحة النفسية')),
         ('Livelihoods and food security', _('سبل العيش واﻷمن الغذائي')),
         ('Project of clean ,water, sanitation ', _(
-            'مشاريع النظافة والمياه والصرف الصحي')),
-        ('Development', _('تنمية')),
-        ('Law, suport, policy', _('قانون و مناصرة و سیاسة')),
-        ('Donors and support volunteering', _('مانحین و دعم العمل التطوعي')),
-        ('Religious org', _('منظمات دینیة')),
-        ('Prof association and assembles', _('تجمعات و اتحادات مھنیة')),
+            'النظافة والمياه والصرف الصحي')),
+        ('Development', _('تنمية و بناء قدرات و ثقافة')),
+        ('Law, suport, policy', _('المواطنة و الحوكمة و الديموقراطية و السلام و السياسة')),
+        ('Donors and support volunteering', _('اﻷسرة و الجندرة و قضايا المرأة')),
+        ('Religious org', _('المأوى و البنة التحتية')),
+        ('Prof association and assembles', _('تنسيق و تجمعات المجتمع المدني')),
         ('Health', _('صحة')),
         ('Studies and research', _('دراسات وأبحاث')),
         ('Other', _('أخرى')),
@@ -376,8 +381,10 @@ class OrgProfile(models.Model):
     #     max_length=150, choices=syr_city_CHOICES, null=True, blank=True, verbose_name=_("المحافظة"))
     logo = models.ImageField(upload_to="org_logos",
                              null=False, default='org_logos/default_logo.jpg', verbose_name=_("شعار المنظمة"))
-    message = models.TextField(
-        max_length=2000, null=False, verbose_name=_("الرؤية و الرسالة"))
+    # message = models.TextField(
+    #     max_length=2000, null=False, verbose_name=_("الرؤية و الرسالة"))
+    message = RichTextField(
+        null=True, blank=True, verbose_name=_("الرؤية و الرسالة"))
 
     name_managing_director = models.CharField(
         max_length=255, null=True, blank=True, verbose_name=_("اسم رئيس مجلس اﻹدارة"))
@@ -499,7 +506,7 @@ class OrgRapport(models.Model):
     title = models.CharField(max_length=255, null=False,
                              verbose_name=_('عنوان التقرير'))
     domain = models.CharField(
-        max_length=150, null=False, blank=False, default='Other', choices=MyChoices.domain_CHOICES, verbose_name=_('مجال التقرير'))
+        max_length=150, null=False, blank=False, choices=MyChoices.domain_CHOICES, verbose_name=_('مجال التقرير'))
     media = models.FileField(upload_to="rapport_files",
                              verbose_name=_('صورة او ملف التقرير'))
 
@@ -660,13 +667,13 @@ class OrgJob(models.Model):
     def __str__(self):
         return self.job_title
 
-    def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
-        super().save(force_insert, force_update, using, update_fields)
-        img = Image.open(self.logo.path)
-        if img.height > 300 or img.width > 300:
-            output_size = (300, 300)
-            img.thumbnail(output_size)
-            img.save(self.logo.path)
+    # def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
+    #     super().save(force_insert, force_update, using, update_fields)
+    #     img = Image.open(self.logo.path)
+    #     if img.height > 300 or img.width > 300:
+    #         output_size = (300, 300)
+    #         img.thumbnail(output_size)
+    #         img.save(self.logo.path)
 
 
 # Organizations funding opportunities
@@ -879,7 +886,7 @@ class DevOrgOpp(models.Model):
     user = models.ForeignKey(
         User, on_delete=models.CASCADE)
     org_name = models.ForeignKey(
-        OrgProfile, on_delete=models.CASCADE, null=True, blank=True)
+        OrgProfile, on_delete=models.CASCADE, null=True, blank=True, verbose_name=_('اسم المنظمة'))
     name_dev = models.CharField(max_length=255, null=True, blank=True,
                                 verbose_name=_("اسم الجهة "))
 
@@ -894,6 +901,8 @@ class DevOrgOpp(models.Model):
         max_length=255, null=False, choices=subject_CHOICES, verbose_name=_("موضوع المادة"))
     content = models.FileField(upload_to="dev_files",
                                null=True, blank=True, default='org_logos/default_logo.jpg', verbose_name=_("المادة "))
+    video = models.URLField(max_length=255, null=True,
+                            blank=True, verbose_name=_("رابط فيديو"))
 
     publish = models.BooleanField(default=False)
 
@@ -903,6 +912,21 @@ class DevOrgOpp(models.Model):
 
     def __str__(self):
         return self.title_dev
+
+    def get_extension(self):
+        title_dev, extension = os.path.splitext(self.content.name)
+        return self.extension
+
+    def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
+        super().save(force_insert, force_update, using, update_fields)
+        extension = os.path.splitext(self.content.name)
+        if extension != '.pdf':
+            img = Image.open(self.content.path)
+            if img.height > 1600 or img.width > 1600:
+                output_size = (1600, 1600)
+                img.thumbnail(output_size)
+                img.save(self.content.path)
+
 
 # News letter for members in our site
 
@@ -922,6 +946,7 @@ class NewsLetter(models.Model):
     def __str__(self):
         return self.name
 # Invitation Modle to invite orgs
+<<<<<<< HEAD
 class Invitation(models.Model): 
     sender = models.ForeignKey(User,on_delete=models.CASCADE)  
     name = models.CharField(max_length=50,null=True, blank=True, verbose_name=_('اسم المنظمة') )
@@ -940,3 +965,24 @@ class Invitation(models.Model):
     #                     subject, message, to=[to_email]
     #                 )
     #                 email.send()
+=======
+
+
+class Invitation(models.Model):
+    sender = models.ForeignKey(User, on_delete=models.CASCADE)
+    name = models.CharField(max_length=50, null=True,
+                            blank=True, verbose_name=_('اسم المنظمة'))
+    email = models.EmailField(
+        max_length=255, null=False, verbose_name=_('البريد الاكتروني'))
+
+    def __unicode__(self):
+        return u'%s, %s' % (self.sender.username, self.email)
+
+    def send(self):
+        subject = u'Invitation to join Django Bookmarks'
+        template = get_template('orgs/our_news/invitation_email.txt')
+        context = Context(
+            {'name': self.name, 'sender': self.sender.username, })
+        message = template.render(context)
+        send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, [self.email])
+>>>>>>> 24a292bdb814300c03643c6878af6fc1fd4882a1

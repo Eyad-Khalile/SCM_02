@@ -23,7 +23,7 @@ from django.views.generic.base import RedirectView
 from orgs import views as orgs_views
 from django.conf.urls.i18n import i18n_patterns
 from django.utils.translation import gettext_lazy as _
-
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 # urlpatterns = [
 #     path('i18n/', include('django.conf.urls.i18n')),
@@ -44,6 +44,10 @@ urlpatterns += i18n_patterns(
     path('favicon.ico', favicon_view),
     prefix_default_language=False,
 ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+# if settings.DEBUG:
+#     urlpatterns += static(settings.MEDIA_URL,
+#                           document_root=settings.MEDIA_ROOT)
 
 handler404 = 'orgs.views.page_not_found_view'
 # handler500 = 'article.views.page_not_found_view'

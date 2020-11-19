@@ -2,6 +2,8 @@
 {% load static i18n %}
 {% block title %} {% trans 'تفاصيل الخبر' %} {% endblock %}
 
+{% get_current_language as LANGUAGE_CODE %}
+
 {% block content %}
 
 
@@ -9,31 +11,156 @@
   <h1> {% trans 'تفاصيل الخبر' %} </h1>
 
   <!-- NEWS DETAIL -->
-  <div class=" well col-lg-9 col-xs-12 ">
-    <!-- <center>   -->
+  <div class="well col-lg-9 job-card col-xs-12 position-relative">
+
+    <!-- MINI MANU -->
+    <span id="span-menu" type="button"
+      class="span-menu {% if LANGUAGE_CODE == 'ar' %} float-right {% else %} float-left {% endif %}"><i
+        class="fa fa-ellipsis-v" aria-hidden="true"></i></span>
+
+    <div id="mini-menu"
+      class="list-group mini-menu d-none {% if LANGUAGE_CODE == 'ar' %} menu-right {% else %} menu-left {% endif %}">
+
+      {% if request.user.is_authenticated and request.user.is_superuser %}
+      {% if new.publish == False %}
+      <form action="" class="confirm" method="post">
+        {% csrf_token %} {{ form.publish }}
+        <div class="form-group">
+          <button type="submit" id="org_confirm_btn" class="list-group-item list-group-item-action"
+            title="{% trans 'الموافقة على نشر الخبر' %}">{% trans 'الموافقة على نشر الخبر' %} <i
+              class="fas fa-check mx-1"></i></button>
+        </div>
+      </form>
+      {% elif new.publish == True %}
+      <form action="" class="deconfirm" method="post">
+        {% csrf_token %} {{ form.publish }}
+        <div class="form-group">
+          <button type="submit" id="org_deconfirm_btn" class="list-group-item list-group-item-action"
+            title="{% trans 'إلغاء نشر الخبر' %}">{% trans 'إلغاء نشر الخبر' %} <i class="fa fa-ban mx-1"
+              aria-hidden="true"></i></button>
+        </div>
+      </form>
+      {% endif %}
+      {% endif %}
+
+      {% if request.user == new.user and new.publish == False %}
+
+      <a href="{% url 'news_edit' new.id %}" class="list-group-item list-group-item-action"
+        title="{% trans 'تعديل الخبر' %}">{% trans 'تعديل الخبر' %} <i class="fas fa-edit mx-1"></i></a>
+
+      {% elif request.user.is_superuser %}
+      <a href="{% url 'news_edit' new.id %}" class="list-group-item list-group-item-action"
+        title="{% trans 'تعديل الخبر' %}">{% trans 'تعديل الخبر' %} <i class="fas fa-edit mx-1"></i></a>
+
+      <a href="{% url 'news_delete' new.id %}" class="list-group-item list-group-item-action"
+        title="{% trans 'حذف الخبر' %}">{% trans 'حذف الخبر' %} <i class="far fa-trash-alt mx-1"></i></a>
+      {% endif %}
+
+    </div>
+
+    <!-- START CART -->
 
     <strong>
-      <h1 class="mt-3"> {{ new.title }}</h1>
+      <h1 class="text-center mt-3" id="post_title"> {{ new.title }}</h1>
     </strong>
 
-    <p class=""> <i class="far fa-clock ml-2 mr-2"></i> {% trans "تاريخ إضافة الخبر" %} :
-      {{ new.created_at|timesince }} </p>
+    <p class="text-muted row">
+      <span class="col-3">
+        <i class="far fa-clock ml-2 mr-2"></i>
+        {% trans "تاريخ إضافة التقرير" %}
+      </span>
+      <span class="col-9">
+        : {{ new.created_at|date:"Y-m-d" }}
+      </span>
+    </p>
 
-    <h3 class="mt-4"><a href="{% url 'particip_detail' new.org_name.id %}" class="nav-link text-dark pl-0 pr-0">
-        {% trans "اسم المنظمة" %} : {{ new.org_name }}</a> </h3>
+
+    <h3 class="mt-4 row">
+      <span class="col-3">
+        {% trans "اسم المنظمة" %}
+      </span>
+      <span class="col-9">
+        <a href="{% url 'particip_detail' new.org_name.id %}" class="nav-link text-dark pl-0 pr-0">
+          : {{ new.org_name }}
+        </a>
+      </span>
+
+
+    </h3>
 
     {% if request.user.is_authenticated and request.user.is_superuser %}
-    <h3 class="mt-2 mb-4 "> {% trans "اسم اللذي أضاف الخبر" %} : {{ new.user }} </h3>
+    <p class="text-muted mt-4 row">
+      <span class="col-3">
+        {% trans "اسم اللذي أضاف الخبر" %}
+      </span>
+      <span class="col-9">
+        : {{ new.user }}
+        {% if new.user.is_staff %}
+        <i class="fas fa-star"></i>
+        {% endif %}
+      </span>
+    </p>
     {% endif %}
 
     <a href="">
-      <img src="{{ new.image.url }}" class="w-100" name="{{ new.title }}" title="{{ new.title }}"
+      <img src="{{ new.image.url }}" id="post_img" class="w-100" name="{{ new.title }}" title="{{ new.title }}"
         alt="{{ new.title }}"></a>
 
 
-    <p class="h4 mt-3 text-al-just p-1"> {{ new.content }}</p>
+    <p class="h4 mt-3 text-al-just p-1" id="post_content"> {{ new.content }}</p>
 
-    <!-- </center> -->
+
+    <!-- SOCIAL -->
+
+    <div class="social-share col-1 position-absolute d-flex flex-column align-items-center {% if LANGUAGE_CODE == 'ar'%}
+      right {% else %} left {% endif %}">
+      <!-- FACEBOOK -->
+      <!-- 
+      <iframe
+        src="https://www.facebook.com/plugins/share_button.php?href=http%3A%2F%2Fkhalilescm02.pythonanywhere.com%2Fnews_detail%2F3&layout=button_count&size=small&width=91&height=20&appId"
+        width="91" height="20" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true"
+        allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe> -->
+
+      <!-- <a target="_blank"
+        href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}&image={{ new.image.url }}"
+        class="btn position-relative mb-2" title="{% trans 'مشاركة على فيسبوك' %}">
+        <i class="fab fa-facebook-f"></i>
+      </a> -->
+
+      <!-- TWITTER -->
+
+      <!-- <a target="_blank" href="https://twitter.com/home?status={{ share_string }}%20{{ request.build_absolute_uri }}"
+        class="btn position-relative mt-2 mb-2 mt-0" title="{% trans 'مشاركة على تويتر' %}">
+        <i class="fab fa-twitter"></i>
+      </a> -->
+
+      <!-- LINKEDIN -->
+
+      <!-- <a target="_blank"
+        href="https://www.linkedin.com/shareArticle?mini=true&url={{ request.build_absolute_uri }}&title={{ new.title }}&summary={{ share_string }}&source={{ request.build_absolute_uri }}"
+        class="btn position-relative mt-2 mt-0" title="{% trans 'مشاركة على لينكدين' %}">
+        <i class="fab fa-linkedin-in"></i>
+      </a> -->
+
+      <a href="#" class="facebook-btn" target="_blank" title="{% trans 'مشاركة على فيسبوك' %}">
+        <i class="fab fa-facebook"></i>
+      </a>
+      <a href="#" class="twitter-btn" target="_blank" title="{% trans 'مشاركة على تويتر' %}">
+        <i class="fab fa-twitter"></i>
+      </a>
+      <a href="#" class="linkedin-btn" target="_blank" title="{% trans 'مشاركة على لينكدين' %}">
+        <i class="fab fa-linkedin"></i>
+      </a>
+      <a href="#" class="whatsapp-btn" target="_blank" title="{% trans 'مشاركة على واتس اب' %}">
+        <i class="fab fa-whatsapp"></i>
+      </a>
+
+
+
+
+    </div>
+
+
   </div>
 
   <!-- THE LATEST NEWS  -->
@@ -54,46 +181,12 @@
     {% endfor %}
   </div>
 
-  <div class="row">
-
-    <div class="col">
-      {% if request.user.is_authenticated and request.user.is_superuser %}
-
-      {% if new.publish == False %}
-      <form action="" class="confirm" method="post">
-        {% csrf_token %} {{form.publish}}
-        <div class="form-group">
-          <input type="submit" id="org_confirm_btn" class="btn btn-block"
-            value="{% trans 'الموافقة على نشر الخبر' %}" />
-        </div>
-      </form>
-      {% elif new.publish == True %}
-      <form action="" class="deconfirm" method="post">
-        {% csrf_token %} {{form.publish}}
-        <div class="form-group">
-          <input type="submit" id="org_deconfirm_btn" class="btn btn-block" value="{% trans 'إلغاء نشر الخبر' %}" />
-        </div>
-      </form>
-      {% endif %}
-      {% endif %}
-    </div>
 
 
-
-    {% if request.user == new.user  or request.user.is_superuser %}
-    <div class="col">
-      <a href="{% url 'news_edit' new.id %}" class="btn btn-block"> {% trans 'تعديل الخبر' %} </a>
-    </div>
-
-    <div class="col">
-      <a href="{% url 'news_delete' new.id %}" class="btn btn-block"> {% trans 'حذف الخبر' %} </a>
-    </div>
-
-    {% endif %}
-
-  </div>
 
 
 </div>
+
+
 
 {% endblock %}

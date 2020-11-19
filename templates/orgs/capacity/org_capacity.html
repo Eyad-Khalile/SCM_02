@@ -15,22 +15,22 @@
 
         <div class="row mt-4">
 
+            {% if request.user.is_authenticated and request.user.is_staff %}
             <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
-                {% if request.user.is_authenticated %}
-                <a href="{% url 'orgs_add_capacity' %}" class="btn btn-block mt-4">
-                    {% trans "اضافة فرصة بناء القدرات" %} </a>
-                {% endif %}
+                <a href="{% url 'orgs_add_capacity' %}" class="btn btn-block mt-4"
+                    title="{% trans 'اضافة فرصة بناء القدرات' %}"><i class="fas fa-plus"></i></a>
             </div>
+            {% endif %}
             {% if Capacitys %}
             <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
                 <a class="btn btn-block mt-4" data-toggle="collapse" href="#collapseFiltre" aria-expanded="false"
-                    aria-controls="collapseFiltre">{% trans 'فرز' %}</a>
+                    aria-controls="collapseFiltre" title="{% trans 'فرز' %}"><i class="fas fa-filter"></i></a>
             </div>
             {% endif %}
             <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
                 {% if request.user.is_authenticated and request.user.is_superuser %}
-                <a href="{% url 'org_capacity_not_pub' %}" class="btn btn-block mt-4">
-                    {% trans 'فرص بناء القدرات قيد الدراسة' %} </a>
+                <a href="{% url 'org_capacity_not_pub' %}" class="btn btn-block mt-4"
+                    title="{% trans 'فرص بناء القدرات قيد الدراسة' %}"><i class="fas fa-chalkboard-teacher"></i></a>
                 {% endif %}
             </div>
 
@@ -40,14 +40,23 @@
                 <form action="" method="get"
                     class="row register justify-content-center align-items-center flex-wrap form my-2 my-lg-0">
                     <div class="col-sm-12 col-md-4  mt-3">
+                        {{ myFilter.form.org_name|as_crispy_field }}
+                    </div>
+                    <div class="col-sm-12 col-md-4  mt-3">
                         {{ myFilter.form.name_capacity|as_crispy_field }}
                     </div>
-                    <div class="col-sm-12 col-md-4 mt-3">
-                        {{ myFilter.form.city_work|as_crispy_field }}
+                    <div class="col-sm-12 col-md-4  mt-3">
+                        {{ myFilter.form.title_capacity|as_crispy_field }}
                     </div>
                     <div class="row">
+                        <div class="col-sm-12 col-md-4 mt-3">
+                            {{ myFilter.form.position_work|as_crispy_field }}
+                        </div>
                         <div class="col-xs-6 col-sm-6 col-md-4 mt-3">
                             {{ myFilter.form.start_date_pub|as_crispy_field }}
+                        </div>
+                        <div class="col-xs-6 col-sm-6 col-md-4 mt-3">
+                            {{ myFilter.form.end_date_pub|as_crispy_field }}
                         </div>
 
                     </div>
@@ -62,11 +71,16 @@
 
             <div class="row row-m-0 mt-4 pt-4">
 
-                <div class="row row-m-0 justify-content-center pt-4 pb-4 mb-4">
+                <div class="row row-m-0 justify-content-start pt-4 pb-4 mb-4">
                     {% if Capacitys %}
                     {% for capacity in Capacitys %}
 
                     <div class="span3 well">
+                        <span class="text-muted">
+                            <i class="far fa-clock ml-2 mr-2"></i>
+                            {{ capacity.created_at|timesince }}
+                        </span>
+                        <hr>
                         <center>
 
                             <h3 class="mt-4">
@@ -78,14 +92,15 @@
                             </h3>
 
                             <p> <strong> {{ capacity.title_capacity }} </strong></p>
+                            <hr>
 
                             <p>{{ capacity.capacity_description|truncatechars:80 }}</p>
 
-                            <p class="text-muted"> {{ capacity.created_at|date:'Y-m-d' }} </p>
+                            <!-- <p class="text-muted"> {{ capacity.created_at|date:'Y-m-d' }} </p> -->
 
                             <p>
-                                <a href="{% url 'capacity_detail' capacity.id %}" class="btn btn-block">
-                                    {% trans 'لقراءة المزيد' %} </a>
+                                <a href="{% url 'capacity_detail' capacity.id %}" class="btn btn-block"
+                                    title="{% trans 'لقراءة المزيد' %}"><i class="fas fa-book-reader"></i></a>
                             </p>
 
                         </center>

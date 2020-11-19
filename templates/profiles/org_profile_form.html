@@ -11,7 +11,7 @@
     <form action="" id="fill_form" method="POST" data-cities-url="{% url 'ajax_load_cities' %}"
         enctype="multipart/form-data">
         {% csrf_token %}
-
+        {{ form.media }}
         {% if request.user.is_staff %}
         <div class="form-group">
             {{ form.user|as_crispy_field }}
@@ -60,7 +60,7 @@
 
 
         <div>
-            {{ form.message|as_crispy_field }}
+            {{ form.message|as_crispy_field | safe }}
             <div class="alert alert-warning d-none" id="message_alert" role="alert">
                 {% trans 'هذا الحقل لا يقبل أقل من 3 حروف و لا يقبل اﻷحرف الخاصه و الرموز' %}
             </div>

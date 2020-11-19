@@ -9,9 +9,13 @@
 
     <div class="container-fluid">
         <!-- BRAND -->
-        <!-- <a class="navbar-brand" href="{% url 'home' %}">
-                    <span class="logo-color">SCM</span>
-                </a> -->
+        <!-- <a class="navbar-brand" href="{% url 'home' %}"> -->
+        <!-- <span class="logo-color">SCM</span> -->
+        <!-- <img src="{% static 'media/main_logo/logo.png' %}" alt="">
+        </a> -->
+        <a class="navbar-brand" href="{% url 'home' %}">
+            <img src="{% static 'media/main_logo/logo.png' %}" alt="" width="60">
+        </a>
 
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -22,8 +26,8 @@
             <ul class="navbar-nav mb-2 mb-lg-0">
                 <li class="nav-item">
                     {# {% if request.resolver_match.url_name == 'home' %} active {% endif %} #}
-                    <a class="nav-link "
-                        aria-current="page" href="{% url 'home' %}"> {% trans 'بوابة المجتمع المدني' %} </a>
+                    <a class="nav-link " aria-current="page" href="{% url 'home' %}"> {% trans 'بوابة المجتمع المدني' %}
+                    </a>
                 </li>
                 <li class="nav-item d-none d-lg-block">
                     <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">|</a>

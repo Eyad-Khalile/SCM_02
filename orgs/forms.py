@@ -391,6 +391,62 @@ class FundingConfirmForm(forms.ModelForm):
         ]
 
 
+class PersoFunForm(forms.ModelForm):
+
+    class Meta:
+        model = PersFundingOpp
+        fields = [
+            'org_name',
+            'name_funding',
+            'logo',
+            'category',
+            'fund_type',
+            'study_level',
+            'comp_study',
+            'domain',
+            'position_work',
+            'city_work',
+            'fund_org_description',
+            'funding_dead_date',
+            'funding_period',
+            'funding_amounte',
+            'funding_description',
+            'funding_conditions',
+            'funding_reqs',
+            'funding_guid',
+            'funding_url',
+        ]
+
+        def __init__(self, *args, **kwargs):
+            super().__init__(*args, **kwargs)
+            self.fields['city_work'].queryset = City.objects.none()
+
+            if 'position_work' in self.data:
+                try:
+                    position_work = self.data.get('position_work')
+                    self.fields['city_work'].queryset = City.objects.filter(
+                        position_work=position_work)
+                except (ValueError, TypeError):
+                    pass  # invalid input from the client; ignore and fallback to empty City queryset
+
+            elif self.instance.pk and self.instance.city_work:
+                position_work = self.instance.position_work
+                self.fields['city_work'].queryset = City.objects.filter(
+                    position_work=position_work)
+
+            elif self.instance.pk and not self.instance.city_work:
+                self.fields['city_work'].queryset = City.objects.all()
+
+
+class PersoFundConfirmForm(forms.ModelForm):
+
+    class Meta:
+        model = PersFundingOpp
+        fields = [
+            'publish',
+        ]
+
+
 # capacity guid for orgs
 class CapacityForm(forms.ModelForm):
 
@@ -455,7 +511,13 @@ class DevForm(forms.ModelForm):
             'dev_description',
             'subject',
             'content',
+            'video',
         ]
+        help_texts = {
+            'video': _('رابط يوتيوب فقط'),
+            'content': _('صورة أو ملف PDF فقط '),
+        }
+
 
 class DevConfirmForm(forms.ModelForm):
 
@@ -514,9 +576,11 @@ class NewsLetterForm(forms.ModelForm):
     #     salut = self.cleaned_data.get('name')
     #     print(salut)
     #     return salut
-class FriendInviteForm(forms.ModelForm): 
-      
-     class Meta:
+
+
+class FriendInviteForm(forms.ModelForm):
+
+    class Meta:
         model = Invitation
         fields = [
             'name',

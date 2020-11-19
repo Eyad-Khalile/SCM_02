@@ -8,8 +8,8 @@
 
 {% for prof in request.user.orgprofile_set.all %}
 <div class="container emp-profile mt-4">
-    <form >
-        
+    <form>
+
         <div class="row">
             <div class="col-md-4 mb-4">
                 <div class="profile-img">
@@ -46,8 +46,8 @@
             <div class="col-md-4">
                 <div class="profile-work">
                     <p>{% trans 'معلومات عن المنظمة' %}</p>
-                    <p>{% trans 'نوع المنظمة' %} : {{ org_type }}</p>
-                    <p>{% trans 'مكان العمل' %} : {{ position_work }}</p>
+                    <p>{% trans 'نوع المنظمة' %} : {{ prof.get_org_type_display }}</p>
+                    <p>{% trans 'مكان العمل' %} : {{ prof.get_position_work_display }}</p>
                     <p>{% trans 'المحافظة' %} : {% if city_work %} {{ city_work }} {% else %} {% trans 'لم يذكر' %}
                         {% endif %} </p>
 
@@ -91,7 +91,7 @@
                             </div>
                             <div class="col-md-6">
                                 <p>
-                                    {% if prof.work_domain %} {{ work_domain }} {% else %}
+                                    {% if prof.work_domain %} {{ prof.get_work_domain_display }} {% else %}
                                     <span class="text-muted"> {% trans 'لم يذكر' %} </span>
                                     {% endif %}
                                 </p>
@@ -103,7 +103,7 @@
                             </div>
                             <div class="col-md-6">
                                 <p>
-                                    {% if prof.target_cat %} {{ target_cat }} {% else %}
+                                    {% if prof.target_cat %} {{ prof.get_target_cat_display }} {% else %}
                                     <span class="text-muted"> {% trans 'لم يذكر' %} </span>
                                     {% endif %}
                                 </p>
@@ -143,7 +143,7 @@
                             <div class="col-md-6">
                                 <p>
                                     {% if prof.org_registered_country %}
-                                    {{ org_registered_country }}
+                                    {{ prof.get_org_registered_country_display }}
                                     {% else %}
                                     <span class="text-muted"> {% trans 'لم يذكر' %} </span>
                                     {% endif %}
@@ -185,7 +185,7 @@
                             <div class="col-md-6">
                                 <p>
                                     {% if prof.w_polic_regulations %}
-                                    {{ w_polic_regulations }}
+                                    {{ prof.get_w_polic_regulations_display }}
                                     {% else %}
                                     <span class="text-muted"> {% trans 'لم يذكر' %} </span>
                                     {% endif %}

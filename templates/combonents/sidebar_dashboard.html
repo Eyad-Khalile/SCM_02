@@ -5,7 +5,7 @@
 
 <div id="sidebar-wrapper" class=" {% if LANGUAGE_CODE == 'ar' %} br-left {% else %} br-right {% endif %}">
     <button class="btn btn-up"><i class="fas fa-angle-double-up"></i></button>
-    
+
     <!-- DASBOARD ICONS -->
     <!-- <div class="brand sidebar-brand d-flex justify-content-center align-items-center mb-3 pb-3">
         <i class="fas fa-tachometer-alt text-white text-center display-3"></i>
@@ -174,7 +174,7 @@
         <hr>
         <li class="nav-item">
             <a href="{% url 'orgs_add_funding' %}" class="nav-link nav-link-icon d-flex justify-content-center"
-                title="{% trans 'إضافة فرصة تمويل' %}">
+                title="{% trans 'إضافة فرصة تمويل لمنظمة' %}">
                 <i class="fas fa-plus-square {% if LANGUAGE_CODE == 'ar' %} left {% else %} right {% endif %}"
                     aria-hidden="true"></i>
             </a>
@@ -182,7 +182,23 @@
         <hr>
         <li class="nav-item">
             <a href="{% url 'org_funding_not_pub' %}" class="nav-link nav-link-icon d-flex justify-content-center"
-                title="{% trans 'فرص التمويل للمنظمات قيد الدراسة' %}">
+                title="{% trans 'فرص تمويل المنظمات قيد الدراسة' %}">
+                <i class="fas fa-chalkboard-teacher {% if LANGUAGE_CODE == 'ar' %} left {% else %} right {% endif %}"
+                    aria-hidden="true"></i>
+            </a>
+        </li>
+        <hr>
+        <li class="nav-item">
+            <a href="{% url 'add_finance_perso' %}" class="nav-link nav-link-icon d-flex justify-content-center"
+                title="{% trans 'إضافة فرصة تمويل للأفراد' %}">
+                <i class="fas fa-plus-square {% if LANGUAGE_CODE == 'ar' %} left {% else %} right {% endif %}"
+                    aria-hidden="true"></i>
+            </a>
+        </li>
+        <hr>
+        <li class="nav-item">
+            <a href="{% url 'finance_perso_not_pub' %}" class="nav-link nav-link-icon d-flex justify-content-center"
+                title="{% trans 'فرص تمويل اﻷفراد قيد الدراسة' %}">
                 <i class="fas fa-chalkboard-teacher {% if LANGUAGE_CODE == 'ar' %} left {% else %} right {% endif %}"
                     aria-hidden="true"></i>
             </a>
@@ -234,4 +250,3 @@
     </ul>
     <button class="btn btn-down"><i class="fas fa-angle-double-down"></i></button>
 </div>
-

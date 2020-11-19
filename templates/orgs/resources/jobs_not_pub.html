@@ -6,124 +6,199 @@
 {% block content %}
 
 
-<div class="row mt-4 pt-4">
+
+
+
+<div class="mt-4 pt-4">
     <h1> {% trans "فرص العمل قيد الدراسة" %} </h1>
 
-    <div class="row justify-content-start">
-        {% if jobs %}
-        {% for job in jobs %}
+    <!-- SECTION 1 -->
+    <div class="">
 
-        <div class="span3 well jobs-cards" data-aos="fade-in">
-            <span class="text-muted">{{ job.created_at|timesince }}</span>
-            <center class="pt-3">
-                {% if job.org_name %}
-                <a href="{% url 'jobs_detail' job.id %}">
-                    <figure>
-                        <img src="{{ job.org_name.logo.url }}" name="{{ job.title }}" title="{{ job.title }}"
-                            alt="{{ job.title }}" width="100%" class="img-circle"></figure>
-                </a>
-                {% elif job.other_org_name %}
-                <a href="{% url 'jobs_detail' job.id %}">
-                    <figure>
-                        <img src="{{ job.other_org_name.logo.url }}" name="{{ job.title }}" title="{{ job.title }}"
-                            alt="{{ job.title }}" width="100%" class="img-circle"></figure>
-                </a>
-                {% else %}
-                {% for other in others %}
-                {% if other.job|floatformat:"2" == job.id|floatformat:"2" %}
-                <a href="{% url 'jobs_detail' job.id %}">
-                    <figure>
-                        <img src="{{ other.logo.url }}" name="{{ other.name }}" title="{{ other.name }}"
-                            alt="{{ other.name }}" width="100%" class="img-circle"></figure>
-                </a>
+
+        <div class="row mt-4">
+
+            <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
+                {% if request.user.is_authenticated %}
+                <a href="{% url 'orgs_add_job' %}" class="btn btn-block mt-4" title="{% trans 'إضافة فرصة عمل' %}"><i
+                        class="fas fa-plus"></i></a>
                 {% endif %}
-                {% endfor %}
+            </div>
+            {% if jobs%}
+            <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
+                <a class="btn btn-block mt-4" data-toggle="collapse" href="#collapseFiltre" aria-expanded="false"
+                    aria-controls="collapseFiltre" title="{% trans 'فرز' %}"><i class="fas fa-filter"></i></a>
+            </div>
+            {% endif %}
 
-                {% endif %}
 
-                <!-- ORGS NAMES -->
-                <h4 class="mt-4">
-                    {% trans 'اسم المنظمة' %} :
-                    {% if job.org_name %}
-                    {{ job.org_name }}
-                    {% elif job.other_org_name %}
-                    {{ job.other_org_name }}
-                    {% else %}
-                    {% for other in others %}
-                    {% if other.job|floatformat:"2" == job.id|floatformat:"2" %}
-                    {{ other.name }}
+            <!-- FILTERS -->
+            <div class="pt-3 px-4 pb-2 mt-4 collapse" id="collapseFiltre">
+
+
+                <form action="" method="get"
+                    class="row register justify-content-start align-items-center flex-wrap form my-2 my-lg-0">
+                    {% if request.user.is_superuser %}
+                    <div class="col-sm-12 col-md-4 mt-3">
+                        {{ myFilter.form.user|as_crispy_field }}
+                    </div>
                     {% endif %}
+                    <div class="col-sm-12 col-md-4  mt-3">
+                        {{ myFilter.form.org_name|as_crispy_field }}
+                    </div>
+                    <div class="col-sm-12 col-md-4 mt-3">
+                        {{ myFilter.form.job_title|as_crispy_field }}
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-12 col-md-4 mt-3">
+                            {{ myFilter.form.position_work|as_crispy_field }}
+                        </div>
+                        <div class="col-sm-12 col-md-4 mt-3">
+                            {{ myFilter.form.start_date_pub|as_crispy_field }}
+                        </div>
+                        <div class="col-sm-12 col-md-4 mt-3">
+                            {{ myFilter.form.end_date_pub|as_crispy_field }}
+                        </div>
+
+                    </div>
+
+                    <div class="form-group mt-3">
+                        <button class="btn btn-block mt-3">{% trans 'بحث' %}</button>
+                    </div>
+                </form>
+            </div>
+
+
+
+            <div class="m-0 mt-4 pt-4">
+
+                <div class="row row-m-0 justify-content-start pt-4 pb-4 mb-4">
+                    {% if jobs %}
+                    {% for job in jobs %}
+
+                    <div class="span3 well jobs-cards" data-aos="fade-in">
+                        <span class="text-muted">{{ job.created_at|timesince }}</span>
+                        <center class="pt-3">
+                            {% if job.org_name %}
+                            <a href="{% url 'jobs_detail' job.id %}">
+                                <figure>
+                                    <img src="{{ job.org_name.logo.url }}" name="{{ job.title }}"
+                                        title="{{ job.title }}" alt="{{ job.title }}" width="100%" class="img-circle">
+                                </figure>
+                            </a>
+                            {% elif job.other_org_name %}
+                            <a href="{% url 'jobs_detail' job.id %}">
+                                <figure>
+                                    <img src="{{ job.other_org_name.logo.url }}" name="{{ job.title }}"
+                                        title="{{ job.title }}" alt="{{ job.title }}" width="100%" class="img-circle">
+                                </figure>
+                            </a>
+                            {% else %}
+                            {% for other in others %}
+                            {% if other.job|floatformat:"2" == job.id|floatformat:"2" %}
+                            <a href="{% url 'jobs_detail' job.id %}">
+                                <figure>
+                                    <img src="{{ other.logo.url }}" name="{{ other.name }}" title="{{ other.name }}"
+                                        alt="{{ other.name }}" width="100%" class="img-circle"></figure>
+                            </a>
+                            {% endif %}
+                            {% endfor %}
+
+                            {% endif %}
+
+                            <!-- ORGS NAMES -->
+                            <h4 class="mt-4">
+                                {% trans 'اسم المنظمة' %} :
+                                {% if job.org_name %}
+                                {{ job.org_name }}
+                                {% elif job.other_org_name %}
+                                {{ job.other_org_name }}
+                                {% else %}
+                                {% for other in others %}
+                                {% if other.job|floatformat:"2" == job.id|floatformat:"2" %}
+                                {{ other.name }}
+                                {% endif %}
+                                {% endfor %}
+                                {% endif %}
+                            </h4>
+                            <hr>
+
+                            <p> {% trans 'اسم العمل' %} : {{ job.job_title }}</p>
+                            <p>{% trans 'مكان العمل' %} :
+                                {{ job.position_work.name }}
+                            </p>
+
+                            <p>
+                                {% trans 'مدة العمل' %} :
+                                {% if job.period_months %}
+                                {{ job.period_months }}
+                                {% trans 'أشهر' %}
+                                {% else %}
+                                {% trans 'لم يذكر' %}
+                                {% endif %}
+                            </p>
+
+
+                            <p>
+                                <a href="{% url 'jobs_detail' job.id %}" class="btn btn-block"
+                                    title="{% trans 'لقراءة المزيد' %}"><i class="fas fa-book-reader"></i></a>
+                            </p>
+
+                        </center>
+                    </div>
+
                     {% endfor %}
-                    {% endif %}
-                </h4>
-                <hr>
 
-                <p> {% trans 'اسم العمل' %} : {{ job.job_title }}</p>
-                <p>{% trans 'مكان العمل' %} :
-                    {{ job.position_work.name }}
-                </p>
 
-                <p>
-                    {% trans 'مدة العمل' %} :
-                    {% if job.period_months %}
-                    {{ job.period_months }}
-                    {% trans 'أشهر' %}
+                    <div class="pagination row border-top mt-4 pt-4" dir="ltr">
+                        <center>
+                            {% if jobs.paginator.num_pages > 1 %}
+                            {% if jobs.has_previous %}
+
+                            <a href="?page=1" class="btn">
+                                <i class="fa fa-angle-double-left"></i>
+                            </a>
+                            <a href="?page={{ news.previous_page_number }}" class="btn">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            {% endif %}
+
+                            {% for num in jobs.paginator.page_range %}
+                            {% if jobs.number == num %}
+                            <a href="?page={{ num }}" class="btn btn-current">{{ num }}</a>
+                            {% elif num > jobs.number|add:'-3' and num < jobs.number|add:'3' %}
+                            <a href="?page={{ num }}" class="btn">{{ num }}</a>
+                            {% endif %}
+                            {% endfor %}
+
+
+                            {% if orgs.has_next %}
+                            <a href="?page={{ jobs.next_page_number }}" class="btn"><i
+                                    class="fa fa-angle-right"></i></a>
+                            <a href="?page={{ jobs.paginator.num_pages }}" class="btn"><i
+                                    class="fa fa-angle-double-right"></i></a>
+
+                            {% endif %}
+                            {% endif %}
+
+                        </center>
+                    </div>
+
+
                     {% else %}
-                    {% trans 'لم يذكر' %}
+                    <h3> {% trans "لا يوجد حالياً فرص عمل للموافقة على النشر" %} </h3>
                     {% endif %}
-                </p>
 
 
-                <p>
-                    <a href="{% url 'jobs_detail' job.id %}" class="btn btn-block"
-                        title="{% trans 'لقراءة المزيد' %}"><i class="fas fa-book-reader"></i></a>
-                </p>
+                </div>
+            </div>
 
-            </center>
+
         </div>
 
-        {% endfor %}
-
-
-        <div class="pagination row border-top mt-4 pt-4" dir="ltr">
-            <center>
-                {% if jobs.paginator.num_pages > 1 %}
-                {% if jobs.has_previous %}
-
-                <a href="?page=1" class="btn">
-                    <i class="fa fa-angle-double-left"></i>
-                </a>
-                <a href="?page={{ news.previous_page_number }}" class="btn">
-                    <i class="fa fa-angle-left"></i>
-                </a>
-
-                {% endif %}
-
-                {% for num in news.paginator.page_range %}
-                {% if news.number == num %}
-                <a href="?page={{ num }}" class="btn btn-current">{{ num }}</a>
-                {% elif num > news.number|add:'-3' and num < news.number|add:'3' %}
-                <a href="?page={{ num }}" class="btn">{{ num }}</a>
-                {% endif %}
-                {% endfor %}
-
-
-                {% if orgs.has_next %}
-                <a href="?page={{ news.next_page_number }}" class="btn"><i class="fa fa-angle-right"></i></a>
-                <a href="?page={{ news.paginator.num_pages }}" class="btn"><i class="fa fa-angle-double-right"></i></a>
-
-                {% endif %}
-                {% endif %}
-
-            </center>
-        </div>
-
-
-        {% else %}
-        <h3> {% trans "لا يوجد حالياً فرص عمل للموافقة على النشر" %} </h3>
-        {% endif %}
 
     </div>
-</div>
 
-{% endblock %}
+    {% endblock %}

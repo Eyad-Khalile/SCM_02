@@ -15,22 +15,25 @@
 
 
         <div class="row mt-4">
+            <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
+                {% if request.user.is_authenticated %}
+                <a href="{% url 'orgs_add_news' %}" class="btn btn-block mt-4" title="{% trans 'إضافة خبر' %}"><i
+                        class="fas fa-plus"></i>
+                </a>
+                {% endif %}
+            </div>
             {% if news%}
             <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
                 <a class="btn btn-block mt-4" data-toggle="collapse" href="#collapseFiltre" aria-expanded="false"
-                    aria-controls="collapseFiltre">{% trans 'فرز' %}</a>
+                    aria-controls="collapseFiltre" title="{% trans 'فرز' %}"><i class="fas fa-filter"></i></a>
             </div>
             {% endif %}
-            <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
-                {% if request.user.is_authenticated %}
-                <a href="{% url 'orgs_add_news' %}" class="btn btn-block mt-4"> {% trans "إضافة خبر" %} </a>
-                {% endif %}
-            </div>
-            
+
             <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
                 {% if request.user.is_authenticated and request.user.is_superuser %}
-                <a href="{% url 'org_news_not_pub' %}" class="btn btn-block mt-4">
-                    {% trans 'أخبار المنظمات قيد الدراسة' %} </a>
+                <a href="{% url 'org_news_not_pub' %}" class="btn btn-block mt-4"
+                    title="{% trans 'أخبار المنظمات قيد الدراسة' %}"><i class="fas fa-chalkboard-teacher"></i>
+                </a>
                 {% endif %}
             </div>
 
@@ -67,12 +70,16 @@
 
             <div class="row row-m-0 mt-4 pt-4">
 
-                <div class="row row-m-0 justify-content-center pt-4 pb-4 mb-4">
+                <div class="row row-m-0 justify-content-start pt-4 pb-4 mb-4">
                     {% if news %}
                     {% for new in news %}
 
                     <div class="span3 well ">
-                        <center>
+                        <span class="text-muted">
+                            <i class="far fa-clock ml-2 mr-2"></i>
+                            {{ new.created_at|timesince }}
+                        </span>
+                        <center class="mt-3">
                             <a href="{% url 'news_detail' new.id %}">
                                 <img src="{{ new.image.url }}" name="{{ new.title }}" title="{{ new.title }}"
                                     alt="{{ new.title }}" width="140" height="140" class="img-circle"></a>
@@ -80,8 +87,9 @@
                             <p class="font-weight-bold">{{ new.title }}</p>
                             <p>{{ new.content|truncatechars:80 }}</p>
                             <p>
-                                <a href="{% url 'news_detail' new.id %}" class="btn btn-block">
-                                    {% trans 'لقراءة المزيد' %} </a>
+                                <a href="{% url 'news_detail' new.id %}" class="btn btn-block"
+                                    title="{% trans 'لقراءة المزيد' %}"><i class="fas fa-book-reader"></i>
+                                </a>
                             </p>
 
                         </center>
@@ -129,7 +137,7 @@
                     {% else %}
                     <h3> {% trans "لا يوجد حالياً أخبار منشورة للمنظمات" %} </h3>
                     {% endif %}
-                    
+
 
                 </div>
             </div>

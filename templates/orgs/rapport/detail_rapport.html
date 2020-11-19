@@ -2,78 +2,193 @@
 {% load static i18n crispy_forms_tags %}
 {% block title %} {% trans 'تفاصيل التقرير أو الدراسة' %} {% endblock %}
 
+{% get_current_language as LANGUAGE_CODE %}
+
 {% block content %}
 
 
-<div class="row justify-content-center mt-4 pt-4">
-    <h1> {% trans 'تفاصيل التقرير أو الدراسة' %} </h1>
+<div class="row mt-4 pt-4">
+  <h1> {% trans 'تفاصيل التقرير أو الدراسة' %} </h1>
 
 
-    <div class="span1 well">
-    <!-- <center>   -->
-    
-    {% if request.user.is_authenticated and request.user.is_superuser %}
-    <h3 class="mt-4"> {% trans "اسم اللذي أضاف التقرير" %} : {{ rapport.user }}</h3>
-    {% endif %}
+  <div class="well col-lg-9 job-card col-xs-12 position-relative">
 
-    <h3 class="mt-4"> {% trans "اسم المنظمة" %} : {{ rapport.org_name }}</h3>
-    <span class="text-muted">{% trans "تاريخ إضافة التقرير" %} : {{ rapport.created_at }} </span>
-      {% if rapport.demain %}
-    <p class="mt-3"> {% trans "عنوان التقرير" %} : {{ rapport.demain }}</p>
-    {% endif %}
+    <!-- MINI MANU -->
+    <span id="span-menu" type="button"
+      class="span-menu {% if LANGUAGE_CODE == 'ar' %} float-right {% else %} float-left {% endif %}"><i
+        class="fa fa-ellipsis-v" aria-hidden="true"></i></span>
 
-    <p class="mt-3"> {% trans "عنوان التقرير" %} : {{ rapport.title }}</p>
-    <p> {% trans "محتوى التقرير" %} : <br> </p>
-    
-    {% if '.pdf' in rapport.media.url %}
-        <object data="{{ rapport.media.url }}" type="application/pdf" title="{{rapport.title}}" width="100%" height="885">
-            <!-- <embed src="{{ rapport.media.url  }}" > -->
-        </object>
-    {% else %}
-        <a href="">
-      <img src="{{ rapport.media.url }}" name="{{ rapport.title }}" title="{{ rapport.title }}" alt="{{ rapport.title }}" width="100%"></a>
-    {% endif %}
-
-    <!-- </center> -->
-  </div>
-  <div class="row">
-
-      <div class="col">
-        {% if request.user.is_authenticated and request.user.is_superuser %}
-        
-        {% if rapport.publish == False %}
-        <form action="" class="confirm" method="post">
-          {% csrf_token %} {{form.publish}}
-          <div class="form-group">
-            <input type="submit" id="org_confirm_btn" class="btn btn-block"
-              value="{% trans 'الموافقة على نشر التقرير' %}" />
-          </div>
-        </form>
-        {% elif rapport.publish == True %}
-        <form action="" class="deconfirm" method="post">
-          {% csrf_token %} {{form.publish}}
-          <div class="form-group">
-            <input type="submit" id="org_deconfirm_btn" class="btn btn-block" value="{% trans 'إلغاء نشر التقرير' %}" />
-          </div>
-        </form>
-        {% endif %}
-        {% endif %}
-      </div>
-      
-      
-        
-        {% if request.user == rapport.user  or request.user.is_superuser %}
-        <div class="col">
-          <a href="{% url 'edit_rapport' rapport.id %}" class="btn btn-block"> {% trans 'تعديل التقرير' %} </a>
+    <div id="mini-menu"
+      class="list-group mini-menu d-none {% if LANGUAGE_CODE == 'ar' %} menu-right {% else %} menu-left {% endif %}">
+      <!-- <a href="#" class="list-group-item list-group-item-action active" aria-current="true">
+        Cras justo odio
+      </a> -->
+      {% if request.user.is_authenticated and request.user.is_superuser %}
+      {% if rapport.publish == False %}
+      <form action="" class="confirm" method="post">
+        {% csrf_token %} {{ form.publish }}
+        <div class="form-group">
+          <button type="submit" id="org_confirm_btn" class="list-group-item list-group-item-action"
+            title="{% trans 'الموافقة على نشر التقرير' %}">{% trans 'الموافقة على نشر التقرير' %} <i
+              class="fas fa-check mx-1"></i></button>
         </div>
-
-        <div class="col">
-          <a href="{% url 'orgs_rapport_delete' rapport.id %}" class="btn btn-block"> {% trans 'حذف التقرير' %} </a>
+      </form>
+      {% elif rapport.publish == True %}
+      <form action="" class="deconfirm" method="post">
+        {% csrf_token %} {{ form.publish }}
+        <div class="form-group">
+          <button type="submit" id="org_deconfirm_btn" class="list-group-item list-group-item-action"
+            title="{% trans 'إلغاء نشر التقرير' %}">{% trans 'إلغاء نشر التقرير' %} <i class="fa fa-ban mx-1"
+              aria-hidden="true"></i></button>
         </div>
-        
+      </form>
+      {% endif %}
+      {% endif %}
+
+      {% if request.user == rapport.user and rapport.publish == False %}
+
+      <a href="{% url 'edit_rapport' rapport.id %}" class="list-group-item list-group-item-action"
+        title="{% trans 'تعديل التقرير' %}">{% trans 'تعديل التقرير' %} <i class="fas fa-edit mx-1"></i></a>
+
+      {% elif request.user.is_superuser %}
+      <a href="{% url 'edit_rapport' rapport.id %}" class="list-group-item list-group-item-action"
+        title="{% trans 'تعديل التقرير' %}">{% trans 'تعديل التقرير' %} <i class="fas fa-edit mx-1"></i></a>
+
+      <a href="{% url 'orgs_rapport_delete' rapport.id %}" class="list-group-item list-group-item-action"
+        title="{% trans 'حذف التقرير' %}">{% trans 'حذف التقرير' %} <i class="far fa-trash-alt mx-1"></i></a>
       {% endif %}
 
     </div>
+
+    <!-- START CART -->
+
+    <strong>
+      {# {% trans "عنوان التقرير" %} :  #}
+      <h1 class="text-center mt-3"> {{ rapport.title }}</h1>
+    </strong>
+
+    <p class="text-muted row">
+      <span class="col-3">
+        <i class="far fa-clock ml-2 mr-2"></i>
+        {% trans "تاريخ إضافة التقرير" %}
+      </span>
+      <span class="col-9">
+        : {{ rapport.created_at|date:"Y-m-d" }}
+      </span>
+    </p>
+
+    <h3 class="mt-4 row">
+      <span class="col-3">
+        {% trans "اسم المنظمة" %}
+      </span>
+      <span class="col-9">
+        <a href="{% url 'particip_detail' rapport.org_name.id %}" class="nav-link text-dark p-0">
+          : {{ rapport.org_name }}
+        </a>
+      </span>
+    </h3>
+
+    {% if request.user.is_authenticated and request.user.is_superuser %}
+    <p class="text-muted mt-4 row">
+      <span class="col-3">
+        {% trans "اسم اللذي أضاف التقرير" %}
+      </span>
+      <span class="col-9">
+        : {{ rapport.user }}
+      </span>
+    </p>
+    {% endif %}
+
+
+    <p class="mt-3 row">
+      <span class="col-3">
+        {% trans "مجال التقرير" %}
+      </span>
+      <span class="col-9">
+        {% if rapport.demain %}
+        {{ rapport.get_demain_display }}
+        {% else %}
+        <span class="text-muted">: {% trans 'لم يذكر'%}</span>
+        {% endif %}
+      </span>
+    </p>
+
+
+    <p class="row">
+      <span class="col-3">
+        {% trans "محتوى التقرير" %} <br>
+      </span>
+      <span class="col-9">
+        :
+      </span>
+    </p>
+
+    {% if '.pdf' in rapport.media.url %}
+    <object data="{{ rapport.media.url }}" type="application/pdf" title="{{rapport.title}}" width="100%" height="885">
+      <!-- <embed src="{{ rapport.media.url  }}" > -->
+    </object>
+    {% else %}
+    <a href="">
+      <img src="{{ rapport.media.url }}" name="{{ rapport.title }}" title="{{ rapport.title }}"
+        alt="{{ rapport.title }}" width="100%"></a>
+    {% endif %}
+
+    <!-- SOCIAL -->
+    <div
+      class="social-share col-1 position-absolute d-flex {% if LANGUAGE_CODE == 'ar'%} flex-column align-items-end right {% else %} flex-column align-items-start left {% endif %}">
+      <!-- FACEBOOK -->
+
+      <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}"
+        class="btn position-relative mb-2" title="{% trans 'مشاركة على فيسبوك' %}">
+        <i class="fab fa-facebook-f"></i>
+      </a>
+
+      <!-- TWITTER -->
+
+      <a target="_blank" href="https://twitter.com/home?status={{ share_string }}%20{{ request.build_absolute_uri }}"
+        class="btn position-relative mt-2 mb-2 mt-0" title="{% trans 'مشاركة على تويتر' %}">
+        <i class="fab fa-twitter"></i>
+      </a>
+
+      <!-- LINKEDIN -->
+
+      <a target="_blank"
+        href="https://www.linkedin.com/shareArticle?mini=true&url={{ request.build_absolute_uri }}&title={{ rapport.title }}&summary={{ share_string }}&source={{ request.build_absolute_uri }}"
+        class="btn position-relative mt-2 mt-0" title="{% trans 'مشاركة على لينكدين' %}">
+        <i class="fab fa-linkedin-in"></i>
+      </a>
+
+    </div>
+
+  </div>
+
+
+  <!-- THE LATEST MEDIA  -->
+  {% if rapports.count > 0 %}
+  <div class="col-lg-3 d-none d-lg-block">
+    <h2 class="text-center mb-4 border-bottom"> {% trans 'أحدث ثلاثة تقارير أو دراسات' %} </h2>
+    {% for rapport in rapports|slice:3 %}
+    <a href="{% url 'orgs_rapport_detail' rapport.id %}" class='bg-light nav-link border-bottom pb-3 mb-2'>
+      <div class="news-card">
+        <p class="text-dark"> {{ rapport.title }} </p>
+
+        <figure>
+          {% if not '.pdf' in rapport.media.url %}
+          <img src="{{ rapport.media.url }}" class="w-100" name="{{ rapport.title }}" title="{{ rapport.title }}"
+            alt="{{ rapport.title }}">
+          {% else %}
+          <p class="text-muted">{% trans 'لعرض ملف التقرير , ادخل على التفاصيل' %}</p>
+          <hr>
+          {% endif %}
+          <figcaption class="text-muted"><i class="far fa-clock ml-2 mr-2"></i>{{ rapport.created_at|timesince }}
+          </figcaption>
+        </figure>
+
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+  {% endif %}
 
 
 

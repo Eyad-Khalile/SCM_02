@@ -27095,7 +27095,7 @@ $('#id_org_name').change(function () {
       break;
 
     default:
-      $('#div_id_other_org_name').hide();
+      $('#div_id_other_org_name, #div_id_name, #div_id_logo').hide();
       break;
   }
 });
@@ -27122,7 +27122,7 @@ $('#id_period_months').attr({
   placeholder: "Ex : 6"
 }); // PERSO FINANCE
 
-$('#div_id_study_level, #div_id_comp_study, #div_id_domain').hide();
+$('#add_perso_finance').find('#div_id_study_level, #div_id_comp_study, #div_id_domain').hide();
 $('#add_perso_finance').find('#id_fund_type').change(function () {
   let value = $(this).val();
 
@@ -27143,7 +27143,9 @@ $('#add_perso_finance').find('#id_fund_type').change(function () {
       break;
   }
 });
-$('#dev_form').find('#id_content').attr('accept', 'application/pdf, image/*, video/*');
+$('#dev_form').find('#id_content').attr('accept', 'application/pdf, image/*'); // VIDEO PLACE HOLDER
+
+$('#id_video').attr('placeholder', 'Ex:  https://www.youtube.com');
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js")))
 
 /***/ }),
@@ -27172,10 +27174,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _fortawesome_fontawesome_free_js_all_js__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_fortawesome_fontawesome_free_js_all_js__WEBPACK_IMPORTED_MODULE_6__);
 /* harmony import */ var slick_carousel__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! slick-carousel */ "./node_modules/slick-carousel/slick/slick.js");
 /* harmony import */ var slick_carousel__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(slick_carousel__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var _social_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./social.js */ "./src/js/social.js");
+/* harmony import */ var _social_js__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_social_js__WEBPACK_IMPORTED_MODULE_8__);
 // const x = "this is a test";
 // alert(x);
 // You can specify which plugins you need
  // import 'bootstrap';
+
 
 
 
@@ -27225,8 +27230,12 @@ if ($('nav').length > 0) {
 
     if (scroll_top < last_scroll_top) {
       $('nav').removeClass('scrolled-down').addClass('scrolled-up');
+      $('#carouselHomePage').find('.carousel-control-prev, .carousel-control-next').show();
+      $('.sym-mouse').show();
     } else {
       $('nav').removeClass('scrolled-up').addClass('scrolled-down');
+      $('#carouselHomePage').find('.carousel-control-prev, .carousel-control-next').hide();
+      $('.sym-mouse').hide();
     }
 
     last_scroll_top = scroll_top;
@@ -27355,8 +27364,9 @@ $('#sidebar-wrapper').find('.btn-down').on('click', function () {
   let li_count = $('ul.sidebar-navbar li').length - 9; // Number of li
 
   let lemite = Math.abs(parseInt(li_height)) * li_count; // Lemite of animation 
-  // console.log(li_height + '-' + li_count + '-' + lemite);
-  // console.log(m_t);
+
+  console.log(li_height + '-' + li_count + '-' + lemite);
+  console.log(m_t);
 
   if (parseInt(m_t) > -lemite) {
     $('#sidebar-wrapper').find('ul.sidebar-navbar').animate({
@@ -27364,7 +27374,7 @@ $('#sidebar-wrapper').find('.btn-down').on('click', function () {
     }, 500);
   } else {
     $('#sidebar-wrapper').find('ul.sidebar-navbar').animate({
-      'margin-top': '-678px'
+      'margin-top': '-780px'
     }, 500);
   }
 });
@@ -27381,7 +27391,79 @@ $('#sidebar-wrapper').find('.btn-up').on('click', function () {
       'margin-top': '0'
     }, 500);
   }
-});
+}); // COUNT UP
+
+$(function () {
+  function count($this) {
+    var current = parseInt($this.html(), 10);
+    current = current + 1;
+    /* Where 50 is increment */
+
+    $this.html(++current);
+
+    if (current > $this.data('count')) {
+      $this.html($this.data('count'));
+    } else {
+      setTimeout(function () {
+        count($this);
+      }, 10);
+    }
+  }
+
+  $(".stat-count").each(function () {
+    $(this).data('count', parseInt($(this).html(), 10));
+    $(this).html('0');
+    count($(this));
+  });
+}); // MINI MENU
+
+$('#span-menu').on('click', function () {
+  $('#mini-menu').toggleClass('d-none', "slow", "easeOutSine");
+}); // escape menu
+
+document.onkeydown = function (evt) {
+  let key = evt.keyCode;
+
+  if (key === 27) {
+    $('#mini-menu').addClass('d-none');
+  }
+};
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js")))
+
+/***/ }),
+
+/***/ "./src/js/social.js":
+/*!**************************!*\
+  !*** ./src/js/social.js ***!
+  \**************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function($) {// WHATSAPP
+// https://api.whatsapp.com/send?text=[post-title] [post-url]
+// FACEBOK 
+// https://www.facebook.com/sharer.php?u=[post-url]
+// TWITTER
+// https://twitter.com/share?url=[post-url]&text=[post-title]&via=[via]&hashtags=[hashtags]
+// LINKEDIN 
+// https://www.linkedin.com/shareArticle?url=[post-url]&title=[post-title]
+const facebookBtn = $('.facebook-btn');
+const twitterBtn = $('.twitter-btn');
+const linkedinkBtn = $('.linkedin-btn');
+const whatsappBtn = $('.whatsapp-btn');
+
+function init() {
+  let url = encodeURI(document.location.href);
+  let post_title = encodeURI($('#post_title').text());
+  let image = encodeURI($('#post_img').attr('src'));
+  let description = encodeURI($('#post_content').text());
+  facebookBtn.attr('href', `https://www.facebook.com/sharer.php?u=${url}&text=${post_title}&image=${image}`);
+  twitterBtn.attr('href', `https://twitter.com/share?url=${url}&text=${post_title}`);
+  linkedinkBtn.attr('href', `https://www.linkedin.com/shareArticle?url=${url}&title=${post_title}`);
+  whatsappBtn.attr('href', `https://api.whatsapp.com/send?text=${post_title} ${url}`);
+}
+
+init();
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js")))
 
 /***/ }),

@@ -10,23 +10,26 @@
     <!-- Grid row -->
     <div class="row">
         <!-- Grid column -->
-        <div class="col-md-6 col-lg-3 mr-auto my-md-4 my-0 mt-4 mb-1">
-            <!-- Content -->
+        <div class="col-md-6 col-lg-3 mr-auto my-md-4 my-0 mb-1">
 
-            <a href="https://scm.bz/" target="_blank" class="logo mb-5 d-block"
+            <!-- SCM LOGO -->
+            <a href="https://scm.bz/" target="_blank" class="logo  d-block"
                 title="{% trans 'المركز السوري للإعلام و حرية التعبير' %}">
                 <img src="{% static 'media/scroll-logo.png' %}" width="90" alt="Logo" loading="lazy" />
             </a>
-            <h5 class="font-weight-bold text-uppercase mb-4">
+
+            <!-- GATEWAY LOGO -->
+            <a href="{% url 'home' %}">
+                <img src="{% static 'media/main_logo/logo.png' %}" alt="CIVIL SOCIETY GATEWAY" width="200">
+            </a>
+
+
+            <h5 class="font-weight-bold text-uppercase mt-3 mb-4">
                 <a href="{% url 'home' %}" class="text-white"> {% trans "بوابة المجتمع المدني" %} </a>
             </h5>
 
 
-            <h5 class="font-weight-bold text-uppercase">
-                <a href="{% url 'site_politic' %}" class="text-white">
-                    {% trans "سياسة الخصوصية" %}
-                </a>
-            </h5>
+            <!-- BTN SCROLL UP -->
             <h5 class="font-weight-bold text-uppercase mt-4 pt-4 d-none " id="f-5-top">
                 <a href="" id="scroll_top" class="btn-scroll-top" title="Top"><i class="fas fa-angle-double-up"></i></a>
             </h5>
@@ -50,8 +53,9 @@
                     <li>
                         <p>
                             <i class="fa fa-home" aria-hidden="true"></i>
-                            <span dir="ltr">17 passage de la Main d’Or,</span> <br> 
-                            <span class="{% if LANGUAGE_CODE == 'ar'%} pr-4 {% else %} pl-4 {% endif %}">75011 Paris, France</span>
+                            <span dir="ltr">17 passage de la Main d’Or,</span> <br>
+                            <span class="{% if LANGUAGE_CODE == 'ar'%} pr-4 {% else %} pl-4 {% endif %}">75011 Paris,
+                                France</span>
                         </p>
                     </li>
                     <li>
@@ -101,6 +105,8 @@
                     <i class="fab fa-dribbble" aria-hidden="true"></i>
                 </a>
             </div>
+
+
             <!-- Contact details -->
 
             <!-- <a href="{% url 'site_politic' %}" class="btn"> سياسة الخصوصية </a> -->
@@ -124,6 +130,11 @@
             </div>
 
             <br />
+            <h5 class="font-weight-bold mt-5 text-uppercase">
+                <a href="{% url 'site_politic' %}" class="text-white">
+                    {% trans "سياسة الخصوصية" %}
+                </a>
+            </h5>
         </div>
         <!-- Grid column -->
     </div>

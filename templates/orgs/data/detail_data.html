@@ -2,74 +2,188 @@
 {% load static i18n crispy_forms_tags%}
 {% block title %} {% trans 'تفاصيل البيان' %} {% endblock %}
 
+{% get_current_language as LANGUAGE_CODE %}
+
 {% block content %}
 
 
-<div class="row justify-content-center mt-4 pt-4">
-    <h1>{% trans 'تفاصيل البيان' %}</h1>
+<div class="row mt-4 pt-4">
+  <h1>{% trans 'تفاصيل البيان' %} </h1>
 
 
-    <div class="span1 well">
-    <!-- <center>   -->
-    
-    {% if request.user.is_authenticated and request.user.is_superuser %}
-    <h3 class="mt-4"> {% trans "اسم اللذي أضاف البيان" %} : {{ data.user }}</h3>
-    {% endif %}
+  <div class="well col-lg-9 job-card col-xs-12 position-relative">
 
-    <h3 class="mt-4"> {% trans "اسم المنظمة" %} : {{ data.org_name }}</h3>
-    <span class="text-muted">{% trans "تاريخ إضافة البيان" %} : {{ data.created_at }} </span>
+    <!-- MINI MANU -->
+    <span id="span-menu" type="button"
+      class="span-menu {% if LANGUAGE_CODE == 'ar' %} float-right {% else %} float-left {% endif %}"><i
+        class="fa fa-ellipsis-v" aria-hidden="true"></i></span>
 
-    <p class="mt-3"> {% trans "عنوان البيان" %} : {{ data.title }}</p>
-    <p> {% trans "محتوى البيان" %} : <br> </p>
-    {% if '.pdf' in data.media.url %}
-        <object data="{{ data.media.url }}" type="application/pdf" title="{{data.title}}" width="100%" height="885">
-            <!-- <embed src="{{ data.media.url  }}" > -->
-        </object>
-    {% else %}
-        <a href="">
-      <img src="{{ data.media.url }}" name="{{ data.title }}" title="{{ data.title }}" alt="{{ data.title }}" width="100%"></a>
-    {% endif %}
-
-    <!-- </center> -->
-  </div>
-  <div class="row">
-
-      <div class="col">
-        {% if request.user.is_authenticated and request.user.is_superuser %}
-        
-        {% if data.publish == False %}
-        <form action="" class="confirm" method="post">
-          {% csrf_token %} {{form.publish}}
-          <div class="form-group">
-            <input type="submit" id="org_confirm_btn" class="btn btn-block"
-              value="{% trans 'الموافقة على نشر البيان' %}" />
-          </div>
-        </form>
-        {% elif data.publish == True %}
-        <form action="" class="deconfirm" method="post">
-          {% csrf_token %} {{form.publish}}
-          <div class="form-group">
-            <input type="submit" id="org_deconfirm_btn" class="btn btn-block" value="{% trans 'إلغاء نشر البيان' %}" />
-          </div>
-        </form>
-        {% endif %}
-        {% endif %}
-      </div>
-      
-      
-        
-        {% if request.user == data.user  or request.user.is_superuser %}
-        <div class="col">
-          <a href="{% url 'edit_data' data.id %}" class="btn btn-block"> {% trans 'تعديل البيان' %} </a>
+    <div id="mini-menu"
+      class="list-group mini-menu d-none {% if LANGUAGE_CODE == 'ar' %} menu-right {% else %} menu-left {% endif %}">
+      <!-- <a href="#" class="list-group-item list-group-item-action active" aria-current="true">
+        Cras justo odio
+      </a> -->
+      {% if request.user.is_authenticated and request.user.is_superuser %}
+      {% if data.publish == False %}
+      <form action="" class="confirm" method="post">
+        {% csrf_token %} {{ form.publish }}
+        <div class="form-group">
+          <button type="submit" id="org_confirm_btn" class="list-group-item list-group-item-action"
+            title="{% trans 'الموافقة على نشر البيان' %}">{% trans 'الموافقة على نشر البيان' %} <i
+              class="fas fa-check mx-1"></i></button>
         </div>
-
-        <div class="col">
-          <a href="{% url 'delete_data' data.id %}" class="btn btn-block"> {% trans 'حذف البيان' %} </a>
+      </form>
+      {% elif data.publish == True %}
+      <form action="" class="deconfirm" method="post">
+        {% csrf_token %} {{ form.publish }}
+        <div class="form-group">
+          <button type="submit" id="org_deconfirm_btn" class="list-group-item list-group-item-action"
+            title="{% trans 'إلغاء نشر البيان' %}">{% trans 'إلغاء نشر البيان' %} <i class="fa fa-ban mx-1"
+              aria-hidden="true"></i></button>
         </div>
-        
+      </form>
+      {% endif %}
+      {% endif %}
+
+      {% if request.user == data.user and data.publish == False %}
+      <a href="{% url 'edit_data' data.id %}" class="list-group-item list-group-item-action"
+        title="{% trans 'تعديل البيان' %}">{% trans 'تعديل البيان' %} <i class="fas fa-edit mx-1"></i></a>
+
+      {% elif request.user.is_superuser %}
+
+      <a href="{% url 'edit_data' data.id %}" class="list-group-item list-group-item-action"
+        title="{% trans 'تعديل البيان' %}">{% trans 'تعديل البيان' %} <i class="fas fa-edit mx-1"></i></a>
+
+      <a href="{% url 'delete_data' data.id %}" class="list-group-item list-group-item-action"
+        title="{% trans 'حذف البيان' %}">{% trans 'حذف البيان' %} <i class="far fa-trash-alt mx-1"></i></a>
       {% endif %}
 
     </div>
+
+    <!-- START CART -->
+
+    <strong>
+      {# {% trans "عنوان البيان" %} #}
+      <h1 class="text-center mt-3"> {{ data.title }}</h1>
+    </strong>
+
+    <p class="text-muted row">
+      <span class="col-3">
+        <i class="far fa-clock ml-2 mr-2"></i>
+        {% trans "تاريخ إضافة البيان" %}
+      </span>
+      <span class="col-9">
+        {% if data.created_at %}
+        : {{ data.created_at|date:"Y-m-d" }}
+        {% else %}
+        {% trans 'لم يذكر'%}
+        {% endif %}
+      </span>
+    </p>
+
+    <h3 class="mt-4 row">
+      <span class="col-3">
+        {% trans "اسم المنظمة" %}
+      </span>
+      <span class="col-9">
+        <a href="{% url 'particip_detail' data.org_name.id %}" class="nav-link text-dark p-0">
+          : {{ data.org_name }}
+        </a>
+      </span>
+    </h3>
+
+    {% if request.user.is_authenticated and request.user.is_superuser %}
+    <p class="text-muted mt-4 row">
+      <span class="col-3">
+        {% trans "اسم اللذي أضاف البيان" %}
+      </span>
+      <span class="col-9">
+        : {{ data.user }}
+      </span>
+    </p>
+    {% endif %}
+
+
+
+
+    <p class="row">
+      <span class="col-3">
+        {% trans "محتوى البيان" %} <br>
+      </span>
+      <span class="col-9">
+        :
+      </span>
+    </p>
+    {% if '.pdf' in data.media.url %}
+    <object data="{{ data.media.url }}" type="application/pdf" title="{{data.title}}" width="100%" height="885">
+      <!-- <embed src="{{ data.media.url  }}" > -->
+    </object>
+    {% else %}
+    <a href="">
+      <img src="{{ data.media.url }}" name="{{ data.title }}" title="{{ data.title }}" alt="{{ data.title }}"
+        width="100%"></a>
+    {% endif %}
+
+
+    <!-- SOCIAL -->
+    <div
+      class="social-share col-1 position-absolute d-flex {% if LANGUAGE_CODE == 'ar'%} flex-column align-items-end right {% else %} flex-column align-items-start left {% endif %}">
+      <!-- FACEBOOK -->
+
+      <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}"
+        class="btn position-relative mb-2" title="{% trans 'مشاركة على فيسبوك' %}">
+        <i class="fab fa-facebook-f"></i>
+      </a>
+
+      <!-- TWITTER -->
+
+      <a target="_blank" href="https://twitter.com/home?status={{ share_string }}%20{{ request.build_absolute_uri }}"
+        class="btn position-relative mt-2 mb-2 mt-0" title="{% trans 'مشاركة على تويتر' %}">
+        <i class="fab fa-twitter"></i>
+      </a>
+
+      <!-- LINKEDIN -->
+
+      <a target="_blank"
+        href="https://www.linkedin.com/shareArticle?mini=true&url={{ request.build_absolute_uri }}&title={{ data.title }}&summary={{ share_string }}&source={{ request.build_absolute_uri }}"
+        class="btn position-relative mt-2 mt-0" title="{% trans 'مشاركة على لينكدين' %}">
+        <i class="fab fa-linkedin-in"></i>
+      </a>
+
+    </div>
+
+
+
+
+  </div>
+
+  <!-- THE LATEST MEDIA  -->
+  {% if datas.count > 0 %}
+  <div class="col-lg-3 d-none d-lg-block">
+    <h2 class="text-center mb-4 border-bottom"> {% trans 'أحدث ثلاثة دليل تطوير' %} </h2>
+    {% for data in datas|slice:3 %}
+    <a href="{% url 'data_detail' data.id %}" class='bg-light nav-link border-bottom pb-3 mb-2'>
+      <div class="news-card">
+        <p class="text-dark"> {{ data.title }} </p>
+
+        <figure>
+          {% if not '.pdf' in data.media.url %}
+          <img src="{{ data.media.url }}" class="w-100" name="{{ data.title }}" title="{{ data.title }}"
+            alt="{{ data.title }}">
+          {% else %}
+          <p class="text-muted">{% trans 'لعرض ملف المحتوى , ادخل على التفاصيل' %}</p>
+          <hr>
+          {% endif %}
+          <figcaption class="text-muted"><i class="far fa-clock ml-2 mr-2"></i>{{ data.created_at|timesince }}
+          </figcaption>
+        </figure>
+
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+  {% endif %}
+
 
 
 

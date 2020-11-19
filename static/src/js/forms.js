@@ -175,7 +175,7 @@ $("#id_phone").attr({
 // LES CHARACTERS SPECIAUX
 $(
     "#id_name, #id_name_en_ku, #id_short_cut, #id_message, #id_name_managing_director, #id_name_ceo, #id_name_person_contact, #id_org_adress, #id_coalition_name"
-).attr({
+).attr({    
     minlength: "3",
     oninput: "this.value = this.value.replace(/[^ا-يa-zA-Z0-9\nçêîşûłňřüḧẍ' ]/gi, '');",
 });
@@ -350,7 +350,7 @@ $('#id_org_name').change(function () {
             }            
             break;
         default:
-            $('#div_id_other_org_name').hide();
+            $('#div_id_other_org_name, #div_id_name, #div_id_logo').hide();
             break;
     }
         
@@ -380,7 +380,7 @@ $('#id_period_months').attr({
 
 
 // PERSO FINANCE
-$('#div_id_study_level, #div_id_comp_study, #div_id_domain').hide();
+$('#add_perso_finance').find('#div_id_study_level, #div_id_comp_study, #div_id_domain').hide();
 $('#add_perso_finance').find('#id_fund_type').change(function () {
     let value = $(this).val();
     switch (value) {
@@ -399,4 +399,7 @@ $('#add_perso_finance').find('#id_fund_type').change(function () {
     }
 });
 
-$('#dev_form').find('#id_content').attr('accept', 'application/pdf, image/*, video/*');
+$('#dev_form').find('#id_content').attr('accept', 'application/pdf, image/*');
+
+// VIDEO PLACE HOLDER
+$('#id_video').attr('placeholder', 'Ex:  https://www.youtube.com');

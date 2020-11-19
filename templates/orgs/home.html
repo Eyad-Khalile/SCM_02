@@ -1,5 +1,5 @@
-{% extends 'base.html' %} {% load static i18n crispy_forms_tags %} 
-{% block title %} {% trans 'بوابة المجتمع المدني' %} {% endblock %} 
+{% extends 'base.html' %} {% load static i18n crispy_forms_tags %}
+{% block title %} {% trans 'بوابة المجتمع المدني' %} {% endblock %}
 
 {% block content-home %}
 
@@ -9,38 +9,38 @@
   <div class="carousel-inner">
     <div class="carousel-item slide-item-1 active">
       <!-- <img src="{% static 'media/slider/img_01.jpg' %}" class="d-block w-100 img-responsive" alt="..."> -->
-      <div class="carousel-caption d-none d-md-block">
+      <!-- <div class="carousel-caption d-none d-md-block">
         <h2>First slide label</h2>
         <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-      </div>
+      </div> -->
     </div>
     <div class="carousel-item slide-item-2">
       <!-- <img src="{% static 'media/slider/img_02.jpg' %}" class="d-block w-100 img-responsive" alt="..."> -->
-      <div class="carousel-caption d-none d-md-block">
+      <!-- <div class="carousel-caption d-none d-md-block">
         <h2>Second slide label</h2>
         <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-      </div>
+      </div> -->
     </div>
     <div class="carousel-item slide-item-3">
       <!-- <img src="{% static 'media/slider/img_03.jpg' %}" class="d-block w-100 img-responsive" alt="..."> -->
-      <div class="carousel-caption d-none d-md-block">
+      <!-- <div class="carousel-caption d-none d-md-block">
         <h2>Third slide label</h2>
         <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-      </div>
+      </div> -->
     </div>
     <div class="carousel-item slide-item-4">
       <!-- <img src="{% static 'media/slider/img_04.jpg' %}" class="d-block w-100 img-responsive" alt="..."> -->
-      <div class="carousel-caption d-none d-md-block">
+      <!-- <div class="carousel-caption d-none d-md-block">
         <h2>Fourth slide label</h2>
         <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-      </div>
+      </div> -->
     </div>
     <div class="carousel-item slide-item-5">
       <!-- <img src="{% static 'media/slider/img_05.jpg' %}" class="d-block w-100 img-responsive" alt="..."> -->
-      <div class="carousel-caption d-none d-md-block">
+      <!-- <div class="carousel-caption d-none d-md-block">
         <h2>Fifth slide label</h2>
         <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-      </div>
+      </div> -->
     </div>
   </div>
   <a class="carousel-control-prev" href="#carouselHomePage" role="button" data-slide="prev">
@@ -102,7 +102,8 @@
       <article>
 
         {% if LANGUAGE_CODE == 'ar' %}
-        <p class="text-right p-color text-al-just h4 pt-5 mt-5">"بوابة المجتمع المدني" هي منصة مخصصة لمنظمات المجتمع
+        <p class="text-right p-color text-al-just h4 text-arab pt-5 mt-5">"بوابة المجتمع المدني" هي منصة مخصصة لمنظمات
+          المجتمع
           المدني
           السورية، تهدف إلى تعزيز دور المجتمع المدني السوري، وتعميق المعرفة بمنظماته ومؤسساته مع عملها، من خلال خلق
           مساحة
@@ -182,7 +183,7 @@
       <div class="carousel-inner">
         {% for org in orgs|slice:3 %}
         <div class="carousel-item {% if org.id == first_org %} slide-item-1 active {% endif %} ">
-          <div class=" well" id="org_{{org.id}}">
+          <div class=" well mh-100" id="org_{{org.id}}">
             <center>
               <a href="{% url 'particip_detail' org.id %}">
                 <img src="{{ org.logo.url }}" name="{{ org.name_en_ku }}" title="{{ org.name_en_ku }}" width="140"
@@ -199,8 +200,10 @@
               </p>
             </center>
           </div>
+
         </div>
         {% endfor %}
+
       </div>
       <a class="carousel-control-prev" href="#carouselOrgs" role="button" data-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>

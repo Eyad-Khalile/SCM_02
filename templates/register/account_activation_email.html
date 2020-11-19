@@ -3,7 +3,7 @@ Welcome : {{ user.username }},
 
 Please click on the link below to confirm your registration:
 
-http://{{ domain }}{% url 'activate' uidb64=uid token=token %}
+<a href="http://{{ domain }}{% url 'activate' uidb64=uid token=token %}" class="btn">Activate</a>
 Your username, in case you've forgotten: {{ user.get_username }}
 {% endautoescape %}
 
@@ -18,7 +18,7 @@ Your username, in case you've forgotten: {{ user.get_username }}
 
 رجاء اضغط على الرابط التالي لتأكيد التسجيل
 
-http://{{ domain }}{% url 'activate' uidb64=uid token=token %}
+<a href="http://{{ domain }}{% url 'activate' uidb64=uid token=token %}">تفعيل</a>
 {% endautoescape %}
 
 
@@ -31,5 +31,5 @@ Bienvenue : {{ user.username }},
 
 Veuillez cliquer sur le lien ci-dessous pour confirmer votre inscription :
 
-http://{{ domain }}{% url 'activate' uidb64=uid token=token %}
+<a href="http://{{ domain }}{% url 'activate' uidb64=uid token=token %}">Activez</a>
 {% endautoescape %}
