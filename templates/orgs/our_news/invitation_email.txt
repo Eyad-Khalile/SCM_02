@@ -1,7 +1,0 @@
-Hi {{ name }},
-{{ sender }} invited you to join civil gateway ,
- a website where you can post and share your news ,to register  please click the link below:
- 
- 
- -- Django civil gateway Team
- 

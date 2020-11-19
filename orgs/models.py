@@ -11,6 +11,10 @@ from django.core.mail import send_mail
 from django.template.loader import get_template
 from django.template import Context
 from django.conf import settings
+from django.core.mail import EmailMessage
+from django.template.loader import render_to_string
+from django.contrib.sites.shortcuts import get_current_site
+
 
 
 # https://github.com/akjasim/cb_dj_dependent_dropdown
@@ -925,9 +929,14 @@ class Invitation(models.Model):
   
     def __unicode__(self):   
          return u'%s, %s' % (self.sender.username, self.email)
-    def send(self):   
-           subject = u'Invitation to join Django Bookmarks'   
-           template = get_template('orgs/our_news/invitation_email.txt')    
-           context = Context({'name': self.name,'sender': self.sender.username,})    
-           message = template.render(context)    
-           send_mail( subject, message,settings.DEFAULT_FROM_EMAIL, [self.email] )
+    # def send(self):   
+    #                 current_site = get_current_site(request)
+    #                 subject = 'Activate Your Account.'
+    #                 context = Context({'name': self.name,'sender': self.sender.username,'domain': current_site.domain,})    
+
+    #                 message = render_to_string('orgs/our_news/invitation_email.txt',context )
+    #                 to_email = self.email
+    #                 email = EmailMessage(
+    #                     subject, message, to=[to_email]
+    #                 )
+    #                 email.send()

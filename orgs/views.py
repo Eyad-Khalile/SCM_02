@@ -2464,6 +2464,12 @@ def friend_invite(request):
             user = form.save(commit=False)
             user.sender = request.user
             user.save()
+            current_site = get_current_site(request)
+            subject = 'Activate Your Account.'
+            message = render_to_string('register/invation.html', { 'domain': current_site.domain, })
+            to_email = form.cleaned_data.get('email')
+            email = EmailMessage(subject, message, to=[to_email] )
+            email.send()
 
             messages.success(request, _(
                 'لقد تم ارسال الدعوة '))
